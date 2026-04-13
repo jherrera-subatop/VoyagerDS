@@ -1,0 +1,5405 @@
+{
+  "_meta": {
+    "source": "SubasCars Storybook",
+    "url": "https://subascars-storybook-gcp.web.app",
+    "extracted_at": "2026-04-13T18:49:39.875Z",
+    "phase": "ib-taxonomia · Task C",
+    "total_components": 73,
+    "total_stories": 179
+  },
+  "summary": {
+    "by_domain": {
+      "primitivos-tokens": 5,
+      "ui-core": 23,
+      "discovery-navegacion": 16,
+      "subasta-tiempo-real": 10,
+      "transaccional-cuenta": 19
+    }
+  },
+  "inventory_by_domain": {
+    "primitivos-tokens": [
+      {
+        "nombre_humano": "Icons",
+        "nombre_ai": "icons",
+        "dominio": "primitivos-tokens",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Icons",
+        "anatomia": [
+          "Alert Circle",
+          "Arrow Asset",
+          "Attention",
+          "Available Subas Tokens",
+          "Back",
+          "Base",
+          "Bell",
+          "Bids",
+          "Calendar",
+          "Car",
+          "Check",
+          "Check Circle",
+          "Check In",
+          "Checkout",
+          "Clear",
+          "Clock 2",
+          "Clock",
+          "Clock 3",
+          "Close",
+          "Cookies",
+          "Don Justo",
+          "Down",
+          "Download",
+          "Drop Off",
+          "Drop On",
+          "Engine Displacement",
+          "Facebook",
+          "Fistbump",
+          "Forward",
+          "Fuel",
+          "Group",
+          "Groups Calendar",
+          "Higgest Bidder",
+          "Hub",
+          "Image",
+          "Info Circle",
+          "Instagram",
+          "Invoice",
+          "Like",
+          "Live",
+          "Location",
+          "Logout",
+          "Minus",
+          "On Hold Subas Tokens",
+          "Opportunities",
+          "Pause",
+          "Pay 2 Play",
+          "Photo Galery",
+          "Plate",
+          "Receipt",
+          "Share",
+          "Subas Token",
+          "Subas Top",
+          "Subas Wallet",
+          "Subastip",
+          "Subaszone",
+          "Tiktok",
+          "Traction",
+          "Transmission",
+          "Trash",
+          "Trophy",
+          "Up",
+          "Upload",
+          "User Calendar",
+          "Value",
+          "View",
+          "X",
+          "Youtube"
+        ],
+        "props": {
+          "variants_count": 68,
+          "story_ids": [
+            "icons--alert-circle",
+            "icons--arrow-asset",
+            "icons--attention",
+            "icons--available-subas-tokens",
+            "icons--back",
+            "icons--base",
+            "icons--bell",
+            "icons--bids",
+            "icons--calendar",
+            "icons--car",
+            "icons--check",
+            "icons--check-circle",
+            "icons--check-in",
+            "icons--checkout",
+            "icons--clear",
+            "icons--clock-2",
+            "icons--clock",
+            "icons--clock-3",
+            "icons--close",
+            "icons--cookies",
+            "icons--don-justo",
+            "icons--down",
+            "icons--download",
+            "icons--drop-off",
+            "icons--drop-on",
+            "icons--engine-displacement",
+            "icons--facebook",
+            "icons--fistbump",
+            "icons--forward",
+            "icons--fuel",
+            "icons--group",
+            "icons--groups-calendar",
+            "icons--higgest-bidder",
+            "icons--hub",
+            "icons--image",
+            "icons--info-circle",
+            "icons--instagram",
+            "icons--invoice",
+            "icons--like",
+            "icons--live",
+            "icons--location",
+            "icons--logout",
+            "icons--minus",
+            "icons--on-hold-subas-tokens",
+            "icons--opportunities",
+            "icons--pause",
+            "icons--pay-2-play",
+            "icons--photo-galery",
+            "icons--plate",
+            "icons--receipt",
+            "icons--share",
+            "icons--subas-token",
+            "icons--subas-top",
+            "icons--subas-wallet",
+            "icons--subastip",
+            "icons--subaszone",
+            "icons--tiktok",
+            "icons--traction",
+            "icons--transmission",
+            "icons--trash",
+            "icons--trophy",
+            "icons--up",
+            "icons--upload",
+            "icons--user-calendar",
+            "icons--value",
+            "icons--view",
+            "icons--x",
+            "icons--youtube"
+          ],
+          "storybook_path": "Icons"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/icons/AlertCircle.stories.ts",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/icons--alert-circle"
+        }
+      },
+      {
+        "nombre_humano": "Navigation",
+        "nombre_ai": "navigation",
+        "dominio": "primitivos-tokens",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Basic/Control/Icon/Navigation",
+        "anatomia": [
+          "Navigation"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "basic-control-icon-navigation--navigation"
+          ],
+          "storybook_path": "Basic/Control/Icon/Navigation"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/Navigation.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-control-icon-navigation--navigation"
+        }
+      },
+      {
+        "nombre_humano": "ActivityCounter",
+        "nombre_ai": "activitycounter",
+        "dominio": "primitivos-tokens",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Basic/Control/Icon/Social/ActivityCounter",
+        "anatomia": [
+          "Like",
+          "Share"
+        ],
+        "props": {
+          "variants_count": 2,
+          "story_ids": [
+            "basic-control-icon-social-activitycounter--like",
+            "basic-control-icon-social-activitycounter--share"
+          ],
+          "storybook_path": "Basic/Control/Icon/Social/ActivityCounter"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/SocialActityCounter.stories.tsx",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-control-icon-social-activitycounter--like"
+        }
+      },
+      {
+        "nombre_humano": "Activity",
+        "nombre_ai": "activity",
+        "dominio": "primitivos-tokens",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Basic/Control/Icon/Social/Activity",
+        "anatomia": [
+          "Activity"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "basic-control-icon-social-activity--activity"
+          ],
+          "storybook_path": "Basic/Control/Icon/Social/Activity"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/SocialActivity.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-control-icon-social-activity--activity"
+        }
+      },
+      {
+        "nombre_humano": "Resources",
+        "nombre_ai": "resources",
+        "dominio": "primitivos-tokens",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Resources",
+        "anatomia": [
+          "Typography",
+          "Graphic Resources"
+        ],
+        "props": {
+          "variants_count": 2,
+          "story_ids": [
+            "resources--typography",
+            "resources--graphic-resources"
+          ],
+          "storybook_path": "Resources"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/shared/stories/SharedComponent.stories.tsx",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/resources--typography"
+        }
+      }
+    ],
+    "ui-core": [
+      {
+        "nombre_humano": "Accordion",
+        "nombre_ai": "accordion",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main/Single/Publication/Accordion",
+        "anatomia": [
+          "Activation",
+          "Asset Holder",
+          "Cy T",
+          "Description",
+          "Location",
+          "Opportunity",
+          "Opportunity Second Hand",
+          "Participation",
+          "Run ODC",
+          "Run ODC With Documents",
+          "Vehicle"
+        ],
+        "props": {
+          "variants_count": 11,
+          "story_ids": [
+            "main-single-publication-accordion--activation",
+            "main-single-publication-accordion--asset-holder",
+            "main-single-publication-accordion--cy-t",
+            "main-single-publication-accordion--description",
+            "main-single-publication-accordion--location",
+            "main-single-publication-accordion--opportunity",
+            "main-single-publication-accordion--opportunity-second-hand",
+            "main-single-publication-accordion--participation",
+            "main-single-publication-accordion--run-odc",
+            "main-single-publication-accordion--run-odc-with-documents",
+            "main-single-publication-accordion--vehicle"
+          ],
+          "storybook_path": "Main/Single/Publication/Accordion"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/accordion/AccordionActivation.stories.tsx",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-publication-accordion--activation"
+        }
+      },
+      {
+        "nombre_humano": "accordion",
+        "nombre_ai": "accordion",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main/Single/Publication/accordion",
+        "anatomia": [
+          "Execution Instructions"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "main-single-publication-accordion--execution-instructions"
+          ],
+          "storybook_path": "Main/Single/Publication/accordion"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/accordion/AccordionExecutionInstructions.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-publication-accordion--execution-instructions"
+        }
+      },
+      {
+        "nombre_humano": "Bubble",
+        "nombre_ai": "bubble",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Basic / Outputs / Conversational / Bubble",
+        "anatomia": [
+          "Bubble"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "basic-outputs-conversational-bubble--bubble"
+          ],
+          "storybook_path": "Basic / Outputs / Conversational / Bubble"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/form/Bubble.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-outputs-conversational-bubble--bubble"
+        }
+      },
+      {
+        "nombre_humano": "Bullet Drops",
+        "nombre_ai": "bullet-drops",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Basic / Outputs / Data label / Bullet Drops",
+        "anatomia": [
+          "Bullet Drops"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "basic-outputs-data-label-bullet-drops--bullet-drops"
+          ],
+          "storybook_path": "Basic / Outputs / Data label / Bullet Drops"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/form/BulletsDrops.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-outputs-data-label-bullet-drops--bullet-drops"
+        }
+      },
+      {
+        "nombre_humano": "CTA2",
+        "nombre_ai": "cta2",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Basic / Control / Button / Clickable / CTA2",
+        "anatomia": [
+          "CTA"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "basic-control-button-clickable-cta2--cta"
+          ],
+          "storybook_path": "Basic / Control / Button / Clickable / CTA2"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/form/Button.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-control-button-clickable-cta2--cta"
+        }
+      },
+      {
+        "nombre_humano": "Clickable2",
+        "nombre_ai": "clickable2",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Basic / Control / Button / Clickable2",
+        "anatomia": [
+          "Bidding"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "basic-control-button-clickable2--bidding"
+          ],
+          "storybook_path": "Basic / Control / Button / Clickable2"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/form/ButtonBidding.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-control-button-clickable2--bidding"
+        }
+      },
+      {
+        "nombre_humano": "Check Box",
+        "nombre_ai": "check-box",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Basic / Inputs  / Content field / Check Box",
+        "anatomia": [
+          "Check Box"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "basic-inputs-content-field-check-box--check-box"
+          ],
+          "storybook_path": "Basic / Inputs  / Content field / Check Box"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/form/Checkbox.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-inputs-content-field-check-box--check-box"
+        }
+      },
+      {
+        "nombre_humano": "Dropdown Box",
+        "nombre_ai": "dropdown-box",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Basic / Inputs  / Content field / Dropdown Box",
+        "anatomia": [
+          "Dropdown Box"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "basic-inputs-content-field-dropdown-box--dropdown-box"
+          ],
+          "storybook_path": "Basic / Inputs  / Content field / Dropdown Box"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/form/Dropdown.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-inputs-content-field-dropdown-box--dropdown-box"
+        }
+      },
+      {
+        "nombre_humano": "Text Box2",
+        "nombre_ai": "text-box2",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Basic / Inputs / Content field /Text Box2",
+        "anatomia": [
+          "Text Box"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "basic-inputs-content-field-text-box2--text-box"
+          ],
+          "storybook_path": "Basic / Inputs / Content field /Text Box2"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/form/Input.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-inputs-content-field-text-box2--text-box"
+        }
+      },
+      {
+        "nombre_humano": "Keys",
+        "nombre_ai": "keys",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Basic/Inputs/Keys",
+        "anatomia": [
+          "Keys"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "basic-inputs-keys--keys"
+          ],
+          "storybook_path": "Basic/Inputs/Keys"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/form/Keys.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-inputs-keys--keys"
+        }
+      },
+      {
+        "nombre_humano": "Pad Value",
+        "nombre_ai": "pad-value",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Basic/Inputs/Content field/Pad Value ",
+        "anatomia": [
+          "Pad Value"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "basic-inputs-content-field-pad-value--pad-value"
+          ],
+          "storybook_path": "Basic/Inputs/Content field/Pad Value "
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/form/PadValueMulti.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-inputs-content-field-pad-value--pad-value"
+        }
+      },
+      {
+        "nombre_humano": "Pad Value",
+        "nombre_ai": "pad-value",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Basic/Inputs/Content field/Pad Value",
+        "anatomia": [
+          "Pad Value Mini"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "basic-inputs-content-field-pad-value--pad-value-mini"
+          ],
+          "storybook_path": "Basic/Inputs/Content field/Pad Value"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/form/PadValueSingle.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-inputs-content-field-pad-value--pad-value-mini"
+        }
+      },
+      {
+        "nombre_humano": "Attention",
+        "nombre_ai": "attention",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main/Single/Overlays/Attention",
+        "anatomia": [
+          "Attention",
+          "Group Stated",
+          "Payment Problem",
+          "Checkout Expired"
+        ],
+        "props": {
+          "variants_count": 4,
+          "story_ids": [
+            "main-single-overlays-attention--attention",
+            "main-single-overlays-attention--group-stated",
+            "main-single-overlays-attention--payment-problem",
+            "main-single-overlays-attention--checkout-expired"
+          ],
+          "storybook_path": "Main/Single/Overlays/Attention"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/Attention.stories.tsx",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-overlays-attention--attention"
+        }
+      },
+      {
+        "nombre_humano": "Model Value",
+        "nombre_ai": "model-value",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Basic / Outputs / Data label / Model Value",
+        "anatomia": [
+          "Model Value"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "basic-outputs-data-label-model-value--model-value"
+          ],
+          "storybook_path": "Basic / Outputs / Data label / Model Value"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/ModelValues.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-outputs-data-label-model-value--model-value"
+        }
+      },
+      {
+        "nombre_humano": "Navigator Bar",
+        "nombre_ai": "navigator-bar",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main/Single/General/Navigator Bar",
+        "anatomia": [
+          "Navigator Bar"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "main-single-general-navigator-bar--navigator-bar"
+          ],
+          "storybook_path": "Main/Single/General/Navigator Bar"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/NavigationBar.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-general-navigator-bar--navigator-bar"
+        }
+      },
+      {
+        "nombre_humano": "Slider",
+        "nombre_ai": "slider",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Basic/Control/Button/Slider",
+        "anatomia": [
+          "Slider"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "basic-control-button-slider--slider"
+          ],
+          "storybook_path": "Basic/Control/Button/Slider"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/Slider.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-control-button-slider--slider"
+        }
+      },
+      {
+        "nombre_humano": "Subastip",
+        "nombre_ai": "subastip",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main/Single/Overlays/Subastip",
+        "anatomia": [
+          "Subastip"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "main-single-overlays-subastip--subastip"
+          ],
+          "storybook_path": "Main/Single/Overlays/Subastip"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/Subastip.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-overlays-subastip--subastip"
+        }
+      },
+      {
+        "nombre_humano": "Tags",
+        "nombre_ai": "tags",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Basic/Outputs/Data label/Tags",
+        "anatomia": [
+          "Tags"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "basic-outputs-data-label-tags--tags"
+          ],
+          "storybook_path": "Basic/Outputs/Data label/Tags"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/Tag.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-outputs-data-label-tags--tags"
+        }
+      },
+      {
+        "nombre_humano": "Wallet",
+        "nombre_ai": "wallet",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main/Single/User/Wallet",
+        "anatomia": [
+          "Wallet"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "main-single-user-wallet--wallet"
+          ],
+          "storybook_path": "Main/Single/User/Wallet"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/Wallet.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-user-wallet--wallet"
+        }
+      },
+      {
+        "nombre_humano": "Auction Tracker",
+        "nombre_ai": "auction-tracker",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Basic / Outputs / Conversational / Auction Tracker",
+        "anatomia": [
+          "Auction Tracker"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "basic-outputs-conversational-auction-tracker--auction-tracker"
+          ],
+          "storybook_path": "Basic / Outputs / Conversational / Auction Tracker"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/auction-tracker/AuctionTracker.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-outputs-conversational-auction-tracker--auction-tracker"
+        }
+      },
+      {
+        "nombre_humano": "Auction Tracker V2",
+        "nombre_ai": "auction-tracker-v2",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Basic / Outputs / Conversational / Auction Tracker V2",
+        "anatomia": [
+          "Auction Tracker V 2"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "basic-outputs-conversational-auction-tracker-v2--auction-tracker-v-2"
+          ],
+          "storybook_path": "Basic / Outputs / Conversational / Auction Tracker V2"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/auction-tracker/AuctionTrackerV2.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-outputs-conversational-auction-tracker-v2--auction-tracker-v-2"
+        }
+      },
+      {
+        "nombre_humano": "User Avatars",
+        "nombre_ai": "user-avatars",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Basic / Outputs / User Avatars",
+        "anatomia": [
+          "User Avatars"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "basic-outputs-user-avatars--user-avatars"
+          ],
+          "storybook_path": "Basic / Outputs / User Avatars"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/avatar/UserAvatar.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-outputs-user-avatars--user-avatars"
+        }
+      },
+      {
+        "nombre_humano": "Pad",
+        "nombre_ai": "pad",
+        "dominio": "ui-core",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Multicomponent/Pad",
+        "anatomia": [
+          "Subas Code",
+          "Checkout"
+        ],
+        "props": {
+          "variants_count": 2,
+          "story_ids": [
+            "widgets-multicomponent-pad--subas-code",
+            "widgets-multicomponent-pad--checkout"
+          ],
+          "storybook_path": "Widgets/Multicomponent/Pad"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetCode.stories.tsx",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-pad--subas-code"
+        }
+      }
+    ],
+    "discovery-navegacion": [
+      {
+        "nombre_humano": "Cards",
+        "nombre_ai": "cards",
+        "dominio": "discovery-navegacion",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main / Multicomponent / Filmstrip / Cards ",
+        "anatomia": [
+          "Cards"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "main-multicomponent-filmstrip-cards--cards"
+          ],
+          "storybook_path": "Main / Multicomponent / Filmstrip / Cards "
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/filmstrip/Cards.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-multicomponent-filmstrip-cards--cards"
+        }
+      },
+      {
+        "nombre_humano": "Gallery",
+        "nombre_ai": "gallery",
+        "dominio": "discovery-navegacion",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main / Multicomponent / Filmstrip / Gallery ",
+        "anatomia": [
+          "Gallery"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "main-multicomponent-filmstrip-gallery--gallery"
+          ],
+          "storybook_path": "Main / Multicomponent / Filmstrip / Gallery "
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/filmstrip/Gallery.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-multicomponent-filmstrip-gallery--gallery"
+        }
+      },
+      {
+        "nombre_humano": "Grid",
+        "nombre_ai": "grid",
+        "dominio": "discovery-navegacion",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main / Multicomponent / Grid  ",
+        "anatomia": [
+          "Grid"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "main-multicomponent-grid--grid"
+          ],
+          "storybook_path": "Main / Multicomponent / Grid  "
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/filmstrip/GridCard.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-multicomponent-grid--grid"
+        }
+      },
+      {
+        "nombre_humano": "Groups",
+        "nombre_ai": "groups",
+        "dominio": "discovery-navegacion",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main/Multicomponent/Filmstrip/Groups",
+        "anatomia": [
+          "Groups"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "main-multicomponent-filmstrip-groups--groups"
+          ],
+          "storybook_path": "Main/Multicomponent/Filmstrip/Groups"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/filmstrip/Group.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-multicomponent-filmstrip-groups--groups"
+        }
+      },
+      {
+        "nombre_humano": "Days",
+        "nombre_ai": "days",
+        "dominio": "discovery-navegacion",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main/Multicomponent/Filmstrip/Days",
+        "anatomia": [
+          "Groups"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "main-multicomponent-filmstrip-days--groups"
+          ],
+          "storybook_path": "Main/Multicomponent/Filmstrip/Days"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/filmstrip/GroupDays.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-multicomponent-filmstrip-days--groups"
+        }
+      },
+      {
+        "nombre_humano": "Header",
+        "nombre_ai": "header",
+        "dominio": "discovery-navegacion",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main/Single/Publication/Header",
+        "anatomia": [
+          "Group Checkout 2",
+          "Group Header 2",
+          "Group Console 2",
+          "Group Opportunity 2"
+        ],
+        "props": {
+          "variants_count": 4,
+          "story_ids": [
+            "main-single-publication-header--group-checkout-2",
+            "main-single-publication-header--group-header-2",
+            "main-single-publication-header--group-console-2",
+            "main-single-publication-header--group-opportunity-2"
+          ],
+          "storybook_path": "Main/Single/Publication/Header"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/group/CheckoutHeader.stories.tsx",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-publication-header--group-checkout-2"
+        }
+      },
+      {
+        "nombre_humano": "Footer",
+        "nombre_ai": "footer",
+        "dominio": "discovery-navegacion",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main/Single/General/Footer",
+        "anatomia": [
+          "Footer Desktop",
+          "Footer"
+        ],
+        "props": {
+          "variants_count": 2,
+          "story_ids": [
+            "main-single-general-footer--footer-desktop",
+            "main-single-general-footer--footer"
+          ],
+          "storybook_path": "Main/Single/General/Footer"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/Footer.stories.tsx",
+          "tags": [
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-general-footer--footer-desktop"
+        }
+      },
+      {
+        "nombre_humano": "Header",
+        "nombre_ai": "header",
+        "dominio": "discovery-navegacion",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main/Single/General/Header",
+        "anatomia": [
+          "Header"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "main-single-general-header--header"
+          ],
+          "storybook_path": "Main/Single/General/Header"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/Header.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-general-header--header"
+        }
+      },
+      {
+        "nombre_humano": "List",
+        "nombre_ai": "list",
+        "dominio": "discovery-navegacion",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main / Multicomponent / List",
+        "anatomia": [
+          "List"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "main-multicomponent-list--list"
+          ],
+          "storybook_path": "Main / Multicomponent / List"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/List.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-multicomponent-list--list"
+        }
+      },
+      {
+        "nombre_humano": "List Item",
+        "nombre_ai": "list-item",
+        "dominio": "discovery-navegacion",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main/Single/Publication/List Item",
+        "anatomia": [
+          "List Item"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "main-single-publication-list-item--list-item"
+          ],
+          "storybook_path": "Main/Single/Publication/List Item"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/ListItem.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-publication-list-item--list-item"
+        }
+      },
+      {
+        "nombre_humano": "Navbar V2",
+        "nombre_ai": "navbar-v2",
+        "dominio": "discovery-navegacion",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main/Single/General/Navbar V2",
+        "anatomia": [
+          "Navbar V 2"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "main-single-general-navbar-v2--navbar-v-2"
+          ],
+          "storybook_path": "Main/Single/General/Navbar V2"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/NavBar.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-general-navbar-v2--navbar-v-2"
+        }
+      },
+      {
+        "nombre_humano": "AddList",
+        "nombre_ai": "addlist",
+        "dominio": "discovery-navegacion",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Single/AddList",
+        "anatomia": [
+          "Atencion",
+          "Agregado"
+        ],
+        "props": {
+          "variants_count": 2,
+          "story_ids": [
+            "widgets-single-addlist--atencion",
+            "widgets-single-addlist--agregado"
+          ],
+          "storybook_path": "Widgets/Single/AddList"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetAddList.stories.tsx",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-single-addlist--atencion"
+        }
+      },
+      {
+        "nombre_humano": "List",
+        "nombre_ai": "list",
+        "dominio": "discovery-navegacion",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Multicomponent/List",
+        "anatomia": [
+          "Notifcations"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "widgets-multicomponent-list--notifcations"
+          ],
+          "storybook_path": "Widgets/Multicomponent/List"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetNotifications.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-list--notifcations"
+        }
+      },
+      {
+        "nombre_humano": "Participations",
+        "nombre_ai": "participations",
+        "dominio": "discovery-navegacion",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Multicomponent/List/Participations",
+        "anatomia": [
+          "Participations"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "widgets-multicomponent-list-participations--participations"
+          ],
+          "storybook_path": "Widgets/Multicomponent/List/Participations"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetParticipations.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-list-participations--participations"
+        }
+      },
+      {
+        "nombre_humano": "Ranking",
+        "nombre_ai": "ranking",
+        "dominio": "discovery-navegacion",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Multicomponent/List/Ranking",
+        "anatomia": [
+          "Ranking",
+          "Ranking With Button"
+        ],
+        "props": {
+          "variants_count": 2,
+          "story_ids": [
+            "widgets-multicomponent-list-ranking--ranking",
+            "widgets-multicomponent-list-ranking--ranking-with-button"
+          ],
+          "storybook_path": "Widgets/Multicomponent/List/Ranking"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetRanking.stories.tsx",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-list-ranking--ranking"
+        }
+      },
+      {
+        "nombre_humano": "RankingV2",
+        "nombre_ai": "rankingv2",
+        "dominio": "discovery-navegacion",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Multicomponent/List/RankingV2",
+        "anatomia": [
+          "Ranking",
+          "Ranking With Button"
+        ],
+        "props": {
+          "variants_count": 2,
+          "story_ids": [
+            "widgets-multicomponent-list-rankingv2--ranking",
+            "widgets-multicomponent-list-rankingv2--ranking-with-button"
+          ],
+          "storybook_path": "Widgets/Multicomponent/List/RankingV2"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetRankingV2.stories.tsx",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-list-rankingv2--ranking"
+        }
+      }
+    ],
+    "subasta-tiempo-real": [
+      {
+        "nombre_humano": "Metrics",
+        "nombre_ai": "metrics",
+        "dominio": "subasta-tiempo-real",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Basic/Outputs/Data label/Metrics",
+        "anatomia": [
+          "Metrics"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "basic-outputs-data-label-metrics--metrics"
+          ],
+          "storybook_path": "Basic/Outputs/Data label/Metrics"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/Metrics.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-outputs-data-label-metrics--metrics"
+        }
+      },
+      {
+        "nombre_humano": "ID Card",
+        "nombre_ai": "id-card",
+        "dominio": "subasta-tiempo-real",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main / Single / User / ID Card",
+        "anatomia": [
+          "ID Card"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "main-single-user-id-card--id-card"
+          ],
+          "storybook_path": "Main / Single / User / ID Card"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/UserCard.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-user-id-card--id-card"
+        }
+      },
+      {
+        "nombre_humano": "Group Avatar",
+        "nombre_ai": "group-avatar",
+        "dominio": "subasta-tiempo-real",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main / Single / User / Group Avatar",
+        "anatomia": [
+          "Group Avatar"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "main-single-user-group-avatar--group-avatar"
+          ],
+          "storybook_path": "Main / Single / User / Group Avatar"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/avatar/GroupAvatar.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-user-group-avatar--group-avatar"
+        }
+      },
+      {
+        "nombre_humano": "CTA",
+        "nombre_ai": "cta",
+        "dominio": "subasta-tiempo-real",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main / Single / Publication / Card / CTA",
+        "anatomia": [
+          "CTA"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "main-single-publication-card-cta--cta"
+          ],
+          "storybook_path": "Main / Single / Publication / Card / CTA"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/card/Cta.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-publication-card-cta--cta"
+        }
+      },
+      {
+        "nombre_humano": "Display",
+        "nombre_ai": "display",
+        "dominio": "subasta-tiempo-real",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main / Single / Publication / Card / Display",
+        "anatomia": [
+          "Display"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "main-single-publication-card-display--display"
+          ],
+          "storybook_path": "Main / Single / Publication / Card / Display"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/card/Display.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-publication-card-display--display"
+        }
+      },
+      {
+        "nombre_humano": "Mini",
+        "nombre_ai": "mini",
+        "dominio": "subasta-tiempo-real",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main / Single / Publication / Card / Mini",
+        "anatomia": [
+          "Mini"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "main-single-publication-card-mini--mini"
+          ],
+          "storybook_path": "Main / Single / Publication / Card / Mini"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/card/Mini.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-publication-card-mini--mini"
+        }
+      },
+      {
+        "nombre_humano": "Opportunity",
+        "nombre_ai": "opportunity",
+        "dominio": "subasta-tiempo-real",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Main / Single / Publication / Card / Opportunity",
+        "anatomia": [
+          "Opportunity"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "main-single-publication-card-opportunity--opportunity"
+          ],
+          "storybook_path": "Main / Single / Publication / Card / Opportunity"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/single/card/Opportunity.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-publication-card-opportunity--opportunity"
+        }
+      },
+      {
+        "nombre_humano": "First Login",
+        "nombre_ai": "first-login",
+        "dominio": "subasta-tiempo-real",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Animation / Widget / Access / First Login",
+        "anatomia": [
+          "First Login"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "animation-widget-access-first-login--first-login"
+          ],
+          "storybook_path": "Animation / Widget / Access / First Login"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/animationSeller/FirstLogin.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/animation-widget-access-first-login--first-login"
+        }
+      },
+      {
+        "nombre_humano": "Negociation",
+        "nombre_ai": "negociation",
+        "dominio": "subasta-tiempo-real",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Animation / Widget / Negociation",
+        "anatomia": [
+          "Negociation"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "animation-widget-negociation--negociation"
+          ],
+          "storybook_path": "Animation / Widget / Negociation"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/animationSeller/Negociation.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/animation-widget-negociation--negociation"
+        }
+      },
+      {
+        "nombre_humano": "Welcome Back",
+        "nombre_ai": "welcome-back",
+        "dominio": "subasta-tiempo-real",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Animation / Widget / Access / Welcome Back",
+        "anatomia": [
+          "Welcome Back"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "animation-widget-access-welcome-back--welcome-back"
+          ],
+          "storybook_path": "Animation / Widget / Access / Welcome Back"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/animationSeller/WelcomeBack.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/animation-widget-access-welcome-back--welcome-back"
+        }
+      }
+    ],
+    "transaccional-cuenta": [
+      {
+        "nombre_humano": "Transaction",
+        "nombre_ai": "transaction",
+        "dominio": "transaccional-cuenta",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Popup/Transaction",
+        "anatomia": [
+          "Success",
+          "Error"
+        ],
+        "props": {
+          "variants_count": 2,
+          "story_ids": [
+            "popup-transaction--success",
+            "popup-transaction--error"
+          ],
+          "storybook_path": "Popup/Transaction"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/popup/WidgetTransactionStatus.stories.tsx",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/popup-transaction--success"
+        }
+      },
+      {
+        "nombre_humano": "CTA",
+        "nombre_ai": "cta",
+        "dominio": "transaccional-cuenta",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Multicomponent/CTA",
+        "anatomia": [
+          "Chat",
+          "Execution"
+        ],
+        "props": {
+          "variants_count": 2,
+          "story_ids": [
+            "widgets-multicomponent-cta--chat",
+            "widgets-multicomponent-cta--execution"
+          ],
+          "storybook_path": "Widgets/Multicomponent/CTA"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetChat.stories.tsx",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-cta--chat"
+        }
+      },
+      {
+        "nombre_humano": "Checkout",
+        "nombre_ai": "checkout",
+        "dominio": "transaccional-cuenta",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Multicomponent/CTA/Checkout",
+        "anatomia": [
+          "Agreed Value",
+          "Upgrate Offer"
+        ],
+        "props": {
+          "variants_count": 2,
+          "story_ids": [
+            "widgets-multicomponent-cta-checkout--agreed-value",
+            "widgets-multicomponent-cta-checkout--upgrate-offer"
+          ],
+          "storybook_path": "Widgets/Multicomponent/CTA/Checkout"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetCheckOutAgreedValue.stories.tsx",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-cta-checkout--agreed-value"
+        }
+      },
+      {
+        "nombre_humano": "Confirmation",
+        "nombre_ai": "confirmation",
+        "dominio": "transaccional-cuenta",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Multicomponent/CTA/Checkout/Confirmation",
+        "anatomia": [
+          "Mejorar",
+          "Mantener",
+          "Rechazar"
+        ],
+        "props": {
+          "variants_count": 3,
+          "story_ids": [
+            "widgets-multicomponent-cta-checkout-confirmation--mejorar",
+            "widgets-multicomponent-cta-checkout-confirmation--mantener",
+            "widgets-multicomponent-cta-checkout-confirmation--rechazar"
+          ],
+          "storybook_path": "Widgets/Multicomponent/CTA/Checkout/Confirmation"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetCheckOutConfirmation.stories.tsx",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-cta-checkout-confirmation--mejorar"
+        }
+      },
+      {
+        "nombre_humano": "Negociation",
+        "nombre_ai": "negociation",
+        "dominio": "transaccional-cuenta",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Multicomponent/CTA/Checkout/Negociation",
+        "anatomia": [
+          "Primera Contrapropuesta",
+          "Segunda Contrapropuesta"
+        ],
+        "props": {
+          "variants_count": 2,
+          "story_ids": [
+            "widgets-multicomponent-cta-checkout-negociation--primera-contrapropuesta",
+            "widgets-multicomponent-cta-checkout-negociation--segunda-contrapropuesta"
+          ],
+          "storybook_path": "Widgets/Multicomponent/CTA/Checkout/Negociation"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetCheckOutNegociationOne.stories.tsx",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-cta-checkout-negociation--primera-contrapropuesta"
+        }
+      },
+      {
+        "nombre_humano": "Single",
+        "nombre_ai": "single",
+        "dominio": "transaccional-cuenta",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Single",
+        "anatomia": [
+          "Confirmacion Solicitud Business"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "widgets-single--confirmacion-solicitud-business"
+          ],
+          "storybook_path": "Widgets/Single"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetConfirmedDemand.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-single--confirmacion-solicitud-business"
+        }
+      },
+      {
+        "nombre_humano": "Cookies",
+        "nombre_ai": "cookies",
+        "dominio": "transaccional-cuenta",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Multicomponent/CTA/Cookies",
+        "anatomia": [
+          "Cookies"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "widgets-multicomponent-cta-cookies--cookies"
+          ],
+          "storybook_path": "Widgets/Multicomponent/CTA/Cookies"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetCookies.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-cta-cookies--cookies"
+        }
+      },
+      {
+        "nombre_humano": "Registration",
+        "nombre_ai": "registration",
+        "dominio": "transaccional-cuenta",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Multicomponent/Form/Registration",
+        "anatomia": [
+          "Cy T",
+          "User Validation"
+        ],
+        "props": {
+          "variants_count": 2,
+          "story_ids": [
+            "widgets-multicomponent-form-registration--cy-t",
+            "widgets-multicomponent-form-registration--user-validation"
+          ],
+          "storybook_path": "Widgets/Multicomponent/Form/Registration"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetCyT.stories.tsx",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-form-registration--cy-t"
+        }
+      },
+      {
+        "nombre_humano": "Access",
+        "nombre_ai": "access",
+        "dominio": "transaccional-cuenta",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Multicomponent/CTA/Access",
+        "anatomia": [
+          "Group Start"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "widgets-multicomponent-cta-access--group-start"
+          ],
+          "storybook_path": "Widgets/Multicomponent/CTA/Access"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetGroupStart.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-cta-access--group-start"
+        }
+      },
+      {
+        "nombre_humano": "Informative",
+        "nombre_ai": "informative",
+        "dominio": "transaccional-cuenta",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Single/Informative",
+        "anatomia": [
+          "Information",
+          "Success",
+          "Congratulations",
+          "Expired"
+        ],
+        "props": {
+          "variants_count": 4,
+          "story_ids": [
+            "widgets-single-informative--information",
+            "widgets-single-informative--success",
+            "widgets-single-informative--congratulations",
+            "widgets-single-informative--expired"
+          ],
+          "storybook_path": "Widgets/Single/Informative"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetInformative.stories.tsx",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-single-informative--information"
+        }
+      },
+      {
+        "nombre_humano": "OpenAccountBusiness",
+        "nombre_ai": "openaccountbusiness",
+        "dominio": "transaccional-cuenta",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Multicomponent/Form/OpenAccountBusiness",
+        "anatomia": [
+          "Open Account Business"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "widgets-multicomponent-form-openaccountbusiness--open-account-business"
+          ],
+          "storybook_path": "Widgets/Multicomponent/Form/OpenAccountBusiness"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetOpenAccountBusiness.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-form-openaccountbusiness--open-account-business"
+        }
+      },
+      {
+        "nombre_humano": "Billing",
+        "nombre_ai": "billing",
+        "dominio": "transaccional-cuenta",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Multicomponent/Form/Operation/Billing",
+        "anatomia": [
+          "Factura",
+          "Boleta"
+        ],
+        "props": {
+          "variants_count": 2,
+          "story_ids": [
+            "widgets-multicomponent-form-operation-billing--factura",
+            "widgets-multicomponent-form-operation-billing--boleta"
+          ],
+          "storybook_path": "Widgets/Multicomponent/Form/Operation/Billing"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetOperation.stories.tsx",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-form-operation-billing--factura"
+        }
+      },
+      {
+        "nombre_humano": "Transfer",
+        "nombre_ai": "transfer",
+        "dominio": "transaccional-cuenta",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Multicomponent/Form/Operation/Transfer",
+        "anatomia": [
+          "Natural",
+          "Juridico"
+        ],
+        "props": {
+          "variants_count": 2,
+          "story_ids": [
+            "widgets-multicomponent-form-operation-transfer--natural",
+            "widgets-multicomponent-form-operation-transfer--juridico"
+          ],
+          "storybook_path": "Widgets/Multicomponent/Form/Operation/Transfer"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetOperationTransfer.stories.tsx",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-form-operation-transfer--natural"
+        }
+      },
+      {
+        "nombre_humano": "CheckIn",
+        "nombre_ai": "checkin",
+        "dominio": "transaccional-cuenta",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Multicomponent/CTA/Access/Participation/CheckIn",
+        "anatomia": [
+          "Suficiente",
+          "Insuficiente"
+        ],
+        "props": {
+          "variants_count": 2,
+          "story_ids": [
+            "widgets-multicomponent-cta-access-participation-checkin--suficiente",
+            "widgets-multicomponent-cta-access-participation-checkin--insuficiente"
+          ],
+          "storybook_path": "Widgets/Multicomponent/CTA/Access/Participation/CheckIn"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetParticipation.stories.tsx",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-cta-access-participation-checkin--suficiente"
+        }
+      },
+      {
+        "nombre_humano": "Debt",
+        "nombre_ai": "debt",
+        "dominio": "transaccional-cuenta",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Multicomponent/CTA/Access/Debt",
+        "anatomia": [
+          "Inhabilitacion Penalizacion",
+          "Inhabilitacion Fee Activacion"
+        ],
+        "props": {
+          "variants_count": 2,
+          "story_ids": [
+            "widgets-multicomponent-cta-access-debt--inhabilitacion-penalizacion",
+            "widgets-multicomponent-cta-access-debt--inhabilitacion-fee-activacion"
+          ],
+          "storybook_path": "Widgets/Multicomponent/CTA/Access/Debt"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetParticipationDisabled.stories.tsx",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-cta-access-debt--inhabilitacion-penalizacion"
+        }
+      },
+      {
+        "nombre_humano": "Pay2Play",
+        "nombre_ai": "pay2play",
+        "dominio": "transaccional-cuenta",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Multicomponent/CTA/Access/Participation/Pay2Play",
+        "anatomia": [
+          "Suficiente",
+          "Insuficiente"
+        ],
+        "props": {
+          "variants_count": 2,
+          "story_ids": [
+            "widgets-multicomponent-cta-access-participation-pay2play--suficiente",
+            "widgets-multicomponent-cta-access-participation-pay2play--insuficiente"
+          ],
+          "storybook_path": "Widgets/Multicomponent/CTA/Access/Participation/Pay2Play"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetParticipationPay2Play.stories.tsx",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-cta-access-participation-pay2play--suficiente"
+        }
+      },
+      {
+        "nombre_humano": "Restricted",
+        "nombre_ai": "restricted",
+        "dominio": "transaccional-cuenta",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Multicomponent/CTA/Access/Restricted",
+        "anatomia": [
+          "Restricted"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "widgets-multicomponent-cta-access-restricted--restricted"
+          ],
+          "storybook_path": "Widgets/Multicomponent/CTA/Access/Restricted"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetRestricted.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-cta-access-restricted--restricted"
+        }
+      },
+      {
+        "nombre_humano": "Registration2",
+        "nombre_ai": "registration2",
+        "dominio": "transaccional-cuenta",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Multicomponent/Form/Registration2",
+        "anatomia": [
+          "Sign In"
+        ],
+        "props": {
+          "variants_count": 1,
+          "story_ids": [
+            "widgets-multicomponent-form-registration2--sign-in"
+          ],
+          "storybook_path": "Widgets/Multicomponent/Form/Registration2"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetSignIn.stories.tsx",
+          "tags": [
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-form-registration2--sign-in"
+        }
+      },
+      {
+        "nombre_humano": "Transaction",
+        "nombre_ai": "transaction",
+        "dominio": "transaccional-cuenta",
+        "origen": "SubasCars",
+        "descripcion": "Componente de SubasCars — Widgets/Single/Transaction",
+        "anatomia": [
+          "Success",
+          "Error"
+        ],
+        "props": {
+          "variants_count": 2,
+          "story_ids": [
+            "widgets-single-transaction--success",
+            "widgets-single-transaction--error"
+          ],
+          "storybook_path": "Widgets/Single/Transaction"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG — fase categorización"
+        },
+        "decision": "pendiente-revision",
+        "_meta": {
+          "import_path": "./packages/components/stories/widget/WidgetTransactionStatus.stories.tsx",
+          "tags": [
+            "dev",
+            "test",
+            "dev",
+            "test"
+          ],
+          "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-single-transaction--success"
+        }
+      }
+    ]
+  },
+  "inventory_flat": [
+    {
+      "nombre_humano": "Accordion",
+      "nombre_ai": "accordion",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main/Single/Publication/Accordion",
+      "anatomia": [
+        "Activation",
+        "Asset Holder",
+        "Cy T",
+        "Description",
+        "Location",
+        "Opportunity",
+        "Opportunity Second Hand",
+        "Participation",
+        "Run ODC",
+        "Run ODC With Documents",
+        "Vehicle"
+      ],
+      "props": {
+        "variants_count": 11,
+        "story_ids": [
+          "main-single-publication-accordion--activation",
+          "main-single-publication-accordion--asset-holder",
+          "main-single-publication-accordion--cy-t",
+          "main-single-publication-accordion--description",
+          "main-single-publication-accordion--location",
+          "main-single-publication-accordion--opportunity",
+          "main-single-publication-accordion--opportunity-second-hand",
+          "main-single-publication-accordion--participation",
+          "main-single-publication-accordion--run-odc",
+          "main-single-publication-accordion--run-odc-with-documents",
+          "main-single-publication-accordion--vehicle"
+        ],
+        "storybook_path": "Main/Single/Publication/Accordion"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/accordion/AccordionActivation.stories.tsx",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-publication-accordion--activation"
+      }
+    },
+    {
+      "nombre_humano": "accordion",
+      "nombre_ai": "accordion",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main/Single/Publication/accordion",
+      "anatomia": [
+        "Execution Instructions"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "main-single-publication-accordion--execution-instructions"
+        ],
+        "storybook_path": "Main/Single/Publication/accordion"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/accordion/AccordionExecutionInstructions.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-publication-accordion--execution-instructions"
+      }
+    },
+    {
+      "nombre_humano": "Cards",
+      "nombre_ai": "cards",
+      "dominio": "discovery-navegacion",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main / Multicomponent / Filmstrip / Cards ",
+      "anatomia": [
+        "Cards"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "main-multicomponent-filmstrip-cards--cards"
+        ],
+        "storybook_path": "Main / Multicomponent / Filmstrip / Cards "
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/filmstrip/Cards.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-multicomponent-filmstrip-cards--cards"
+      }
+    },
+    {
+      "nombre_humano": "Gallery",
+      "nombre_ai": "gallery",
+      "dominio": "discovery-navegacion",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main / Multicomponent / Filmstrip / Gallery ",
+      "anatomia": [
+        "Gallery"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "main-multicomponent-filmstrip-gallery--gallery"
+        ],
+        "storybook_path": "Main / Multicomponent / Filmstrip / Gallery "
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/filmstrip/Gallery.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-multicomponent-filmstrip-gallery--gallery"
+      }
+    },
+    {
+      "nombre_humano": "Grid",
+      "nombre_ai": "grid",
+      "dominio": "discovery-navegacion",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main / Multicomponent / Grid  ",
+      "anatomia": [
+        "Grid"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "main-multicomponent-grid--grid"
+        ],
+        "storybook_path": "Main / Multicomponent / Grid  "
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/filmstrip/GridCard.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-multicomponent-grid--grid"
+      }
+    },
+    {
+      "nombre_humano": "Groups",
+      "nombre_ai": "groups",
+      "dominio": "discovery-navegacion",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main/Multicomponent/Filmstrip/Groups",
+      "anatomia": [
+        "Groups"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "main-multicomponent-filmstrip-groups--groups"
+        ],
+        "storybook_path": "Main/Multicomponent/Filmstrip/Groups"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/filmstrip/Group.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-multicomponent-filmstrip-groups--groups"
+      }
+    },
+    {
+      "nombre_humano": "Days",
+      "nombre_ai": "days",
+      "dominio": "discovery-navegacion",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main/Multicomponent/Filmstrip/Days",
+      "anatomia": [
+        "Groups"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "main-multicomponent-filmstrip-days--groups"
+        ],
+        "storybook_path": "Main/Multicomponent/Filmstrip/Days"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/filmstrip/GroupDays.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-multicomponent-filmstrip-days--groups"
+      }
+    },
+    {
+      "nombre_humano": "Bubble",
+      "nombre_ai": "bubble",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Basic / Outputs / Conversational / Bubble",
+      "anatomia": [
+        "Bubble"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "basic-outputs-conversational-bubble--bubble"
+        ],
+        "storybook_path": "Basic / Outputs / Conversational / Bubble"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/form/Bubble.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-outputs-conversational-bubble--bubble"
+      }
+    },
+    {
+      "nombre_humano": "Bullet Drops",
+      "nombre_ai": "bullet-drops",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Basic / Outputs / Data label / Bullet Drops",
+      "anatomia": [
+        "Bullet Drops"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "basic-outputs-data-label-bullet-drops--bullet-drops"
+        ],
+        "storybook_path": "Basic / Outputs / Data label / Bullet Drops"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/form/BulletsDrops.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-outputs-data-label-bullet-drops--bullet-drops"
+      }
+    },
+    {
+      "nombre_humano": "CTA2",
+      "nombre_ai": "cta2",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Basic / Control / Button / Clickable / CTA2",
+      "anatomia": [
+        "CTA"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "basic-control-button-clickable-cta2--cta"
+        ],
+        "storybook_path": "Basic / Control / Button / Clickable / CTA2"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/form/Button.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-control-button-clickable-cta2--cta"
+      }
+    },
+    {
+      "nombre_humano": "Clickable2",
+      "nombre_ai": "clickable2",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Basic / Control / Button / Clickable2",
+      "anatomia": [
+        "Bidding"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "basic-control-button-clickable2--bidding"
+        ],
+        "storybook_path": "Basic / Control / Button / Clickable2"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/form/ButtonBidding.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-control-button-clickable2--bidding"
+      }
+    },
+    {
+      "nombre_humano": "Check Box",
+      "nombre_ai": "check-box",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Basic / Inputs  / Content field / Check Box",
+      "anatomia": [
+        "Check Box"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "basic-inputs-content-field-check-box--check-box"
+        ],
+        "storybook_path": "Basic / Inputs  / Content field / Check Box"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/form/Checkbox.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-inputs-content-field-check-box--check-box"
+      }
+    },
+    {
+      "nombre_humano": "Dropdown Box",
+      "nombre_ai": "dropdown-box",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Basic / Inputs  / Content field / Dropdown Box",
+      "anatomia": [
+        "Dropdown Box"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "basic-inputs-content-field-dropdown-box--dropdown-box"
+        ],
+        "storybook_path": "Basic / Inputs  / Content field / Dropdown Box"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/form/Dropdown.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-inputs-content-field-dropdown-box--dropdown-box"
+      }
+    },
+    {
+      "nombre_humano": "Text Box2",
+      "nombre_ai": "text-box2",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Basic / Inputs / Content field /Text Box2",
+      "anatomia": [
+        "Text Box"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "basic-inputs-content-field-text-box2--text-box"
+        ],
+        "storybook_path": "Basic / Inputs / Content field /Text Box2"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/form/Input.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-inputs-content-field-text-box2--text-box"
+      }
+    },
+    {
+      "nombre_humano": "Keys",
+      "nombre_ai": "keys",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Basic/Inputs/Keys",
+      "anatomia": [
+        "Keys"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "basic-inputs-keys--keys"
+        ],
+        "storybook_path": "Basic/Inputs/Keys"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/form/Keys.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-inputs-keys--keys"
+      }
+    },
+    {
+      "nombre_humano": "Pad Value",
+      "nombre_ai": "pad-value",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Basic/Inputs/Content field/Pad Value ",
+      "anatomia": [
+        "Pad Value"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "basic-inputs-content-field-pad-value--pad-value"
+        ],
+        "storybook_path": "Basic/Inputs/Content field/Pad Value "
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/form/PadValueMulti.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-inputs-content-field-pad-value--pad-value"
+      }
+    },
+    {
+      "nombre_humano": "Pad Value",
+      "nombre_ai": "pad-value",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Basic/Inputs/Content field/Pad Value",
+      "anatomia": [
+        "Pad Value Mini"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "basic-inputs-content-field-pad-value--pad-value-mini"
+        ],
+        "storybook_path": "Basic/Inputs/Content field/Pad Value"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/form/PadValueSingle.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-inputs-content-field-pad-value--pad-value-mini"
+      }
+    },
+    {
+      "nombre_humano": "Header",
+      "nombre_ai": "header",
+      "dominio": "discovery-navegacion",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main/Single/Publication/Header",
+      "anatomia": [
+        "Group Checkout 2",
+        "Group Header 2",
+        "Group Console 2",
+        "Group Opportunity 2"
+      ],
+      "props": {
+        "variants_count": 4,
+        "story_ids": [
+          "main-single-publication-header--group-checkout-2",
+          "main-single-publication-header--group-header-2",
+          "main-single-publication-header--group-console-2",
+          "main-single-publication-header--group-opportunity-2"
+        ],
+        "storybook_path": "Main/Single/Publication/Header"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/group/CheckoutHeader.stories.tsx",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-publication-header--group-checkout-2"
+      }
+    },
+    {
+      "nombre_humano": "Icons",
+      "nombre_ai": "icons",
+      "dominio": "primitivos-tokens",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Icons",
+      "anatomia": [
+        "Alert Circle",
+        "Arrow Asset",
+        "Attention",
+        "Available Subas Tokens",
+        "Back",
+        "Base",
+        "Bell",
+        "Bids",
+        "Calendar",
+        "Car",
+        "Check",
+        "Check Circle",
+        "Check In",
+        "Checkout",
+        "Clear",
+        "Clock 2",
+        "Clock",
+        "Clock 3",
+        "Close",
+        "Cookies",
+        "Don Justo",
+        "Down",
+        "Download",
+        "Drop Off",
+        "Drop On",
+        "Engine Displacement",
+        "Facebook",
+        "Fistbump",
+        "Forward",
+        "Fuel",
+        "Group",
+        "Groups Calendar",
+        "Higgest Bidder",
+        "Hub",
+        "Image",
+        "Info Circle",
+        "Instagram",
+        "Invoice",
+        "Like",
+        "Live",
+        "Location",
+        "Logout",
+        "Minus",
+        "On Hold Subas Tokens",
+        "Opportunities",
+        "Pause",
+        "Pay 2 Play",
+        "Photo Galery",
+        "Plate",
+        "Receipt",
+        "Share",
+        "Subas Token",
+        "Subas Top",
+        "Subas Wallet",
+        "Subastip",
+        "Subaszone",
+        "Tiktok",
+        "Traction",
+        "Transmission",
+        "Trash",
+        "Trophy",
+        "Up",
+        "Upload",
+        "User Calendar",
+        "Value",
+        "View",
+        "X",
+        "Youtube"
+      ],
+      "props": {
+        "variants_count": 68,
+        "story_ids": [
+          "icons--alert-circle",
+          "icons--arrow-asset",
+          "icons--attention",
+          "icons--available-subas-tokens",
+          "icons--back",
+          "icons--base",
+          "icons--bell",
+          "icons--bids",
+          "icons--calendar",
+          "icons--car",
+          "icons--check",
+          "icons--check-circle",
+          "icons--check-in",
+          "icons--checkout",
+          "icons--clear",
+          "icons--clock-2",
+          "icons--clock",
+          "icons--clock-3",
+          "icons--close",
+          "icons--cookies",
+          "icons--don-justo",
+          "icons--down",
+          "icons--download",
+          "icons--drop-off",
+          "icons--drop-on",
+          "icons--engine-displacement",
+          "icons--facebook",
+          "icons--fistbump",
+          "icons--forward",
+          "icons--fuel",
+          "icons--group",
+          "icons--groups-calendar",
+          "icons--higgest-bidder",
+          "icons--hub",
+          "icons--image",
+          "icons--info-circle",
+          "icons--instagram",
+          "icons--invoice",
+          "icons--like",
+          "icons--live",
+          "icons--location",
+          "icons--logout",
+          "icons--minus",
+          "icons--on-hold-subas-tokens",
+          "icons--opportunities",
+          "icons--pause",
+          "icons--pay-2-play",
+          "icons--photo-galery",
+          "icons--plate",
+          "icons--receipt",
+          "icons--share",
+          "icons--subas-token",
+          "icons--subas-top",
+          "icons--subas-wallet",
+          "icons--subastip",
+          "icons--subaszone",
+          "icons--tiktok",
+          "icons--traction",
+          "icons--transmission",
+          "icons--trash",
+          "icons--trophy",
+          "icons--up",
+          "icons--upload",
+          "icons--user-calendar",
+          "icons--value",
+          "icons--view",
+          "icons--x",
+          "icons--youtube"
+        ],
+        "storybook_path": "Icons"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/icons/AlertCircle.stories.ts",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/icons--alert-circle"
+      }
+    },
+    {
+      "nombre_humano": "Transaction",
+      "nombre_ai": "transaction",
+      "dominio": "transaccional-cuenta",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Popup/Transaction",
+      "anatomia": [
+        "Success",
+        "Error"
+      ],
+      "props": {
+        "variants_count": 2,
+        "story_ids": [
+          "popup-transaction--success",
+          "popup-transaction--error"
+        ],
+        "storybook_path": "Popup/Transaction"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/popup/WidgetTransactionStatus.stories.tsx",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/popup-transaction--success"
+      }
+    },
+    {
+      "nombre_humano": "Attention",
+      "nombre_ai": "attention",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main/Single/Overlays/Attention",
+      "anatomia": [
+        "Attention",
+        "Group Stated",
+        "Payment Problem",
+        "Checkout Expired"
+      ],
+      "props": {
+        "variants_count": 4,
+        "story_ids": [
+          "main-single-overlays-attention--attention",
+          "main-single-overlays-attention--group-stated",
+          "main-single-overlays-attention--payment-problem",
+          "main-single-overlays-attention--checkout-expired"
+        ],
+        "storybook_path": "Main/Single/Overlays/Attention"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/Attention.stories.tsx",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-overlays-attention--attention"
+      }
+    },
+    {
+      "nombre_humano": "Footer",
+      "nombre_ai": "footer",
+      "dominio": "discovery-navegacion",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main/Single/General/Footer",
+      "anatomia": [
+        "Footer Desktop",
+        "Footer"
+      ],
+      "props": {
+        "variants_count": 2,
+        "story_ids": [
+          "main-single-general-footer--footer-desktop",
+          "main-single-general-footer--footer"
+        ],
+        "storybook_path": "Main/Single/General/Footer"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/Footer.stories.tsx",
+        "tags": [
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-general-footer--footer-desktop"
+      }
+    },
+    {
+      "nombre_humano": "Header",
+      "nombre_ai": "header",
+      "dominio": "discovery-navegacion",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main/Single/General/Header",
+      "anatomia": [
+        "Header"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "main-single-general-header--header"
+        ],
+        "storybook_path": "Main/Single/General/Header"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/Header.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-general-header--header"
+      }
+    },
+    {
+      "nombre_humano": "List",
+      "nombre_ai": "list",
+      "dominio": "discovery-navegacion",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main / Multicomponent / List",
+      "anatomia": [
+        "List"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "main-multicomponent-list--list"
+        ],
+        "storybook_path": "Main / Multicomponent / List"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/List.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-multicomponent-list--list"
+      }
+    },
+    {
+      "nombre_humano": "List Item",
+      "nombre_ai": "list-item",
+      "dominio": "discovery-navegacion",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main/Single/Publication/List Item",
+      "anatomia": [
+        "List Item"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "main-single-publication-list-item--list-item"
+        ],
+        "storybook_path": "Main/Single/Publication/List Item"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/ListItem.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-publication-list-item--list-item"
+      }
+    },
+    {
+      "nombre_humano": "Metrics",
+      "nombre_ai": "metrics",
+      "dominio": "subasta-tiempo-real",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Basic/Outputs/Data label/Metrics",
+      "anatomia": [
+        "Metrics"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "basic-outputs-data-label-metrics--metrics"
+        ],
+        "storybook_path": "Basic/Outputs/Data label/Metrics"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/Metrics.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-outputs-data-label-metrics--metrics"
+      }
+    },
+    {
+      "nombre_humano": "Model Value",
+      "nombre_ai": "model-value",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Basic / Outputs / Data label / Model Value",
+      "anatomia": [
+        "Model Value"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "basic-outputs-data-label-model-value--model-value"
+        ],
+        "storybook_path": "Basic / Outputs / Data label / Model Value"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/ModelValues.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-outputs-data-label-model-value--model-value"
+      }
+    },
+    {
+      "nombre_humano": "Navbar V2",
+      "nombre_ai": "navbar-v2",
+      "dominio": "discovery-navegacion",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main/Single/General/Navbar V2",
+      "anatomia": [
+        "Navbar V 2"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "main-single-general-navbar-v2--navbar-v-2"
+        ],
+        "storybook_path": "Main/Single/General/Navbar V2"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/NavBar.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-general-navbar-v2--navbar-v-2"
+      }
+    },
+    {
+      "nombre_humano": "Navigation",
+      "nombre_ai": "navigation",
+      "dominio": "primitivos-tokens",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Basic/Control/Icon/Navigation",
+      "anatomia": [
+        "Navigation"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "basic-control-icon-navigation--navigation"
+        ],
+        "storybook_path": "Basic/Control/Icon/Navigation"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/Navigation.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-control-icon-navigation--navigation"
+      }
+    },
+    {
+      "nombre_humano": "Navigator Bar",
+      "nombre_ai": "navigator-bar",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main/Single/General/Navigator Bar",
+      "anatomia": [
+        "Navigator Bar"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "main-single-general-navigator-bar--navigator-bar"
+        ],
+        "storybook_path": "Main/Single/General/Navigator Bar"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/NavigationBar.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-general-navigator-bar--navigator-bar"
+      }
+    },
+    {
+      "nombre_humano": "Slider",
+      "nombre_ai": "slider",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Basic/Control/Button/Slider",
+      "anatomia": [
+        "Slider"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "basic-control-button-slider--slider"
+        ],
+        "storybook_path": "Basic/Control/Button/Slider"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/Slider.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-control-button-slider--slider"
+      }
+    },
+    {
+      "nombre_humano": "ActivityCounter",
+      "nombre_ai": "activitycounter",
+      "dominio": "primitivos-tokens",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Basic/Control/Icon/Social/ActivityCounter",
+      "anatomia": [
+        "Like",
+        "Share"
+      ],
+      "props": {
+        "variants_count": 2,
+        "story_ids": [
+          "basic-control-icon-social-activitycounter--like",
+          "basic-control-icon-social-activitycounter--share"
+        ],
+        "storybook_path": "Basic/Control/Icon/Social/ActivityCounter"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/SocialActityCounter.stories.tsx",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-control-icon-social-activitycounter--like"
+      }
+    },
+    {
+      "nombre_humano": "Activity",
+      "nombre_ai": "activity",
+      "dominio": "primitivos-tokens",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Basic/Control/Icon/Social/Activity",
+      "anatomia": [
+        "Activity"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "basic-control-icon-social-activity--activity"
+        ],
+        "storybook_path": "Basic/Control/Icon/Social/Activity"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/SocialActivity.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-control-icon-social-activity--activity"
+      }
+    },
+    {
+      "nombre_humano": "Subastip",
+      "nombre_ai": "subastip",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main/Single/Overlays/Subastip",
+      "anatomia": [
+        "Subastip"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "main-single-overlays-subastip--subastip"
+        ],
+        "storybook_path": "Main/Single/Overlays/Subastip"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/Subastip.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-overlays-subastip--subastip"
+      }
+    },
+    {
+      "nombre_humano": "Tags",
+      "nombre_ai": "tags",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Basic/Outputs/Data label/Tags",
+      "anatomia": [
+        "Tags"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "basic-outputs-data-label-tags--tags"
+        ],
+        "storybook_path": "Basic/Outputs/Data label/Tags"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/Tag.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-outputs-data-label-tags--tags"
+      }
+    },
+    {
+      "nombre_humano": "ID Card",
+      "nombre_ai": "id-card",
+      "dominio": "subasta-tiempo-real",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main / Single / User / ID Card",
+      "anatomia": [
+        "ID Card"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "main-single-user-id-card--id-card"
+        ],
+        "storybook_path": "Main / Single / User / ID Card"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/UserCard.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-user-id-card--id-card"
+      }
+    },
+    {
+      "nombre_humano": "Wallet",
+      "nombre_ai": "wallet",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main/Single/User/Wallet",
+      "anatomia": [
+        "Wallet"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "main-single-user-wallet--wallet"
+        ],
+        "storybook_path": "Main/Single/User/Wallet"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/Wallet.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-user-wallet--wallet"
+      }
+    },
+    {
+      "nombre_humano": "Auction Tracker",
+      "nombre_ai": "auction-tracker",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Basic / Outputs / Conversational / Auction Tracker",
+      "anatomia": [
+        "Auction Tracker"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "basic-outputs-conversational-auction-tracker--auction-tracker"
+        ],
+        "storybook_path": "Basic / Outputs / Conversational / Auction Tracker"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/auction-tracker/AuctionTracker.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-outputs-conversational-auction-tracker--auction-tracker"
+      }
+    },
+    {
+      "nombre_humano": "Auction Tracker V2",
+      "nombre_ai": "auction-tracker-v2",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Basic / Outputs / Conversational / Auction Tracker V2",
+      "anatomia": [
+        "Auction Tracker V 2"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "basic-outputs-conversational-auction-tracker-v2--auction-tracker-v-2"
+        ],
+        "storybook_path": "Basic / Outputs / Conversational / Auction Tracker V2"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/auction-tracker/AuctionTrackerV2.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-outputs-conversational-auction-tracker-v2--auction-tracker-v-2"
+      }
+    },
+    {
+      "nombre_humano": "Group Avatar",
+      "nombre_ai": "group-avatar",
+      "dominio": "subasta-tiempo-real",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main / Single / User / Group Avatar",
+      "anatomia": [
+        "Group Avatar"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "main-single-user-group-avatar--group-avatar"
+        ],
+        "storybook_path": "Main / Single / User / Group Avatar"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/avatar/GroupAvatar.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-user-group-avatar--group-avatar"
+      }
+    },
+    {
+      "nombre_humano": "User Avatars",
+      "nombre_ai": "user-avatars",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Basic / Outputs / User Avatars",
+      "anatomia": [
+        "User Avatars"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "basic-outputs-user-avatars--user-avatars"
+        ],
+        "storybook_path": "Basic / Outputs / User Avatars"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/avatar/UserAvatar.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/basic-outputs-user-avatars--user-avatars"
+      }
+    },
+    {
+      "nombre_humano": "CTA",
+      "nombre_ai": "cta",
+      "dominio": "subasta-tiempo-real",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main / Single / Publication / Card / CTA",
+      "anatomia": [
+        "CTA"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "main-single-publication-card-cta--cta"
+        ],
+        "storybook_path": "Main / Single / Publication / Card / CTA"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/card/Cta.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-publication-card-cta--cta"
+      }
+    },
+    {
+      "nombre_humano": "Display",
+      "nombre_ai": "display",
+      "dominio": "subasta-tiempo-real",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main / Single / Publication / Card / Display",
+      "anatomia": [
+        "Display"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "main-single-publication-card-display--display"
+        ],
+        "storybook_path": "Main / Single / Publication / Card / Display"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/card/Display.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-publication-card-display--display"
+      }
+    },
+    {
+      "nombre_humano": "Mini",
+      "nombre_ai": "mini",
+      "dominio": "subasta-tiempo-real",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main / Single / Publication / Card / Mini",
+      "anatomia": [
+        "Mini"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "main-single-publication-card-mini--mini"
+        ],
+        "storybook_path": "Main / Single / Publication / Card / Mini"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/card/Mini.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-publication-card-mini--mini"
+      }
+    },
+    {
+      "nombre_humano": "Opportunity",
+      "nombre_ai": "opportunity",
+      "dominio": "subasta-tiempo-real",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Main / Single / Publication / Card / Opportunity",
+      "anatomia": [
+        "Opportunity"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "main-single-publication-card-opportunity--opportunity"
+        ],
+        "storybook_path": "Main / Single / Publication / Card / Opportunity"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/single/card/Opportunity.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-publication-card-opportunity--opportunity"
+      }
+    },
+    {
+      "nombre_humano": "AddList",
+      "nombre_ai": "addlist",
+      "dominio": "discovery-navegacion",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Single/AddList",
+      "anatomia": [
+        "Atencion",
+        "Agregado"
+      ],
+      "props": {
+        "variants_count": 2,
+        "story_ids": [
+          "widgets-single-addlist--atencion",
+          "widgets-single-addlist--agregado"
+        ],
+        "storybook_path": "Widgets/Single/AddList"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetAddList.stories.tsx",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-single-addlist--atencion"
+      }
+    },
+    {
+      "nombre_humano": "CTA",
+      "nombre_ai": "cta",
+      "dominio": "transaccional-cuenta",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Multicomponent/CTA",
+      "anatomia": [
+        "Chat",
+        "Execution"
+      ],
+      "props": {
+        "variants_count": 2,
+        "story_ids": [
+          "widgets-multicomponent-cta--chat",
+          "widgets-multicomponent-cta--execution"
+        ],
+        "storybook_path": "Widgets/Multicomponent/CTA"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetChat.stories.tsx",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-cta--chat"
+      }
+    },
+    {
+      "nombre_humano": "Checkout",
+      "nombre_ai": "checkout",
+      "dominio": "transaccional-cuenta",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Multicomponent/CTA/Checkout",
+      "anatomia": [
+        "Agreed Value",
+        "Upgrate Offer"
+      ],
+      "props": {
+        "variants_count": 2,
+        "story_ids": [
+          "widgets-multicomponent-cta-checkout--agreed-value",
+          "widgets-multicomponent-cta-checkout--upgrate-offer"
+        ],
+        "storybook_path": "Widgets/Multicomponent/CTA/Checkout"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetCheckOutAgreedValue.stories.tsx",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-cta-checkout--agreed-value"
+      }
+    },
+    {
+      "nombre_humano": "Confirmation",
+      "nombre_ai": "confirmation",
+      "dominio": "transaccional-cuenta",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Multicomponent/CTA/Checkout/Confirmation",
+      "anatomia": [
+        "Mejorar",
+        "Mantener",
+        "Rechazar"
+      ],
+      "props": {
+        "variants_count": 3,
+        "story_ids": [
+          "widgets-multicomponent-cta-checkout-confirmation--mejorar",
+          "widgets-multicomponent-cta-checkout-confirmation--mantener",
+          "widgets-multicomponent-cta-checkout-confirmation--rechazar"
+        ],
+        "storybook_path": "Widgets/Multicomponent/CTA/Checkout/Confirmation"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetCheckOutConfirmation.stories.tsx",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-cta-checkout-confirmation--mejorar"
+      }
+    },
+    {
+      "nombre_humano": "Negociation",
+      "nombre_ai": "negociation",
+      "dominio": "transaccional-cuenta",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Multicomponent/CTA/Checkout/Negociation",
+      "anatomia": [
+        "Primera Contrapropuesta",
+        "Segunda Contrapropuesta"
+      ],
+      "props": {
+        "variants_count": 2,
+        "story_ids": [
+          "widgets-multicomponent-cta-checkout-negociation--primera-contrapropuesta",
+          "widgets-multicomponent-cta-checkout-negociation--segunda-contrapropuesta"
+        ],
+        "storybook_path": "Widgets/Multicomponent/CTA/Checkout/Negociation"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetCheckOutNegociationOne.stories.tsx",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-cta-checkout-negociation--primera-contrapropuesta"
+      }
+    },
+    {
+      "nombre_humano": "Pad",
+      "nombre_ai": "pad",
+      "dominio": "ui-core",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Multicomponent/Pad",
+      "anatomia": [
+        "Subas Code",
+        "Checkout"
+      ],
+      "props": {
+        "variants_count": 2,
+        "story_ids": [
+          "widgets-multicomponent-pad--subas-code",
+          "widgets-multicomponent-pad--checkout"
+        ],
+        "storybook_path": "Widgets/Multicomponent/Pad"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetCode.stories.tsx",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-pad--subas-code"
+      }
+    },
+    {
+      "nombre_humano": "Single",
+      "nombre_ai": "single",
+      "dominio": "transaccional-cuenta",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Single",
+      "anatomia": [
+        "Confirmacion Solicitud Business"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "widgets-single--confirmacion-solicitud-business"
+        ],
+        "storybook_path": "Widgets/Single"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetConfirmedDemand.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-single--confirmacion-solicitud-business"
+      }
+    },
+    {
+      "nombre_humano": "Cookies",
+      "nombre_ai": "cookies",
+      "dominio": "transaccional-cuenta",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Multicomponent/CTA/Cookies",
+      "anatomia": [
+        "Cookies"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "widgets-multicomponent-cta-cookies--cookies"
+        ],
+        "storybook_path": "Widgets/Multicomponent/CTA/Cookies"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetCookies.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-cta-cookies--cookies"
+      }
+    },
+    {
+      "nombre_humano": "Registration",
+      "nombre_ai": "registration",
+      "dominio": "transaccional-cuenta",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Multicomponent/Form/Registration",
+      "anatomia": [
+        "Cy T",
+        "User Validation"
+      ],
+      "props": {
+        "variants_count": 2,
+        "story_ids": [
+          "widgets-multicomponent-form-registration--cy-t",
+          "widgets-multicomponent-form-registration--user-validation"
+        ],
+        "storybook_path": "Widgets/Multicomponent/Form/Registration"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetCyT.stories.tsx",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-form-registration--cy-t"
+      }
+    },
+    {
+      "nombre_humano": "Access",
+      "nombre_ai": "access",
+      "dominio": "transaccional-cuenta",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Multicomponent/CTA/Access",
+      "anatomia": [
+        "Group Start"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "widgets-multicomponent-cta-access--group-start"
+        ],
+        "storybook_path": "Widgets/Multicomponent/CTA/Access"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetGroupStart.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-cta-access--group-start"
+      }
+    },
+    {
+      "nombre_humano": "Informative",
+      "nombre_ai": "informative",
+      "dominio": "transaccional-cuenta",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Single/Informative",
+      "anatomia": [
+        "Information",
+        "Success",
+        "Congratulations",
+        "Expired"
+      ],
+      "props": {
+        "variants_count": 4,
+        "story_ids": [
+          "widgets-single-informative--information",
+          "widgets-single-informative--success",
+          "widgets-single-informative--congratulations",
+          "widgets-single-informative--expired"
+        ],
+        "storybook_path": "Widgets/Single/Informative"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetInformative.stories.tsx",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-single-informative--information"
+      }
+    },
+    {
+      "nombre_humano": "List",
+      "nombre_ai": "list",
+      "dominio": "discovery-navegacion",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Multicomponent/List",
+      "anatomia": [
+        "Notifcations"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "widgets-multicomponent-list--notifcations"
+        ],
+        "storybook_path": "Widgets/Multicomponent/List"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetNotifications.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-list--notifcations"
+      }
+    },
+    {
+      "nombre_humano": "OpenAccountBusiness",
+      "nombre_ai": "openaccountbusiness",
+      "dominio": "transaccional-cuenta",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Multicomponent/Form/OpenAccountBusiness",
+      "anatomia": [
+        "Open Account Business"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "widgets-multicomponent-form-openaccountbusiness--open-account-business"
+        ],
+        "storybook_path": "Widgets/Multicomponent/Form/OpenAccountBusiness"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetOpenAccountBusiness.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-form-openaccountbusiness--open-account-business"
+      }
+    },
+    {
+      "nombre_humano": "Billing",
+      "nombre_ai": "billing",
+      "dominio": "transaccional-cuenta",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Multicomponent/Form/Operation/Billing",
+      "anatomia": [
+        "Factura",
+        "Boleta"
+      ],
+      "props": {
+        "variants_count": 2,
+        "story_ids": [
+          "widgets-multicomponent-form-operation-billing--factura",
+          "widgets-multicomponent-form-operation-billing--boleta"
+        ],
+        "storybook_path": "Widgets/Multicomponent/Form/Operation/Billing"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetOperation.stories.tsx",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-form-operation-billing--factura"
+      }
+    },
+    {
+      "nombre_humano": "Transfer",
+      "nombre_ai": "transfer",
+      "dominio": "transaccional-cuenta",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Multicomponent/Form/Operation/Transfer",
+      "anatomia": [
+        "Natural",
+        "Juridico"
+      ],
+      "props": {
+        "variants_count": 2,
+        "story_ids": [
+          "widgets-multicomponent-form-operation-transfer--natural",
+          "widgets-multicomponent-form-operation-transfer--juridico"
+        ],
+        "storybook_path": "Widgets/Multicomponent/Form/Operation/Transfer"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetOperationTransfer.stories.tsx",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-form-operation-transfer--natural"
+      }
+    },
+    {
+      "nombre_humano": "CheckIn",
+      "nombre_ai": "checkin",
+      "dominio": "transaccional-cuenta",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Multicomponent/CTA/Access/Participation/CheckIn",
+      "anatomia": [
+        "Suficiente",
+        "Insuficiente"
+      ],
+      "props": {
+        "variants_count": 2,
+        "story_ids": [
+          "widgets-multicomponent-cta-access-participation-checkin--suficiente",
+          "widgets-multicomponent-cta-access-participation-checkin--insuficiente"
+        ],
+        "storybook_path": "Widgets/Multicomponent/CTA/Access/Participation/CheckIn"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetParticipation.stories.tsx",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-cta-access-participation-checkin--suficiente"
+      }
+    },
+    {
+      "nombre_humano": "Debt",
+      "nombre_ai": "debt",
+      "dominio": "transaccional-cuenta",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Multicomponent/CTA/Access/Debt",
+      "anatomia": [
+        "Inhabilitacion Penalizacion",
+        "Inhabilitacion Fee Activacion"
+      ],
+      "props": {
+        "variants_count": 2,
+        "story_ids": [
+          "widgets-multicomponent-cta-access-debt--inhabilitacion-penalizacion",
+          "widgets-multicomponent-cta-access-debt--inhabilitacion-fee-activacion"
+        ],
+        "storybook_path": "Widgets/Multicomponent/CTA/Access/Debt"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetParticipationDisabled.stories.tsx",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-cta-access-debt--inhabilitacion-penalizacion"
+      }
+    },
+    {
+      "nombre_humano": "Pay2Play",
+      "nombre_ai": "pay2play",
+      "dominio": "transaccional-cuenta",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Multicomponent/CTA/Access/Participation/Pay2Play",
+      "anatomia": [
+        "Suficiente",
+        "Insuficiente"
+      ],
+      "props": {
+        "variants_count": 2,
+        "story_ids": [
+          "widgets-multicomponent-cta-access-participation-pay2play--suficiente",
+          "widgets-multicomponent-cta-access-participation-pay2play--insuficiente"
+        ],
+        "storybook_path": "Widgets/Multicomponent/CTA/Access/Participation/Pay2Play"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetParticipationPay2Play.stories.tsx",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-cta-access-participation-pay2play--suficiente"
+      }
+    },
+    {
+      "nombre_humano": "Participations",
+      "nombre_ai": "participations",
+      "dominio": "discovery-navegacion",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Multicomponent/List/Participations",
+      "anatomia": [
+        "Participations"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "widgets-multicomponent-list-participations--participations"
+        ],
+        "storybook_path": "Widgets/Multicomponent/List/Participations"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetParticipations.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-list-participations--participations"
+      }
+    },
+    {
+      "nombre_humano": "Ranking",
+      "nombre_ai": "ranking",
+      "dominio": "discovery-navegacion",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Multicomponent/List/Ranking",
+      "anatomia": [
+        "Ranking",
+        "Ranking With Button"
+      ],
+      "props": {
+        "variants_count": 2,
+        "story_ids": [
+          "widgets-multicomponent-list-ranking--ranking",
+          "widgets-multicomponent-list-ranking--ranking-with-button"
+        ],
+        "storybook_path": "Widgets/Multicomponent/List/Ranking"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetRanking.stories.tsx",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-list-ranking--ranking"
+      }
+    },
+    {
+      "nombre_humano": "RankingV2",
+      "nombre_ai": "rankingv2",
+      "dominio": "discovery-navegacion",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Multicomponent/List/RankingV2",
+      "anatomia": [
+        "Ranking",
+        "Ranking With Button"
+      ],
+      "props": {
+        "variants_count": 2,
+        "story_ids": [
+          "widgets-multicomponent-list-rankingv2--ranking",
+          "widgets-multicomponent-list-rankingv2--ranking-with-button"
+        ],
+        "storybook_path": "Widgets/Multicomponent/List/RankingV2"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetRankingV2.stories.tsx",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-list-rankingv2--ranking"
+      }
+    },
+    {
+      "nombre_humano": "Restricted",
+      "nombre_ai": "restricted",
+      "dominio": "transaccional-cuenta",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Multicomponent/CTA/Access/Restricted",
+      "anatomia": [
+        "Restricted"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "widgets-multicomponent-cta-access-restricted--restricted"
+        ],
+        "storybook_path": "Widgets/Multicomponent/CTA/Access/Restricted"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetRestricted.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-cta-access-restricted--restricted"
+      }
+    },
+    {
+      "nombre_humano": "Registration2",
+      "nombre_ai": "registration2",
+      "dominio": "transaccional-cuenta",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Multicomponent/Form/Registration2",
+      "anatomia": [
+        "Sign In"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "widgets-multicomponent-form-registration2--sign-in"
+        ],
+        "storybook_path": "Widgets/Multicomponent/Form/Registration2"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetSignIn.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-multicomponent-form-registration2--sign-in"
+      }
+    },
+    {
+      "nombre_humano": "Transaction",
+      "nombre_ai": "transaction",
+      "dominio": "transaccional-cuenta",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Widgets/Single/Transaction",
+      "anatomia": [
+        "Success",
+        "Error"
+      ],
+      "props": {
+        "variants_count": 2,
+        "story_ids": [
+          "widgets-single-transaction--success",
+          "widgets-single-transaction--error"
+        ],
+        "storybook_path": "Widgets/Single/Transaction"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/WidgetTransactionStatus.stories.tsx",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/widgets-single-transaction--success"
+      }
+    },
+    {
+      "nombre_humano": "First Login",
+      "nombre_ai": "first-login",
+      "dominio": "subasta-tiempo-real",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Animation / Widget / Access / First Login",
+      "anatomia": [
+        "First Login"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "animation-widget-access-first-login--first-login"
+        ],
+        "storybook_path": "Animation / Widget / Access / First Login"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/animationSeller/FirstLogin.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/animation-widget-access-first-login--first-login"
+      }
+    },
+    {
+      "nombre_humano": "Negociation",
+      "nombre_ai": "negociation",
+      "dominio": "subasta-tiempo-real",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Animation / Widget / Negociation",
+      "anatomia": [
+        "Negociation"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "animation-widget-negociation--negociation"
+        ],
+        "storybook_path": "Animation / Widget / Negociation"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/animationSeller/Negociation.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/animation-widget-negociation--negociation"
+      }
+    },
+    {
+      "nombre_humano": "Welcome Back",
+      "nombre_ai": "welcome-back",
+      "dominio": "subasta-tiempo-real",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Animation / Widget / Access / Welcome Back",
+      "anatomia": [
+        "Welcome Back"
+      ],
+      "props": {
+        "variants_count": 1,
+        "story_ids": [
+          "animation-widget-access-welcome-back--welcome-back"
+        ],
+        "storybook_path": "Animation / Widget / Access / Welcome Back"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/components/stories/widget/animationSeller/WelcomeBack.stories.tsx",
+        "tags": [
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/animation-widget-access-welcome-back--welcome-back"
+      }
+    },
+    {
+      "nombre_humano": "Resources",
+      "nombre_ai": "resources",
+      "dominio": "primitivos-tokens",
+      "origen": "SubasCars",
+      "descripcion": "Componente de SubasCars — Resources",
+      "anatomia": [
+        "Typography",
+        "Graphic Resources"
+      ],
+      "props": {
+        "variants_count": 2,
+        "story_ids": [
+          "resources--typography",
+          "resources--graphic-resources"
+        ],
+        "storybook_path": "Resources"
+      },
+      "tokens": [],
+      "accesibilidad": {
+        "auditado": false,
+        "notas": "Pendiente audit WCAG — fase categorización"
+      },
+      "decision": "pendiente-revision",
+      "_meta": {
+        "import_path": "./packages/shared/stories/SharedComponent.stories.tsx",
+        "tags": [
+          "dev",
+          "test",
+          "dev",
+          "test"
+        ],
+        "storybook_url": "https://subascars-storybook-gcp.web.app/?path=/story/resources--typography"
+      }
+    }
+  ]
+}
