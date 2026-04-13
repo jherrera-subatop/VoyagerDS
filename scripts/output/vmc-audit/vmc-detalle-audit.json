@@ -1,0 +1,799 @@
+{
+  "_meta": {
+    "source": "VMC Subastas — live audit",
+    "target_page": "DETALLE",
+    "access_level": "no-loggeado",
+    "phase": "ib-taxonomia · Task B",
+    "audited_at": "2026-04-13T19:07:51.019Z",
+    "page_url": "https://www.vmcsubastas.com/oferta/61204",
+    "total_dom_elements": 632
+  },
+  "summary": {
+    "total_component_types": 12,
+    "in_subascars": 5,
+    "new_components": 7,
+    "screenshots": [
+      "01-detalle-full.png",
+      "02-detalle-viewport.png"
+    ]
+  },
+  "page_structure": {
+    "title": "Subasta de Chevrolet Tracker 2022 Seminuevo en Perú | VMC Subastas",
+    "url": "https://www.vmcsubastas.com/oferta/61204",
+    "sections": [
+      {
+        "tag": "div",
+        "classes": "relative h-full swiper-container",
+        "children": 1
+      },
+      {
+        "tag": "div",
+        "classes": "swiper-container swiper-container-initialized swiper-container-horizontal",
+        "children": 1
+      }
+    ],
+    "total_elements": 632
+  },
+  "components": {
+    "all": [
+      {
+        "nombre_humano": "Icon",
+        "nombre_ai": "icon",
+        "dominio": "primitivos-tokens",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "svg, img[src*=\"icon\"]"
+        ],
+        "props": {
+          "instances_found": 46,
+          "dom_tag": "svg",
+          "sample_classes": [
+            "fill-current",
+            "text-purple-500",
+            "w-6",
+            "h-6"
+          ],
+          "sample_text": ""
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "ya-en-subascars",
+        "_vmc": {
+          "detected_by": "svg, img[src*=\"icon\"]",
+          "in_subascars": true,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      },
+      {
+        "nombre_humano": "Button",
+        "nombre_ai": "btn",
+        "dominio": "ui-core",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "button, [role=\"button\"]"
+        ],
+        "props": {
+          "instances_found": 17,
+          "dom_tag": "a",
+          "sample_classes": [
+            "nav-item",
+            "flex",
+            "items-center",
+            "justify-between",
+            "leading-6"
+          ],
+          "sample_text": "Hoy"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "crear-o-evaluar",
+        "_vmc": {
+          "detected_by": "button, [role=\"button\"]",
+          "in_subascars": false,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      },
+      {
+        "nombre_humano": "Input",
+        "nombre_ai": "input",
+        "dominio": "ui-core",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "input, textarea, select"
+        ],
+        "props": {
+          "instances_found": 6,
+          "dom_tag": "input",
+          "sample_classes": [],
+          "sample_text": ""
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "crear-o-evaluar",
+        "_vmc": {
+          "detected_by": "input, textarea, select",
+          "in_subascars": false,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      },
+      {
+        "nombre_humano": "Header",
+        "nombre_ai": "header-primary",
+        "dominio": "discovery-navegacion",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "header, [class*=\"header\"]"
+        ],
+        "props": {
+          "instances_found": 8,
+          "dom_tag": "div",
+          "sample_classes": [
+            "sticky",
+            "top-0",
+            "z-50",
+            "flex",
+            "flex-row"
+          ],
+          "sample_text": "Ingresa"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "ya-en-subascars",
+        "_vmc": {
+          "detected_by": "header, [class*=\"header\"]",
+          "in_subascars": true,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      },
+      {
+        "nombre_humano": "Navbar",
+        "nombre_ai": "nav-primary",
+        "dominio": "discovery-navegacion",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "nav, [class*=\"navbar\"], [class*=\"nav-bar\"], [role=\"navigation\"]"
+        ],
+        "props": {
+          "instances_found": 1,
+          "dom_tag": "div",
+          "sample_classes": [
+            "navigation",
+            "mt-8",
+            "w-full"
+          ],
+          "sample_text": "Hoy     Tipo de oferta     Categorías     Empresas"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "ya-en-subascars",
+        "_vmc": {
+          "detected_by": "nav, [class*=\"navbar\"], [class*=\"nav-bar\"], [role=\"navigation\"]",
+          "in_subascars": true,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      },
+      {
+        "nombre_humano": "Footer",
+        "nombre_ai": "footer-primary",
+        "dominio": "discovery-navegacion",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "footer, [class*=\"footer\"]"
+        ],
+        "props": {
+          "instances_found": 1,
+          "dom_tag": "div",
+          "sample_classes": [
+            "footer"
+          ],
+          "sample_text": "Visita nuestro\n                    Centro de ayuda"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "ya-en-subascars",
+        "_vmc": {
+          "detected_by": "footer, [class*=\"footer\"]",
+          "in_subascars": true,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      },
+      {
+        "nombre_humano": "Sidebar",
+        "nombre_ai": "sidebar",
+        "dominio": "discovery-navegacion",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "[class*=\"sidebar\"], aside"
+        ],
+        "props": {
+          "instances_found": 2,
+          "dom_tag": "div",
+          "sample_classes": [
+            "-ml-6",
+            "transition-transform",
+            "duration-200",
+            "transform",
+            "sidebar"
+          ],
+          "sample_text": ""
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "crear-o-evaluar",
+        "_vmc": {
+          "detected_by": "[class*=\"sidebar\"], aside",
+          "in_subascars": false,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      },
+      {
+        "nombre_humano": "PriceDisplay",
+        "nombre_ai": "display-price",
+        "dominio": "subasta-tiempo-real",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "[class*=\"price\"], [class*=\"precio\"]"
+        ],
+        "props": {
+          "instances_found": 1,
+          "dom_tag": "div",
+          "sample_classes": [
+            "cp-base-price-info",
+            "vmc-detail-text-center",
+            "vmc-detail-font-display",
+            "vmc-detail-text-oracle",
+            "vmc-detail-font-normal"
+          ],
+          "sample_text": "Comisión: 10% del valor de compra o mínimo >S< 50"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "crear-o-evaluar",
+        "_vmc": {
+          "detected_by": "[class*=\"price\"], [class*=\"precio\"]",
+          "in_subascars": false,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      },
+      {
+        "nombre_humano": "AuctionCard",
+        "nombre_ai": "card-auction",
+        "dominio": "subasta-tiempo-real",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "[class*=\"card\"], [class*=\"vehicle\"], [class*=\"lot\"]"
+        ],
+        "props": {
+          "instances_found": 1,
+          "dom_tag": "div",
+          "sample_classes": [
+            "card-process",
+            "vmc-detail-relative",
+            "vmc-detail-select-none",
+            "is-live",
+            "is-web"
+          ],
+          "sample_text": "Inicia lunes 20 04:20 pm   5      0   0     ¡Oport"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "crear-o-evaluar",
+        "_vmc": {
+          "detected_by": "[class*=\"card\"], [class*=\"vehicle\"], [class*=\"lot\"]",
+          "in_subascars": false,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      },
+      {
+        "nombre_humano": "Metrics",
+        "nombre_ai": "display-metrics",
+        "dominio": "subasta-tiempo-real",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "[class*=\"metric\"], [class*=\"stat\"], [class*=\"counter\"]"
+        ],
+        "props": {
+          "instances_found": 2,
+          "dom_tag": "div",
+          "sample_classes": [
+            "header-state-default",
+            "vmc-detail-relative",
+            "vmc-detail-z-9"
+          ],
+          "sample_text": "Inicia lunes 20"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "ya-en-subascars",
+        "_vmc": {
+          "detected_by": "[class*=\"metric\"], [class*=\"stat\"], [class*=\"counter\"]",
+          "in_subascars": true,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      },
+      {
+        "nombre_humano": "VehicleSpecs",
+        "nombre_ai": "table-specs",
+        "dominio": "transaccional-cuenta",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "[class*=\"spec\"], [class*=\"specs\"], [class*=\"detail\"]"
+        ],
+        "props": {
+          "instances_found": 48,
+          "dom_tag": "div",
+          "sample_classes": [
+            "detail-process-app"
+          ],
+          "sample_text": "Inicia lunes 20 04:20 pm   5      0   0     ¡Oport"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "crear-o-evaluar",
+        "_vmc": {
+          "detected_by": "[class*=\"spec\"], [class*=\"specs\"], [class*=\"detail\"]",
+          "in_subascars": false,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      },
+      {
+        "nombre_humano": "DataQualityIndicator",
+        "nombre_ai": "indicator-data-quality",
+        "dominio": "transaccional-cuenta",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "[class*=\"quality\"], [class*=\"calidad\"]"
+        ],
+        "props": {
+          "instances_found": 1,
+          "dom_tag": "span",
+          "sample_classes": [
+            "block",
+            "w-3",
+            "h-3",
+            "rounded-full",
+            "bg-quality-600"
+          ],
+          "sample_text": "Básica"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "crear-o-evaluar",
+        "_vmc": {
+          "detected_by": "[class*=\"quality\"], [class*=\"calidad\"]",
+          "in_subascars": false,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      }
+    ],
+    "new_only": [
+      {
+        "nombre_humano": "Button",
+        "nombre_ai": "btn",
+        "dominio": "ui-core",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "button, [role=\"button\"]"
+        ],
+        "props": {
+          "instances_found": 17,
+          "dom_tag": "a",
+          "sample_classes": [
+            "nav-item",
+            "flex",
+            "items-center",
+            "justify-between",
+            "leading-6"
+          ],
+          "sample_text": "Hoy"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "crear-o-evaluar",
+        "_vmc": {
+          "detected_by": "button, [role=\"button\"]",
+          "in_subascars": false,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      },
+      {
+        "nombre_humano": "Input",
+        "nombre_ai": "input",
+        "dominio": "ui-core",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "input, textarea, select"
+        ],
+        "props": {
+          "instances_found": 6,
+          "dom_tag": "input",
+          "sample_classes": [],
+          "sample_text": ""
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "crear-o-evaluar",
+        "_vmc": {
+          "detected_by": "input, textarea, select",
+          "in_subascars": false,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      },
+      {
+        "nombre_humano": "Sidebar",
+        "nombre_ai": "sidebar",
+        "dominio": "discovery-navegacion",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "[class*=\"sidebar\"], aside"
+        ],
+        "props": {
+          "instances_found": 2,
+          "dom_tag": "div",
+          "sample_classes": [
+            "-ml-6",
+            "transition-transform",
+            "duration-200",
+            "transform",
+            "sidebar"
+          ],
+          "sample_text": ""
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "crear-o-evaluar",
+        "_vmc": {
+          "detected_by": "[class*=\"sidebar\"], aside",
+          "in_subascars": false,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      },
+      {
+        "nombre_humano": "PriceDisplay",
+        "nombre_ai": "display-price",
+        "dominio": "subasta-tiempo-real",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "[class*=\"price\"], [class*=\"precio\"]"
+        ],
+        "props": {
+          "instances_found": 1,
+          "dom_tag": "div",
+          "sample_classes": [
+            "cp-base-price-info",
+            "vmc-detail-text-center",
+            "vmc-detail-font-display",
+            "vmc-detail-text-oracle",
+            "vmc-detail-font-normal"
+          ],
+          "sample_text": "Comisión: 10% del valor de compra o mínimo >S< 50"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "crear-o-evaluar",
+        "_vmc": {
+          "detected_by": "[class*=\"price\"], [class*=\"precio\"]",
+          "in_subascars": false,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      },
+      {
+        "nombre_humano": "AuctionCard",
+        "nombre_ai": "card-auction",
+        "dominio": "subasta-tiempo-real",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "[class*=\"card\"], [class*=\"vehicle\"], [class*=\"lot\"]"
+        ],
+        "props": {
+          "instances_found": 1,
+          "dom_tag": "div",
+          "sample_classes": [
+            "card-process",
+            "vmc-detail-relative",
+            "vmc-detail-select-none",
+            "is-live",
+            "is-web"
+          ],
+          "sample_text": "Inicia lunes 20 04:20 pm   5      0   0     ¡Oport"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "crear-o-evaluar",
+        "_vmc": {
+          "detected_by": "[class*=\"card\"], [class*=\"vehicle\"], [class*=\"lot\"]",
+          "in_subascars": false,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      },
+      {
+        "nombre_humano": "VehicleSpecs",
+        "nombre_ai": "table-specs",
+        "dominio": "transaccional-cuenta",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "[class*=\"spec\"], [class*=\"specs\"], [class*=\"detail\"]"
+        ],
+        "props": {
+          "instances_found": 48,
+          "dom_tag": "div",
+          "sample_classes": [
+            "detail-process-app"
+          ],
+          "sample_text": "Inicia lunes 20 04:20 pm   5      0   0     ¡Oport"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "crear-o-evaluar",
+        "_vmc": {
+          "detected_by": "[class*=\"spec\"], [class*=\"specs\"], [class*=\"detail\"]",
+          "in_subascars": false,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      },
+      {
+        "nombre_humano": "DataQualityIndicator",
+        "nombre_ai": "indicator-data-quality",
+        "dominio": "transaccional-cuenta",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "[class*=\"quality\"], [class*=\"calidad\"]"
+        ],
+        "props": {
+          "instances_found": 1,
+          "dom_tag": "span",
+          "sample_classes": [
+            "block",
+            "w-3",
+            "h-3",
+            "rounded-full",
+            "bg-quality-600"
+          ],
+          "sample_text": "Básica"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "crear-o-evaluar",
+        "_vmc": {
+          "detected_by": "[class*=\"quality\"], [class*=\"calidad\"]",
+          "in_subascars": false,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      }
+    ],
+    "in_subascars": [
+      {
+        "nombre_humano": "Icon",
+        "nombre_ai": "icon",
+        "dominio": "primitivos-tokens",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "svg, img[src*=\"icon\"]"
+        ],
+        "props": {
+          "instances_found": 46,
+          "dom_tag": "svg",
+          "sample_classes": [
+            "fill-current",
+            "text-purple-500",
+            "w-6",
+            "h-6"
+          ],
+          "sample_text": ""
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "ya-en-subascars",
+        "_vmc": {
+          "detected_by": "svg, img[src*=\"icon\"]",
+          "in_subascars": true,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      },
+      {
+        "nombre_humano": "Header",
+        "nombre_ai": "header-primary",
+        "dominio": "discovery-navegacion",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "header, [class*=\"header\"]"
+        ],
+        "props": {
+          "instances_found": 8,
+          "dom_tag": "div",
+          "sample_classes": [
+            "sticky",
+            "top-0",
+            "z-50",
+            "flex",
+            "flex-row"
+          ],
+          "sample_text": "Ingresa"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "ya-en-subascars",
+        "_vmc": {
+          "detected_by": "header, [class*=\"header\"]",
+          "in_subascars": true,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      },
+      {
+        "nombre_humano": "Navbar",
+        "nombre_ai": "nav-primary",
+        "dominio": "discovery-navegacion",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "nav, [class*=\"navbar\"], [class*=\"nav-bar\"], [role=\"navigation\"]"
+        ],
+        "props": {
+          "instances_found": 1,
+          "dom_tag": "div",
+          "sample_classes": [
+            "navigation",
+            "mt-8",
+            "w-full"
+          ],
+          "sample_text": "Hoy     Tipo de oferta     Categorías     Empresas"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "ya-en-subascars",
+        "_vmc": {
+          "detected_by": "nav, [class*=\"navbar\"], [class*=\"nav-bar\"], [role=\"navigation\"]",
+          "in_subascars": true,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      },
+      {
+        "nombre_humano": "Footer",
+        "nombre_ai": "footer-primary",
+        "dominio": "discovery-navegacion",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "footer, [class*=\"footer\"]"
+        ],
+        "props": {
+          "instances_found": 1,
+          "dom_tag": "div",
+          "sample_classes": [
+            "footer"
+          ],
+          "sample_text": "Visita nuestro\n                    Centro de ayuda"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "ya-en-subascars",
+        "_vmc": {
+          "detected_by": "footer, [class*=\"footer\"]",
+          "in_subascars": true,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      },
+      {
+        "nombre_humano": "Metrics",
+        "nombre_ai": "display-metrics",
+        "dominio": "subasta-tiempo-real",
+        "origen": "VMC",
+        "descripcion": "Componente detectado en VMC DETALLE page",
+        "anatomia": [
+          "[class*=\"metric\"], [class*=\"stat\"], [class*=\"counter\"]"
+        ],
+        "props": {
+          "instances_found": 2,
+          "dom_tag": "div",
+          "sample_classes": [
+            "header-state-default",
+            "vmc-detail-relative",
+            "vmc-detail-z-9"
+          ],
+          "sample_text": "Inicia lunes 20"
+        },
+        "tokens": [],
+        "accesibilidad": {
+          "auditado": false,
+          "notas": "Pendiente audit WCAG"
+        },
+        "decision": "ya-en-subascars",
+        "_vmc": {
+          "detected_by": "[class*=\"metric\"], [class*=\"stat\"], [class*=\"counter\"]",
+          "in_subascars": true,
+          "page_url": "https://www.vmcsubastas.com/oferta/61204"
+        }
+      }
+    ]
+  }
+}

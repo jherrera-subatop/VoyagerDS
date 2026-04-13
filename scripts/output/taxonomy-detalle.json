@@ -1,0 +1,981 @@
+{
+  "_meta": {
+    "source": "VMC DETALLE oferta/61204 × SubasCars Storybook",
+    "phase": "ib-taxonomia · Task E · Ruta B iteración 1",
+    "page_scope": "DETALLE",
+    "curated_at": "2026-04-13T19:21:43.038Z",
+    "total": 12,
+    "referencia_subascars": 5,
+    "solo_vmc": 7
+  },
+  "by_domain": {
+    "primitivos-tokens": [
+      {
+        "nombre_humano": "Icon",
+        "nombre_ai": "icon",
+        "dominio": "primitivos-tokens",
+        "origen": "VMC + SubasCars",
+        "descripcion": "Elemento visual atómico. Comunica acciones, estados y conceptos sin texto. Decorativo o funcional según contexto.",
+        "anatomia": [
+          "svg sprite",
+          "tamaño: sm/md/lg",
+          "color via token"
+        ],
+        "props": {
+          "instancias_en_vmc": 46,
+          "variantes_conocidas": [
+            "Alert Circle",
+            "Arrow Asset",
+            "Attention",
+            "Available Subas Tokens",
+            "Back",
+            "Base",
+            "Bell",
+            "Bids",
+            "Calendar",
+            "Car",
+            "Check",
+            "Check Circle",
+            "Check In",
+            "Checkout",
+            "Clear",
+            "Clock 2",
+            "Clock",
+            "Clock 3",
+            "Close",
+            "Cookies",
+            "Don Justo",
+            "Down",
+            "Download",
+            "Drop Off",
+            "Drop On",
+            "Engine Displacement",
+            "Facebook",
+            "Fistbump",
+            "Forward",
+            "Fuel",
+            "Group",
+            "Groups Calendar",
+            "Higgest Bidder",
+            "Hub",
+            "Image",
+            "Info Circle",
+            "Instagram",
+            "Invoice",
+            "Like",
+            "Live",
+            "Location",
+            "Logout",
+            "Minus",
+            "On Hold Subas Tokens",
+            "Opportunities",
+            "Pause",
+            "Pay 2 Play",
+            "Photo Galery",
+            "Plate",
+            "Receipt",
+            "Share",
+            "Subas Token",
+            "Subas Top",
+            "Subas Wallet",
+            "Subastip",
+            "Subaszone",
+            "Tiktok",
+            "Traction",
+            "Transmission",
+            "Trash",
+            "Trophy",
+            "Up",
+            "Upload",
+            "User Calendar",
+            "Value",
+            "View",
+            "X",
+            "Youtube"
+          ],
+          "dom_tag_vmc": "svg",
+          "storybook_ref": "https://subascars-storybook-gcp.web.app/?path=/story/icons--alert-circle"
+        },
+        "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+        "accesibilidad": {
+          "roles": "img (si decorativo: aria-hidden=true)",
+          "keyboard": "N/A si decorativo",
+          "notas": "iconos funcionales requieren aria-label"
+        },
+        "decision": "referencia-subascars",
+        "_meta": {
+          "page_source": "VMC DETALLE — oferta/61204",
+          "vmc_instances": 46,
+          "subascars_ref": "Icons",
+          "decision_razon": "SubasCars tiene este componente → usar como referencia anatómica en ib-componentes (NO portar). VMC manda en UX/comportamiento."
+        }
+      }
+    ],
+    "ui-core": [
+      {
+        "nombre_humano": "Button",
+        "nombre_ai": "btn",
+        "dominio": "ui-core",
+        "origen": "VMC",
+        "descripcion": "Dispara una acción. Variantes: primario (CTA principal), secundario, ghost, destructivo. Estados: default, hover, focus, disabled, loading.",
+        "anatomia": [
+          "label",
+          "icon-left?",
+          "icon-right?",
+          "estado: default/hover/disabled/loading"
+        ],
+        "props": {
+          "instancias_en_vmc": 17,
+          "variantes_conocidas": [
+            "pendiente-audit"
+          ],
+          "dom_tag_vmc": "a",
+          "storybook_ref": null
+        },
+        "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+        "accesibilidad": {
+          "roles": "button",
+          "keyboard": "Enter/Space",
+          "notas": "focus-visible required, disabled no ocultar"
+        },
+        "decision": "solo-vmc",
+        "_meta": {
+          "page_source": "VMC DETALLE — oferta/61204",
+          "vmc_instances": 17,
+          "subascars_ref": null,
+          "decision_razon": "No existe en SubasCars → construir desde VMC audit. Referencia: solo DOM + screenshot."
+        }
+      },
+      {
+        "nombre_humano": "Input",
+        "nombre_ai": "input",
+        "dominio": "ui-core",
+        "origen": "VMC",
+        "descripcion": "Captura datos del usuario. Tipos: text, email, número, select, etc. Siempre con label visible y manejo de error explícito.",
+        "anatomia": [
+          "label",
+          "placeholder",
+          "helper-text",
+          "error-text",
+          "estado: default/focus/error/disabled"
+        ],
+        "props": {
+          "instancias_en_vmc": 6,
+          "variantes_conocidas": [
+            "pendiente-audit"
+          ],
+          "dom_tag_vmc": "input",
+          "storybook_ref": null
+        },
+        "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+        "accesibilidad": {
+          "roles": "textbox/combobox/listbox según tipo",
+          "keyboard": "Tab, flechas en select",
+          "notas": "label asociado obligatorio, error anunciado via aria-describedby"
+        },
+        "decision": "solo-vmc",
+        "_meta": {
+          "page_source": "VMC DETALLE — oferta/61204",
+          "vmc_instances": 6,
+          "subascars_ref": null,
+          "decision_razon": "No existe en SubasCars → construir desde VMC audit. Referencia: solo DOM + screenshot."
+        }
+      }
+    ],
+    "discovery-navegacion": [
+      {
+        "nombre_humano": "Header",
+        "nombre_ai": "header-primary",
+        "dominio": "discovery-navegacion",
+        "origen": "VMC + SubasCars",
+        "descripcion": "Identidad y navegación global. Contiene logo, links principales y accesos de cuenta. Persiste en todas las páginas.",
+        "anatomia": [
+          "logo",
+          "nav-links",
+          "cta-login",
+          "cta-registro"
+        ],
+        "props": {
+          "instancias_en_vmc": 8,
+          "variantes_conocidas": [
+            "Group Checkout 2",
+            "Group Header 2",
+            "Group Console 2",
+            "Group Opportunity 2"
+          ],
+          "dom_tag_vmc": "div",
+          "storybook_ref": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-publication-header--group-checkout-2"
+        },
+        "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+        "accesibilidad": {
+          "roles": "banner (landmark)",
+          "keyboard": "Tab a través de nav-links",
+          "notas": "skip-to-content link recomendado"
+        },
+        "decision": "referencia-subascars",
+        "_meta": {
+          "page_source": "VMC DETALLE — oferta/61204",
+          "vmc_instances": 8,
+          "subascars_ref": "Header",
+          "decision_razon": "SubasCars tiene este componente → usar como referencia anatómica en ib-componentes (NO portar). VMC manda en UX/comportamiento."
+        }
+      },
+      {
+        "nombre_humano": "Navbar",
+        "nombre_ai": "nav-primary",
+        "dominio": "discovery-navegacion",
+        "origen": "VMC + SubasCars",
+        "descripcion": "Navegación entre secciones principales. Indica página activa. Colapsa a hamburger en mobile.",
+        "anatomia": [
+          "links de navegación",
+          "indicador activo",
+          "responsive: hamburger"
+        ],
+        "props": {
+          "instancias_en_vmc": 1,
+          "variantes_conocidas": [
+            "Navigation"
+          ],
+          "dom_tag_vmc": "div",
+          "storybook_ref": "https://subascars-storybook-gcp.web.app/?path=/story/basic-control-icon-navigation--navigation"
+        },
+        "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+        "accesibilidad": {
+          "roles": "navigation (landmark)",
+          "keyboard": "Tab/flechas",
+          "notas": "aria-current=\"page\" en link activo"
+        },
+        "decision": "referencia-subascars",
+        "_meta": {
+          "page_source": "VMC DETALLE — oferta/61204",
+          "vmc_instances": 1,
+          "subascars_ref": "Navigation",
+          "decision_razon": "SubasCars tiene este componente → usar como referencia anatómica en ib-componentes (NO portar). VMC manda en UX/comportamiento."
+        }
+      },
+      {
+        "nombre_humano": "Footer",
+        "nombre_ai": "footer-primary",
+        "dominio": "discovery-navegacion",
+        "origen": "VMC + SubasCars",
+        "descripcion": "Cierre de página. Links legales, redes sociales, información de contacto. Persiste en todas las páginas.",
+        "anatomia": [
+          "columnas de links",
+          "redes sociales",
+          "legal/copyright"
+        ],
+        "props": {
+          "instancias_en_vmc": 1,
+          "variantes_conocidas": [
+            "Footer Desktop",
+            "Footer"
+          ],
+          "dom_tag_vmc": "div",
+          "storybook_ref": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-general-footer--footer-desktop"
+        },
+        "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+        "accesibilidad": {
+          "roles": "contentinfo (landmark)",
+          "keyboard": "Tab",
+          "notas": "links deben tener texto descriptivo"
+        },
+        "decision": "referencia-subascars",
+        "_meta": {
+          "page_source": "VMC DETALLE — oferta/61204",
+          "vmc_instances": 1,
+          "subascars_ref": "Footer",
+          "decision_razon": "SubasCars tiene este componente → usar como referencia anatómica en ib-componentes (NO portar). VMC manda en UX/comportamiento."
+        }
+      },
+      {
+        "nombre_humano": "Sidebar",
+        "nombre_ai": "sidebar",
+        "dominio": "discovery-navegacion",
+        "origen": "VMC",
+        "descripcion": "Panel lateral de filtros para exploración de ofertas. Contiene filtros de precio, tipo, año y marca.",
+        "anatomia": [
+          "filtros de búsqueda",
+          "precio-range",
+          "tipo-vehículo",
+          "año",
+          "marca"
+        ],
+        "props": {
+          "instancias_en_vmc": 2,
+          "variantes_conocidas": [
+            "pendiente-audit"
+          ],
+          "dom_tag_vmc": "div",
+          "storybook_ref": null
+        },
+        "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+        "accesibilidad": {
+          "roles": "complementary (landmark)",
+          "keyboard": "Tab, flechas en sliders",
+          "notas": "filtros deben anunciar cambios via aria-live"
+        },
+        "decision": "solo-vmc",
+        "_meta": {
+          "page_source": "VMC DETALLE — oferta/61204",
+          "vmc_instances": 2,
+          "subascars_ref": null,
+          "decision_razon": "No existe en SubasCars → construir desde VMC audit. Referencia: solo DOM + screenshot."
+        }
+      }
+    ],
+    "subasta-tiempo-real": [
+      {
+        "nombre_humano": "PriceDisplay",
+        "nombre_ai": "display-price",
+        "dominio": "subasta-tiempo-real",
+        "origen": "VMC",
+        "descripcion": "Muestra el precio actual de la subasta. Central en la decisión del postor — debe ser legible, preciso y actualizable en tiempo real.",
+        "anatomia": [
+          "precio actual",
+          "moneda (PEN/USD)",
+          "precio base?",
+          "variante: grande/compacto"
+        ],
+        "props": {
+          "instancias_en_vmc": 1,
+          "variantes_conocidas": [
+            "pendiente-audit"
+          ],
+          "dom_tag_vmc": "div",
+          "storybook_ref": null
+        },
+        "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+        "accesibilidad": {
+          "roles": "text (implícito)",
+          "keyboard": "N/A",
+          "notas": "contraste mínimo 4.5:1, no solo color para comunicar cambio"
+        },
+        "decision": "solo-vmc",
+        "_meta": {
+          "page_source": "VMC DETALLE — oferta/61204",
+          "vmc_instances": 1,
+          "subascars_ref": null,
+          "decision_razon": "No existe en SubasCars → construir desde VMC audit. Referencia: solo DOM + screenshot."
+        }
+      },
+      {
+        "nombre_humano": "AuctionCard",
+        "nombre_ai": "card-auction",
+        "dominio": "subasta-tiempo-real",
+        "origen": "VMC",
+        "descripcion": "Tarjeta de oferta individual. Contiene imagen, título del vehículo, precio actual, timer y CTA de puja.",
+        "anatomia": [
+          "imagen vehículo",
+          "título",
+          "precio",
+          "timer-countdown",
+          "cta-pujar",
+          "badge-estado"
+        ],
+        "props": {
+          "instancias_en_vmc": 1,
+          "variantes_conocidas": [
+            "pendiente-audit"
+          ],
+          "dom_tag_vmc": "div",
+          "storybook_ref": null
+        },
+        "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+        "accesibilidad": {
+          "roles": "article o listitem",
+          "keyboard": "Tab al CTA",
+          "notas": "imagen con alt descriptivo del vehículo"
+        },
+        "decision": "solo-vmc",
+        "_meta": {
+          "page_source": "VMC DETALLE — oferta/61204",
+          "vmc_instances": 1,
+          "subascars_ref": null,
+          "decision_razon": "No existe en SubasCars → construir desde VMC audit. Referencia: solo DOM + screenshot."
+        }
+      },
+      {
+        "nombre_humano": "Metrics",
+        "nombre_ai": "display-metrics",
+        "dominio": "subasta-tiempo-real",
+        "origen": "VMC + SubasCars",
+        "descripcion": "Muestra una métrica clave (views, pujas, participantes). Compacto, legible, puede actualizarse en tiempo real.",
+        "anatomia": [
+          "label",
+          "valor numérico",
+          "unidad",
+          "icono?"
+        ],
+        "props": {
+          "instancias_en_vmc": 2,
+          "variantes_conocidas": [
+            "Metrics"
+          ],
+          "dom_tag_vmc": "div",
+          "storybook_ref": "https://subascars-storybook-gcp.web.app/?path=/story/basic-outputs-data-label-metrics--metrics"
+        },
+        "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+        "accesibilidad": {
+          "roles": "text (implícito)",
+          "keyboard": "N/A",
+          "notas": "valores dinámicos via aria-live=\"polite\""
+        },
+        "decision": "referencia-subascars",
+        "_meta": {
+          "page_source": "VMC DETALLE — oferta/61204",
+          "vmc_instances": 2,
+          "subascars_ref": "Metrics",
+          "decision_razon": "SubasCars tiene este componente → usar como referencia anatómica en ib-componentes (NO portar). VMC manda en UX/comportamiento."
+        }
+      }
+    ],
+    "transaccional-cuenta": [
+      {
+        "nombre_humano": "VehicleSpecs",
+        "nombre_ai": "table-specs",
+        "dominio": "transaccional-cuenta",
+        "origen": "VMC",
+        "descripcion": "Tabla de especificaciones técnicas del vehículo. Agrupa datos por categoría (motor, carrocería, equipamiento). Crítico para la decisión de compra.",
+        "anatomia": [
+          "filas clave-valor",
+          "grupos de specs (motor, carrocería, etc.)",
+          "expand/collapse?"
+        ],
+        "props": {
+          "instancias_en_vmc": 48,
+          "variantes_conocidas": [
+            "pendiente-audit"
+          ],
+          "dom_tag_vmc": "div",
+          "storybook_ref": null
+        },
+        "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+        "accesibilidad": {
+          "roles": "table/grid o dl/dt/dd",
+          "keyboard": "Tab si hay filas expandibles",
+          "notas": "headers asociados a celdas, scope=\"row/col\""
+        },
+        "decision": "solo-vmc",
+        "_meta": {
+          "page_source": "VMC DETALLE — oferta/61204",
+          "vmc_instances": 48,
+          "subascars_ref": null,
+          "decision_razon": "No existe en SubasCars → construir desde VMC audit. Referencia: solo DOM + screenshot."
+        }
+      },
+      {
+        "nombre_humano": "DataQualityIndicator",
+        "nombre_ai": "indicator-data-quality",
+        "dominio": "transaccional-cuenta",
+        "origen": "VMC",
+        "descripcion": "Indica el nivel de completitud/calidad de los datos del vehículo. Ayuda al postor a evaluar confiabilidad de la información.",
+        "anatomia": [
+          "porcentaje o score",
+          "label descriptivo",
+          "color semántico por nivel"
+        ],
+        "props": {
+          "instancias_en_vmc": 1,
+          "variantes_conocidas": [
+            "pendiente-audit"
+          ],
+          "dom_tag_vmc": "span",
+          "storybook_ref": null
+        },
+        "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+        "accesibilidad": {
+          "roles": "meter o progressbar",
+          "keyboard": "N/A",
+          "notas": "aria-valuenow/min/max, no transmitir solo por color"
+        },
+        "decision": "solo-vmc",
+        "_meta": {
+          "page_source": "VMC DETALLE — oferta/61204",
+          "vmc_instances": 1,
+          "subascars_ref": null,
+          "decision_razon": "No existe en SubasCars → construir desde VMC audit. Referencia: solo DOM + screenshot."
+        }
+      }
+    ]
+  },
+  "flat": [
+    {
+      "nombre_humano": "Icon",
+      "nombre_ai": "icon",
+      "dominio": "primitivos-tokens",
+      "origen": "VMC + SubasCars",
+      "descripcion": "Elemento visual atómico. Comunica acciones, estados y conceptos sin texto. Decorativo o funcional según contexto.",
+      "anatomia": [
+        "svg sprite",
+        "tamaño: sm/md/lg",
+        "color via token"
+      ],
+      "props": {
+        "instancias_en_vmc": 46,
+        "variantes_conocidas": [
+          "Alert Circle",
+          "Arrow Asset",
+          "Attention",
+          "Available Subas Tokens",
+          "Back",
+          "Base",
+          "Bell",
+          "Bids",
+          "Calendar",
+          "Car",
+          "Check",
+          "Check Circle",
+          "Check In",
+          "Checkout",
+          "Clear",
+          "Clock 2",
+          "Clock",
+          "Clock 3",
+          "Close",
+          "Cookies",
+          "Don Justo",
+          "Down",
+          "Download",
+          "Drop Off",
+          "Drop On",
+          "Engine Displacement",
+          "Facebook",
+          "Fistbump",
+          "Forward",
+          "Fuel",
+          "Group",
+          "Groups Calendar",
+          "Higgest Bidder",
+          "Hub",
+          "Image",
+          "Info Circle",
+          "Instagram",
+          "Invoice",
+          "Like",
+          "Live",
+          "Location",
+          "Logout",
+          "Minus",
+          "On Hold Subas Tokens",
+          "Opportunities",
+          "Pause",
+          "Pay 2 Play",
+          "Photo Galery",
+          "Plate",
+          "Receipt",
+          "Share",
+          "Subas Token",
+          "Subas Top",
+          "Subas Wallet",
+          "Subastip",
+          "Subaszone",
+          "Tiktok",
+          "Traction",
+          "Transmission",
+          "Trash",
+          "Trophy",
+          "Up",
+          "Upload",
+          "User Calendar",
+          "Value",
+          "View",
+          "X",
+          "Youtube"
+        ],
+        "dom_tag_vmc": "svg",
+        "storybook_ref": "https://subascars-storybook-gcp.web.app/?path=/story/icons--alert-circle"
+      },
+      "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+      "accesibilidad": {
+        "roles": "img (si decorativo: aria-hidden=true)",
+        "keyboard": "N/A si decorativo",
+        "notas": "iconos funcionales requieren aria-label"
+      },
+      "decision": "referencia-subascars",
+      "_meta": {
+        "page_source": "VMC DETALLE — oferta/61204",
+        "vmc_instances": 46,
+        "subascars_ref": "Icons",
+        "decision_razon": "SubasCars tiene este componente → usar como referencia anatómica en ib-componentes (NO portar). VMC manda en UX/comportamiento."
+      }
+    },
+    {
+      "nombre_humano": "Button",
+      "nombre_ai": "btn",
+      "dominio": "ui-core",
+      "origen": "VMC",
+      "descripcion": "Dispara una acción. Variantes: primario (CTA principal), secundario, ghost, destructivo. Estados: default, hover, focus, disabled, loading.",
+      "anatomia": [
+        "label",
+        "icon-left?",
+        "icon-right?",
+        "estado: default/hover/disabled/loading"
+      ],
+      "props": {
+        "instancias_en_vmc": 17,
+        "variantes_conocidas": [
+          "pendiente-audit"
+        ],
+        "dom_tag_vmc": "a",
+        "storybook_ref": null
+      },
+      "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+      "accesibilidad": {
+        "roles": "button",
+        "keyboard": "Enter/Space",
+        "notas": "focus-visible required, disabled no ocultar"
+      },
+      "decision": "solo-vmc",
+      "_meta": {
+        "page_source": "VMC DETALLE — oferta/61204",
+        "vmc_instances": 17,
+        "subascars_ref": null,
+        "decision_razon": "No existe en SubasCars → construir desde VMC audit. Referencia: solo DOM + screenshot."
+      }
+    },
+    {
+      "nombre_humano": "Input",
+      "nombre_ai": "input",
+      "dominio": "ui-core",
+      "origen": "VMC",
+      "descripcion": "Captura datos del usuario. Tipos: text, email, número, select, etc. Siempre con label visible y manejo de error explícito.",
+      "anatomia": [
+        "label",
+        "placeholder",
+        "helper-text",
+        "error-text",
+        "estado: default/focus/error/disabled"
+      ],
+      "props": {
+        "instancias_en_vmc": 6,
+        "variantes_conocidas": [
+          "pendiente-audit"
+        ],
+        "dom_tag_vmc": "input",
+        "storybook_ref": null
+      },
+      "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+      "accesibilidad": {
+        "roles": "textbox/combobox/listbox según tipo",
+        "keyboard": "Tab, flechas en select",
+        "notas": "label asociado obligatorio, error anunciado via aria-describedby"
+      },
+      "decision": "solo-vmc",
+      "_meta": {
+        "page_source": "VMC DETALLE — oferta/61204",
+        "vmc_instances": 6,
+        "subascars_ref": null,
+        "decision_razon": "No existe en SubasCars → construir desde VMC audit. Referencia: solo DOM + screenshot."
+      }
+    },
+    {
+      "nombre_humano": "Header",
+      "nombre_ai": "header-primary",
+      "dominio": "discovery-navegacion",
+      "origen": "VMC + SubasCars",
+      "descripcion": "Identidad y navegación global. Contiene logo, links principales y accesos de cuenta. Persiste en todas las páginas.",
+      "anatomia": [
+        "logo",
+        "nav-links",
+        "cta-login",
+        "cta-registro"
+      ],
+      "props": {
+        "instancias_en_vmc": 8,
+        "variantes_conocidas": [
+          "Group Checkout 2",
+          "Group Header 2",
+          "Group Console 2",
+          "Group Opportunity 2"
+        ],
+        "dom_tag_vmc": "div",
+        "storybook_ref": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-publication-header--group-checkout-2"
+      },
+      "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+      "accesibilidad": {
+        "roles": "banner (landmark)",
+        "keyboard": "Tab a través de nav-links",
+        "notas": "skip-to-content link recomendado"
+      },
+      "decision": "referencia-subascars",
+      "_meta": {
+        "page_source": "VMC DETALLE — oferta/61204",
+        "vmc_instances": 8,
+        "subascars_ref": "Header",
+        "decision_razon": "SubasCars tiene este componente → usar como referencia anatómica en ib-componentes (NO portar). VMC manda en UX/comportamiento."
+      }
+    },
+    {
+      "nombre_humano": "Navbar",
+      "nombre_ai": "nav-primary",
+      "dominio": "discovery-navegacion",
+      "origen": "VMC + SubasCars",
+      "descripcion": "Navegación entre secciones principales. Indica página activa. Colapsa a hamburger en mobile.",
+      "anatomia": [
+        "links de navegación",
+        "indicador activo",
+        "responsive: hamburger"
+      ],
+      "props": {
+        "instancias_en_vmc": 1,
+        "variantes_conocidas": [
+          "Navigation"
+        ],
+        "dom_tag_vmc": "div",
+        "storybook_ref": "https://subascars-storybook-gcp.web.app/?path=/story/basic-control-icon-navigation--navigation"
+      },
+      "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+      "accesibilidad": {
+        "roles": "navigation (landmark)",
+        "keyboard": "Tab/flechas",
+        "notas": "aria-current=\"page\" en link activo"
+      },
+      "decision": "referencia-subascars",
+      "_meta": {
+        "page_source": "VMC DETALLE — oferta/61204",
+        "vmc_instances": 1,
+        "subascars_ref": "Navigation",
+        "decision_razon": "SubasCars tiene este componente → usar como referencia anatómica en ib-componentes (NO portar). VMC manda en UX/comportamiento."
+      }
+    },
+    {
+      "nombre_humano": "Footer",
+      "nombre_ai": "footer-primary",
+      "dominio": "discovery-navegacion",
+      "origen": "VMC + SubasCars",
+      "descripcion": "Cierre de página. Links legales, redes sociales, información de contacto. Persiste en todas las páginas.",
+      "anatomia": [
+        "columnas de links",
+        "redes sociales",
+        "legal/copyright"
+      ],
+      "props": {
+        "instancias_en_vmc": 1,
+        "variantes_conocidas": [
+          "Footer Desktop",
+          "Footer"
+        ],
+        "dom_tag_vmc": "div",
+        "storybook_ref": "https://subascars-storybook-gcp.web.app/?path=/story/main-single-general-footer--footer-desktop"
+      },
+      "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+      "accesibilidad": {
+        "roles": "contentinfo (landmark)",
+        "keyboard": "Tab",
+        "notas": "links deben tener texto descriptivo"
+      },
+      "decision": "referencia-subascars",
+      "_meta": {
+        "page_source": "VMC DETALLE — oferta/61204",
+        "vmc_instances": 1,
+        "subascars_ref": "Footer",
+        "decision_razon": "SubasCars tiene este componente → usar como referencia anatómica en ib-componentes (NO portar). VMC manda en UX/comportamiento."
+      }
+    },
+    {
+      "nombre_humano": "Sidebar",
+      "nombre_ai": "sidebar",
+      "dominio": "discovery-navegacion",
+      "origen": "VMC",
+      "descripcion": "Panel lateral de filtros para exploración de ofertas. Contiene filtros de precio, tipo, año y marca.",
+      "anatomia": [
+        "filtros de búsqueda",
+        "precio-range",
+        "tipo-vehículo",
+        "año",
+        "marca"
+      ],
+      "props": {
+        "instancias_en_vmc": 2,
+        "variantes_conocidas": [
+          "pendiente-audit"
+        ],
+        "dom_tag_vmc": "div",
+        "storybook_ref": null
+      },
+      "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+      "accesibilidad": {
+        "roles": "complementary (landmark)",
+        "keyboard": "Tab, flechas en sliders",
+        "notas": "filtros deben anunciar cambios via aria-live"
+      },
+      "decision": "solo-vmc",
+      "_meta": {
+        "page_source": "VMC DETALLE — oferta/61204",
+        "vmc_instances": 2,
+        "subascars_ref": null,
+        "decision_razon": "No existe en SubasCars → construir desde VMC audit. Referencia: solo DOM + screenshot."
+      }
+    },
+    {
+      "nombre_humano": "PriceDisplay",
+      "nombre_ai": "display-price",
+      "dominio": "subasta-tiempo-real",
+      "origen": "VMC",
+      "descripcion": "Muestra el precio actual de la subasta. Central en la decisión del postor — debe ser legible, preciso y actualizable en tiempo real.",
+      "anatomia": [
+        "precio actual",
+        "moneda (PEN/USD)",
+        "precio base?",
+        "variante: grande/compacto"
+      ],
+      "props": {
+        "instancias_en_vmc": 1,
+        "variantes_conocidas": [
+          "pendiente-audit"
+        ],
+        "dom_tag_vmc": "div",
+        "storybook_ref": null
+      },
+      "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+      "accesibilidad": {
+        "roles": "text (implícito)",
+        "keyboard": "N/A",
+        "notas": "contraste mínimo 4.5:1, no solo color para comunicar cambio"
+      },
+      "decision": "solo-vmc",
+      "_meta": {
+        "page_source": "VMC DETALLE — oferta/61204",
+        "vmc_instances": 1,
+        "subascars_ref": null,
+        "decision_razon": "No existe en SubasCars → construir desde VMC audit. Referencia: solo DOM + screenshot."
+      }
+    },
+    {
+      "nombre_humano": "AuctionCard",
+      "nombre_ai": "card-auction",
+      "dominio": "subasta-tiempo-real",
+      "origen": "VMC",
+      "descripcion": "Tarjeta de oferta individual. Contiene imagen, título del vehículo, precio actual, timer y CTA de puja.",
+      "anatomia": [
+        "imagen vehículo",
+        "título",
+        "precio",
+        "timer-countdown",
+        "cta-pujar",
+        "badge-estado"
+      ],
+      "props": {
+        "instancias_en_vmc": 1,
+        "variantes_conocidas": [
+          "pendiente-audit"
+        ],
+        "dom_tag_vmc": "div",
+        "storybook_ref": null
+      },
+      "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+      "accesibilidad": {
+        "roles": "article o listitem",
+        "keyboard": "Tab al CTA",
+        "notas": "imagen con alt descriptivo del vehículo"
+      },
+      "decision": "solo-vmc",
+      "_meta": {
+        "page_source": "VMC DETALLE — oferta/61204",
+        "vmc_instances": 1,
+        "subascars_ref": null,
+        "decision_razon": "No existe en SubasCars → construir desde VMC audit. Referencia: solo DOM + screenshot."
+      }
+    },
+    {
+      "nombre_humano": "Metrics",
+      "nombre_ai": "display-metrics",
+      "dominio": "subasta-tiempo-real",
+      "origen": "VMC + SubasCars",
+      "descripcion": "Muestra una métrica clave (views, pujas, participantes). Compacto, legible, puede actualizarse en tiempo real.",
+      "anatomia": [
+        "label",
+        "valor numérico",
+        "unidad",
+        "icono?"
+      ],
+      "props": {
+        "instancias_en_vmc": 2,
+        "variantes_conocidas": [
+          "Metrics"
+        ],
+        "dom_tag_vmc": "div",
+        "storybook_ref": "https://subascars-storybook-gcp.web.app/?path=/story/basic-outputs-data-label-metrics--metrics"
+      },
+      "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+      "accesibilidad": {
+        "roles": "text (implícito)",
+        "keyboard": "N/A",
+        "notas": "valores dinámicos via aria-live=\"polite\""
+      },
+      "decision": "referencia-subascars",
+      "_meta": {
+        "page_source": "VMC DETALLE — oferta/61204",
+        "vmc_instances": 2,
+        "subascars_ref": "Metrics",
+        "decision_razon": "SubasCars tiene este componente → usar como referencia anatómica en ib-componentes (NO portar). VMC manda en UX/comportamiento."
+      }
+    },
+    {
+      "nombre_humano": "VehicleSpecs",
+      "nombre_ai": "table-specs",
+      "dominio": "transaccional-cuenta",
+      "origen": "VMC",
+      "descripcion": "Tabla de especificaciones técnicas del vehículo. Agrupa datos por categoría (motor, carrocería, equipamiento). Crítico para la decisión de compra.",
+      "anatomia": [
+        "filas clave-valor",
+        "grupos de specs (motor, carrocería, etc.)",
+        "expand/collapse?"
+      ],
+      "props": {
+        "instancias_en_vmc": 48,
+        "variantes_conocidas": [
+          "pendiente-audit"
+        ],
+        "dom_tag_vmc": "div",
+        "storybook_ref": null
+      },
+      "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+      "accesibilidad": {
+        "roles": "table/grid o dl/dt/dd",
+        "keyboard": "Tab si hay filas expandibles",
+        "notas": "headers asociados a celdas, scope=\"row/col\""
+      },
+      "decision": "solo-vmc",
+      "_meta": {
+        "page_source": "VMC DETALLE — oferta/61204",
+        "vmc_instances": 48,
+        "subascars_ref": null,
+        "decision_razon": "No existe en SubasCars → construir desde VMC audit. Referencia: solo DOM + screenshot."
+      }
+    },
+    {
+      "nombre_humano": "DataQualityIndicator",
+      "nombre_ai": "indicator-data-quality",
+      "dominio": "transaccional-cuenta",
+      "origen": "VMC",
+      "descripcion": "Indica el nivel de completitud/calidad de los datos del vehículo. Ayuda al postor a evaluar confiabilidad de la información.",
+      "anatomia": [
+        "porcentaje o score",
+        "label descriptivo",
+        "color semántico por nivel"
+      ],
+      "props": {
+        "instancias_en_vmc": 1,
+        "variantes_conocidas": [
+          "pendiente-audit"
+        ],
+        "dom_tag_vmc": "span",
+        "storybook_ref": null
+      },
+      "tokens": "Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.",
+      "accesibilidad": {
+        "roles": "meter o progressbar",
+        "keyboard": "N/A",
+        "notas": "aria-valuenow/min/max, no transmitir solo por color"
+      },
+      "decision": "solo-vmc",
+      "_meta": {
+        "page_source": "VMC DETALLE — oferta/61204",
+        "vmc_instances": 1,
+        "subascars_ref": null,
+        "decision_razon": "No existe en SubasCars → construir desde VMC audit. Referencia: solo DOM + screenshot."
+      }
+    }
+  ]
+}
