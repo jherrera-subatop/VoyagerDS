@@ -5,6 +5,41 @@
 
 ---
 
+## 0. Tipografía — Sistema Dual (LOCKED ✓)
+
+**Validado en Figma + Stitch. Roles distintos confirmados por diseño.**
+
+```
+Plus Jakarta Sans   → Display / Headings / UI principal
+                      text-display-*, text-heading-*, labels, CTAs, nav
+                      Comunica: marca, modernidad, confianza premium
+                      Licencia: SIL Open Font License
+                      Carga: next/font (Google Fonts)
+
+Roboto              → Body / Data / Texto denso
+                      text-body-*, text-caption, tablas, metadata, formularios
+                      Comunica: legibilidad, densidad, precisión técnica
+                      Licencia: Apache 2.0
+                      Carga: next/font (Google Fonts)
+
+Roboto Mono         → Valores críticos ÚNICAMENTE
+                      Precio actual, countdown timer, bid amount, códigos de lote
+                      Elimina jitter en WebSocket por construcción (monospaced nativo)
+                      Licencia: Apache 2.0
+                      Carga: next/font (Google Fonts)
+```
+
+**Regla de asignación:**
+- ¿Es un número que cambia en tiempo real? → Roboto Mono
+- ¿Es texto de UI, label, CTA o heading? → Plus Jakarta Sans
+- ¿Es body copy, metadata o datos en tabla? → Roboto
+
+**Nota:** El usuario tiene componentes diseñados en Figma con este sistema
+(header, sidebar, footer, auction card). Esos diseños son la referencia
+visual para ib-componentes — NO interpretar tipografía sin consultarlos.
+
+---
+
 ## 1. Arquitectura de Capas
 
 ```
