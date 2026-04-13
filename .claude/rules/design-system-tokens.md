@@ -38,6 +38,46 @@ Roboto Mono         → Valores críticos ÚNICAMENTE
 (header, sidebar, footer, auction card). Esos diseños son la referencia
 visual para ib-componentes — NO interpretar tipografía sin consultarlos.
 
+### Scale Completo — 20 Text Styles (LOCKED ✓)
+
+**Regla de gobernanza:** Ningún componente crea un text style nuevo.
+Solo consume de esta lista. Si algo no encaja → revisión formal antes de agregar.
+El scale puede auditarse y ajustarse en ib-componentes contra los diseños de Figma.
+
+```
+DISPLAY (Plus Jakarta Sans)
+  text-display-xl    48px / lh 56px / w700
+  text-display-lg    40px / lh 48px / w700
+  text-display-md    32px / lh 40px / w600
+
+HEADING (Plus Jakarta Sans)
+  text-heading-xl    28px / lh 36px / w600
+  text-heading-lg    24px / lh 32px / w600
+  text-heading-md    20px / lh 28px / w600
+  text-heading-sm    18px / lh 24px / w500
+
+BODY (Roboto)
+  text-body-lg       18px / lh 28px / w400
+  text-body-md       16px / lh 24px / w400
+  text-body-sm       14px / lh 20px / w400
+
+LABEL (Plus Jakarta Sans)
+  text-label-lg      16px / lh 24px / w500
+  text-label-md      14px / lh 20px / w500
+  text-label-sm      12px / lh 16px / w500
+
+CAPTION (Roboto)
+  text-caption       12px / lh 16px / w400
+  text-overline      10px / lh 14px / w500 / uppercase / letter-spacing +0.08em
+
+NUMERIC (Roboto Mono — tabular-nums nativo)
+  text-numeric-xl    40px / lh 48px / w700  → precio activo en subasta en vivo
+  text-numeric-lg    32px / lh 40px / w600  → precio en auction card
+  text-numeric-md    24px / lh 32px / w500  → precio secundario, countdown
+  text-numeric-sm    16px / lh 24px / w400  → datos en tabla, specs
+  text-numeric-xs    12px / lh 16px / w400  → metadata numérica, IDs de lote
+```
+
 ---
 
 ## 1. Arquitectura de Capas
