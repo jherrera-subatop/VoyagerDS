@@ -1,0 +1,27 @@
+# Next.js
+.next/
+out/
+
+# Node
+node_modules/
+
+# pnpm
+.pnpm-store/
+
+# Generated token CSS — rebuilt by terrazzo on predev/prebuild
+src/styles/tokens/tokens-primitives.css
+src/styles/tokens/tokens-semantics-light.css
+src/styles/tokens/tokens-semantics-dark.css
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/

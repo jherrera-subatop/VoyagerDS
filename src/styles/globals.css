@@ -1,0 +1,246 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   Voyager VMC — Global Styles
+   Tailwind v4 CSS-first configuration.
+
+   Import order:
+     1. Terrazzo token outputs (Terrazzo MUST run before next dev via predev)
+     2. @theme block — maps --vmc-* variables to Tailwind's --color-*, --spacing-*, etc.
+        Using separate --vmc-* prefix avoids circular var() references.
+     3. @layer base — global resets and root styles
+   ──────────────────────────────────────────────────────────────────────────── */
+
+@import "tailwindcss";
+
+/* ── 1. Terrazzo token outputs ───────────────────────────────────────────── */
+@import "./tokens/tokens-primitives.css";
+@import "./tokens/tokens-semantics-light.css";
+@import "./tokens/tokens-semantics-dark.css";
+
+/* ── 2. Tailwind v4 theme — maps Terrazzo variables to Tailwind utilities ── */
+/*
+   Pattern: --color-{name}: var(--vmc-color-{name})
+   Primitives follow The Vault system (vault / orange / cyan + neutrals + status).
+   Opacity modifiers use color-mix() against --color-*.
+*/
+@theme {
+  /* ── Primitive colors — The Vault (brand purple) ───────────────────────── */
+  --color-vault-100: var(--vmc-color-vault-100);
+  --color-vault-200: var(--vmc-color-vault-200);
+  --color-vault-300: var(--vmc-color-vault-300);
+  --color-vault-400: var(--vmc-color-vault-400);
+  --color-vault-500: var(--vmc-color-vault-500);
+  --color-vault-600: var(--vmc-color-vault-600);
+  --color-vault-700: var(--vmc-color-vault-700);
+  --color-vault-800: var(--vmc-color-vault-800);
+  --color-vault-900: var(--vmc-color-vault-900);
+  --color-vault-1000: var(--vmc-color-vault-1000);
+  --color-vault-1100: var(--vmc-color-vault-1100);
+  --color-vault-1200: var(--vmc-color-vault-1200);
+
+  /* ── En Vivo (urgency / live accent) ───────────────────────────────────── */
+  --color-orange-100: var(--vmc-color-orange-100);
+  --color-orange-200: var(--vmc-color-orange-200);
+  --color-orange-300: var(--vmc-color-orange-300);
+  --color-orange-400: var(--vmc-color-orange-400);
+  --color-orange-500: var(--vmc-color-orange-500);
+  --color-orange-600: var(--vmc-color-orange-600);
+  --color-orange-700: var(--vmc-color-orange-700);
+  --color-orange-800: var(--vmc-color-orange-800);
+  --color-orange-900: var(--vmc-color-orange-900);
+  --color-orange-1000: var(--vmc-color-orange-1000);
+  --color-orange-1100: var(--vmc-color-orange-1100);
+  --color-orange-1200: var(--vmc-color-orange-1200);
+
+  /* ── Negociable (cyan accent) ──────────────────────────────────────────── */
+  --color-cyan-100: var(--vmc-color-cyan-100);
+  --color-cyan-200: var(--vmc-color-cyan-200);
+  --color-cyan-300: var(--vmc-color-cyan-300);
+  --color-cyan-400: var(--vmc-color-cyan-400);
+  --color-cyan-500: var(--vmc-color-cyan-500);
+  --color-cyan-600: var(--vmc-color-cyan-600);
+  --color-cyan-700: var(--vmc-color-cyan-700);
+  --color-cyan-800: var(--vmc-color-cyan-800);
+  --color-cyan-900: var(--vmc-color-cyan-900);
+  --color-cyan-1000: var(--vmc-color-cyan-1000);
+  --color-cyan-1100: var(--vmc-color-cyan-1100);
+  --color-cyan-1200: var(--vmc-color-cyan-1200);
+
+  /* ── Neutral scale ──────────────────────────────────────────────────────── */
+  --color-neutral-100: var(--vmc-color-neutral-100);
+  --color-neutral-200: var(--vmc-color-neutral-200);
+  --color-neutral-300: var(--vmc-color-neutral-300);
+  --color-neutral-400: var(--vmc-color-neutral-400);
+  --color-neutral-500: var(--vmc-color-neutral-500);
+  --color-neutral-600: var(--vmc-color-neutral-600);
+  --color-neutral-700: var(--vmc-color-neutral-700);
+  --color-neutral-800: var(--vmc-color-neutral-800);
+  --color-neutral-900: var(--vmc-color-neutral-900);
+  --color-neutral-1000: var(--vmc-color-neutral-1000);
+  --color-neutral-1100: var(--vmc-color-neutral-1100);
+  --color-neutral-1200: var(--vmc-color-neutral-1200);
+
+  /* ── Green scale ────────────────────────────────────────────────────────── */
+  --color-green-100: var(--vmc-color-green-100);
+  --color-green-200: var(--vmc-color-green-200);
+  --color-green-300: var(--vmc-color-green-300);
+  --color-green-400: var(--vmc-color-green-400);
+  --color-green-500: var(--vmc-color-green-500);
+  --color-green-600: var(--vmc-color-green-600);
+  --color-green-700: var(--vmc-color-green-700);
+  --color-green-800: var(--vmc-color-green-800);
+  --color-green-900: var(--vmc-color-green-900);
+  --color-green-1000: var(--vmc-color-green-1000);
+  --color-green-1100: var(--vmc-color-green-1100);
+  --color-green-1200: var(--vmc-color-green-1200);
+
+  /* ── Red scale ──────────────────────────────────────────────────────────── */
+  --color-red-100: var(--vmc-color-red-100);
+  --color-red-200: var(--vmc-color-red-200);
+  --color-red-300: var(--vmc-color-red-300);
+  --color-red-400: var(--vmc-color-red-400);
+  --color-red-500: var(--vmc-color-red-500);
+  --color-red-600: var(--vmc-color-red-600);
+  --color-red-700: var(--vmc-color-red-700);
+  --color-red-800: var(--vmc-color-red-800);
+  --color-red-900: var(--vmc-color-red-900);
+  --color-red-1000: var(--vmc-color-red-1000);
+  --color-red-1100: var(--vmc-color-red-1100);
+  --color-red-1200: var(--vmc-color-red-1200);
+
+  /* ── Amber scale ────────────────────────────────────────────────────────── */
+  --color-amber-100: var(--vmc-color-amber-100);
+  --color-amber-200: var(--vmc-color-amber-200);
+  --color-amber-300: var(--vmc-color-amber-300);
+  --color-amber-400: var(--vmc-color-amber-400);
+  --color-amber-500: var(--vmc-color-amber-500);
+  --color-amber-600: var(--vmc-color-amber-600);
+  --color-amber-700: var(--vmc-color-amber-700);
+  --color-amber-800: var(--vmc-color-amber-800);
+  --color-amber-900: var(--vmc-color-amber-900);
+  --color-amber-1000: var(--vmc-color-amber-1000);
+  --color-amber-1100: var(--vmc-color-amber-1100);
+  --color-amber-1200: var(--vmc-color-amber-1200);
+
+  /* ── Semantic colors — background ──────────────────────────────────────── */
+  --color-bg-primary: var(--vmc-color-background-primary);
+  --color-bg-secondary: var(--vmc-color-background-secondary);
+  --color-bg-tertiary: var(--vmc-color-background-tertiary);
+  --color-bg-inverse: var(--vmc-color-background-inverse);
+  --color-bg-brand: var(--vmc-color-background-brand);
+  --color-bg-interactive: var(--vmc-color-background-interactive);
+  --color-bg-interactive-hover: var(--vmc-color-background-interactive-hover);
+  --color-bg-interactive-active: var(--vmc-color-background-interactive-active);
+  --color-bg-interactive-selected: var(--vmc-color-background-interactive-selected);
+  --color-bg-disabled: var(--vmc-color-background-disabled);
+  --color-bg-overlay: var(--vmc-color-background-overlay);
+  --color-bg-card: var(--vmc-color-background-card);
+  --color-bg-urgency-low: var(--vmc-color-background-urgency-low);
+  --color-bg-urgency-high: var(--vmc-color-background-urgency-high);
+  --color-bg-urgency-critical: var(--vmc-color-background-urgency-critical);
+
+  /* ── Semantic colors — text ─────────────────────────────────────────────── */
+  --color-text-primary: var(--vmc-color-text-primary);
+  --color-text-secondary: var(--vmc-color-text-secondary);
+  --color-text-tertiary: var(--vmc-color-text-tertiary);
+  --color-text-inverse: var(--vmc-color-text-inverse);
+  --color-text-brand: var(--vmc-color-text-brand);
+  --color-text-brand-hover: var(--vmc-color-text-brand-hover);
+  --color-text-disabled: var(--vmc-color-text-disabled);
+  --color-text-placeholder: var(--vmc-color-text-placeholder);
+  --color-text-market-bullish: var(--vmc-color-text-market-bullish);
+  --color-text-market-bearish: var(--vmc-color-text-market-bearish);
+  --color-text-price-label: var(--vmc-color-text-price-label);
+  --color-text-on-dark-muted: var(--vmc-color-text-on-dark-muted);
+  --color-text-on-dark-subtle: var(--vmc-color-text-on-dark-subtle);
+
+  /* ── Semantic colors — border ───────────────────────────────────────────── */
+  --color-border-default: var(--vmc-color-border-default);
+  --color-border-subtle: var(--vmc-color-border-subtle);
+  --color-border-strong: var(--vmc-color-border-strong);
+  --color-border-brand: var(--vmc-color-border-brand);
+  --color-border-focus: var(--vmc-color-border-focus);
+  --color-border-error: var(--vmc-color-border-error);
+  --color-border-verified: var(--vmc-color-border-verified);
+
+  /* ── Semantic colors — icon ─────────────────────────────────────────────── */
+  --color-icon-primary: var(--vmc-color-icon-primary);
+  --color-icon-secondary: var(--vmc-color-icon-secondary);
+  --color-icon-tertiary: var(--vmc-color-icon-tertiary);
+  --color-icon-inverse: var(--vmc-color-icon-inverse);
+  --color-icon-brand: var(--vmc-color-icon-brand);
+  --color-icon-disabled: var(--vmc-color-icon-disabled);
+  --color-icon-error: var(--vmc-color-icon-error);
+  --color-icon-success: var(--vmc-color-icon-success);
+
+  /* ── Transactional colors — Voyager-exclusive ───────────────────────────── */
+  --color-timer-standard: var(--vmc-color-timer-standard);
+  --color-timer-imminent: var(--vmc-color-timer-imminent);
+  --color-action-bid: var(--vmc-color-action-execute-bid);
+  --color-action-withdraw: var(--vmc-color-action-execute-withdraw);
+  --color-surface-processing: var(--vmc-color-surface-processing);
+
+  /* ── Spacing — Atlassian multiplier (space.100 = 8px base unit) ─────────── */
+  --spacing-025: var(--vmc-space-025);
+  --spacing-050: var(--vmc-space-050);
+  --spacing-100: var(--vmc-space-100);
+  --spacing-150: var(--vmc-space-150);
+  --spacing-200: var(--vmc-space-200);
+  --spacing-300: var(--vmc-space-300);
+  --spacing-400: var(--vmc-space-400);
+  --spacing-600: var(--vmc-space-600);
+  --spacing-800: var(--vmc-space-800);
+  --spacing-1000: var(--vmc-space-1000);
+  --spacing-1200: var(--vmc-space-1200);
+
+  /* ── Border radius ──────────────────────────────────────────────────────── */
+  --radius-none: var(--vmc-radius-none);
+  --radius-sm: var(--vmc-radius-sm);
+  --radius-md: var(--vmc-radius-md);
+  --radius-lg: var(--vmc-radius-lg);
+  --radius-full: var(--vmc-radius-full);
+
+  /* ── Shadows ────────────────────────────────────────────────────────────── */
+  --shadow-sm: var(--vmc-shadow-sm);
+  --shadow-md: var(--vmc-shadow-md);
+  /* Alias: design system defines exactly sm + md — lg maps to floating (md) */
+  --shadow-lg: var(--vmc-shadow-md);
+
+  /* ── Motion durations ───────────────────────────────────────────────────── */
+  --duration-instant: var(--vmc-motion-duration-instant);
+  --duration-fast: var(--vmc-motion-duration-fast);
+  --duration-moderate: var(--vmc-motion-duration-moderate);
+  --duration-slow: var(--vmc-motion-duration-slow);
+
+  /* ── Motion easing ──────────────────────────────────────────────────────── */
+  --ease-standard: var(--vmc-motion-easing-standard);
+  --ease-entrance: var(--vmc-motion-easing-entrance);
+}
+
+/* ── 3. Base layer ───────────────────────────────────────────────────────── */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: var(--font-body, "Roboto", sans-serif);
+    color: var(--vmc-color-text-primary);
+    background-color: var(--vmc-color-background-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Focus ring — always outline, never box-shadow (clips with overflow:hidden) */
+  :focus-visible {
+    outline: 2px solid var(--vmc-color-border-focus);
+    outline-offset: 2px;
+  }
+
+  /* Numeric values: enforce tabular-nums globally on Roboto Mono elements */
+  [data-numeric] {
+    font-variant-numeric: tabular-nums;
+  }
+}

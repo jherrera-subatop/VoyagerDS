@@ -8,10 +8,12 @@
 
 ## Comandos esenciales
 ```bash
-pnpm dev          # desarrollo local
+pnpm dev          # desarrollo local → http://localhost:3420 (puerto fijo en .env.local)
+pnpm dev:turbo    # opcional: Turbopack (rápido; si algo falla, borrar .next y usar pnpm dev)
 pnpm build        # build producción
 pnpm lint         # linter
 pnpm type-check   # verificación TypeScript
+pnpm verify:pages # build + next start + GET rutas críticas (no dejar páginas rotas)
 ```
 
 ## Arquitectura de memoria (leer en orden)
@@ -19,6 +21,8 @@ pnpm type-check   # verificación TypeScript
 2. `.claude/rules/typescript-strict.md` → contrato de código (activa en *.ts, *.tsx)
 3. `.claude/rules/tailwind-v4.md` → reglas específicas de Tailwind v4
 4. `.claude/rules/agents-governance.md` → constitución del agente (siempre activa)
+
+**Docs al día (Cursor MCP Context7):** antes de patrones no triviales en Next.js / React / Tailwind / RTK Query, consultar documentación vía Context7; combinar con `pnpm verify:pages` al tocar rutas. Ver `.cursor/rules/voyager-context7-docs-first.mdc`.
 
 ## Skills disponibles (bajo demanda)
 - `ib-maestro` → IB macro del proyecto Voyager
@@ -28,6 +32,10 @@ pnpm type-check   # verificación TypeScript
 - `ib-handoff` → IB fase 4: handoff a código
 - `voyager-frontend` → estándares de código frontend
 - `token-optimizer` → técnicas de optimización de contexto y tokens
+- `ds-token-audit` → auditoría tokens + Terrazzo + CSS + DESIGN.md (procedimiento + prompts Deep Research)
+- `voyager-runtime-verify` → antes de cerrar: `pnpm verify:pages` (HTTP real tras build)
+
+En **Cursor**: `.cursor/rules/voyager-ds-token-audit.mdc` (tokens/Terrazzo/docs) y `.cursor/rules/voyager-context7-docs-first.mdc` (Next/React/stack + verify tras cambios en app).
 
 ## Estructura de features
 ```

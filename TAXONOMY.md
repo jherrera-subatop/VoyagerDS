@@ -75,7 +75,7 @@
 **Props conocidos:**
 - Instancias en VMC DETALLE: 17
 
-**Tokens:** Pendiente ib-fundamentos — se asignan tokens DTCG (OKLCH) cuando la capa de primitivos esté definida.
+**Tokens:** Consumo vía `var(--vmc-*)` en `src/components/ui/Button` (ib-componentes — primer átomo). Primitivos/semánticos en `tokens.json` + Terrazzo.
 
 **Accesibilidad:**
 - ARIA roles: button
