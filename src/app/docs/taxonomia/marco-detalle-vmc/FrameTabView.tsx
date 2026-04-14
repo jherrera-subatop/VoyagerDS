@@ -152,7 +152,7 @@ export function FrameTabView() {
             style={{ color: "var(--vmc-color-text-tertiary)" }}
           >
             ↔ scroll horizontal si el panel es más angosto que 1024px · Si el iframe muestra error
-            de seguridad, usar el botón "Abrir en VMC" para ver la página real en otra pestaña.
+            de seguridad, usar el botón {`"Abrir en VMC"`} para ver la página real en otra pestaña.
           </p>
         </div>
       )}

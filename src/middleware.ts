@@ -44,12 +44,13 @@ function isPublicPathname(pathname: string): boolean {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Allow public asset requests through
-  if (
-    pathname.startsWith("/_next") ||
-    pathname.startsWith("/api/auth") ||
-    pathname.includes(".")
-  ) {
+  // Todo lo de Next (chunks, HMR, etc.) y APIs — sin lógica de auth aquí
+  if (pathname.startsWith("/_next") || pathname.startsWith("/api")) {
+    return NextResponse.next();
+  }
+
+  // Otros estáticos por extensión (favicon, manifest, etc.)
+  if (pathname.includes(".")) {
     return NextResponse.next();
   }
 
@@ -73,11 +74,9 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     /*
-     * Match all request paths EXCEPT:
-     * - _next/static (static files)
-     * - _next/image (image optimization)
-     * - favicon.ico
+     * Igual que la plantilla Next: no ejecutar middleware en api, estáticos de
+     * Next ni favicon (evita interferir con chunks / RSC / imágenes).
      */
-    "/((?!_next/static|_next/image|favicon.ico).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico).*)",
   ],
 };

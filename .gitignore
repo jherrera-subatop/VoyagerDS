@@ -25,3 +25,9 @@ Thumbs.db
 # Editor
 .vscode/
 .idea/
+
+# Cursor IDE (plans, agent transcripts — no son código del repo)
+.cursor/
+
+# TypeScript build info (regenerado automáticamente)
+tsconfig.tsbuildinfo

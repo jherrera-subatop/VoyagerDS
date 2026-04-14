@@ -7,6 +7,12 @@
 
 ---
 
+## Criterios de cierre — Ruta B (operativo)
+
+El skill oficial `ib-taxonomia` define cierre con `TAXONOMY.md` al **100%** global. En **Ruta B** el trabajo avanza por **marco (page-type)** con revisión explícita del arquitecto: un marco se considera **cerrado** cuando el inventario de ese page-type está documentado con los 10 campos y decisiones asignadas. La tensión con el gate formal y las reglas para agentes están descritas en [`VOYAGER_CLAUDE_CODE.md`](./VOYAGER_CLAUDE_CODE.md) (sección 1).
+
+---
+
 ## Aclaración sobre las decisiones
 
 | Decisión | Significado |

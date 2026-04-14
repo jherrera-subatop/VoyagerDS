@@ -35,12 +35,15 @@ const ROUTES = [
 
 const SKIP_BUILD = process.argv.includes("--skip-build");
 
+/** Windows: spawn sin shell no resuelve `pnpm` en PATH (ENOENT). */
+const SPAWN_SHELL = process.platform === "win32";
+
 function runBuild() {
   return new Promise((resolve, reject) => {
     const p = spawn("pnpm", ["build"], {
       cwd: ROOT,
       stdio: "inherit",
-      shell: false,
+      shell: SPAWN_SHELL,
     });
     p.on("error", reject);
     p.on("exit", (code) => {
@@ -58,6 +61,7 @@ function startServer() {
     const child = spawn("pnpm", ["exec", "next", "start", "-p", PORT], {
       cwd: ROOT,
       stdio: "inherit",
+      shell: SPAWN_SHELL,
       env: { ...process.env, PORT },
     });
 

@@ -8,7 +8,7 @@
 
 ## Comandos esenciales
 ```bash
-pnpm dev          # desarrollo local → http://localhost:3420 (puerto fijo en .env.local)
+pnpm dev          # desarrollo local → http://localhost:3420 (script fijo; otro puerto: pnpm exec next dev -p <puerto>)
 pnpm dev:turbo    # opcional: Turbopack (rápido; si algo falla, borrar .next y usar pnpm dev)
 pnpm build        # build producción
 pnpm lint         # linter
@@ -48,6 +48,19 @@ src/features/[NombreFeature]/
   use[NombreFeature]Logic.ts   ← si lógica > 20 líneas
 ```
 
+## Protocolo de Salida Directa (RESTRICCIÓN ABSOLUTA)
+- NUNCA resumir contexto recuperado ni replantear instrucciones del prompt
+- NUNCA explicar el código antes de escribirlo ni después de escribirlo
+- NUNCA emitir saludos, confirmaciones conversacionales ni frases de cierre
+- La respuesta consiste EXCLUSIVAMENTE en bloques de código funcional + comentarios estructurales mínimos
+- Si se debe reportar un estado: una línea, imperativa, sin narrativa
+
+## Optimización de contexto (sesiones largas)
+- No re-leer archivos ya leídos en la sesión salvo que hayan podido cambiar
+- Ignorar archivos > 100 KB salvo solicitud explícita
+- Sugerir `/cost` cuando la sesión se extiende para monitorear el cache ratio
+- Recomendar nueva sesión al cambiar a una tarea completamente no relacionada
+
 ## Reglas de oro (invariables)
 - NUNCA any en TypeScript
 - NUNCA ternarios — if/else o &&
@@ -60,3 +73,7 @@ src/features/[NombreFeature]/
 VMC Subastas — plataforma transaccional de subastas de vehículos de alto valor, Perú.
 UI Upgrade total (Voyager): modernización de capa visual únicamente.
 UX flows y UX writing del legacy se mantienen INTACTOS.
+
+## Insumo Claude Code / IB (roadmap)
+- [`VOYAGER_CLAUDE_CODE.md`](./VOYAGER_CLAUDE_CODE.md) — gobernanza Ruta B, criterios de cierre por marco, instrucciones operativas para agentes.
+- [`COMPONENTS_PRIORITY.md`](./COMPONENTS_PRIORITY.md) — orden sugerido de implementación ib-componentes (marco Detalle).

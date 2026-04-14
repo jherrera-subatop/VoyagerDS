@@ -2,11 +2,11 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 
 type LoginPageProps = Readonly<{
-  searchParams: Promise<{ redirect?: string }>;
+  searchParams?: Promise<{ redirect?: string }>;
 }>;
 
 export default async function LoginPage({ searchParams }: LoginPageProps) {
-  const params = await searchParams;
+  const params = searchParams !== undefined ? await searchParams : {};
   const redirect = params.redirect;
 
   let redirectHint: ReactNode = null;

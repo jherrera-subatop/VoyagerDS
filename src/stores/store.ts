@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { baseQueryWithReauth } from "@/lib/api/baseQuery";
-import { createApi } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query";
 
 /**
  * Root API slice — all RTK Query endpoints extend this.

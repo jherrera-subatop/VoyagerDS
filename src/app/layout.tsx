@@ -39,6 +39,12 @@ export default function RootLayout({
     <html lang="es" suppressHydrationWarning>
       <body
         className={`${plusJakartaSans.variable} ${roboto.variable} ${robotoMono.variable} antialiased`}
+        style={{
+          minHeight: "100vh",
+          /* Fallbacks si los tokens CSS aún no cargan (evita pantalla “en blanco”) */
+          backgroundColor: "var(--vmc-color-background-primary, #F8FAF9)",
+          color: "var(--vmc-color-text-primary, #191C1C)",
+        }}
       >
         <StoreProvider>
           <ModalStoreProvider>

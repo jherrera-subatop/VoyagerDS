@@ -22,7 +22,13 @@ export default function DocsTaxonomiaPage() {
         <p className="leading-relaxed">
           <strong style={{ color: "var(--vmc-color-text-primary)" }}>ib-taxonomia</strong> precede a{" "}
           <strong style={{ color: "var(--vmc-color-text-primary)" }}>ib-fundamentos</strong>: primero se acuerda
-          qué componentes existen por marco, después se cierran tokens y pipeline.
+          qué componentes existen por marco, después se cierran tokens y pipeline.{" "}
+          <strong style={{ color: "var(--vmc-color-text-primary)" }}>Ruta B:</strong> la taxonomía crece por page-type;
+          criterios de cierre por marco vs. documento global — ver{" "}
+          <code className="font-mono text-xs" style={{ color: "var(--vmc-color-text-tertiary)" }}>
+            VOYAGER_CLAUDE_CODE.md
+          </code>{" "}
+          en la raíz del repo.
         </p>
         <div className="flex flex-wrap gap-4 pt-1 text-xs">
           <Link
@@ -44,7 +50,7 @@ export default function DocsTaxonomiaPage() {
             className="underline underline-offset-2"
             style={{ color: "var(--vmc-color-text-tertiary)" }}
           >
-            Siguiente: Fundamentos →
+            Fundamentos →
           </Link>
         </div>
       </div>

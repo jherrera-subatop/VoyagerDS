@@ -9,6 +9,36 @@
  */
 
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+import type { JSX } from "react";
+import { TAXONOMY_COMPONENTS } from "../_data/taxonomy-components";
+import type { TaxonomyMeasurements } from "../_data/taxonomy-components";
+
+// ─── Lookup taxonomía por ID ──────────────────────────────────────────────────
+const TC_MAP = new Map(TAXONOMY_COMPONENTS.map((c) => [c.id, c]));
+
+function measurementLines(m: TaxonomyMeasurements): string[] {
+  const lines: string[] = [];
+  if (m.height) lines.push(`h: ${m.height}`);
+  if (m.width) lines.push(`w: ${m.width}`);
+  if (m.padding) lines.push(`pad: ${m.padding}`);
+  if (m.extra) {
+    for (const [k, v] of Object.entries(m.extra)) {
+      lines.push(`${k}: ${v}`);
+    }
+  }
+  return lines;
+}
+
+/** Construye ZoneInfo desde taxonomy-components.ts por ID de componente */
+function zi(id: string): ZoneInfo {
+  const c = TC_MAP.get(id);
+  if (!c) return { name: id, category: "—", measurements: [] };
+  return {
+    name: c.name,
+    category: c.domain,
+    measurements: c.measurements ? measurementLines(c.measurements) : [],
+  };
+}
 
 // ─── Paleta wireframe — 100% escala de grises ────────────────────────────────
 const W = {
@@ -106,7 +136,6 @@ function HoverZone({
   const [hovered, setHovered] = useState(false);
 
   return (
-    // @ts-expect-error dynamic tag
     <Tag
       style={{
         ...style,
@@ -153,7 +182,7 @@ function TextLine({ w = "100%", h = 8, mt = 4 }: { w?: string | number; h?: numb
 function WfHeader() {
   return (
     <HoverZone
-      info={{ name: "Header Primary", category: "layout", measurements: ["w: 1024px", "h: 64px"] }}
+      info={zi("header-primary")}
       style={{ height: 64, background: W.dark, borderBottom: `1px solid ${W.borderDark}`, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 24px", flexShrink: 0 }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -177,7 +206,7 @@ function WfSidebar() {
   const navItems = ["Hoy", "Tipo de oferta", "Categorías", "Empresas", "Centro de ayuda"];
   return (
     <HoverZone
-      info={{ name: "Navbar Primary", category: "navigation", measurements: ["w: 256px", "h: 48px (por ítem)"] }}
+      info={zi("nav-primary")}
       style={{ width: SIDEBAR_W, background: W.darkMid, borderRight: `1px solid ${W.borderDark}`, display: "flex", flexDirection: "column", flexShrink: 0, minHeight: 600 }}
     >
       <div style={{ height: 56, borderBottom: `1px solid ${W.borderDark}`, display: "flex", alignItems: "center", padding: "0 16px", gap: 8 }}>
@@ -203,7 +232,7 @@ function WfSidebar() {
 function WfTitleBar() {
   return (
     <HoverZone
-      info={{ name: "Title Bar — Detalle", category: "layout", measurements: ["w: 768px", "h: 56px"] }}
+      info={zi("title-bar")}
       style={{ height: 56, borderBottom: `1px solid ${W.border}`, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 16px", background: W.darkMid, flexShrink: 0, gap: 12 }}
     >
       <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
@@ -215,10 +244,16 @@ function WfTitleBar() {
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
         <div style={{ display: "flex", gap: 12 }}>
-          {[["244", "pujas"], ["13", ""], ["7", ""]].map(([val, lbl]) => (
+          {(
+            [
+              ["244", "pujas"],
+              ["13", ""],
+              ["7", ""],
+            ] as const
+          ).map(([val, lbl]) => (
             <div key={val + lbl} style={{ textAlign: "center" }}>
               <div style={{ fontSize: 13, fontWeight: 700, fontFamily: "monospace", color: W.white }}>{val}</div>
-              {lbl && <div style={{ fontSize: 8, color: "rgba(255,255,255,0.6)" }}>{lbl}</div>}
+              {lbl.length > 0 && <div style={{ fontSize: 8, color: "rgba(255,255,255,0.6)" }}>{lbl}</div>}
             </div>
           ))}
         </div>
@@ -242,10 +277,10 @@ function WfBidWidget() {
   ];
 
   const relatedCards = [
-    { title: "Kia Sportage", year: "2011" },
-    { title: "Toyota Corolla", year: "2012" },
-    { title: "Yuejin NJ1063D...", year: "2011" },
-    { title: "Nissan Navara", year: "2012" },
+    { title: "Toyota Yaris", year: "2017" },
+    { title: "Haval M6", year: "2019" },
+    { title: "Italika 125Z Eur...", year: "2017" },
+    { title: "Great Wall Poer", year: "2024" },
   ];
 
   return (
@@ -256,19 +291,19 @@ function WfBidWidget() {
 
         {/* Header del widget — fecha / corazón / hora / métricas */}
         <HoverZone
-          info={{ name: "Bid Widget Header", category: "auction-core", measurements: ["w: 276px", "h: 96px"] }}
+          info={zi("bid-widget-header")}
           style={{ background: W.dark, padding: "10px 12px 8px" }}
         >
           {/* Fila 1: fecha | divider | hora */}
           <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 6 }}>
             <div>
               <div style={{ fontSize: 8, color: W.labelDark, fontFamily: "sans-serif" }}>Inicia</div>
-              <div style={{ fontSize: 12, fontWeight: 800, color: W.textLight, fontFamily: "sans-serif" }}>VIERNES 17</div>
+              <div style={{ fontSize: 12, fontWeight: 800, color: W.textLight, fontFamily: "sans-serif" }}>HOY</div>
             </div>
             {/* Divider vertical */}
             <div style={{ width: 1, height: 28, background: W.borderDark, alignSelf: "center" }} />
             <div style={{ textAlign: "right" }}>
-              <div style={{ fontSize: 18, fontWeight: 800, fontFamily: "monospace", color: W.textLight, lineHeight: 1 }}>01:00 pm</div>
+              <div style={{ fontSize: 18, fontWeight: 800, fontFamily: "monospace", color: W.textLight, lineHeight: 1 }}>02:05 pm</div>
             </div>
           </div>
 
@@ -285,7 +320,7 @@ function WfBidWidget() {
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             {/* Vistas */}
             <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
-              <span style={{ fontSize: 11, fontWeight: 700, fontFamily: "monospace", color: W.textLight }}>518</span>
+              <span style={{ fontSize: 11, fontWeight: 700, fontFamily: "monospace", color: W.textLight }}>244</span>
               <div style={{ width: 16, height: 16, borderRadius: "50%", border: `1px solid ${W.borderDark}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <svg width={8} height={8} viewBox="0 0 24 24" fill="none" stroke={W.labelDark} strokeWidth="2">
                   <circle cx="12" cy="12" r="3"/><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/>
@@ -294,7 +329,7 @@ function WfBidWidget() {
             </div>
             {/* Pujas (centro — coincide con el corazón) */}
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-              <span style={{ fontSize: 11, fontWeight: 700, fontFamily: "monospace", color: W.textLight }}>2</span>
+              <span style={{ fontSize: 11, fontWeight: 700, fontFamily: "monospace", color: W.textLight }}>13</span>
             </div>
             {/* Participantes */}
             <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
@@ -303,14 +338,14 @@ function WfBidWidget() {
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                 </svg>
               </div>
-              <span style={{ fontSize: 11, fontWeight: 700, fontFamily: "monospace", color: W.textLight }}>0</span>
+              <span style={{ fontSize: 11, fontWeight: 700, fontFamily: "monospace", color: W.textLight }}>7</span>
             </div>
           </div>
         </HoverZone>
 
         {/* Banner ¡Oportunidad! */}
         <HoverZone
-          info={{ name: "Promo Banner", category: "feedback", measurements: ["w: 276px", "h: 28px"] }}
+          info={zi("promo-banner")}
           style={{ background: W.zone, padding: "5px 12px", borderBottom: `1px solid ${W.border}` }}
         >
           <span style={{ fontSize: 9, color: W.label, fontFamily: "sans-serif", fontStyle: "italic" }}>¡Oportunidad para el que sabe!</span>
@@ -319,7 +354,7 @@ function WfBidWidget() {
         <div style={{ padding: "10px 12px 8px" }}>
           {/* CTA PARTICIPA */}
           <HoverZone
-            info={{ name: "CTA Primary — PARTICIPA", category: "interaction", measurements: ["w: 252px", "h: 52px"] }}
+            info={zi("btn")}
             style={{ height: 52, background: W.accentCta, borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 10 }}
           >
             <span style={{ fontSize: 12, fontWeight: 800, color: W.white, fontFamily: "sans-serif", letterSpacing: 2 }}>PARTICIPA</span>
@@ -327,7 +362,7 @@ function WfBidWidget() {
 
           {/* Precio Base */}
           <HoverZone
-            info={{ name: "Display Price", category: "content", measurements: ["w: 252px", "h: 46px"] }}
+            info={zi("display-price")}
             style={{ marginBottom: 4 }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
@@ -341,7 +376,7 @@ function WfBidWidget() {
                   <span style={{ fontSize: 14, fontWeight: 700, fontFamily: "monospace", color: W.text }}>US$ 14,999</span>
                 </div>
                 <span style={{ fontSize: 8, color: W.label, fontFamily: "sans-serif", display: "block" }}>
-                  Comisión: 7.5% del valor de compra o mínimo &gt;S&lt; 50
+                  Comisión: 7.5% del valor de compra y mínimo s/. 90
                 </span>
               </div>
             </div>
@@ -350,7 +385,7 @@ function WfBidWidget() {
 
         {/* Option Tags — grid 2×2 + 1 centrado */}
         <HoverZone
-          info={{ name: "Option Tags", category: "interaction", measurements: ["w: 252px", "h: 52px (c/u · 5 ítems · grid 2col)"] }}
+          info={zi("option-tags")}
           style={{ padding: "0 12px 12px" }}
         >
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
@@ -388,7 +423,9 @@ function WfBidWidget() {
                 textAlign: "center",
               }}
             >
-              <span style={{ fontSize: 9, color: W.label, fontFamily: "sans-serif", lineHeight: 1.3, whiteSpace: "pre-line" }}>{optionButtons[4].label}</span>
+              <span style={{ fontSize: 9, color: W.label, fontFamily: "sans-serif", lineHeight: 1.3, whiteSpace: "pre-line" }}>
+                {optionButtons[4]?.label ?? ""}
+              </span>
             </div>
           </div>
         </HoverZone>
@@ -396,7 +433,7 @@ function WfBidWidget() {
 
       {/* ── SubasCoins ── */}
       <HoverZone
-        info={{ name: "SubasCoins Promo", category: "interaction", measurements: ["w: 276px", "h: 56px"] }}
+        info={zi("subascoins-promo")}
         style={{ border: `1px solid ${W.border}`, borderRadius: 6, padding: "10px 14px", display: "flex", alignItems: "center", gap: 10, background: W.white }}
       >
         {/* Ícono moneda SubasCoins */}
@@ -411,7 +448,7 @@ function WfBidWidget() {
 
       {/* ── Ofertas Relacionadas ── */}
       <HoverZone
-        info={{ name: "Ofertas Relacionadas", category: "content", measurements: ["w: 276px", "h: 420px", "card: 127×168px", "img: 127×110px"] }}
+        info={zi("card-auction")}
         style={{ background: W.white, padding: "12px 12px 4px" }}
       >
         {/* Título de sección — sin header bar, directo */}
@@ -479,14 +516,14 @@ function WfMainCol() {
 
       {/* Hero image */}
       <HoverZone
-        info={{ name: "Image Gallery — Hero", category: "media", measurements: ["w: 444px", "h: 220px"] }}
+        info={zi("image-gallery")}
       >
         <ImgBlock w="100%" h={220} />
       </HoverZone>
 
       {/* Thumbnails */}
       <HoverZone
-        info={{ name: "Thumbnail Strip", category: "media", measurements: ["w: 444px", "h: 50px", "thumb: 72×50px"] }}
+        info={zi("image-gallery")}
         style={{ display: "flex", gap: 6 }}
       >
         {[0, 1, 2, 3].map((i) => <ImgBlock key={i} w={72} h={50} />)}
@@ -494,7 +531,7 @@ function WfMainCol() {
 
       {/* Información general */}
       <HoverZone
-        info={{ name: "Specs Accordion", category: "content", measurements: ["w: 444px", "h: 268px", "fila: 444×40px"] }}
+        info={zi("table-specs")}
         style={{ border: `1px solid ${W.border}`, borderRadius: 4, overflow: "hidden" }}
       >
         <div style={{ padding: "8px 12px", background: W.zone, borderBottom: `1px solid ${W.border}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -507,7 +544,7 @@ function WfMainCol() {
           </div>
         </div>
         <div style={{ padding: "4px 12px", borderBottom: `1px solid ${W.border}` }}>
-          <span style={{ fontSize: 9, color: W.label, fontFamily: "monospace" }}>CÓDIGO: 4172</span>
+          <span style={{ fontSize: 9, color: W.label, fontFamily: "monospace" }}>CÓDIGO: 61172</span>
         </div>
         {[
           ["Transmisión", "Automática"],
@@ -525,7 +562,7 @@ function WfMainCol() {
 
       {/* Descripción */}
       <HoverZone
-        info={{ name: "Description Block", category: "content", measurements: ["w: 444px", "h: 96px"] }}
+        info={zi("description-block")}
         style={{ border: `1px solid ${W.border}`, borderRadius: 4, padding: 12 }}
       >
         <span style={{ fontSize: 9, color: W.text, fontFamily: "sans-serif" }}>Vehículo siniestrado por choque...</span>
@@ -536,7 +573,7 @@ function WfMainCol() {
 
       {/* Descargas */}
       <HoverZone
-        info={{ name: "Document Downloads", category: "content", measurements: ["w: 444px", "h: 220px", "fila: 444×44px"] }}
+        info={zi("document-downloads")}
         style={{ border: `1px solid ${W.border}`, borderRadius: 4, overflow: "hidden" }}
       >
         <div style={{ padding: "8px 12px", background: W.zone, borderBottom: `1px solid ${W.border}` }}>
@@ -558,7 +595,7 @@ function WfMainCol() {
         <div style={{ padding: "6px 12px", borderBottom: `1px solid ${W.border}` }}>
           <span style={{ fontSize: 10, fontWeight: 700, color: W.text, fontFamily: "sans-serif" }}>Documentos requeridos:</span>
         </div>
-        {["Ficha de lavado de activos PN", "Ficha Lavado de Activos PJ"].map((doc) => (
+        {["Ficha de lavado de activos PN", "Ficha Lavados de Activos PJ"].map((doc) => (
           <div key={doc} style={{ height: 44, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 12px", borderBottom: `1px solid ${W.border}` }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <div style={{ width: 24, height: 28, background: W.accentHigh, borderRadius: 2, opacity: 0.6, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -575,7 +612,7 @@ function WfMainCol() {
 
       {/* Condiciones del ofrecimiento */}
       <HoverZone
-        info={{ name: "Conditions Accordion", category: "content", measurements: ["w: 444px", "h: 44px"] }}
+        info={zi("conditions-accordion")}
         style={{ border: `1px solid ${W.border}`, borderRadius: 4, height: 44, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 12px" }}
       >
         <span style={{ fontSize: 10, fontWeight: 700, color: W.text, fontFamily: "sans-serif" }}>Condiciones del ofrecimiento</span>
@@ -589,7 +626,7 @@ function WfMainCol() {
 function WfHelpBanner() {
   return (
     <HoverZone
-      info={{ name: "Help Center Banner", category: "support", measurements: ["w: 768px", "h: 80px"] }}
+      info={zi("help-center-banner")}
       style={{ height: 80, borderTop: `1px solid ${W.border}`, borderBottom: `1px solid ${W.border}`, background: W.zone, display: "flex", alignItems: "center", padding: "0 16px", gap: 12, flexShrink: 0 }}
     >
       <div style={{ width: 48, height: 48, background: W.accent, borderRadius: "50%", opacity: 0.4, flexShrink: 0 }} />
@@ -609,11 +646,11 @@ function WfHelpBanner() {
 
 // ─── FOOTER ───────────────────────────────────────────────────────────────────
 function WfFooter() {
-  const col1 = ["SubasCars", "SubaBlog", "¿Quiénes somos?", "¿Cómo vender?", "Subaspas", "Blacksheep Nation"];
+  const col1 = ["SubasCars", "SubasBlog", "¿Quiénes somos?", "¿Cómo vender?", "Subaspass", "Blacksheep Nation"];
   const col2 = ["Condiciones y Términos", "Contáctanos", "Política de Protección de Datos Personales", "Política de Privacidad General", "Testimonios"];
   return (
     <HoverZone
-      info={{ name: "Footer Primary", category: "layout", measurements: ["w: 1024px", "h: 148px"] }}
+      info={zi("footer-primary")}
       style={{ background: W.dark, padding: "24px 24px", flexShrink: 0 }}
     >
       <div style={{ display: "flex", gap: 32, marginBottom: 16 }}>
