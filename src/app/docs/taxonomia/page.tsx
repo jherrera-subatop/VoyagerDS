@@ -39,11 +39,11 @@ export default function DocsTaxonomiaPage() {
             Inventario completo →
           </Link>
           <Link
-            href="/docs/taxonomia/marco-detalle-vmc"
+            href="/docs/taxonomia/frame-detalle-vmc"
             className="underline underline-offset-2"
             style={{ color: "var(--vmc-color-text-brand)" }}
           >
-            Marco: Detalle VMC →
+            Frame: Detalle VMC →
           </Link>
           <Link
             href="/docs/fundamentos"

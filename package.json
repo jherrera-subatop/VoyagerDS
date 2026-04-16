@@ -18,7 +18,12 @@
     "tokens:audit": "node scripts/token-gatekeeper.mjs && pnpm exec terrazzo build && pnpm type-check && pnpm lint",
     "tokens:watch": "terrazzo build --watch",
     "verify:pages": "node scripts/verify-routes.mjs",
-    "verify:pages:quick": "node scripts/verify-routes.mjs --skip-build"
+    "verify:pages:quick": "node scripts/verify-routes.mjs --skip-build",
+    "wireframe:parity": "node scripts/wireframe-parity-check.mjs",
+    "screenshots:canonical": "node scripts/generate-canonical-screenshots.mjs",
+    "jira:sync": "node scripts/jira-ops-agent/index.mjs",
+    "jira:dry-run": "node scripts/jira-ops-agent/index.mjs --dry-run",
+    "jira:state": "node scripts/jira-ops-agent/index.mjs --state"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.3.0",
@@ -33,6 +38,7 @@
     "zustand": "^5.0.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.49.0",
     "@tailwindcss/postcss": "^4.2.2",
     "@terrazzo/cli": "^2.0.2",
     "@terrazzo/plugin-css": "^2.0.2",

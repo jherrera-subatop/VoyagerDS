@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { SectionTitle } from "../components/SectionTitle";
+import { FooterImageProvider } from "../components/FooterImageContext";
+import { FooterDoneShowcaseSection } from "../components/FooterDoneShowcaseSection";
 
 export function ComponentesPreviewSection() {
   return (
@@ -12,6 +14,7 @@ export function ComponentesPreviewSection() {
         badge="btn"
       />
 
+      {/* ── Button ────────────────────────────────────────────────────── */}
       <div
         className="rounded-lg border p-6 space-y-4"
         style={{
@@ -51,6 +54,12 @@ export function ComponentesPreviewSection() {
         </p>
       </div>
 
+      {/* ── Footer — provider envuelve showcase + panel de handoff ──── */}
+      <FooterImageProvider>
+        <FooterDoneShowcaseSection />
+      </FooterImageProvider>
+
+      {/* ── Cola ──────────────────────────────────────────────────────── */}
       <div className="mt-8 p-6 rounded-lg border" style={{ borderColor: "var(--vmc-color-border-subtle)" }}>
         <p className="text-sm font-semibold mb-2" style={{ color: "var(--vmc-color-text-primary)" }}>
           Siguiente en cola
@@ -63,7 +72,8 @@ export function ComponentesPreviewSection() {
             </Link>{" "}
             si cambia el detalle legacy (Challenge D).
           </li>
-          <li>Siguiente átomo UI Core: `input`.</li>
+          <li>Header — pipeline UX → Stitch → Frontend</li>
+          <li>Sidebar — pipeline UX → Stitch → Frontend</li>
           <li>
             Fundamentos técnicos en{" "}
             <Link href="/docs/fundamentos" className="underline underline-offset-2" style={{ color: "var(--vmc-color-text-brand)" }}>

@@ -4,7 +4,7 @@ import { TaxonomyAccordion } from "../components/TaxonomyAccordion";
 import { FrameTabView } from "./FrameTabView";
 
 export const metadata = {
-  title: "Voyager DS — Marco: Detalle VMC",
+  title: "Voyager DS — Frame: Detalle VMC",
   description: "Frame Detalle — composición wireframe 1024px + componentes auditados por categoría",
 };
 
@@ -23,7 +23,7 @@ export default function TaxonomiaMarcoDetallePage() {
         }}
       >
         <p className="leading-relaxed">
-          <strong style={{ color: "var(--vmc-color-text-primary)" }}>Marco: Detalle</strong> — la URL de oferta
+          <strong style={{ color: "var(--vmc-color-text-primary)" }}>Frame: Detalle</strong> — la URL de oferta
           individual de VMC Subastas (e.g. <code className="font-mono text-xs">/oferta/61172</code>).
           Composición fiel al audit del 13-abr-2026. Max-width: 1024px.
         </p>
@@ -33,7 +33,7 @@ export default function TaxonomiaMarcoDetallePage() {
             className="underline underline-offset-2"
             style={{ color: "var(--vmc-color-text-brand)" }}
           >
-            ← Taxonomía (todos los marcos)
+            ← Taxonomía (todos los frames)
           </Link>
           <Link
             href="/docs/taxonomia/inventario"
@@ -99,7 +99,7 @@ export default function TaxonomiaMarcoDetallePage() {
             className="text-base font-semibold"
             style={{ color: "var(--vmc-color-text-primary)" }}
           >
-            Componentes de este marco
+            Componentes de este frame
           </h2>
           <p className="text-xs mt-1" style={{ color: "var(--vmc-color-text-tertiary)" }}>
             {detalleComponents.length} piezas — expandí cada categoría para ver wireframe y medidas.

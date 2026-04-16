@@ -8,9 +8,9 @@ const LINKS = [
   { href: "/docs/taxonomia", label: "Resumen", match: (p: string) => p === "/docs/taxonomia" || p === "/docs/taxonomia/" },
   { href: "/docs/taxonomia/inventario", label: "Inventario", match: (p: string) => p.startsWith("/docs/taxonomia/inventario") },
   {
-    href: "/docs/taxonomia/marco-detalle-vmc",
-    label: "Marco: Detalle",
-    match: (p: string) => p.startsWith("/docs/taxonomia/marco-detalle-vmc"),
+    href: "/docs/taxonomia/frame-detalle-vmc",
+    label: "Frame: Detalle",
+    match: (p: string) => p.startsWith("/docs/taxonomia/frame-detalle-vmc"),
   },
 ] as const;
 

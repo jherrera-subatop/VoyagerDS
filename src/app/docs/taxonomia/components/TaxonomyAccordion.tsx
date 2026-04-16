@@ -16,6 +16,8 @@ interface TaxonomyAccordionProps {
   components: TaxonomyComponent[];
   /** Dominio abierto por defecto (ID de dominio). Por defecto: primero del orden. */
   defaultOpen?: string;
+  /** Map of componentId → validatedAt ISO string for upgrade validation state. */
+  validatedIds?: Record<string, string>;
 }
 
 function resolveInitialOpen(presentDomains: string[], defaultOpen: string | undefined): string {
@@ -33,7 +35,7 @@ function presentDomainsFor(components: TaxonomyComponent[]): string[] {
   return TAXONOMY_DOMAIN_ORDER.filter((d) => grouped.has(d));
 }
 
-export function TaxonomyAccordion({ components, defaultOpen }: TaxonomyAccordionProps) {
+export function TaxonomyAccordion({ components, defaultOpen, validatedIds }: TaxonomyAccordionProps) {
   const grouped = useMemo(() => groupTaxonomyByDomain(components), [components]);
 
   // Dominios presentes en este subconjunto, respetando el orden canónico
@@ -118,7 +120,7 @@ export function TaxonomyAccordion({ components, defaultOpen }: TaxonomyAccordion
               >
                 <div className="grid grid-cols-1 gap-4">
                   {items.map((c) => (
-                    <TaxonomyComponentCard key={c.id} component={c} />
+                    <TaxonomyComponentCard key={c.id} component={c} validatedAt={validatedIds?.[c.id]} />
                   ))}
                 </div>
               </div>

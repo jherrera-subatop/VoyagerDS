@@ -1,987 +1,560 @@
+"use client";
+
 /**
- * ComponentWireframe — bocetos a proporciones reales.
+ * ComponentWireframe — bocetos extraídos del Frame: Detalle VMC.
  *
- * Reglas aplicadas:
- * - DESIGN.md manda en medidas (header 64px, btn 44px, input 48px,
- *   card-img 132px, padding 12px, gap 8px, radius 4px, etc.)
- * - VMC DETALLE manda en layout y comportamiento
- * - SubasCars manda en anatomía interna cuando decision = referencia-subascars
- * - Sin color de marca: solo grises neutros para que sea un boceto genuino
+ * REGLA: cada sketch refleja cómo el componente aparece visualmente
+ * en vmcsubastas.com/oferta/61204 (audit 13-abr-2026).
+ * La referencia SubasCars es SOLO taxonómica/variantes — no visual.
+ *
+ * Paleta y átomos de contenido importados de wf-detalle-atoms.tsx
+ * para garantizar pixel-perfect con DetallePageFrame.
+ *
+ * Escalado: cada Sketch renderiza el componente a su ancho natural en el frame
+ * (ATOM_W importado de wf-detalle-atoms.tsx — fuente de verdad única de anchos) y usa
+ * transform:scale para ajustar al ancho del acordeón — igual que DetallePageFrame.
  */
 
-/** Paleta neutra de boceto */
-const W = {
-  bg: "rgba(130,128,148,0.08)",
-  border: "rgba(130,128,148,0.35)",
-  fill: "rgba(130,128,148,0.18)",
-  fillDark: "rgba(130,128,148,0.32)",
-  fillDarker: "rgba(130,128,148,0.48)",
-  text: "rgba(60,58,80,0.55)",
-  textStrong: "rgba(60,58,80,0.75)",
-  label: {
-    fontSize: "8px",
-    letterSpacing: "0.06em",
-    textTransform: "uppercase" as const,
-    color: "rgba(60,58,80,0.45)",
-    fontFamily: "monospace",
-  },
-  mono: {
-    fontFamily: "'Roboto Mono', 'Courier New', monospace",
-  },
+import { useEffect, useRef, useState } from "react";
+import { useWireMode } from "./WireModeContext";
+import type { WireMode } from "./WireModeContext";
+import FooterDone from "../../../../features/Footer/FooterDone";
+import {
+  ATOM_W,
+  W,
+  AtomMetrics_Content,
+  AtomHeader_Content,
+  AtomSidebar_Content,
+  AtomTitleBar_Content,
+  AtomBidWidgetHeader_Content,
+  AtomPromoBanner_Content,
+  AtomButton_Content,
+  AtomPriceDisplay_Content,
+  AtomOptionTags_Content,
+  AtomSubascoins_Content,
+  AtomAuctionCards_Content,
+  AtomImageGallery_Content,
+  AtomVehicleSpecs_Content,
+  AtomDescriptionBlock_Content,
+  AtomDocumentDownloads_Content,
+  AtomConditionsAccordion_Content,
+  AtomHelpBanner_Content,
+  AtomFooter_Content,
+} from "./wf-detalle-atoms";
+
+const lbl = {
+  fontSize: "8px" as const,
+  letterSpacing: "0.06em",
+  textTransform: "uppercase" as const,
+  color: W.label,
+  fontFamily: "monospace",
 };
 
-/** Línea de texto simulada */
-function Line({ w = "60%", h = 7, opacity = 1 }: { w?: string; h?: number; opacity?: number }) {
-  return (
-    <div
-      style={{
-        width: w,
-        height: `${h}px`,
-        borderRadius: "3px",
-        background: W.fill,
-        opacity,
-        flexShrink: 0,
-      }}
-    />
-  );
-}
+// NW eliminado — usar ATOM_W importado de wf-detalle-atoms.tsx (fuente de verdad única)
 
-/** Contenedor del boceto con borde discontinuo */
-function WireFrame({
+// ─── Contenedor base del boceto — escala desde tamaño natural del frame ───────
+// · Escala: Math.min(1, containerW / naturalWidth) — nunca zoom-in, igual que DetallePageFrame
+// · Centrado: translateX((containerW - naturalWidth*scale)/2) — siempre centrado
+// · Nota: fuera del fondo del componente, como anotación bajo el borde
+function Sketch({
   children,
-  label,
-  minH = 80,
-  p = 8,
+  note,
+  naturalWidth = ATOM_W.frame,
 }: {
   children: React.ReactNode;
-  label?: string;
-  minH?: number;
-  p?: number;
+  note?: string;
+  naturalWidth?: number;
 }) {
+  const outerRef = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
+  const [innerH, setInnerH] = useState(0);
+  const [containerW, setContainerW] = useState(naturalWidth);
+
+  useEffect(() => {
+    function update() {
+      if (!outerRef.current || !innerRef.current) return;
+      const w = outerRef.current.offsetWidth;
+      if (w === 0) return;
+      const s = Math.min(1, w / naturalWidth);
+      setScale(s);
+      setContainerW(w);
+      setInnerH(innerRef.current.scrollHeight);
+    }
+    update();
+    const ro = new ResizeObserver(update);
+    if (outerRef.current) ro.observe(outerRef.current);
+    return () => ro.disconnect();
+  }, [naturalWidth]);
+
+  // Offset para centrar el contenido escalado dentro del contenedor
+  const offsetX = (containerW - naturalWidth * scale) / 2;
+
   return (
-    <div
-      style={{
-        border: `1.5px dashed ${W.border}`,
-        borderRadius: "6px",
-        background: W.bg,
-        padding: `${p}px`,
-        minHeight: `${minH}px`,
-        display: "flex",
-        flexDirection: "column",
-        gap: "0px",
-      }}
-    >
-      {children}
-      {label && (
-        <div style={{ ...W.label, marginTop: "6px", paddingTop: "4px", borderTop: `1px solid ${W.border}` }}>
-          {label}
+    <div style={{ display: "flex", flexDirection: "column", gap: 4, width: "100%" }}>
+      {/* ── Zona del componente — borde punteado delimita el área visual ── */}
+      <div
+        ref={outerRef}
+        style={{
+          border: `1.5px dashed ${W.border}`,
+          borderRadius: 6,
+          background: W.bg,
+          overflow: "hidden",
+          width: "100%",
+          boxSizing: "border-box",
+          height: innerH > 0 ? innerH * scale : 48,
+          flexShrink: 0,
+        }}
+      >
+        <div
+          ref={innerRef}
+          style={{
+            width: naturalWidth,
+            transformOrigin: "top left",
+            transform: `translateX(${offsetX}px) scale(${scale})`,
+            padding: "20px 0",
+          }}
+        >
+          {children}
         </div>
+      </div>
+      {/* ── Nota de anotación — completamente fuera del área del componente ── */}
+      {note && (
+        <p style={{ ...lbl, margin: 0, paddingLeft: 2 }}>
+          {note}
+        </p>
       )}
     </div>
   );
 }
 
-/* ─────────────────────── sketches por componente ────────────────────────── */
+// ─── Bocetos independientes (no en DetallePageFrame) ─────────────────────────
 
-/** Icon — tamaños sm/md/lg, referencia SubasCars sprite */
+/** Icon — sprite SVG en tamaños sm/md/lg */
 function WireIcon() {
-  const sizes = [
-    { s: 16, name: "sm" },
-    { s: 20, name: "md" },
-    { s: 24, name: "lg" },
-  ];
+  const sizes = [{ s: 16, n: "sm" }, { s: 20, n: "md" }, { s: 24, n: "lg" }];
   return (
-    <WireFrame label="svg sprite · sm 16 · md 20 · lg 24 · color via token">
-      <div style={{ display: "flex", gap: "12px", alignItems: "flex-end", padding: "8px 0" }}>
-        {sizes.map(({ s, name }) => (
-          <div key={name} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>
-            <div
-              style={{
-                width: `${s}px`,
-                height: `${s}px`,
-                border: `1.5px solid ${W.border}`,
-                borderRadius: "3px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+    <Sketch naturalWidth={ATOM_W.demo} note="svg sprite · sm 16 · md 20 · lg 24 · color via token">
+      <div style={{ display: "flex", gap: 12, alignItems: "flex-end", padding: "6px 0" }}>
+        {sizes.map(({ s, n }) => (
+          <div key={n} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
+            <div style={{ width: s, height: s, border: `1.5px solid ${W.border}`, borderRadius: 3, display: "flex", alignItems: "center", justifyContent: "center" }}>
               <svg viewBox="0 0 24 24" width={s - 4} height={s - 4} fill="none" stroke={W.border} strokeWidth="2.5">
                 <circle cx="12" cy="12" r="5" />
                 <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
               </svg>
             </div>
-            <span style={{ ...W.label, fontSize: "7px" }}>{name}</span>
+            <span style={{ ...lbl, fontSize: "7px" }}>{n}</span>
           </div>
         ))}
-        <div style={{ marginLeft: "8px", display: "flex", flexDirection: "column", gap: "4px" }}>
+        <div style={{ marginLeft: 6, display: "flex", flexDirection: "column", gap: 3 }}>
           {["Bell", "Check", "Car", "Clock"].map((n) => (
-            <div
-              key={n}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "4px",
-              }}
-            >
-              <div
-                style={{ width: "14px", height: "14px", border: `1px dashed ${W.border}`, borderRadius: "2px" }}
-              />
-              <span style={{ ...W.label }}>{n}</span>
+            <div key={n} style={{ display: "flex", alignItems: "center", gap: 4 }}>
+              <div style={{ width: 14, height: 14, border: `1px dashed ${W.border}`, borderRadius: 2 }} />
+              <span style={lbl}>{n}</span>
             </div>
           ))}
         </div>
       </div>
-    </WireFrame>
+    </Sketch>
   );
 }
 
-/** Button — DESIGN.md: h44, radius4, padding 0 20px. Variantes VMC */
+/** Button — CTA "PARTICIPA" del widget + variante ghost */
 function WireButton() {
   return (
-    <WireFrame label="h 44px · radius 4px · padding 0 20px · 7 estados">
-      <div style={{ display: "flex", flexDirection: "column", gap: "8px", padding: "4px 0" }}>
-        {/* Primario */}
-        <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-          <div
-            style={{
-              height: "44px",
-              padding: "0 20px",
-              borderRadius: "4px",
-              background: W.fillDark,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "6px",
-            }}
-          >
-            <Line w="60px" h={8} />
+    <Sketch naturalWidth={ATOM_W.widget} note="h 52px CTA principal · h 44px secundario / ghost · 7 estados · VMC Detalle widget">
+      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+        {/* CTA primario — wrapper idéntico al HoverZone del frame */}
+        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+          <div style={{ flex: 1, height: 52, background: W.accentCta, borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <AtomButton_Content />
           </div>
-          <span style={W.label}>primario</span>
+          <span style={lbl}>primario</span>
         </div>
-        {/* Secundario */}
-        <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-          <div
-            style={{
-              height: "44px",
-              padding: "0 20px",
-              borderRadius: "4px",
-              border: `1.5px solid ${W.border}`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "6px",
-            }}
-          >
-            <Line w="60px" h={8} />
+        {/* Ghost / secundario */}
+        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+          <div style={{ flex: 1, height: 36, border: `1.5px solid ${W.accentHigh}`, borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <span style={{ fontSize: 10, color: W.accentHigh, fontFamily: "sans-serif", fontWeight: 600 }}>Acción secundaria</span>
           </div>
-          <span style={W.label}>ghost / secundario</span>
+          <span style={lbl}>ghost</span>
         </div>
         {/* Disabled */}
-        <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-          <div
-            style={{
-              height: "44px",
-              padding: "0 20px",
-              borderRadius: "4px",
-              background: W.fill,
-              opacity: 0.45,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Line w="60px" h={8} />
+        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+          <div style={{ flex: 1, height: 36, background: W.zone, borderRadius: 6, opacity: 0.5, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <span style={{ fontSize: 10, color: W.label, fontFamily: "sans-serif" }}>Disabled</span>
           </div>
-          <span style={W.label}>disabled 72% opacity</span>
+          <span style={lbl}>disabled</span>
         </div>
       </div>
-    </WireFrame>
+    </Sketch>
   );
 }
 
-/** Input — DESIGN.md: h48, sin borde en rest, label arriba uppercase, helper/error abajo */
+/** Input — campo de texto con label uppercase y helper */
 function WireInput() {
   return (
-    <WireFrame label="h 48px · fill sin borde · label uppercase arriba · helper / error abajo">
-      <div style={{ display: "flex", flexDirection: "column", gap: "6px", padding: "4px 0" }}>
-        {/* Label uppercase */}
-        <div
-          style={{
-            ...W.label,
-            fontSize: "9px",
-            letterSpacing: "0.9px",
-          }}
-        >
-          NOMBRE DEL CAMPO
+    <Sketch naturalWidth={ATOM_W.demo} note="h 48px · fill sin borde en reposo · label uppercase · helper / error">
+      <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+        <span style={{ ...lbl, letterSpacing: "0.9px" }}>NOMBRE DEL CAMPO</span>
+        <div style={{ height: 48, borderRadius: 4, background: W.zone, display: "flex", alignItems: "center", padding: "0 12px" }}>
+          <div style={{ width: "45%", height: 8, background: W.border, borderRadius: 2 }} />
         </div>
-        {/* Campo */}
-        <div
-          style={{
-            height: "48px",
-            borderRadius: "4px",
-            background: W.fill,
-            display: "flex",
-            alignItems: "center",
-            padding: "0 12px",
-          }}
-        >
-          <Line w="45%" h={8} opacity={0.6} />
-        </div>
-        {/* Helper */}
-        <Line w="55%" h={6} opacity={0.5} />
-        {/* Error state */}
-        <div style={{ display: "flex", gap: "6px", alignItems: "center", marginTop: "4px" }}>
-          <div
-            style={{
-              height: "48px",
-              flex: 1,
-              borderRadius: "4px",
-              background: W.fill,
-              border: `1px solid rgba(186,26,26,0.35)`,
-              display: "flex",
-              alignItems: "center",
-              padding: "0 12px",
-            }}
-          >
-            <Line w="35%" h={8} opacity={0.5} />
+        <div style={{ width: "55%", height: 6, background: W.zone, borderRadius: 2 }} />
+        {/* Error */}
+        <div style={{ display: "flex", gap: 6, alignItems: "center", marginTop: 4 }}>
+          <div style={{ height: 48, flex: 1, borderRadius: 4, background: W.zone, border: `1px solid rgba(186,26,26,0.35)`, display: "flex", alignItems: "center", padding: "0 12px" }}>
+            <div style={{ width: "35%", height: 8, background: W.border, borderRadius: 2 }} />
           </div>
-          <span style={W.label}>estado error</span>
+          <span style={lbl}>error</span>
         </div>
-        <div style={{ display: "flex", gap: "4px", alignItems: "center" }}>
-          <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "rgba(186,26,26,0.3)" }} />
-          <Line w="50%" h={6} opacity={0.5} />
+        <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
+          <div style={{ width: 10, height: 10, borderRadius: "50%", background: "rgba(186,26,26,0.3)" }} />
+          <div style={{ width: "50%", height: 6, background: W.zone, borderRadius: 2 }} />
         </div>
       </div>
-    </WireFrame>
+    </Sketch>
   );
 }
 
-/**
- * Header — DESIGN.md: h64, width 768px (panel derecho), fondo oscuro.
- * Anatomía SubasCars Group Checkout 2: logo izq + nav-links centro + cta-login + cta-registro der.
- */
-function WireHeader() {
-  return (
-    <WireFrame label="h 64px · logo izq · nav-links centro · cta-login + cta-registro der · SubasCars Group Checkout 2">
-      <div
-        style={{
-          height: "64px",
-          borderRadius: "4px",
-          background: W.fillDarker,
-          display: "flex",
-          alignItems: "center",
-          padding: "0 16px",
-          gap: "0",
-          justifyContent: "space-between",
-        }}
-      >
-        {/* Logo */}
-        <div
-          style={{
-            width: "96px",
-            height: "28px",
-            borderRadius: "3px",
-            background: W.fillDark,
-            border: `1px solid ${W.border}`,
-          }}
-        />
-        {/* Nav links */}
-        <div style={{ display: "flex", gap: "20px" }}>
-          {["Subastas", "Vehículos", "Nosotros"].map((l, i) => (
-            <div key={l} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>
-              <span
-                style={{
-                  ...W.label,
-                  color: i === 0 ? "rgba(255,255,255,0.8)" : "rgba(255,255,255,0.45)",
-                  fontSize: "8px",
-                }}
-              >
-                {l}
-              </span>
-              {i === 0 && (
-                <div style={{ width: "100%", height: "2px", borderRadius: "1px", background: W.border }} />
-              )}
-            </div>
-          ))}
-        </div>
-        {/* CTAs */}
-        <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-          <div
-            style={{
-              height: "32px",
-              padding: "0 12px",
-              borderRadius: "4px",
-              border: `1px solid ${W.border}`,
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <span style={{ ...W.label, color: "rgba(255,255,255,0.6)" }}>ingresar</span>
-          </div>
-          <div
-            style={{
-              height: "32px",
-              padding: "0 12px",
-              borderRadius: "4px",
-              background: W.fillDark,
-              border: `1px solid ${W.border}`,
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <span style={{ ...W.label, color: "rgba(255,255,255,0.7)" }}>registrarse</span>
-          </div>
-        </div>
-      </div>
-    </WireFrame>
-  );
-}
-
-/**
- * Navbar — anatomía SubasCars "Navigation" (icon + label por ítem)
- */
-function WireNavbar() {
-  const items = [
-    { icon: "🏷️", label: "Subastas", active: true },
-    { icon: "🚗", label: "Vehículos" },
-    { icon: "👤", label: "Cuenta" },
-    { icon: "❤️", label: "Favoritos" },
-  ];
-  return (
-    <WireFrame label="icon + label · indicador activo bajo ítem · colapsa a hamburger en mobile · SubasCars Navigation">
-      <div
-        style={{
-          height: "48px",
-          display: "flex",
-          alignItems: "center",
-          gap: "0",
-          borderBottom: `2px solid ${W.border}`,
-          padding: "0 8px",
-        }}
-      >
-        {items.map(({ label, active }) => (
-          <div
-            key={label}
-            style={{
-              height: "48px",
-              padding: "0 16px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "2px",
-              position: "relative",
-              borderBottom: active ? `2px solid ${W.fillDarker}` : "2px solid transparent",
-              marginBottom: "-2px",
-            }}
-          >
-            <div style={{ width: "16px", height: "16px", borderRadius: "2px", background: W.fill }} />
-            <span style={{ ...W.label, fontSize: "7px", color: active ? W.textStrong : W.text }}>{label}</span>
-          </div>
-        ))}
-      </div>
-    </WireFrame>
-  );
-}
-
-/**
- * Footer — anatomía SubasCars Footer Desktop: logo top-left, 3-4 cols links, fila copyright
- */
-function WireFooter() {
-  const cols = [
-    { head: "Empresa", rows: 3 },
-    { head: "Legal", rows: 4 },
-    { head: "Redes", rows: 4 },
-    { head: "Contacto", rows: 3 },
-  ];
-  return (
-    <WireFrame label="logo · 4 cols links · copyright · SubasCars Footer Desktop" minH={100} p={10}>
-      <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-        {/* Logo + cols */}
-        <div style={{ display: "flex", gap: "24px" }}>
-          {/* Logo */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "8px", minWidth: "80px" }}>
-            <div style={{ width: "72px", height: "20px", borderRadius: "3px", background: W.fillDark }} />
-            <Line w="70px" h={6} opacity={0.5} />
-            <Line w="55px" h={6} opacity={0.4} />
-          </div>
-          {/* Cols links */}
-          {cols.map(({ head, rows }) => (
-            <div key={head} style={{ display: "flex", flexDirection: "column", gap: "6px", flex: 1 }}>
-              <Line w="50%" h={7} />
-              {Array.from({ length: rows }).map((_, i) => (
-                <Line key={i} w={`${45 + i * 5}%`} h={6} opacity={0.5} />
-              ))}
-            </div>
-          ))}
-        </div>
-        {/* Separator */}
-        <div style={{ height: "1px", background: W.fill }} />
-        {/* Copyright */}
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Line w="30%" h={6} opacity={0.4} />
-          <div style={{ display: "flex", gap: "8px" }}>
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                style={{ width: "18px", height: "18px", borderRadius: "9999px", background: W.fill }}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    </WireFrame>
-  );
-}
-
-/**
- * Sidebar — VMC: 256px, filtros de precio/tipo/año/marca + slider price range
- */
-function WireSidebar() {
-  const filters = [
-    { label: "Precio", type: "range" },
-    { label: "Tipo vehículo", type: "checkboxes" },
-    { label: "Año", type: "checkboxes" },
-    { label: "Marca", type: "checkboxes" },
-  ];
-  return (
-    <WireFrame label="256px · filtros precio-range + checkboxes · VMC audit" minH={160} p={8}>
-      <div style={{ display: "flex", gap: "12px" }}>
-        {/* Panel sidebar */}
-        <div
-          style={{
-            width: "120px",
-            border: `1px solid ${W.border}`,
-            borderRadius: "4px",
-            background: W.bg,
-            padding: "8px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "10px",
-          }}
-        >
-          {filters.map(({ label, type }) => (
-            <div key={label} style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-              <Line w="70%" h={7} />
-              {type === "range" && (
-                <div style={{ position: "relative", height: "10px", display: "flex", alignItems: "center" }}>
-                  <div style={{ width: "100%", height: "3px", borderRadius: "9999px", background: W.fill }} />
-                  <div
-                    style={{
-                      position: "absolute",
-                      left: "30%",
-                      width: "60%",
-                      height: "3px",
-                      background: W.fillDarker,
-                    }}
-                  />
-                  <div
-                    style={{
-                      position: "absolute",
-                      left: "28%",
-                      width: "8px",
-                      height: "8px",
-                      borderRadius: "50%",
-                      background: W.fillDarker,
-                      border: `1px solid ${W.border}`,
-                    }}
-                  />
-                  <div
-                    style={{
-                      position: "absolute",
-                      left: "87%",
-                      width: "8px",
-                      height: "8px",
-                      borderRadius: "50%",
-                      background: W.fillDarker,
-                      border: `1px solid ${W.border}`,
-                    }}
-                  />
-                </div>
-              )}
-              {type === "checkboxes" &&
-                [65, 50, 75].map((w, i) => (
-                  <div key={i} style={{ display: "flex", gap: "4px", alignItems: "center" }}>
-                    <div
-                      style={{
-                        width: "9px",
-                        height: "9px",
-                        borderRadius: "2px",
-                        border: `1px solid ${W.border}`,
-                        ...(i === 1 ? { background: W.fillDark } : {}),
-                      }}
-                    />
-                    <Line w={`${w}%`} h={6} opacity={0.55} />
-                  </div>
-                ))}
-            </div>
-          ))}
-        </div>
-        {/* Label apuntando */}
-        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: "8px" }}>
-          <span style={W.label}>256px</span>
-          <span style={W.label}>complementary</span>
-          <span style={W.label}>aria-live</span>
-        </div>
-      </div>
-    </WireFrame>
-  );
-}
-
-/**
- * PriceDisplay — DESIGN.md 9.9: tres contextos.
- * Hero: label 12/600 "PRECIO BASE" + amount h1 30px tabular-nums + currency.
- */
-function WirePriceDisplay() {
-  return (
-    <WireFrame label="3 contextos: hero h1-30 · card 16px · compact 12px · tabular-nums VMC">
-      <div style={{ display: "flex", flexDirection: "column", gap: "12px", padding: "4px 0" }}>
-        {/* Hero */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-          <span
-            style={{
-              ...W.label,
-              letterSpacing: "0.9px",
-              fontSize: "8px",
-            }}
-          >
-            PRECIO BASE
-          </span>
-          <div style={{ display: "flex", alignItems: "baseline", gap: "4px" }}>
-            <span
-              style={{
-                fontSize: "11px",
-                fontFamily: W.mono.fontFamily,
-                color: W.textStrong,
-                fontWeight: 700,
-              }}
-            >
-              US$
-            </span>
-            <span
-              style={{
-                fontSize: "22px",
-                fontFamily: W.mono.fontFamily,
-                color: W.textStrong,
-                fontWeight: 800,
-                letterSpacing: "-0.5px",
-                fontVariantNumeric: "tabular-nums",
-              }}
-            >
-              00,000
-            </span>
-          </div>
-          <span style={{ ...W.label }}>contexto hero · h1 30px</span>
-        </div>
-        <div style={{ height: "1px", background: W.fill }} />
-        {/* Card */}
-        <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
-          <div style={{ display: "flex", alignItems: "baseline", gap: "3px" }}>
-            <span style={{ fontSize: "8px", fontFamily: W.mono.fontFamily, color: W.textStrong }}>US$</span>
-            <span
-              style={{
-                fontSize: "14px",
-                fontFamily: W.mono.fontFamily,
-                color: W.textStrong,
-                fontWeight: 700,
-                fontVariantNumeric: "tabular-nums",
-              }}
-            >
-              0,000
-            </span>
-          </div>
-          <span style={{ ...W.label }}>card · 16px</span>
-          <div style={{ display: "flex", alignItems: "baseline", gap: "2px" }}>
-            <span style={{ fontSize: "7px", fontFamily: W.mono.fontFamily, color: W.textStrong }}>US$</span>
-            <span
-              style={{
-                fontSize: "10px",
-                fontFamily: W.mono.fontFamily,
-                color: W.textStrong,
-                fontVariantNumeric: "tabular-nums",
-              }}
-            >
-              000
-            </span>
-          </div>
-          <span style={{ ...W.label }}>compact · 12px</span>
-        </div>
-      </div>
-    </WireFrame>
-  );
-}
-
-/**
- * AuctionCard — DESIGN.md 9.5: img 132px, content-padding 12px, gap 8px,
- * radius 4px, Signature bottom border 4px, badge top-left en imagen.
- */
-function WireAuctionCard() {
-  return (
-    <WireFrame label="img 132px · badge overlay · content 12px padding 8px gap · signature border 4px" p={0}>
-      <div
-        style={{
-          width: "200px",
-          borderRadius: "4px",
-          border: `1px solid ${W.border}`,
-          overflow: "hidden",
-          background: "white",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        {/* Imagen 132px */}
-        <div
-          style={{
-            width: "100%",
-            height: "132px",
-            background: W.fill,
-            position: "relative",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          {/* Car silhouette placeholder */}
-          <svg viewBox="0 0 64 32" width="56" height="28" fill="none" opacity={0.35}>
-            <rect x="8" y="12" width="48" height="14" rx="2" fill="currentColor" />
-            <path d="M16 12L22 4h20l6 8" fill="currentColor" />
-            <circle cx="18" cy="26" r="5" fill="none" stroke="currentColor" strokeWidth="2" />
-            <circle cx="46" cy="26" r="5" fill="none" stroke="currentColor" strokeWidth="2" />
-          </svg>
-          {/* Badge top-left */}
-          <div
-            style={{
-              position: "absolute",
-              top: "8px",
-              left: "8px",
-              height: "18px",
-              padding: "0 8px",
-              borderRadius: "9999px",
-              background: W.fillDarker,
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <span style={{ ...W.label, color: "rgba(255,255,255,0.8)", fontSize: "7px" }}>EN VIVO</span>
-          </div>
-          {/* Fav button top-right */}
-          <div
-            style={{
-              position: "absolute",
-              top: "8px",
-              right: "8px",
-              width: "28px",
-              height: "28px",
-              borderRadius: "9999px",
-              background: W.fill,
-              border: `1px solid ${W.border}`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <svg viewBox="0 0 16 16" width="10" height="10" fill="none" stroke={W.border} strokeWidth="1.5">
-              <path d="M8 13.5S2 9.5 2 5.5a3 3 0 0 1 6 0 3 3 0 0 1 6 0c0 4-6 8-6 8z" />
-            </svg>
-          </div>
-        </div>
-        {/* Content */}
-        <div
-          style={{
-            padding: "12px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "8px",
-          }}
-        >
-          {/* Nombre vehículo uppercase caption */}
-          <Line w="90%" h={8} />
-          {/* Subtítulo year · location */}
-          <Line w="60%" h={6} opacity={0.5} />
-          {/* Precio + fav */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-              <Line w="36px" h={5} opacity={0.4} />
-              <div style={{ display: "flex", alignItems: "baseline", gap: "3px" }}>
-                <span style={{ fontSize: "7px", fontFamily: W.mono.fontFamily, color: W.textStrong }}>US$</span>
-                <span
-                  style={{
-                    fontSize: "13px",
-                    fontFamily: W.mono.fontFamily,
-                    color: W.textStrong,
-                    fontWeight: 700,
-                    fontVariantNumeric: "tabular-nums",
-                  }}
-                >
-                  0,000
-                </span>
-              </div>
-            </div>
-            <div
-              style={{
-                width: "28px",
-                height: "28px",
-                borderRadius: "9999px",
-                background: W.fill,
-                border: `1px solid ${W.border}`,
-              }}
-            />
-          </div>
-          {/* Countdown */}
-          <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-            <Line w="50px" h={6} opacity={0.4} />
-            <span
-              style={{
-                fontSize: "10px",
-                fontFamily: W.mono.fontFamily,
-                color: W.textStrong,
-                fontWeight: 700,
-                fontVariantNumeric: "tabular-nums",
-              }}
-            >
-              00:00:00
-            </span>
-          </div>
-        </div>
-        {/* Signature border 4px */}
-        <div style={{ height: "4px", background: W.fillDarker }} />
-      </div>
-    </WireFrame>
-  );
-}
-
-/**
- * Metrics — SubasCars anatomy: icono + valor grande + label.
- * DESIGN.md: aria-live, compacto.
- */
-function WireMetrics() {
-  const items = [
-    { icon: "👁", label: "Vistas", value: "128" },
-    { icon: "🏷", label: "Pujas", value: "24" },
-    { icon: "👥", label: "Postores", value: "9" },
-  ];
-  return (
-    <WireFrame label="icono + valor + label · aria-live · SubasCars Metrics">
-      <div style={{ display: "flex", gap: "12px", padding: "4px 0" }}>
-        {items.map(({ label, value }) => (
-          <div
-            key={label}
-            style={{
-              display: "flex",
-              gap: "6px",
-              alignItems: "center",
-              border: `1px solid ${W.border}`,
-              borderRadius: "4px",
-              padding: "8px 10px",
-              background: W.bg,
-            }}
-          >
-            {/* Icon placeholder */}
-            <div
-              style={{
-                width: "20px",
-                height: "20px",
-                borderRadius: "4px",
-                background: W.fill,
-                flexShrink: 0,
-              }}
-            />
-            <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-              <span
-                style={{
-                  fontSize: "16px",
-                  fontFamily: W.mono.fontFamily,
-                  color: W.textStrong,
-                  fontWeight: 700,
-                  lineHeight: 1,
-                  fontVariantNumeric: "tabular-nums",
-                }}
-              >
-                {value}
-              </span>
-              <span style={{ ...W.label }}>{label}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </WireFrame>
-  );
-}
-
-/**
- * VehicleSpecs — VMC: dl/dt/dd con grupos por categoría (motor, carrocería…)
- * 48 instancias VMC. Filas clave-valor + header de grupo.
- */
-function WireVehicleSpecs() {
-  const groups = [
-    { head: "Motor", rows: [["Combustible", "Gasolina"], ["Motor", "2.0L 16v"], ["Potencia", "150 CV"]] },
-    { head: "Carrocería", rows: [["Tipo", "Sedán"], ["Color", "Blanco"], ["Año", "2022"]] },
-  ];
-  return (
-    <WireFrame label="grupos col-1 header + filas clave-valor · 48 inst VMC · dl/dt/dd" minH={140} p={8}>
-      <div style={{ display: "flex", gap: "12px" }}>
-        {groups.map(({ head, rows }) => (
-          <div
-            key={head}
-            style={{
-              flex: 1,
-              border: `1px solid ${W.border}`,
-              borderRadius: "4px",
-              overflow: "hidden",
-            }}
-          >
-            {/* Group header */}
-            <div
-              style={{
-                padding: "6px 10px",
-                background: W.fill,
-                borderBottom: `1px solid ${W.border}`,
-              }}
-            >
-              <Line w="50%" h={7} />
-            </div>
-            {/* Rows */}
-            {rows.map(([k], i) => (
-              <div
-                key={k}
-                style={{
-                  display: "flex",
-                  padding: "5px 10px",
-                  borderBottom: i < rows.length - 1 ? `1px solid ${W.border}` : "none",
-                  gap: "8px",
-                }}
-              >
-                <Line w="40%" h={6} opacity={0.5} />
-                <Line w="45%" h={6} />
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-    </WireFrame>
-  );
-}
-
-/**
- * DataQualityIndicator — VMC: score %, barra de progreso, label, color semántico.
- */
+/** DataQualityIndicator — "CALIDAD DE INFORMACIÓN" con dots de nivel */
 function WireDataQualityIndicator() {
   return (
-    <WireFrame label="score % · barra · label semántico · meter / progressbar · VMC">
-      <div style={{ display: "flex", flexDirection: "column", gap: "8px", padding: "4px 0" }}>
-        {/* Badge score */}
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <div
-            style={{
-              padding: "4px 10px",
-              borderRadius: "9999px",
-              background: W.fillDark,
-              display: "flex",
-              alignItems: "center",
-              gap: "4px",
-            }}
-          >
-            <span
-              style={{
-                fontSize: "13px",
-                fontFamily: W.mono.fontFamily,
-                color: W.textStrong,
-                fontWeight: 700,
-                fontVariantNumeric: "tabular-nums",
-              }}
-            >
-              72%
-            </span>
+    <Sketch naturalWidth={ATOM_W.demo} note="3 niveles: alto / parcial / básico · dots + label · VMC Detalle tabla specs">
+      <div style={{ display: "flex", flexDirection: "column", gap: 8, padding: "4px 0" }}>
+        {[
+          { label: "Alta calidad", dots: 3, active: 3 },
+          { label: "Datos parciales", dots: 3, active: 2 },
+          { label: "Datos básicos", dots: 3, active: 1 },
+        ].map(({ label, dots, active }) => (
+          <div key={label} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <span style={{ fontSize: 8, color: W.label, fontFamily: "sans-serif", width: 80 }}>{label}</span>
+            <div style={{ display: "flex", gap: 3 }}>
+              {Array.from({ length: dots }).map((_, i) => (
+                <div key={i} style={{ width: 8, height: 8, borderRadius: "50%", background: i < active ? W.accentHigh : W.border }} />
+              ))}
+            </div>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-            <Line w="100px" h={7} />
-            <span style={W.label}>calidad del dato</span>
-          </div>
-        </div>
-        {/* Progress bar */}
-        <div
-          style={{
-            width: "100%",
-            height: "8px",
-            borderRadius: "9999px",
-            background: W.fill,
-            border: `1px solid ${W.border}`,
-            overflow: "hidden",
-          }}
-        >
-          <div
-            style={{
-              width: "72%",
-              height: "100%",
-              borderRadius: "9999px",
-              background: W.fillDarker,
-            }}
-          />
-        </div>
-        {/* Niveles */}
-        <div style={{ display: "flex", gap: "4px" }}>
-          {[
-            { label: "bajo <40%", w: 32 },
-            { label: "medio 40-70%", w: 52 },
-            { label: "alto >70%", w: 40 },
-          ].map(({ label }) => (
-            <div
-              key={label}
-              style={{
-                flex: 1,
-                height: "5px",
-                borderRadius: "2px",
-                background: W.fillDark,
-                opacity: label.startsWith("alto") ? 1 : 0.4,
-              }}
-            />
-          ))}
-        </div>
-        <span style={W.label}>aria-valuenow · aria-min · aria-max · no solo color</span>
+        ))}
       </div>
-    </WireFrame>
+    </Sketch>
   );
 }
 
-/* ─────────────────────────── mapa id → sketch ───────────────────────────── */
+// ─── Bocetos extraídos del DetallePageFrame ───────────────────────────────────
 
-const WIREFRAMES: Record<string, () => React.JSX.Element> = {
-  icon: WireIcon,
-  btn: WireButton,
-  input: WireInput,
-  "header-primary": WireHeader,
-  "nav-primary": WireNavbar,
-  "footer-primary": WireFooter,
-  sidebar: WireSidebar,
-  "display-price": WirePriceDisplay,
-  "card-auction": WireAuctionCard,
-  "display-metrics": WireMetrics,
-  "table-specs": WireVehicleSpecs,
-  "indicator-data-quality": WireDataQualityIndicator,
+/** Header — barra superior VMC: h 64px, fondo oscuro, logo izq + "Ingresa" der */
+function WireHeader() {
+  return (
+    <Sketch naturalWidth={ATOM_W.content} note="h 64px · 768px (content area, sidebar excluido) · botón Ingresa der · fondo oscuro · VMC Detalle">
+      <div style={{ height: 64, background: W.dark, borderBottom: `1px solid ${W.borderDark}`, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 24px", flexShrink: 0 }}>
+        <AtomHeader_Content />
+      </div>
+    </Sketch>
+  );
+}
+
+/** Navbar — sidebar vertical: 256px, fondo oscuro, ítem activo con borde izquierdo */
+function WireNavbar() {
+  return (
+    <Sketch naturalWidth={ATOM_W.sidebar} note="256px · sidebar vertical · icon + label · ítem activo borde-L · fondo oscuro · VMC Detalle">
+      <div style={{ width: 256, background: W.darkMid, borderRight: `1px solid ${W.borderDark}`, display: "flex", flexDirection: "column", flexShrink: 0, minHeight: 600 }}>
+        <AtomSidebar_Content />
+      </div>
+    </Sketch>
+  );
+}
+
+/** Footer baseline — 768px (content area, sidebar excluido) */
+function WireFooter() {
+  return (
+    <Sketch naturalWidth={ATOM_W.content} note="768px (content area, sidebar excluido) · fondo oscuro · logo + 2 cols · redes sociales · copyright · VMC Detalle">
+      <div style={{ background: W.dark, padding: "24px 24px", flexShrink: 0 }}>
+        <AtomFooter_Content />
+      </div>
+    </Sketch>
+  );
+}
+
+/** Footer upgrade — wireframe 1024px full-width: abarca sidebar + content, contenido distribuido */
+function WireFooterUpgrade() {
+  return (
+    <Sketch naturalWidth={ATOM_W.frame} note="1024px (full width · sidebar + content) · upgrade · contenido distribuido equitativamente · VMC Detalle">
+      <div style={{ background: W.dark, padding: "24px 32px", flexShrink: 0 }}>
+        <AtomFooter_Content />
+      </div>
+    </Sketch>
+  );
+}
+
+/** Sidebar — mismo que Navbar en el frame Detalle */
+function WireSidebar() {
+  return (
+    <Sketch naturalWidth={ATOM_W.sidebar} note="256px · nav lateral · fondo vault oscuro · solo-vmc · VMC Detalle">
+      <div style={{ width: 256, background: W.darkMid, borderRight: `1px solid ${W.borderDark}`, display: "flex", flexDirection: "column", flexShrink: 0, minHeight: 600 }}>
+        <AtomSidebar_Content />
+      </div>
+    </Sketch>
+  );
+}
+
+/** TitleBar — barra de contexto oscura h56: título vehículo + vendedor + métricas */
+function WireTitleBar() {
+  return (
+    <Sketch naturalWidth={ATOM_W.content} note="h 56px · fondo vault-mid · título + vendedor · métricas der · VMC Detalle">
+      <div style={{ height: 56, borderBottom: `1px solid ${W.border}`, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 16px", background: W.darkMid, flexShrink: 0, gap: 12 }}>
+        <AtomTitleBar_Content />
+      </div>
+    </Sketch>
+  );
+}
+
+/** BidWidgetHeader — cabecera del widget de puja: fecha/hora/corazón/métricas */
+function WireBidWidgetHeader() {
+  return (
+    <Sketch naturalWidth={ATOM_W.widget} note="fondo oscuro · fecha HOY | hora 02:05pm · corazón · métricas · VMC Detalle widget">
+      <div style={{ background: W.dark, padding: "10px 12px 8px" }}>
+        <AtomBidWidgetHeader_Content />
+      </div>
+    </Sketch>
+  );
+}
+
+/** PromoBanner — "¡Oportunidad para el que sabe!" — franja sobre CTA */
+function WirePromoBanner() {
+  return (
+    <Sketch naturalWidth={ATOM_W.widget} note="franja sutil · texto italics promo · fondo gris claro · VMC Detalle widget">
+      <div style={{ background: W.zone, padding: "5px 12px", borderBottom: `1px solid ${W.border}` }}>
+        <AtomPromoBanner_Content />
+      </div>
+    </Sketch>
+  );
+}
+
+/** PriceDisplay — precio base con ícono $, label y comisión — extraído del widget */
+function WirePriceDisplay() {
+  return (
+    <Sketch naturalWidth={ATOM_W.widget} note="ícono $ · Precio Base: US$ 14,999 · comisión 7.5% · VMC Detalle widget">
+      <div style={{ marginBottom: 4 }}>
+        <AtomPriceDisplay_Content />
+      </div>
+    </Sketch>
+  );
+}
+
+/** OptionTags — grid 2×2 + 1 centrado de condiciones del lote */
+function WireOptionTags() {
+  return (
+    <Sketch naturalWidth={ATOM_W.widget} note="grid 2×2 + 1 centrado · estado activo/inactivo · VMC Detalle widget">
+      <div style={{ padding: "0 12px 12px" }}>
+        <AtomOptionTags_Content />
+      </div>
+    </Sketch>
+  );
+}
+
+/** SubasCoins Banner — ícono moneda + CTA "ADQUIERE SUBASCOINS" + flecha */
+function WireSubascoins() {
+  return (
+    <Sketch naturalWidth={ATOM_W.widget} note="ícono moneda S · ADQUIERE SUBASCOINS · flecha der · VMC Detalle widget">
+      <div style={{ border: `1px solid ${W.border}`, borderRadius: 6, padding: "10px 14px", display: "flex", alignItems: "center", gap: 10, background: W.white }}>
+        <AtomSubascoins_Content />
+      </div>
+    </Sketch>
+  );
+}
+
+/** AuctionCard — "Ofertas Relacionadas" en el widget: grid 2×2 con imagen y badge */
+function WireAuctionCard() {
+  return (
+    <Sketch naturalWidth={ATOM_W.widget} note="grid 2×2 · img + badge precio + corazón · signature border 4px · VMC Detalle widget">
+      <div style={{ background: W.white, padding: "12px 12px 4px" }}>
+        <AtomAuctionCards_Content />
+      </div>
+    </Sketch>
+  );
+}
+
+/** ImageGallery — imagen hero + fila de 4 thumbnails */
+function WireImageGallery() {
+  return (
+    <Sketch naturalWidth={ATOM_W.main} note="hero 220px · 4 thumbnails 72×50 · flechas nav overlay · VMC Detalle columna principal">
+      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        <AtomImageGallery_Content />
+      </div>
+    </Sketch>
+  );
+}
+
+/** VehicleSpecs — tabla "Información general" con filas de atributos */
+function WireVehicleSpecs() {
+  return (
+    <Sketch naturalWidth={ATOM_W.main} note="tabla Información general · fila header + N filas h40 · VMC Detalle columna principal">
+      <div style={{ border: `1px solid ${W.border}`, borderRadius: 4, overflow: "hidden" }}>
+        <AtomVehicleSpecs_Content />
+      </div>
+    </Sketch>
+  );
+}
+
+/** DescriptionBlock — bloque de texto libre del vehículo */
+function WireDescriptionBlock() {
+  return (
+    <Sketch naturalWidth={ATOM_W.main} note="texto libre · líneas de cuerpo · VMC Detalle columna principal">
+      <div style={{ border: `1px solid ${W.border}`, borderRadius: 4, padding: 12 }}>
+        <AtomDescriptionBlock_Content />
+      </div>
+    </Sketch>
+  );
+}
+
+/** DocumentDownloads — filas de PDF / DOC con botón "↓ Descarga" */
+function WireDocumentDownloads() {
+  return (
+    <Sketch naturalWidth={ATOM_W.main} note="sección PDF + sección DOC · botón descarga der · VMC Detalle columna principal">
+      <div style={{ border: `1px solid ${W.border}`, borderRadius: 4, overflow: "hidden" }}>
+        <AtomDocumentDownloads_Content />
+      </div>
+    </Sketch>
+  );
+}
+
+/** ConditionsAccordion — fila colapsable h44 con chevron */
+function WireConditionsAccordion() {
+  return (
+    <Sketch naturalWidth={ATOM_W.main} note="fila h 44px · texto condiciones + chevron der · colapsable · VMC Detalle columna principal">
+      <div style={{ border: `1px solid ${W.border}`, borderRadius: 4, height: 44, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 12px" }}>
+        <AtomConditionsAccordion_Content />
+      </div>
+    </Sketch>
+  );
+}
+
+/** HelpCenterBanner — franja horizontal h80 con avatar, texto y CTA */
+function WireHelpCenterBanner() {
+  return (
+    <Sketch naturalWidth={ATOM_W.content} note="h 80px · avatar circular izq · título + desc · botón CTA der · VMC Detalle">
+      <div style={{ height: 80, borderTop: `1px solid ${W.border}`, borderBottom: `1px solid ${W.border}`, background: W.zone, display: "flex", alignItems: "center", padding: "0 16px", gap: 12, flexShrink: 0 }}>
+        <AtomHelpBanner_Content />
+      </div>
+    </Sketch>
+  );
+}
+
+/** Metrics — fila de contadores: vistas · pujas · participantes · fondo oscuro widget */
+function WireMetrics() {
+  return (
+    <Sketch naturalWidth={ATOM_W.widget} note="vistas · pujas · participantes · fondo oscuro · VMC Detalle widget">
+      <AtomMetrics_Content />
+    </Sketch>
+  );
+}
+
+// ─── Mapa NORMAL: componentId → boceto as-is VMC ─────────────────────────────
+// WireMode importado de WireModeContext — NORMAL = as-is VMC · UPGRADE = propuesta pipeline
+
+const WIREFRAME_MAP: Record<string, () => React.JSX.Element> = {
+  "icon":                    WireIcon,
+  "button":                  WireButton,
+  "btn":                     WireButton,
+  "input":                   WireInput,
+  "header":                  WireHeader,
+  "header-primary":          WireHeader,
+  "navbar":                  WireNavbar,
+  "nav-primary":             WireNavbar,
+  "footer":                  WireFooter,
+  "footer-primary":          WireFooter,
+  "sidebar":                 WireSidebar,
+  "price-display":           WirePriceDisplay,
+  "display-price":           WirePriceDisplay,
+  "auction-card":            WireAuctionCard,
+  "card-auction":            WireAuctionCard,
+  "data-quality-indicator":  WireDataQualityIndicator,
+  "indicator-data-quality":  WireDataQualityIndicator,
+  "title-bar":               WireTitleBar,
+  "bid-widget-header":       WireBidWidgetHeader,
+  "display-metrics":         WireMetrics,
+  "promo-banner":            WirePromoBanner,
+  "option-tags":             WireOptionTags,
+  "subascoin-banner":        WireSubascoins,
+  "subascoins-promo":        WireSubascoins,
+  "image-gallery":           WireImageGallery,
+  "table-specs":             WireVehicleSpecs,
+  "vehicle-specs":           WireVehicleSpecs,
+  "description-block":       WireDescriptionBlock,
+  "document-downloads":      WireDocumentDownloads,
+  "conditions-accordion":    WireConditionsAccordion,
+  "help-center-banner":      WireHelpCenterBanner,
 };
+
+// ─── Mapa UPGRADE: componentId → boceto con cambios propuestos ───────────────
+// Se puebla conforme los agentes del pipeline proponen modificaciones.
+// Si no existe entrada → el componente no tiene upgrade aún (pill oculta).
+
+const WIREFRAME_UPGRADE_MAP: Partial<Record<string, () => React.JSX.Element>> = {
+  "footer-primary": WireFooterUpgrade,
+};
+
+// ─── Mapa DONE: componentId → componente real implementado ────────────────────
+// Se agrega un entry cuando el componente ya está construido (FooterDone, etc.).
+// En modo "done" el acordeón muestra el componente real renderizado y escalado.
+
+function WireFooterDone() {
+  return (
+    <Sketch naturalWidth={ATOM_W.frame} note="footer-primary · DONE · componente real implementado">
+      <FooterDone />
+    </Sketch>
+  );
+}
+
+const WIREFRAME_DONE_MAP: Partial<Record<string, () => React.JSX.Element>> = {
+  "footer-primary": WireFooterDone,
+};
+
+// ─── Helper de resolución ────────────────────────────────────────────────────
+
+function resolveActiveFn(
+  mode: WireMode,
+  normalFn: () => React.JSX.Element,
+  upgradeFn: (() => React.JSX.Element) | undefined,
+  doneFn: (() => React.JSX.Element) | undefined,
+): () => React.JSX.Element {
+  if (mode === "done" && doneFn !== undefined) return doneFn;
+  if (mode === "upgrade" && upgradeFn !== undefined) return upgradeFn;
+  return normalFn;
+}
+
+// ─── Componente público ───────────────────────────────────────────────────────
 
 interface ComponentWireframeProps {
   componentId: string;
 }
 
 export function ComponentWireframe({ componentId }: ComponentWireframeProps) {
-  const Sketch = WIREFRAMES[componentId];
-  if (!Sketch) {
+  const { mode } = useWireMode();
+  const normalFn  = WIREFRAME_MAP[componentId];
+  const upgradeFn = WIREFRAME_UPGRADE_MAP[componentId];
+  const doneFn    = WIREFRAME_DONE_MAP[componentId];
+
+  if (!normalFn) {
     return (
       <div
         style={{
           border: `1.5px dashed ${W.border}`,
-          borderRadius: "6px",
-          padding: "12px",
+          borderRadius: 6,
+          background: W.bg,
+          padding: "16px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          minHeight: 60,
         }}
       >
-        <span style={W.label}>boceto pendiente — {componentId}</span>
+        <span style={{ ...lbl, color: W.accent }}>wireframe pendiente · {componentId}</span>
       </div>
     );
   }
-  return <Sketch />;
+
+  const ActiveFn = resolveActiveFn(mode, normalFn, upgradeFn, doneFn);
+  return <ActiveFn />;
 }

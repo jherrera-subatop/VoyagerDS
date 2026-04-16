@@ -1,13 +1,21 @@
 import Link from "next/link";
 import { TAXONOMY_COMPONENTS } from "../_data/taxonomy-components";
 import { TaxonomyAccordion } from "../components/TaxonomyAccordion";
+import { getUpgradeValidations } from "../actions/validateUpgrade";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Voyager DS — Taxonomía · Inventario",
   description: "Inventario completo por dominio — todos los componentes VMC auditados",
 };
 
-export default function TaxonomiaInventarioPage() {
+export default async function TaxonomiaInventarioPage() {
+  const validations = await getUpgradeValidations();
+  const validatedIds: Record<string, string> = {};
+  for (const [id, entry] of Object.entries(validations)) {
+    validatedIds[id] = entry.validatedAt;
+  }
   return (
     <div className="max-w-5xl mx-auto px-6 pb-24 pt-8 space-y-8">
       {/* Header */}
@@ -39,11 +47,11 @@ export default function TaxonomiaInventarioPage() {
             ← Taxonomía
           </Link>
           <Link
-            href="/docs/taxonomia/marco-detalle-vmc"
+            href="/docs/taxonomia/frame-detalle-vmc"
             className="underline underline-offset-2"
             style={{ color: "var(--vmc-color-text-brand)" }}
           >
-            Marco: Detalle VMC →
+            Frame: Detalle VMC →
           </Link>
         </div>
       </div>
@@ -116,7 +124,7 @@ export default function TaxonomiaInventarioPage() {
       </div>
 
       {/* Acordeón */}
-      <TaxonomyAccordion components={TAXONOMY_COMPONENTS} defaultOpen="primitivos-tokens" />
+      <TaxonomyAccordion components={TAXONOMY_COMPONENTS} defaultOpen="primitivos-tokens" validatedIds={validatedIds} />
 
       <p className="text-xs text-center" style={{ color: "var(--vmc-color-text-tertiary)" }}>
         Marcos pendientes (Ruta B, TAXONOMY.md): Homepage, Listing, Panel usuario, Flujo puja.

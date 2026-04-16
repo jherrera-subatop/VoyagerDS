@@ -1,0 +1,232 @@
+{
+  "frame": "detalle",
+  "label": "Frame: Detalle VMC",
+  "url": "http://localhost:3420/docs/taxonomia/frame-detalle-vmc",
+  "generated_at": "2026-04-16T19:14:22.063Z",
+  "viewport": {
+    "width": 1280,
+    "height": 900
+  },
+  "chrome_zones": [
+    "nav-primary",
+    "header-primary",
+    "footer-primary"
+  ],
+  "content_zones": [
+    "title-bar",
+    "image-gallery",
+    "image-gallery-thumbs",
+    "table-specs",
+    "description-block",
+    "document-downloads",
+    "conditions-accordion",
+    "bid-widget-header",
+    "promo-banner",
+    "btn",
+    "display-price",
+    "option-tags",
+    "subascoins-promo",
+    "card-auction",
+    "help-center-banner"
+  ],
+  "zones": [
+    {
+      "component_id": "nav-primary",
+      "is_chrome": true,
+      "bounding_box": {
+        "x": 154,
+        "y": 564,
+        "w": 244,
+        "h": 1492
+      },
+      "crop": "C:\\VoyagerDS\\VoyagerDS\\public\\screenshots\\canonical\\detalle\\components\\nav-primary.png"
+    },
+    {
+      "component_id": "header-primary",
+      "is_chrome": true,
+      "bounding_box": {
+        "x": 398,
+        "y": 564,
+        "w": 732,
+        "h": 61
+      },
+      "crop": "C:\\VoyagerDS\\VoyagerDS\\public\\screenshots\\canonical\\detalle\\components\\header-primary.png"
+    },
+    {
+      "component_id": "title-bar",
+      "is_chrome": false,
+      "bounding_box": {
+        "x": 398,
+        "y": 625,
+        "w": 732,
+        "h": 53
+      },
+      "crop": "C:\\VoyagerDS\\VoyagerDS\\public\\screenshots\\canonical\\detalle\\components\\title-bar.png"
+    },
+    {
+      "component_id": "image-gallery",
+      "is_chrome": false,
+      "bounding_box": {
+        "x": 413,
+        "y": 693,
+        "w": 423,
+        "h": 210
+      },
+      "crop": "C:\\VoyagerDS\\VoyagerDS\\public\\screenshots\\canonical\\detalle\\components\\image-gallery.png"
+    },
+    {
+      "component_id": "image-gallery-thumbs",
+      "is_chrome": false,
+      "bounding_box": {
+        "x": 413,
+        "y": 915,
+        "w": 423,
+        "h": 48
+      },
+      "crop": "C:\\VoyagerDS\\VoyagerDS\\public\\screenshots\\canonical\\detalle\\components\\image-gallery-thumbs.png"
+    },
+    {
+      "component_id": "table-specs",
+      "is_chrome": false,
+      "bounding_box": {
+        "x": 413,
+        "y": 974,
+        "w": 423,
+        "h": 254
+      },
+      "crop": "C:\\VoyagerDS\\VoyagerDS\\public\\screenshots\\canonical\\detalle\\components\\table-specs.png"
+    },
+    {
+      "component_id": "description-block",
+      "is_chrome": false,
+      "bounding_box": {
+        "x": 413,
+        "y": 1240,
+        "w": 423,
+        "h": 139
+      },
+      "crop": "C:\\VoyagerDS\\VoyagerDS\\public\\screenshots\\canonical\\detalle\\components\\description-block.png"
+    },
+    {
+      "component_id": "document-downloads",
+      "is_chrome": false,
+      "bounding_box": {
+        "x": 413,
+        "y": 1390,
+        "w": 423,
+        "h": 244
+      },
+      "crop": "C:\\VoyagerDS\\VoyagerDS\\public\\screenshots\\canonical\\detalle\\components\\document-downloads.png"
+    },
+    {
+      "component_id": "conditions-accordion",
+      "is_chrome": false,
+      "bounding_box": {
+        "x": 413,
+        "y": 1646,
+        "w": 423,
+        "h": 42
+      },
+      "crop": "C:\\VoyagerDS\\VoyagerDS\\public\\screenshots\\canonical\\detalle\\components\\conditions-accordion.png"
+    },
+    {
+      "component_id": "bid-widget-header",
+      "is_chrome": false,
+      "bounding_box": {
+        "x": 853,
+        "y": 694,
+        "w": 261,
+        "h": 103
+      },
+      "crop": "C:\\VoyagerDS\\VoyagerDS\\public\\screenshots\\canonical\\detalle\\components\\bid-widget-header.png"
+    },
+    {
+      "component_id": "promo-banner",
+      "is_chrome": false,
+      "bounding_box": {
+        "x": 853,
+        "y": 798,
+        "w": 261,
+        "h": 33
+      },
+      "crop": "C:\\VoyagerDS\\VoyagerDS\\public\\screenshots\\canonical\\detalle\\components\\promo-banner.png"
+    },
+    {
+      "component_id": "btn",
+      "is_chrome": false,
+      "bounding_box": {
+        "x": 864,
+        "y": 841,
+        "w": 238,
+        "h": 50
+      },
+      "crop": "C:\\VoyagerDS\\VoyagerDS\\public\\screenshots\\canonical\\detalle\\components\\btn.png"
+    },
+    {
+      "component_id": "display-price",
+      "is_chrome": false,
+      "bounding_box": {
+        "x": 864,
+        "y": 900,
+        "w": 238,
+        "h": 31
+      },
+      "crop": "C:\\VoyagerDS\\VoyagerDS\\public\\screenshots\\canonical\\detalle\\components\\display-price.png"
+    },
+    {
+      "component_id": "option-tags",
+      "is_chrome": false,
+      "bounding_box": {
+        "x": 853,
+        "y": 943,
+        "w": 261,
+        "h": 172
+      },
+      "crop": "C:\\VoyagerDS\\VoyagerDS\\public\\screenshots\\canonical\\detalle\\components\\option-tags.png"
+    },
+    {
+      "component_id": "subascoins-promo",
+      "is_chrome": false,
+      "bounding_box": {
+        "x": 852,
+        "y": 1123,
+        "w": 263,
+        "h": 55
+      },
+      "crop": "C:\\VoyagerDS\\VoyagerDS\\public\\screenshots\\canonical\\detalle\\components\\subascoins-promo.png"
+    },
+    {
+      "component_id": "card-auction",
+      "is_chrome": false,
+      "bounding_box": {
+        "x": 852,
+        "y": 1186,
+        "w": 263,
+        "h": 384
+      },
+      "crop": "C:\\VoyagerDS\\VoyagerDS\\public\\screenshots\\canonical\\detalle\\components\\card-auction.png"
+    },
+    {
+      "component_id": "help-center-banner",
+      "is_chrome": false,
+      "bounding_box": {
+        "x": 398,
+        "y": 1703,
+        "w": 732,
+        "h": 76
+      },
+      "crop": "C:\\VoyagerDS\\VoyagerDS\\public\\screenshots\\canonical\\detalle\\components\\help-center-banner.png"
+    },
+    {
+      "component_id": "footer-primary",
+      "is_chrome": true,
+      "bounding_box": {
+        "x": 398,
+        "y": 1794,
+        "w": 732,
+        "h": 262
+      },
+      "crop": "C:\\VoyagerDS\\VoyagerDS\\public\\screenshots\\canonical\\detalle\\components\\footer-primary.png"
+    }
+  ]
+}

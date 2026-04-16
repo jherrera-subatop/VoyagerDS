@@ -1,14 +1,16 @@
-import { ComponentesPreviewSection } from "../sections/ComponentesPreviewSection";
+"use client";
 
-export const metadata = {
-  title: "Voyager DS — Componentes",
-  description: "Átomos ib-componentes (Button y siguientes)",
-};
+import { ComponentModeProvider } from "../components/ComponentModeContext";
+import { ComponentModePill } from "../components/ComponentModePill";
+import { ComponentesPreviewSection } from "../sections/ComponentesPreviewSection";
 
 export default function DocsComponentesPage() {
   return (
-    <div className="max-w-7xl mx-auto px-6 pb-24 pt-12">
-      <ComponentesPreviewSection />
-    </div>
+    <ComponentModeProvider>
+      <div className="max-w-7xl mx-auto px-6 pb-24 pt-12">
+        <ComponentesPreviewSection />
+      </div>
+      <ComponentModePill />
+    </ComponentModeProvider>
   );
 }

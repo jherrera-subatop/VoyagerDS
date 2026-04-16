@@ -1,10 +1,16 @@
+import { ATOM_W } from "./frame-dimensions";
+
 export type TaxonomyDecision = "referencia-subascars" | "solo-vmc" | "pendiente-audit";
 
 export interface TaxonomyMeasurements {
-  /** Altura fija o rango, ej. "64px" | "44px (touch target)" */
+  /** Altura fija o rango, ej. "64px" | "44px (touch target)" — label de display */
   height?: string;
-  /** Ancho fijo o regla, ej. "256px" | "100%" | "flex-1" */
+  /** Ancho fijo o regla, ej. "256px" | "100%" | "flex-1" — label de display */
   width?: string;
+  /** Ancho numérico vinculado a ATOM_W — fuente de verdad para validación automática */
+  widthPx?: number;
+  /** Alto numérico fijo en px — para validación automática cuando aplique */
+  heightPx?: number;
   /** Padding interno, ej. "0 20px" | "12px 16px" */
   padding?: string;
   /** Otras propiedades clave, ej. { "border-radius": "4px", "font-size": "30px" } */
@@ -20,8 +26,10 @@ export interface TaxonomyComponent {
   description: string;
   instances?: number;
   variants?: number;
-  /** Medidas de referencia sacadas de DESIGN.md + audit VMC Detalle */
+  /** Medidas de referencia sacadas de DESIGN.md + audit VMC Detalle — versión normal */
   measurements?: TaxonomyMeasurements;
+  /** Medidas en modo upgrade — si existe, se muestra cuando wireMode === "upgrade" */
+  upgradeMeasurements?: TaxonomyMeasurements;
   /** En qué marcos/frames de VMC aparece */
   frames?: string[];
   /** Nombre del componente en Subascars que se relaciona (fuzzy match por nombre o propósito) */
@@ -124,6 +132,7 @@ export const TAXONOMY_COMPONENTS: TaxonomyComponent[] = [
     measurements: {
       height: "100vh (sticky, scroll independiente)",
       width: "256px",
+      widthPx: ATOM_W.sidebar,
       extra: { "item-height": "48px", "item-padding": "0 16px", "background": "var(--vmc-color-background-inverse)" },
     },
     subascarsMatch: "Main/Single/General/Navbar V2",
@@ -140,10 +149,18 @@ export const TAXONOMY_COMPONENTS: TaxonomyComponent[] = [
     instances: 1,
     frames: ["detalle"],
     measurements: {
-      height: "auto (≥ 160px)",
-      width: "100% (max-width: 1024px)",
-      padding: "32px 24px",
+      height: "variable (≥ 160px)",
+      width: "768px (content area)",
+      widthPx: ATOM_W.content,
+      padding: "32px 32px 16px",
       extra: { "background": "var(--vmc-color-background-inverse)" },
+    },
+    upgradeMeasurements: {
+      height: "variable (≥ 160px)",
+      width: "1024px (full width · sidebar + content)",
+      widthPx: ATOM_W.frame,
+      padding: "24px 32px",
+      extra: { "background": "var(--vmc-color-background-inverse)", "layout": "spans sidebar + content col" },
     },
     subascarsMatch: "Main/Single/General/Footer",
     subascarsVariants: ["footer-desktop", "footer"],
@@ -160,6 +177,7 @@ export const TAXONOMY_COMPONENTS: TaxonomyComponent[] = [
     measurements: {
       height: "100% (scroll interno)",
       width: "256px",
+      widthPx: ATOM_W.sidebar,
       padding: "16px",
       extra: { "frame": "listing / búsqueda — no en Detalle" },
     },
@@ -286,6 +304,7 @@ export const TAXONOMY_COMPONENTS: TaxonomyComponent[] = [
     measurements: {
       height: "56px",
       width: "768px (content area)",
+      widthPx: ATOM_W.content,
       padding: "0 16px",
       extra: { "background": "var(--vmc-color-background-inverse-mid)", "font-title": "12px 700" },
     },
@@ -305,6 +324,7 @@ export const TAXONOMY_COMPONENTS: TaxonomyComponent[] = [
     measurements: {
       height: "96px",
       width: "276px",
+      widthPx: ATOM_W.widget,
       padding: "10px 12px",
       extra: { "background": "var(--vmc-color-background-inverse)", "heart-icon": "32px circle" },
     },
@@ -324,6 +344,7 @@ export const TAXONOMY_COMPONENTS: TaxonomyComponent[] = [
     measurements: {
       height: "28px",
       width: "276px",
+      widthPx: ATOM_W.widget,
       padding: "5px 12px",
     },
     subascarsMatch: "Widgets/Single/Informative — Information",
@@ -342,6 +363,7 @@ export const TAXONOMY_COMPONENTS: TaxonomyComponent[] = [
     measurements: {
       height: "52px (c/u)",
       width: "252px (interior widget)",
+      widthPx: ATOM_W.widgetInner,
       extra: { "layout": "grid 2col + 1 centrado", "radius": "6px" },
     },
     subascarsMatch: "Basic/Outputs/Data label/Tags",
@@ -360,6 +382,7 @@ export const TAXONOMY_COMPONENTS: TaxonomyComponent[] = [
     measurements: {
       height: "56px",
       width: "276px",
+      widthPx: ATOM_W.widget,
       padding: "10px 14px",
     },
     subascarsMatch: "Main/Single/User/Wallet",
@@ -378,6 +401,7 @@ export const TAXONOMY_COMPONENTS: TaxonomyComponent[] = [
     measurements: {
       height: "220px (hero) + 50px (thumbnails)",
       width: "444px",
+      widthPx: ATOM_W.main,
       extra: { "thumb-w": "72px", "thumb-h": "50px", "thumb-count": "4 visible" },
     },
     subascarsMatch: "Main/Multicomponent/Filmstrip/Gallery",
@@ -396,6 +420,7 @@ export const TAXONOMY_COMPONENTS: TaxonomyComponent[] = [
     measurements: {
       height: "96px (min)",
       width: "444px",
+      widthPx: ATOM_W.main,
       padding: "12px",
     },
     subascarsMatch: "Main/Single/Publication/Accordion — Description",
@@ -414,6 +439,7 @@ export const TAXONOMY_COMPONENTS: TaxonomyComponent[] = [
     measurements: {
       height: "220px",
       width: "444px",
+      widthPx: ATOM_W.main,
       extra: { "row-height": "44px", "icon": "24×28px", "btn": "ghost h:28px" },
     },
     subascarsMatch: "Main/Single/Publication/Accordion — Run ODC With Documents",
@@ -432,6 +458,7 @@ export const TAXONOMY_COMPONENTS: TaxonomyComponent[] = [
     measurements: {
       height: "44px (cerrado)",
       width: "444px",
+      widthPx: ATOM_W.main,
       extra: { "chevron": "12px", "state-default": "cerrado" },
     },
     subascarsMatch: "Main/Single/Publication/Accordion — Cy T",
@@ -450,6 +477,7 @@ export const TAXONOMY_COMPONENTS: TaxonomyComponent[] = [
     measurements: {
       height: "80px",
       width: "768px",
+      widthPx: ATOM_W.content,
       padding: "0 16px",
       extra: { "icon": "48px circle", "btn-h": "36px" },
     },

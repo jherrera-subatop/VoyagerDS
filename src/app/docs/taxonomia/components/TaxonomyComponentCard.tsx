@@ -1,16 +1,42 @@
-import type { TaxonomyComponent, TaxonomyDecision } from "../_data/taxonomy-components";
+"use client";
+
+import type { TaxonomyComponent, TaxonomyDecision, TaxonomyMeasurements } from "../_data/taxonomy-components";
 import { DECISION_META, DOMAIN_COLORS } from "../_data/taxonomy-components";
 import { SUBASCARS_STORYBOOK_BY_COMPONENT_ID } from "../_data/wireframe-references";
 import { ComponentWireframe } from "./ComponentWireframe";
+import { UpgradeValidationBadge } from "./UpgradeValidationBadge";
+import { useWireMode } from "./WireModeContext";
 
 interface TaxonomyComponentCardProps {
   component: TaxonomyComponent;
+  validatedAt?: string;
 }
 
-export function TaxonomyComponentCard({ component: c }: TaxonomyComponentCardProps) {
+function resolveWidthDisplay(m: TaxonomyMeasurements): string | undefined {
+  if (m.widthPx !== undefined) {
+    return `${m.widthPx}px`;
+  }
+  return m.width;
+}
+
+function resolveMeasurements(
+  c: TaxonomyComponent,
+  mode: "normal" | "upgrade" | "done",
+): TaxonomyMeasurements | undefined {
+  if ((mode === "upgrade" || mode === "done") && c.upgradeMeasurements !== undefined) {
+    return c.upgradeMeasurements;
+  }
+  return c.measurements;
+}
+
+export function TaxonomyComponentCard({ component: c, validatedAt }: TaxonomyComponentCardProps) {
+  const { mode } = useWireMode();
+  const isUpgrade = mode === "upgrade";
   const decision = DECISION_META[c.decision];
   const domainColor = DOMAIN_COLORS[c.domain] ?? "var(--vmc-color-neutral-500)";
   const storybookUrl = SUBASCARS_STORYBOOK_BY_COMPONENT_ID[c.id];
+  const measurements = resolveMeasurements(c, mode);
+  const hasUpgradeOverride = c.upgradeMeasurements !== undefined;
 
   return (
     <div
@@ -59,38 +85,58 @@ export function TaxonomyComponentCard({ component: c }: TaxonomyComponentCardPro
           {c.description}
         </p>
 
-        {/* Medidas */}
-        {c.measurements && (
+        {/* Medidas — reactivas al modo normal/upgrade */}
+        {measurements && (
           <div
             className="rounded p-2 text-xs font-mono space-y-1"
             style={{
-              background: "var(--vmc-color-background-tertiary)",
-              border: "1px solid var(--vmc-color-border-subtle)",
+              background: isUpgrade && hasUpgradeOverride
+                ? "var(--vmc-color-amber-50)"
+                : "var(--vmc-color-background-tertiary)",
+              border: isUpgrade && hasUpgradeOverride
+                ? "1px solid var(--vmc-color-amber-200)"
+                : "1px solid var(--vmc-color-border-subtle)",
             }}
           >
-            <p className="font-semibold text-xs mb-1" style={{ color: "var(--vmc-color-text-tertiary)", fontFamily: "inherit" }}>
-              medidas
-            </p>
-            {c.measurements.height && (
+            <div className="flex items-center justify-between mb-1">
+              <p className="font-semibold text-xs" style={{ color: "var(--vmc-color-text-tertiary)", fontFamily: "inherit" }}>
+                medidas
+              </p>
+              {hasUpgradeOverride && (
+                <span
+                  className="text-xs px-1.5 py-0 rounded font-mono"
+                  style={{
+                    background: isUpgrade ? "var(--vmc-color-amber-100)" : "var(--vmc-color-background-tertiary)",
+                    color: isUpgrade ? "var(--vmc-color-amber-900)" : "var(--vmc-color-text-tertiary)",
+                    border: "1px solid currentColor",
+                    opacity: 0.7,
+                    fontSize: "10px",
+                  }}
+                >
+                  {isUpgrade ? "upgrade" : "normal"}
+                </span>
+              )}
+            </div>
+            {measurements.height && (
               <p style={{ color: "var(--vmc-color-text-secondary)" }}>
                 <span style={{ color: "var(--vmc-color-text-tertiary)" }}>h: </span>
-                {c.measurements.height}
+                {measurements.height}
               </p>
             )}
-            {c.measurements.width && (
+            {resolveWidthDisplay(measurements) && (
               <p style={{ color: "var(--vmc-color-text-secondary)" }}>
                 <span style={{ color: "var(--vmc-color-text-tertiary)" }}>w: </span>
-                {c.measurements.width}
+                {resolveWidthDisplay(measurements)}
               </p>
             )}
-            {c.measurements.padding && (
+            {measurements.padding && (
               <p style={{ color: "var(--vmc-color-text-secondary)" }}>
                 <span style={{ color: "var(--vmc-color-text-tertiary)" }}>pad: </span>
-                {c.measurements.padding}
+                {measurements.padding}
               </p>
             )}
-            {c.measurements.extra &&
-              Object.entries(c.measurements.extra).map(([k, v]) => (
+            {measurements.extra &&
+              Object.entries(measurements.extra).map(([k, v]) => (
                 <p key={k} style={{ color: "var(--vmc-color-text-secondary)" }}>
                   <span style={{ color: "var(--vmc-color-text-tertiary)" }}>{k}: </span>
                   {v}
@@ -157,6 +203,8 @@ export function TaxonomyComponentCard({ component: c }: TaxonomyComponentCardPro
               Ver anatomía en SubasCars →
             </a>
           )}
+
+          <UpgradeValidationBadge componentId={c.id} validatedAt={validatedAt} />
         </div>
       </div>
     </div>

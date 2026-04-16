@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 import { TaxonomiaSubNav } from "./components/TaxonomiaSubNav";
+import { WireModeProvider } from "./components/WireModeContext";
+import { WireModePill } from "./components/WireModePill";
 
 export default function TaxonomiaLayout({
   children,
@@ -7,9 +9,10 @@ export default function TaxonomiaLayout({
   children: ReactNode;
 }>) {
   return (
-    <>
+    <WireModeProvider>
       <TaxonomiaSubNav />
       {children}
-    </>
+      <WireModePill />
+    </WireModeProvider>
   );
 }
