@@ -125,9 +125,10 @@ function CodeBlock({ id, code, copyKey, onCopy, copiedKey }: {
         style={{
           margin: 0,
           padding: "12px 14px",
+          paddingRight: 72,
           borderRadius: 6,
-          background: "var(--vmc-color-background-tertiary, oklch(0.12 0.05 285))",
-          color: "oklch(0.88 0.04 285)",
+          background: "var(--vmc-color-background-brand)",
+          color: "var(--vmc-color-text-on-dark-muted)",
           fontSize: 12,
           lineHeight: "20px",
           fontFamily: "monospace",
@@ -145,14 +146,18 @@ function CodeBlock({ id, code, copyKey, onCopy, copiedKey }: {
           top: 8,
           right: 8,
           fontSize: 10,
-          fontWeight: 600,
+          fontWeight: 700,
           fontFamily: "monospace",
-          padding: "2px 8px",
+          padding: "3px 10px",
           borderRadius: 4,
           border: "none",
           cursor: "pointer",
-          background: copied ? "oklch(0.55 0.18 145)" : "oklch(0.30 0.06 285)",
-          color: "oklch(1 0 0)",
+          background: copied
+            ? "oklch(0.55 0.18 145)"
+            : "var(--vmc-color-text-inverse)",
+          color: copied
+            ? "var(--vmc-color-text-inverse)"
+            : "var(--vmc-color-background-brand)",
           transition: "background 150ms ease",
         }}
       >
@@ -251,7 +256,7 @@ function ImageAssetRow({ label, path, dims, filename, current, onUpload, onClear
       {/* Info */}
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
-          <code style={{ fontSize: 11, color: "oklch(0.78 0.10 285)", fontFamily: "monospace", wordBreak: "break-all" }}>
+          <code style={{ fontSize: 11, color: "var(--vmc-color-text-brand, oklch(0.30 0.20 285))", fontFamily: "monospace", wordBreak: "break-all" }}>
             {path}
           </code>
           <span style={{ fontSize: 10, color: "var(--vmc-color-text-tertiary)", whiteSpace: "nowrap" }}>
@@ -539,7 +544,7 @@ export function FooterDoneHandoffPanel(): JSX.Element {
                   return (
                     <tr key={r.zone}>
                       <td style={{ padding: "5px 8px", color: "var(--vmc-color-text-secondary)", fontSize: 11, borderBottom: "1px solid var(--vmc-color-border-subtle)", whiteSpace: "nowrap" }}>{r.zone}</td>
-                      <td style={{ padding: "5px 8px", color: "oklch(0.78 0.10 285)", fontSize: 11, fontFamily: "monospace", borderBottom: "1px solid var(--vmc-color-border-subtle)" }}>{r.token}</td>
+                      <td style={{ padding: "5px 8px", color: "var(--vmc-color-text-brand, oklch(0.30 0.20 285))", fontSize: 11, fontFamily: "monospace", borderBottom: "1px solid var(--vmc-color-border-subtle)" }}>{r.token}</td>
                     </tr>
                   );
                 })}
@@ -566,7 +571,7 @@ export function FooterDoneHandoffPanel(): JSX.Element {
             <CodeBlock id="component" code={COMPONENT_CODE} copyKey="component" onCopy={handleCopy} copiedKey={copiedKey} />
             <p style={{ fontSize: 11, color: "var(--vmc-color-text-tertiary)", margin: "6px 0 0", lineHeight: "18px" }}>
               Copiar el archivo completo{" "}
-              <code style={{ fontFamily: "monospace", fontSize: 11, color: "oklch(0.78 0.10 285)" }}>
+              <code style={{ fontFamily: "monospace", fontSize: 11, color: "var(--vmc-color-text-brand, oklch(0.30 0.20 285))" }}>
                 src/features/Footer/FooterDone.tsx
               </code>{" "}
               de este repo al mismo path en el repo de producción. Sin dependencias externas — solo <code style={{ fontFamily: "monospace", fontSize: 11 }}>next/image</code> y <code style={{ fontFamily: "monospace", fontSize: 11 }}>next/link</code>.
@@ -603,7 +608,7 @@ export function FooterDoneHandoffPanel(): JSX.Element {
           <div style={{ paddingTop: 4, borderTop: "1px solid var(--vmc-color-border-subtle)" }}>
             <p style={{ fontSize: 11, color: "var(--vmc-color-text-tertiary)", margin: 0, fontFamily: "monospace" }}>
               Spec completa:{" "}
-              <span style={{ color: "oklch(0.78 0.10 285)" }}>
+              <span style={{ color: "var(--vmc-color-text-brand, oklch(0.30 0.20 285))" }}>
                 src/features/Footer/FOOTER_DONE_SPEC.md
               </span>
             </p>
