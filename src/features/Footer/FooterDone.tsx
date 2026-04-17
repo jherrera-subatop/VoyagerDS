@@ -191,7 +191,7 @@ const STYLES = `
 // ---------------------------------------------------------------------------
 
 export default function FooterDone({ logoSrc, reclamacionesSrc }: FooterDoneProps): JSX.Element {
-  const resolvedLogoSrc         = logoSrc          ?? "/images/vmc-logo-white.svg";
+  const resolvedLogoSrc         = logoSrc          ?? "/images/vmc-logo-white.png";
   const resolvedReclamacionesSrc = reclamacionesSrc ?? "/images/libro-reclamaciones.png";
 
   return (

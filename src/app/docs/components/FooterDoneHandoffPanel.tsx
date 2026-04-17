@@ -90,7 +90,7 @@ const BREAKPOINTS = [
 ];
 
 const IMAGES = [
-  { path: "/public/images/vmc-logo-white.svg",       dims: "120 × 32",  desc: "Logo VMC blanco" },
+  { path: "/public/images/vmc-logo-white.png",       dims: "120 × 32",  desc: "Logo VMC blanco" },
   { path: "/public/images/libro-reclamaciones.png",  dims: "86 × 35",   desc: "Ícono libro (req. legal Perú)" },
 ];
 
