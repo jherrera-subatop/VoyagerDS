@@ -42,14 +42,20 @@ const ComponentModeContext = createContext<ComponentModeContextValue>({
 
 interface ComponentModeProviderProps {
   children: ReactNode;
+  initialMode?: ComponentMode;
 }
 
-export function ComponentModeProvider({ children }: ComponentModeProviderProps): JSX.Element {
+export function ComponentModeProvider({ children, initialMode }: ComponentModeProviderProps): JSX.Element {
   const [mode, setModeState] = useState<ComponentMode>("normal");
 
   useEffect(function syncFromStorage() {
-    setModeState(readStoredMode());
-  }, []);
+    if (initialMode) {
+      persistMode(initialMode);
+      setModeState(initialMode);
+    } else {
+      setModeState(readStoredMode());
+    }
+  }, [initialMode]);
 
   function setMode(m: ComponentMode): void {
     persistMode(m);
