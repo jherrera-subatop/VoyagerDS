@@ -120,7 +120,7 @@ const STYLES = `
   /* footer[role="contentinfo"] es el container — responde a su propio ancho,
      no al viewport del navegador. Funciona correctamente en el viewport switcher
      del DS y en producción. */
-  footer[role="contentinfo"] {
+  footer {
     container-type: inline-size;
     container-name: fd;
   }
@@ -198,7 +198,6 @@ export default function FooterDone({ logoSrc, reclamacionesSrc }: FooterDoneProp
     <>
       <style>{STYLES}</style>
       <footer
-        role="contentinfo"
         className="w-full"
         style={{ backgroundColor: "var(--vmc-color-background-brand)" }}
       >
@@ -389,7 +388,7 @@ function BottomBar(): JSX.Element {
       className="w-full"
       style={{
         background:
-          "color-mix(in oklch, var(--vmc-color-background-brand) 85%, oklch(0 0 0))",
+          "color-mix(in oklch, var(--vmc-color-background-brand) 85%, var(--vmc-color-text-primary))",
       }}
     >
       <div className="fd-bottom-inner">
