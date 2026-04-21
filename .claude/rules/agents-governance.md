@@ -223,4 +223,46 @@ Gobierna TODA decisión visual y de código en el proyecto Voyager.
 
 ---
 
+## 11. LEY DE FIDELIDAD PIXEL-PERFECT — WIREFRAMES DE TAXONOMÍA
+
+```xml
+<wireframe-fidelity-law>
+  APLICA A: todos los frames de taxonomía (detalle, listing, home y cualquier frame futuro).
+  PRIORIDAD: igual a los axiomas de sección 1 — no negociable.
+
+  <source-of-truth>
+    El boceto de un componente en el acordeón de taxonomía DEBE ser un extracto
+    pixel-perfect de la función WfXxx() del {Frame}PageFrame.tsx correspondiente.
+    NO existe otra fuente visual válida.
+  </source-of-truth>
+
+  <subascars-boundary>
+    SubasCars = referencia taxonómica y de variantes ÚNICAMENTE.
+    PROHIBIDO usar SubasCars como referencia visual para dibujar wireframes.
+    El visual siempre proviene del screenshot de VMC y del frame construido sobre él.
+  </subascars-boundary>
+
+  <palette-contract>
+    El objeto W de ComponentWireframe.tsx y el de cada {Frame}PageFrame.tsx
+    son IDÉNTICOS. Un solo cambio de valor propaga a todos los bocetos.
+  </palette-contract>
+
+  <new-frame-protocol>
+    Al auditar un frame nuevo:
+    1. Crear {Frame}PageFrame.tsx desde el screenshot VMC
+    2. Cada zona visual → función WfXxx() dentro del frame
+    3. Extraer esas funciones → ComponentWireframe.tsx
+    4. Registrar IDs en WIREFRAME_MAP
+    5. Verificar: ningún acordeón muestra "wireframe pendiente · {id}"
+  </new-frame-protocol>
+
+  <red-flag>
+    Si ComponentWireframe muestra un boceto que no reconoces en el frame → STOP.
+    Es una alucinación visual. Corregir antes de continuar.
+  </red-flag>
+</wireframe-fidelity-law>
+```
+
+---
+
 *"La claridad de intención es la base de la precisión en la ejecución."*

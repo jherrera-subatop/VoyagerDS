@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/Button";
 import { SectionTitle } from "../components/SectionTitle";
 import { FooterImageProvider } from "../components/FooterImageContext";
 import { FooterDoneShowcaseSection } from "../components/FooterDoneShowcaseSection";
+import { SidebarStitchShowcaseSection } from "../components/SidebarStitchShowcaseSection";
 
 export function ComponentesPreviewSection() {
   return (
@@ -54,9 +55,13 @@ export function ComponentesPreviewSection() {
         </p>
       </div>
 
-      {/* ── Footer — provider envuelve showcase + panel de handoff ──── */}
+      {/* ── Footer + Sidebar comparten FooterImageProvider (logo VMC) ── */}
       <FooterImageProvider>
         <FooterDoneShowcaseSection />
+
+        {/* ── Sidebar ──────────────────────────────────────────────── */}
+        <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "0" }} />
+        <SidebarStitchShowcaseSection />
       </FooterImageProvider>
 
       {/* ── Cola ──────────────────────────────────────────────────────── */}
@@ -73,7 +78,6 @@ export function ComponentesPreviewSection() {
             si cambia el detalle legacy (Challenge D).
           </li>
           <li>Header — pipeline UX → Stitch → Frontend</li>
-          <li>Sidebar — pipeline UX → Stitch → Frontend</li>
           <li>
             Fundamentos técnicos en{" "}
             <Link href="/docs/fundamentos" className="underline underline-offset-2" style={{ color: "var(--vmc-color-text-brand)" }}>

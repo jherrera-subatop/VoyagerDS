@@ -1,0 +1,474 @@
+{
+  "meta": {
+    "project": "Voyager DS",
+    "client": "VMC Subastas",
+    "description": "Design system AI-readable para la plataforma de subastas de vehículos de alto valor. Perú.",
+    "stack": [
+      "Next.js 15",
+      "TypeScript strict",
+      "Tailwind v4",
+      "Terrazzo",
+      "OKLCH tokens",
+      "RTK Query",
+      "Zustand"
+    ],
+    "lastSync": "2026-04-14",
+    "jiraBoard": "https://subastop.atlassian.net/jira/core/projects/VD/board",
+    "version": "2.0.0"
+  },
+  "phases": [
+    {
+      "id": "ib-taxonomia",
+      "jira": "VD-1",
+      "title": "Fase 1 · Taxonomía",
+      "emoji": "🗂️",
+      "status": "in-progress",
+      "summary": "Auditoría frame-a-frame de componentes. Nombre canónico, dominio, decisión, variantes.",
+      "progress": "Marco Detalle completado (22 componentes). Listing y Home pendientes.",
+      "outputArtifact": "TAXONOMY.md"
+    },
+    {
+      "id": "ib-fundamentos",
+      "jira": "VD-2",
+      "title": "Fase 2 · Tokens y pipeline",
+      "emoji": "🎨",
+      "status": "done",
+      "summary": "Pipeline W3C DTCG → Terrazzo → CSS → Tailwind v4. 3 capas: primitivos / semánticos / componente.",
+      "progress": "Completada. Pipeline operativo, gatekeeper activo en predev/prebuild.",
+      "outputArtifact": "tokens.json + tokens.css"
+    },
+    {
+      "id": "ib-componentes",
+      "jira": "VD-3",
+      "title": "Fase 3 · Construcción",
+      "emoji": "🔧",
+      "status": "todo",
+      "summary": "Construir cada componente del inventario en src/features/ según prioridad P0→P4.",
+      "progress": "Pendiente. Arrancar con P0: Button, Badge, PriceDisplay, CountdownTimer.",
+      "outputArtifact": "src/features/{componentId}/"
+    },
+    {
+      "id": "ib-handoff",
+      "jira": "VD-4",
+      "title": "Fase 4 · Handoff a código",
+      "emoji": "🚀",
+      "status": "todo",
+      "summary": "Documentar cada componente para consumo sin fricción: props API, tokens, ejemplos, restricciones.",
+      "progress": "Bloqueada por ib-componentes. Inicia cuando P0 y P1 estén aprobados en PR.",
+      "outputArtifact": "Storybook + README por componente"
+    },
+    {
+      "id": "ib-optimization",
+      "jira": "VD-5",
+      "title": "Optimización Multi-Agente",
+      "emoji": "⚡",
+      "status": "in-progress",
+      "summary": "Optimizar flujo Claude Code → Cursor. Context architecture, handoff scripts, .mdc rules, scheduled tasks.",
+      "progress": "En progreso paralelo. Jira ops-agent activo (sync 9am + 4pm diario).",
+      "outputArtifact": "scripts/jira-ops-agent/ + .claude/skills/"
+    }
+  ],
+  "components": [
+    {
+      "id": "icon",
+      "jira": "VD-6",
+      "name": "Icon",
+      "domain": "primitivos-tokens",
+      "domainLabel": "Primitivos",
+      "priority": null,
+      "status": "todo",
+      "decision": "referencia-subascars",
+      "frames": [
+        "detalle"
+      ],
+      "isBuilt": false
+    },
+    {
+      "id": "button",
+      "jira": "VD-7",
+      "name": "Button",
+      "domain": "ui-core",
+      "domainLabel": "UI Core",
+      "priority": "P0",
+      "status": "todo",
+      "decision": "referencia-subascars",
+      "frames": [
+        "detalle"
+      ],
+      "isBuilt": false
+    },
+    {
+      "id": "input",
+      "jira": "VD-8",
+      "name": "Input",
+      "domain": "ui-core",
+      "domainLabel": "UI Core",
+      "priority": null,
+      "status": "todo",
+      "decision": "referencia-subascars",
+      "frames": [
+        "detalle"
+      ],
+      "isBuilt": false
+    },
+    {
+      "id": "header",
+      "jira": "VD-9",
+      "name": "Header",
+      "domain": "layout",
+      "domainLabel": "Layout",
+      "priority": "P1",
+      "status": "todo",
+      "decision": "referencia-subascars",
+      "frames": [
+        "detalle"
+      ],
+      "isBuilt": false
+    },
+    {
+      "id": "navbar",
+      "jira": "VD-10",
+      "name": "Navbar",
+      "domain": "layout",
+      "domainLabel": "Layout",
+      "priority": null,
+      "status": "todo",
+      "decision": "referencia-subascars",
+      "frames": [
+        "detalle"
+      ],
+      "isBuilt": false
+    },
+    {
+      "id": "footer",
+      "jira": "VD-11",
+      "name": "Footer",
+      "domain": "layout",
+      "domainLabel": "Layout",
+      "priority": null,
+      "status": "todo",
+      "decision": "referencia-subascars",
+      "frames": [
+        "detalle"
+      ],
+      "isBuilt": false
+    },
+    {
+      "id": "sidebar",
+      "jira": "VD-12",
+      "name": "Sidebar",
+      "domain": "layout",
+      "domainLabel": "Layout",
+      "priority": "P1",
+      "status": "todo",
+      "decision": "solo-vmc",
+      "frames": [
+        "detalle"
+      ],
+      "isBuilt": false
+    },
+    {
+      "id": "price-display",
+      "jira": "VD-13",
+      "name": "PriceDisplay",
+      "domain": "auction-core",
+      "domainLabel": "Subasta",
+      "priority": "P0",
+      "status": "todo",
+      "decision": "referencia-subascars",
+      "frames": [
+        "detalle"
+      ],
+      "isBuilt": false
+    },
+    {
+      "id": "auction-card",
+      "jira": "VD-14",
+      "name": "AuctionCard",
+      "domain": "auction-core",
+      "domainLabel": "Subasta",
+      "priority": null,
+      "status": "todo",
+      "decision": "referencia-subascars",
+      "frames": [
+        "detalle"
+      ],
+      "isBuilt": false
+    },
+    {
+      "id": "metrics",
+      "jira": "VD-15",
+      "name": "Metrics",
+      "domain": "auction-core",
+      "domainLabel": "Subasta",
+      "priority": null,
+      "status": "todo",
+      "decision": "referencia-subascars",
+      "frames": [
+        "detalle"
+      ],
+      "isBuilt": false
+    },
+    {
+      "id": "vehicle-specs",
+      "jira": "VD-16",
+      "name": "VehicleSpecs",
+      "domain": "vehicle-data",
+      "domainLabel": "Datos del vehículo",
+      "priority": null,
+      "status": "todo",
+      "decision": "referencia-subascars",
+      "frames": [
+        "detalle"
+      ],
+      "isBuilt": false
+    },
+    {
+      "id": "data-quality-indicator",
+      "jira": "VD-17",
+      "name": "DataQualityIndicator",
+      "domain": "vehicle-data",
+      "domainLabel": "Datos del vehículo",
+      "priority": null,
+      "status": "todo",
+      "decision": "referencia-subascars",
+      "frames": [
+        "detalle"
+      ],
+      "isBuilt": false
+    },
+    {
+      "id": "title-bar",
+      "jira": "VD-18",
+      "name": "Title Bar",
+      "domain": "layout",
+      "domainLabel": "Layout",
+      "priority": null,
+      "status": "todo",
+      "decision": "referencia-subascars",
+      "frames": [
+        "detalle"
+      ],
+      "isBuilt": false
+    },
+    {
+      "id": "bid-widget-header",
+      "jira": "VD-19",
+      "name": "Bid Widget Header",
+      "domain": "auction-core",
+      "domainLabel": "Subasta",
+      "priority": null,
+      "status": "todo",
+      "decision": "referencia-subascars",
+      "frames": [
+        "detalle"
+      ],
+      "isBuilt": false
+    },
+    {
+      "id": "promo-banner",
+      "jira": "VD-20",
+      "name": "Promo Banner",
+      "domain": "auction-core",
+      "domainLabel": "Subasta",
+      "priority": null,
+      "status": "todo",
+      "decision": "referencia-subascars",
+      "frames": [
+        "detalle"
+      ],
+      "isBuilt": false
+    },
+    {
+      "id": "option-tags",
+      "jira": "VD-21",
+      "name": "Option Tags",
+      "domain": "auction-core",
+      "domainLabel": "Subasta",
+      "priority": null,
+      "status": "todo",
+      "decision": "referencia-subascars",
+      "frames": [
+        "detalle"
+      ],
+      "isBuilt": false
+    },
+    {
+      "id": "subascoin-banner",
+      "jira": "VD-22",
+      "name": "SubasCoins Banner",
+      "domain": "ui-core",
+      "domainLabel": "UI Core",
+      "priority": null,
+      "status": "todo",
+      "decision": "solo-vmc",
+      "frames": [
+        "detalle"
+      ],
+      "isBuilt": false
+    },
+    {
+      "id": "image-gallery",
+      "jira": "VD-23",
+      "name": "Image Gallery",
+      "domain": "media",
+      "domainLabel": "Galería",
+      "priority": null,
+      "status": "todo",
+      "decision": "referencia-subascars",
+      "frames": [
+        "detalle"
+      ],
+      "isBuilt": false
+    },
+    {
+      "id": "description-block",
+      "jira": "VD-24",
+      "name": "Description Block",
+      "domain": "content",
+      "domainLabel": "Contenido",
+      "priority": null,
+      "status": "todo",
+      "decision": "referencia-subascars",
+      "frames": [
+        "detalle"
+      ],
+      "isBuilt": false
+    },
+    {
+      "id": "document-downloads",
+      "jira": "VD-25",
+      "name": "Document Downloads",
+      "domain": "content",
+      "domainLabel": "Contenido",
+      "priority": null,
+      "status": "todo",
+      "decision": "referencia-subascars",
+      "frames": [
+        "detalle"
+      ],
+      "isBuilt": false
+    },
+    {
+      "id": "conditions-accordion",
+      "jira": "VD-26",
+      "name": "Conditions Accordion",
+      "domain": "content",
+      "domainLabel": "Contenido",
+      "priority": null,
+      "status": "todo",
+      "decision": "referencia-subascars",
+      "frames": [
+        "detalle"
+      ],
+      "isBuilt": false
+    },
+    {
+      "id": "help-center-banner",
+      "jira": "VD-27",
+      "name": "Help Center Banner",
+      "domain": "support",
+      "domainLabel": "Soporte",
+      "priority": null,
+      "status": "todo",
+      "decision": "solo-vmc",
+      "frames": [
+        "detalle"
+      ],
+      "isBuilt": false
+    }
+  ],
+  "domains": [
+    {
+      "id": "primitivos-tokens",
+      "label": "Primitivos",
+      "color": "#6B7280",
+      "componentCount": 1
+    },
+    {
+      "id": "ui-core",
+      "label": "UI Core",
+      "color": "#7C3AED",
+      "componentCount": 3
+    },
+    {
+      "id": "layout",
+      "label": "Layout",
+      "color": "#1D4ED8",
+      "componentCount": 5
+    },
+    {
+      "id": "auction-core",
+      "label": "Subasta",
+      "color": "#B45309",
+      "componentCount": 7
+    },
+    {
+      "id": "vehicle-data",
+      "label": "Datos del vehículo",
+      "color": "#065F46",
+      "componentCount": 2
+    },
+    {
+      "id": "media",
+      "label": "Galería",
+      "color": "#9D174D",
+      "componentCount": 1
+    },
+    {
+      "id": "content",
+      "label": "Contenido",
+      "color": "#1E40AF",
+      "componentCount": 3
+    },
+    {
+      "id": "support",
+      "label": "Soporte",
+      "color": "#374151",
+      "componentCount": 1
+    }
+  ],
+  "priorities": {
+    "P0": {
+      "label": "Base",
+      "description": "Componentes bloqueantes — todo depende de estos",
+      "components": [
+        "button",
+        "price-display"
+      ]
+    },
+    "P1": {
+      "label": "Shell",
+      "description": "Estructura de la aplicación",
+      "components": [
+        "header",
+        "sidebar"
+      ]
+    },
+    "P2": {
+      "label": "Content",
+      "description": "Contenido visual principal",
+      "components": []
+    },
+    "P3": {
+      "label": "Auction",
+      "description": "Flujo transaccional de subasta",
+      "components": []
+    },
+    "P4": {
+      "label": "Transversal",
+      "description": "Features secundarios y de soporte",
+      "components": []
+    }
+  },
+  "stats": {
+    "totalComponents": 22,
+    "totalPhases": 5,
+    "built": 0,
+    "inProgress": 0,
+    "todo": 22,
+    "phasesCompleted": 1,
+    "phasesInProgress": 2,
+    "phasesPending": 2
+  }
+}

@@ -162,7 +162,7 @@ export function ComponentShowcase({
   }
 
   return (
-    <div className="mt-12">
+    <div id={id} className="mt-12" style={{ scrollMarginTop: 96 }}>
       {/* ── Header ────────────────────────────────────────────────────── */}
       <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16, marginBottom: 12, flexWrap: "wrap" }}>
         <div>

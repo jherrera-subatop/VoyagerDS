@@ -42,7 +42,7 @@ export async function listAgentIssues() {
   const jql = encodeURIComponent(
     `project = ${JIRA_PROJECT_KEY} AND labels = "${AGENT_LABEL}" ORDER BY created ASC`
   );
-  const data = await jiraFetch(`/search/jql?jql=${jql}&maxResults=200&fields=summary,status,labels,description`);
+  const data = await jiraFetch(`/search/jql?jql=${jql}&maxResults=200&fields=summary,status,labels,description,priority`);
   return data.issues ?? [];
 }
 
@@ -116,6 +116,14 @@ export async function transitionIssue(issueKey, targetStatusName) {
   await jiraFetch(`/issue/${issueKey}/transitions`, {
     method: "POST",
     body: JSON.stringify({ transition: { id: match.id } }),
+  });
+}
+
+/** Setea el campo Priority de Jira en un issue */
+export async function setPriority(issueKey, priorityName) {
+  await jiraFetch(`/issue/${issueKey}`, {
+    method: "PUT",
+    body: JSON.stringify({ fields: { priority: { name: priorityName } } }),
   });
 }
 

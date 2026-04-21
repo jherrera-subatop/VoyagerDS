@@ -1,0 +1,135 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "description": "Memoria acumulada del pipeline de construcción de componentes Voyager DS. Cada corrección de Figma alimenta este archivo. Los agentes leen esto ANTES de generar.",
+    "last_updated": "2026-04-17",
+    "total_components_processed": 1
+  },
+
+  "global_principles": [
+    {
+      "id": "GP-001",
+      "source": "Footer correction — Figma",
+      "principle": "Los iconos de navegación en sidebar deben ser circulares con borde 1.5px, NO cuadrados rellenos",
+      "applies_to": ["sidebar", "nav-primary", "cualquier componente con iconos de navegación"]
+    },
+    {
+      "id": "GP-002",
+      "source": "Footer — DS rules",
+      "principle": "NUNCA HEX hardcodeados en el prompt de Stitch. Usar siempre var(--token) como referencia semántica aunque Stitch los convierta internamente",
+      "applies_to": ["todos los componentes"]
+    },
+    {
+      "id": "GP-003",
+      "source": "Footer correction — Figma",
+      "principle": "Container queries SIEMPRE para responsive, nunca Tailwind lg:/md:. El viewport switcher del DS no cambia el viewport del browser.",
+      "applies_to": ["todos los componentes"]
+    },
+    {
+      "id": "GP-004",
+      "source": "Footer — pipeline",
+      "principle": "El primer resultado de Stitch tiende a ser genérico. Necesita al menos 1 iteración de crítica específica contra el wireframe antes de ser aceptable.",
+      "applies_to": ["todos los componentes"]
+    },
+    {
+      "id": "GP-005",
+      "source": "DS DESIGN.md",
+      "principle": "Separación de contenido SIEMPRE por cambio de background, NUNCA por border 1px. La única excepción es ghost border funcional.",
+      "applies_to": ["todos los componentes"]
+    }
+  ],
+
+  "stitch_prompt_patterns": {
+    "always_include": [
+      "Specify exact pixel values for all dimensions",
+      "Reference The Digital Curator design system by name",
+      "List the exact nav item labels in order — Stitch tends to invent labels",
+      "Specify opacity values for text (60% for secondary, 30% for tertiary)",
+      "State explicitly: NO rounded containers, NO box shadows, NO generic placeholder icons"
+    ],
+    "common_failures": [
+      "Stitch adds rounded corners to containers that should be square",
+      "Stitch uses generic flat icons instead of circular-border style",
+      "Stitch invents nav item labels instead of using the specified ones",
+      "Stitch adds a bottom navigation bar on desktop designs",
+      "Stitch uses wrong font weights (too light)"
+    ],
+    "iteration_triggers": [
+      "Any wrong nav label → regenerate with labels bolded and numbered in prompt",
+      "Generic square icons → add: 'CRITICAL: icons are 22px circles with 1.5px white border stroke, SVG path inside'",
+      "Wrong background color → add: 'CRITICAL: background MUST be #22005C dark purple, not any other color'",
+      "Too many rounded corners → add: 'ZERO rounded corners on the main container'"
+    ]
+  },
+
+  "audit_scorecard": {
+    "passing_threshold": 80,
+    "criteria": {
+      "brand_colors": {
+        "weight": 25,
+        "description": "Background y colores coinciden con tokens VMC (#22005C vault, #ED8936 live, etc.)"
+      },
+      "typography": {
+        "weight": 20,
+        "description": "Plus Jakarta Sans para UI, Roboto Mono para datos numéricos, tamaños correctos"
+      },
+      "layout_fidelity": {
+        "weight": 25,
+        "description": "Dimensiones exactas (256px sidebar, 64px brand area, 48px nav items)"
+      },
+      "content_accuracy": {
+        "weight": 20,
+        "description": "Labels, textos y contenido canónico exacto sin invención"
+      },
+      "ds_rules": {
+        "weight": 10,
+        "description": "Sin borders 1px de separación, sin HEX hardcoded, sin box-shadow genérico"
+      }
+    }
+  },
+
+  "components": {
+    "footer": {
+      "status": "done",
+      "stitch_iterations": 2,
+      "final_version": "stitch-footer-v2.html",
+      "corrections_from_figma": [
+        "Logo 'powered by SUBASTOP.Co' debía ser más pequeño (~7px) y con menos opacidad",
+        "Links del footer necesitaban más espaciado vertical entre grupos",
+        "El ícono de libro de reclamaciones tenía tamaño incorrecto en mobile"
+      ],
+      "learned_principles": [
+        "El texto 'powered by SUBASTOP.Co' es contenido legal — mantener exactamente así, capitalización incluida",
+        "Las columnas de links del footer tienen heading uppercase 12px/600 + items 12px/400",
+        "El divider horizontal usa background shift, NO border"
+      ],
+      "approved_tokens": {
+        "background": "var(--vmc-color-background-inverse)",
+        "text_primary": "rgba(255,255,255,0.8)",
+        "text_secondary": "rgba(255,255,255,0.6)",
+        "divider": "rgba(255,255,255,0.1)"
+      }
+    },
+
+    "sidebar": {
+      "status": "stitch_pending",
+      "stitch_iterations": 0,
+      "wireframe_ref": "AtomSidebar_Content in wf-detalle-atoms.tsx",
+      "canonical_content": {
+        "brand": ">vmc< Subastas",
+        "brand_sub": "powered by SUBASTOP.Co",
+        "nav_items": ["Próximas", "Tipo de oferta", "Categorías", "Empresas", "Centro de ayuda"]
+      },
+      "key_specs": {
+        "width": "256px",
+        "brand_area_height": "64px",
+        "nav_item_height": "48px",
+        "nav_item_padding": "0 16px",
+        "icon_size": "22px circular, 1.5px white border",
+        "background": "var(--vmc-color-background-inverse) = #22005C"
+      },
+      "corrections_from_figma": [],
+      "learned_principles": []
+    }
+  }
+}

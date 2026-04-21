@@ -64,6 +64,25 @@ function zi(id: string): ZoneInfo {
   };
 }
 
+/** Resuelve ZoneInfo con medidas correctas según el modo activo */
+function resolveZoneInfo(
+  base: ZoneInfo,
+  componentId: string | undefined,
+  mode: WireMode,
+): ZoneInfo {
+  if (componentId === undefined) return base;
+  const c = TC_MAP.get(componentId);
+  if (c === undefined) return base;
+  const isActiveMode = mode === "upgrade" || mode === "done";
+  if (isActiveMode && c.upgradeMeasurements !== undefined) {
+    return { name: base.name, category: base.category, measurements: measurementLines(c.upgradeMeasurements) };
+  }
+  if (c.measurements !== undefined) {
+    return { name: base.name, category: base.category, measurements: measurementLines(c.measurements) };
+  }
+  return base;
+}
+
 const WIDGET_W = 276;
 
 // ─── Sistema de tooltip hover ─────────────────────────────────────────────────
@@ -137,7 +156,9 @@ function HoverZone({
   as?: keyof JSX.IntrinsicElements;
 }) {
   const ctx = useContext(HoverCtx);
+  const { mode } = useWireMode();
   const [hovered, setHovered] = useState(false);
+  const resolvedInfo = resolveZoneInfo(info, componentId, mode);
 
   return (
     <Tag
@@ -151,11 +172,11 @@ function HoverZone({
         cursor: "default",
       }}
       onMouseMove={(e: React.MouseEvent) => {
-        ctx?.show(info, e.clientX, e.clientY);
+        ctx?.show(resolvedInfo, e.clientX, e.clientY);
       }}
       onMouseEnter={(e: React.MouseEvent) => {
         setHovered(true);
-        ctx?.show(info, e.clientX, e.clientY);
+        ctx?.show(resolvedInfo, e.clientX, e.clientY);
       }}
       onMouseLeave={() => {
         setHovered(false);

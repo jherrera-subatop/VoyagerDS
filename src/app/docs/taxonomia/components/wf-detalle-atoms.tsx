@@ -81,15 +81,31 @@ export function AtomHeader_Content(): JSX.Element {
 // children del HoverZone de zi("nav-primary")
 // style del HoverZone: { width: SIDEBAR_W, background: W.darkMid, borderRight: `1px solid ${W.borderDark}`, display: "flex", flexDirection: "column", flexShrink: 0, minHeight: 600 }
 export function AtomSidebar_Content(): JSX.Element {
-  // VMC real: logo en brand area (top) + 5 items icon+texto+flecha
-  // Ref: vmcsubastas.com/oferta/61272
-  const navItems = [
-    { label: "Mañana",        icon: "calendar" },
-    { label: "Tipo de oferta", icon: "coin"     },
-    { label: "Categorías",    icon: "star"      },
-    { label: "Empresas",      icon: "grid"      },
-    { label: "Centro de ayuda", icon: "help"    },
+  // VMC real: logo en brand area (top) + 5 items icono-círculo + texto + flecha
+  // Audit 17-abr-2026: "Próximas" (no "Mañana"), iconos circulares
+  const navItems: Array<{ label: string; path: string }> = [
+    {
+      label: "Próximas",
+      path: "M8 2v2M16 2v2M3 8h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z",
+    },
+    {
+      label: "Tipo de oferta",
+      path: "M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zM12 6v6l4 2",
+    },
+    {
+      label: "Categorías",
+      path: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z",
+    },
+    {
+      label: "Empresas",
+      path: "M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z",
+    },
+    {
+      label: "Centro de ayuda",
+      path: "M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 8v4M12 16h.01",
+    },
   ];
+
   return (
     <>
       {/* Brand area — logo VMC con "powered by SUBASTOP.Co" */}
@@ -103,20 +119,27 @@ export function AtomSidebar_Content(): JSX.Element {
         </div>
       </div>
 
-      {/* Nav items: icon + label + flecha derecha */}
+      {/* Nav items: icono-círculo + label + flecha derecha */}
       <div style={{ padding: "6px 0", flex: 1 }}>
-        {navItems.map(({ label, icon }) => (
-          <div
-            key={label}
-            style={{ height: 48, display: "flex", alignItems: "center", padding: "0 16px", gap: 12, justifyContent: "space-between" }}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              <div style={{ width: 20, height: 20, background: W.accent, borderRadius: 3, opacity: 0.5, flexShrink: 0 }} />
-              <span style={{ fontSize: 12, color: W.labelBright, fontFamily: "sans-serif" }}>{label}</span>
+        {navItems.map(function renderNavItem({ label, path }) {
+          return (
+            <div
+              key={label}
+              style={{ height: 48, display: "flex", alignItems: "center", padding: "0 16px", gap: 12, justifyContent: "space-between" }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                {/* Ícono circular — borde + SVG interior */}
+                <div style={{ width: 22, height: 22, borderRadius: "50%", border: `1.5px solid ${W.labelDark}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke={W.labelBright} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d={path} />
+                  </svg>
+                </div>
+                <span style={{ fontSize: 12, color: W.labelBright, fontFamily: "sans-serif" }}>{label}</span>
+              </div>
+              <span style={{ fontSize: 10, color: W.labelDark, fontFamily: "sans-serif" }}>›</span>
             </div>
-            <span style={{ fontSize: 10, color: W.labelDark, fontFamily: "sans-serif" }}>›</span>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </>
   );

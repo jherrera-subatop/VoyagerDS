@@ -31,7 +31,7 @@ function resolveMeasurements(
 
 export function TaxonomyComponentCard({ component: c, validatedAt }: TaxonomyComponentCardProps) {
   const { mode } = useWireMode();
-  const isUpgrade = mode === "upgrade";
+  const isActiveMode = mode === "upgrade" || mode === "done";
   const decision = DECISION_META[c.decision];
   const domainColor = DOMAIN_COLORS[c.domain] ?? "var(--vmc-color-neutral-500)";
   const storybookUrl = SUBASCARS_STORYBOOK_BY_COMPONENT_ID[c.id];
@@ -90,10 +90,10 @@ export function TaxonomyComponentCard({ component: c, validatedAt }: TaxonomyCom
           <div
             className="rounded p-2 text-xs font-mono space-y-1"
             style={{
-              background: isUpgrade && hasUpgradeOverride
+              background: isActiveMode && hasUpgradeOverride
                 ? "var(--vmc-color-amber-50)"
                 : "var(--vmc-color-background-tertiary)",
-              border: isUpgrade && hasUpgradeOverride
+              border: isActiveMode && hasUpgradeOverride
                 ? "1px solid var(--vmc-color-amber-200)"
                 : "1px solid var(--vmc-color-border-subtle)",
             }}
@@ -106,14 +106,14 @@ export function TaxonomyComponentCard({ component: c, validatedAt }: TaxonomyCom
                 <span
                   className="text-xs px-1.5 py-0 rounded font-mono"
                   style={{
-                    background: isUpgrade ? "var(--vmc-color-amber-100)" : "var(--vmc-color-background-tertiary)",
-                    color: isUpgrade ? "var(--vmc-color-amber-900)" : "var(--vmc-color-text-tertiary)",
+                    background: isActiveMode ? "var(--vmc-color-amber-100)" : "var(--vmc-color-background-tertiary)",
+                    color: isActiveMode ? "var(--vmc-color-amber-900)" : "var(--vmc-color-text-tertiary)",
                     border: "1px solid currentColor",
                     opacity: 0.7,
                     fontSize: "10px",
                   }}
                 >
-                  {isUpgrade ? "upgrade" : "normal"}
+                  {mode === "done" ? "done" : mode === "upgrade" ? "upgrade" : "normal"}
                 </span>
               )}
             </div>

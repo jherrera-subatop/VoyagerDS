@@ -1,69 +1,126 @@
-# Handoff — 2026-04-16 — sesión "wireframes + handoff protocol fix"
+# Handoff — 2026-04-17 14:45 — Sesión Jira Audit + Bug Fixes + Sprint Plan
 
 ## Proyecto
-VMC Subastas — Voyager DS. Stack: Next.js 15 / TypeScript strict / Tailwind v4 / Terrazzo / RTK Query.
-Objetivo: UI Upgrade visual puro — UX flows y UX writing legacy se mantienen INTACTOS.
+VMC Subastas — Voyager DS. Stack: Next.js 15 / TypeScript strict / Tailwind v4 / Terrazzo.
+Objetivo: UI Upgrade visual total (sin tocar UX flows legacy).
+
+---
 
 ## Lo que se completó en esta sesión
 
-### Sesión anterior (15-abr — compactada)
-- `JIRA_SYNC.md` — cola de acciones Jira (COMMENT, MOVE, LINK, CREATE)
-- `scripts/voyager-jira-sync.py` — script Python que ejecuta la cola; fix regex `→`, fix create_link JSON parse
-- `scripts/update-ticket-descriptions.py` — actualizó 8 tickets (VD-43, 39, 40, 41, 34, 35, 42, 44) con ADF rich descriptions
-- `CLAUDE.md` — añadido protocolo arranque de sesión + protocolo handoff (hoy mejorado)
-- `.claude/skills/voyager-session-start/SKILL.md` — nuevo skill de arranque
-- `~/.claude/settings.json` — añadido `permissions.allow` para Jira API sin prompt
-- `src/app/docs/taxonomia/components/wf-detalle-atoms.tsx` — AtomHeader_Content, AtomSidebar_Content, AtomFooter_Content actualizados desde screenshots reales vmcsubastas.com/oferta/61272
-- `src/features/Footer/constants.tsx` — contenido real VMC reemplaza contenido inventado (SubasCars, SubasBlog, etc.)
+### Bugs corregidos
+- `src/app/docs/taxonomia/components/TaxonomyComponentCard.tsx`
+  - `isUpgrade = mode === "upgrade"` ampliado a `isActiveMode = mode === "upgrade" || mode === "done"`
+  - Badge muestra "done" / "upgrade" / "normal" según modo real
+  - Amber styling activo en upgrade Y done
 
-### Sesión actual (16-abr)
-- `CLAUDE.md` — protocolo de handoff reescrito: triggers proactivos (milestone/turn 25/degradación) + output a archivo en lugar de solo chat
-- `.claude/handoff-current.md` — este archivo; primer uso del protocolo nuevo
+- `src/app/docs/taxonomia/components/DetallePageFrame.tsx`
+  - Nueva función `resolveZoneInfo(base, componentId, mode)` — lee `upgradeMeasurements` en upgrade/done
+  - `HoverZone` llama `useWireMode()` y usa `resolveZoneInfo()` — tooltip siempre correcto
+  - Fix automático para cualquier componente futuro con `upgradeMeasurements`
+
+### Infraestructura
+- `src/app/api/source/[component]/route.ts` — API route sirve .tsx como text/plain
+- `src/app/docs/components/ComponentHandoffShared.tsx` — CodeBlock, SectionHeading, SourceSection
+- `src/app/docs/components/FooterDoneHandoffPanel.tsx` — refactorizado (SourceSection via API, accordion abierto por defecto)
+- `src/app/docs/components/FooterDoneShowcaseSection.tsx` — HandoffPanel solo en modo "done"
+- `.claude/skills/voyager-component-done/SKILL.md` — cookbook completo NORMAL→DONE
+
+### Jira organizado (13 acciones ejecutadas)
+- VD-3 (ib-componentes) → En curso
+- VD-4 (ib-handoff) → En curso
+- VD-40 (Header) → En curso (desbloqueado)
+- VD-41 (Sidebar) → En curso (desbloqueado)
+- VD-50 (BUG taxonomy medidas) → Finalizada
+- Sprint 1 + Sprint 2 plan en comentarios de VD-3
+- Roadmap en VD-30, VD-32, VD-33, VD-40, VD-41, VD-1
+
+### Scripts arreglados
+- `scripts/jira-ops-agent/read-state.mjs` — "Tareas por hacer" → "Backlog" (columna real en Jira)
+- `scripts/jira-ops-agent/sync.mjs` — phaseJiraStatus usa "Backlog" para todo
+- `ib-componentes` + `ib-handoff` → `in-progress` en read-state.mjs
+
+---
 
 ## Estado del board Jira
 
-| Ticket | Estado | Bloqueado por |
-|--------|--------|---------------|
-| VD-43 | Finalizada | — (completado) |
-| VD-39 | Bloqueado | VD-43 desbloqueado; listo para pipeline |
-| VD-40 | Bloqueado | VD-43 desbloqueado; listo para pipeline |
-| VD-41 | Bloqueado | VD-43 desbloqueado; listo para pipeline |
-| VD-34 | Agent Queue | Playwright + SQLite canonical store |
-| VD-35 | Agent Queue | feedback-log.json schema |
-| VD-44 | Backlog | Windows Task Scheduler (hacer manualmente) |
-| VD-42 | Backlog | Orchestrator Master Agent |
+| Ticket | Estado | Descripción |
+|--------|--------|-------------|
+| VD-1 | En curso | ib-taxonomia (detalle completo, falta listing+home) |
+| VD-2 | Finalizada | ib-fundamentos |
+| VD-3 | En curso | ib-componentes Sprint 1 activo |
+| VD-4 | En curso | ib-handoff (Footer pilot operativo) |
+| VD-5 | Backlog | ib-optimization (renombrar a ib-looping) |
+| VD-33 | En curso | Handoff y entrega |
+| VD-39 | Finalizada | FooterDone |
+| VD-40 | En curso | Header desbloqueado |
+| VD-41 | En curso | Sidebar desbloqueado |
+| VD-50 | Finalizada | BUG medidas taxonomy resuelto |
 
-## Tarea en curso
-Ninguna interrumpida. Sesión terminó limpiamente después de fix de protocolo handoff.
+---
 
-## Próximo paso — empieza aquí
+## Sprint 1 — Primera mitad Detalle (11 componentes — PRIORIDAD AHORA)
+
 ```
-1. python3 scripts/voyager-jira-sync.py --status  (verificar board)
-2. Ticket activo siguiente: VD-39 (Footer re-run pipeline completo)
-   Pipeline: Agente 1 UX Writer → Agente 2 Stitch → Agente 3 Product Designer → Agente 4 Frontend
-   Stitch project ID: 14182036405227000116
-3. Antes de arrancar VD-39: leer src/features/Footer/Footer.tsx + constants.tsx (ya actualizados)
+P0 — Fundacion (otros dependen de estos):
+  1. btn            → ButtonDone.tsx
+  2. display-price  → PriceDisplayDone.tsx
+  3. input          → InputDone.tsx
+
+P1 — Shell de pagina:
+  4. header-primary → HeaderDone.tsx
+  5. sidebar        → SidebarDone.tsx (depende de header)
+  6. title-bar      → TitleBarDone.tsx
+
+P2 — Contenido principal:
+  7. image-gallery           → ImageGalleryDone.tsx
+  8. table-specs             → VehicleSpecsDone.tsx
+  9. indicator-data-quality  → DataQualityDone.tsx
+ 10. conditions-accordion    → AccordionDone.tsx
+ 11. description-block       → DescriptionBlockDone.tsx
 ```
 
-## Decisiones que NO están en el código
+Workflow: `/voyager-component-done <Nombre>` — skill en `.claude/skills/voyager-component-done/SKILL.md`
 
-- **Footer headings vacíos**: `FooterNavColumn.heading = ""` porque el Footer real VMC no muestra headings de columna. VD-39 debe reestructurar el componente para eliminar el renderizado del heading vacío.
-- **LinkedIn en socials**: VMC real tiene Twitter/X en lugar de LinkedIn. No cambiado porque FooterSocialIcon no tiene SVG para Twitter — se resuelve en VD-39 pipeline.
-- **Jira MOVE `→` → `TO`**: El script voyager-jira-sync.py normaliza arrows pero el print en Windows cp1252 falla. Las acciones API sí se ejecutan aunque el log muestre `[!]`. Verificar con `--status`.
-- **wf-detalle-atoms.tsx `icon` unused**: navItems tiene `icon` field sin uso (placeholder div en su lugar). TypeScript no se queja porque tsconfig no tiene `noUnusedLocals`. No tocar — se usará cuando se implementen los íconos reales.
+---
 
-## Archivos clave (leer en este orden para retomar)
-1. `.claude/handoff-current.md` — este archivo (ya leído)
-2. `CLAUDE.md` — reglas del agente, protocolo arranque, protocolo handoff nuevo
-3. `scripts/voyager-jira-sync.py --status` — estado actual del board
-4. `src/features/Footer/Footer.tsx` — componente a re-pipear en VD-39
-5. `src/features/Footer/constants.tsx` — contenido real VMC (actualizado)
-6. `src/app/docs/taxonomia/components/wf-detalle-atoms.tsx` — wireframe atoms (completado)
+## Sprint 2 — Segunda mitad (10 componentes, despues de Sprint 1)
 
-## Comandos para retomar
+```
+Auction widget: bid-widget-header, option-tags, promo-banner
+Secundarios: display-metrics, document-downloads, help-center-banner
+Transversales: card-auction, subascoins-promo, nav-primary, icon
+```
+
+---
+
+## Proximo paso — empieza aqui
+
+**Construir Button (btn) — P0 mas simple, base de todo.**
 ```bash
-python3 scripts/voyager-jira-sync.py --status
-PYTHONIOENCODING=utf-8 python3 scripts/voyager-jira-sync.py
-pnpm type-check
-pnpm dev  # http://localhost:3420
+# En nueva sesion:
+python3 scripts/voyager-jira-sync.py --status   # ver board
+pnpm dev                                         # http://localhost:3420
+# Luego: /voyager-component-done Button
 ```
+
+---
+
+## Decisiones arquitectonicas (no estan en el codigo)
+
+- Container queries en TODOS los Done — Tailwind lg: no funciona en viewport switcher del DS
+- API route /api/source/[component] — source servido en runtime, no embebido en bundle
+- ib-frames trigger — automatico cuando TODOS los componentes de un frame tienen Done en taxonomy
+- ib-looping — fase continua post-frames, versiones v1/v2 optimizadas SEO/GEO
+- VD-5 ib-optimization no existe como fase — renombrar a ib-looping cuando llegue
+- VD-34 Playwright bot — ALTA prioridad, pero despues de Sprint 1
+
+---
+
+## Archivos clave (leer en orden)
+
+1. `.claude/skills/voyager-component-done/SKILL.md` — workflow completo
+2. `src/features/Footer/FooterDone.tsx` — referencia de implementacion
+3. `src/app/docs/components/FooterDoneHandoffPanel.tsx` — referencia HandoffPanel
+4. `src/app/docs/taxonomia/_data/taxonomy-components.ts` — specs por componente
+5. `COMPONENTS_PRIORITY.md` — orden Sprint 1 y Sprint 2

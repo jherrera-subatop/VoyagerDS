@@ -9,6 +9,7 @@ import {
   updateIssue,
   transitionIssue,
   addComment,
+  setPriority,
 } from "./jira.mjs";
 import { readProjectState } from "./read-state.mjs";
 import { AGENT_LABEL } from "./config.mjs";
@@ -217,12 +218,35 @@ function phaseDescription(phase) {
   );
 }
 
+// ─── Prioridad Jira ───────────────────────────────────────────────────────────
+// Mapea prioridad Voyager → campo Priority de Jira
+// Jira acepta: Highest · High · Medium · Low · Lowest
+
+const VOYAGER_TO_JIRA_PRIORITY = {
+  "P0": "Highest",
+  "P1": "High",
+  "P2": "Medium",
+  "P3": "Low",
+  "P4": "Lowest",
+};
+
+function componentJiraPriority(c) {
+  return VOYAGER_TO_JIRA_PRIORITY[c.priority] ?? "Medium";
+}
+
+function phaseJiraPriority(phase) {
+  if (phase.id === "ib-componentes" && phase.status === "in-progress") return "Highest";
+  if (phase.status === "in-progress") return "High";
+  if (phase.status === "done")        return "Medium";
+  return "Low";
+}
+
 // ─── Estado Jira de una fase ──────────────────────────────────────────────────
 
 function phaseJiraStatus(phase) {
   if (phase.status === "done")        return "Finalizada";
   if (phase.status === "in-progress") return "En curso";
-  return "Tareas por hacer";
+  return "Backlog";
 }
 
 // ─── Motor principal ──────────────────────────────────────────────────────────
@@ -252,16 +276,21 @@ export async function runSync({ dryRun = false } = {}) {
     const labels        = phaseLabels(phase);
     const targetStatus  = phaseJiraStatus(phase);
 
+    const phasePriority = phaseJiraPriority(phase);
+
     if (!existingIssue) {
-      console.log(`  ✚ Crear: "${summary}" → ${targetStatus}`);
+      console.log(`  ✚ Crear: "${summary}" → ${targetStatus} [${phasePriority}]`);
       if (!dryRun) {
         const created = await createIssue({ summary, description: phaseDescription(phase), labels });
         await transitionIssue(created.key, targetStatus);
+        await setPriority(created.key, phasePriority);
         log.created.push({ key: created.key, summary });
       }
     } else {
-      const currentStatus = existingIssue.fields?.status?.name ?? "";
-      const titleChanged  = existingIssue.fields?.summary !== summary;
+      const currentStatus   = existingIssue.fields?.status?.name ?? "";
+      const currentPriority = existingIssue.fields?.priority?.name ?? "";
+      const titleChanged    = existingIssue.fields?.summary !== summary;
+      const priorityChanged = currentPriority !== phasePriority;
 
       if (titleChanged) {
         console.log(`  ✏️  Actualizar ${existingIssue.key}: título y descripción`);
@@ -275,14 +304,19 @@ export async function runSync({ dryRun = false } = {}) {
         }
       }
 
+      if (priorityChanged) {
+        console.log(`  🎯 Prioridad ${existingIssue.key}: "${currentPriority}" → "${phasePriority}"`);
+        if (!dryRun) await setPriority(existingIssue.key, phasePriority);
+      }
+
       if (currentStatus !== targetStatus) {
         console.log(`  ↔ Transicionar ${existingIssue.key}: "${currentStatus}" → "${targetStatus}"`);
         if (!dryRun) {
           await transitionIssue(existingIssue.key, targetStatus);
           log.transitioned.push({ key: existingIssue.key, from: currentStatus, to: targetStatus });
         }
-      } else if (!titleChanged) {
-        console.log(`  ✓ ${existingIssue.key}: OK (${currentStatus})`);
+      } else if (!titleChanged && !priorityChanged) {
+        console.log(`  ✓ ${existingIssue.key}: OK (${currentStatus} · ${currentPriority})`);
         log.skipped.push(existingIssue.key);
       }
     }
@@ -296,16 +330,21 @@ export async function runSync({ dryRun = false } = {}) {
     const labels        = componentLabels(c);
     const targetStatus  = c.jiraStatus;
 
+    const compPriority = componentJiraPriority(c);
+
     if (!existingIssue) {
-      console.log(`  ✚ Crear: "${summary}" → ${targetStatus}`);
+      console.log(`  ✚ Crear: "${summary}" → ${targetStatus} [${compPriority}]`);
       if (!dryRun) {
         const created = await createIssue({ summary, description: componentDescription(c), labels });
         await transitionIssue(created.key, targetStatus);
+        await setPriority(created.key, compPriority);
         log.created.push({ key: created.key, summary });
       }
     } else {
-      const currentStatus = existingIssue.fields?.status?.name ?? "";
-      const titleChanged  = existingIssue.fields?.summary !== summary;
+      const currentStatus   = existingIssue.fields?.status?.name ?? "";
+      const currentPriority = existingIssue.fields?.priority?.name ?? "";
+      const titleChanged    = existingIssue.fields?.summary !== summary;
+      const priorityChanged = currentPriority !== compPriority;
 
       if (titleChanged) {
         console.log(`  ✏️  Actualizar ${existingIssue.key}: "${summary}"`);
@@ -317,6 +356,11 @@ export async function runSync({ dryRun = false } = {}) {
           });
           log.updated.push({ key: existingIssue.key, summary });
         }
+      }
+
+      if (priorityChanged) {
+        console.log(`  🎯 Prioridad ${existingIssue.key}: "${currentPriority}" → "${compPriority}"`);
+        if (!dryRun) await setPriority(existingIssue.key, compPriority);
       }
 
       if (currentStatus !== targetStatus) {
@@ -331,7 +375,7 @@ export async function runSync({ dryRun = false } = {}) {
           }
           log.transitioned.push({ key: existingIssue.key, from: currentStatus, to: targetStatus });
         }
-      } else if (!titleChanged) {
+      } else if (!titleChanged && !priorityChanged) {
         log.skipped.push(existingIssue.key);
       }
     }

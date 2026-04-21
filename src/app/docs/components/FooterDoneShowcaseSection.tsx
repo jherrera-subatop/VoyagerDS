@@ -12,12 +12,14 @@ import FooterDone from "@/features/Footer/FooterDone";
 import { ComponentShowcase } from "./ComponentShowcase";
 import { FooterDoneHandoffPanel } from "./FooterDoneHandoffPanel";
 import { useFooterImages } from "./FooterImageContext";
+import { useComponentMode } from "./ComponentModeContext";
 
 const STITCH_PROJECT_ID = "14182036405227000116";
 const STITCH_SCREEN_ID  = "721499f3bb8045628248df64e7bbcb2d";
 
 export function FooterDoneShowcaseSection(): JSX.Element {
   const { logoSrc, reclamacionesSrc } = useFooterImages();
+  const { mode } = useComponentMode();
 
   return (
     <>
@@ -38,7 +40,7 @@ export function FooterDoneShowcaseSection(): JSX.Element {
       >
         <Footer />
       </ComponentShowcase>
-      <FooterDoneHandoffPanel />
+      {mode === "done" && <FooterDoneHandoffPanel />}
     </>
   );
 }
