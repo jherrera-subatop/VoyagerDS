@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { SectionTitle } from "../components/SectionTitle";
@@ -14,8 +16,20 @@ import { DetalleOfertaBarStitchShowcaseSection } from "../components/DetalleOfer
 import { GalleryMainStitchShowcaseSection } from "../components/GalleryMainStitchShowcaseSection";
 import { AuctionConditionsStitchShowcaseSection } from "../components/AuctionConditionsStitchShowcaseSection";
 import { InfoGeneralStitchShowcaseSection } from "../components/InfoGeneralStitchShowcaseSection";
+import { useComponentMode } from "../components/ComponentModeContext";
+
+const HR = (
+  <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "32px 0 0" }} />
+);
+
+const HR0 = (
+  <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "0" }} />
+);
 
 export function ComponentesPreviewSection() {
+  const { mode } = useComponentMode();
+  const isDone = mode === "done";
+
   return (
     <section>
       <SectionTitle
@@ -25,7 +39,7 @@ export function ComponentesPreviewSection() {
         badge="btn"
       />
 
-      {/* ── Button ────────────────────────────────────────────────────── */}
+      {/* ── Button — status: done ──────────────────────────────────────── */}
       <div
         className="rounded-lg border p-6 space-y-4"
         style={{
@@ -65,78 +79,78 @@ export function ComponentesPreviewSection() {
         </p>
       </div>
 
-      {/* ── detail-card ───────────────────────────────────────────── */}
-      <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "32px 0 0" }} />
-      <ParticipaStitchShowcaseSection />
+      {/* ── Stitch / pending — solo en modo normal ───────────────────── */}
+      {!isDone && (
+        <>
+          {HR}
+          <ParticipaStitchShowcaseSection />
 
-      {/* ── RelatedCard ───────────────────────────────────────────── */}
-      <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "32px 0 0" }} />
-      <RelatedCardStitchShowcaseSection />
+          {HR}
+          <RelatedCardStitchShowcaseSection />
 
-      {/* ── OfferCard (EN VIVO / NEGOCIABLE) ─────────────────────── */}
-      <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "32px 0 0" }} />
-      <OfferCardStitchShowcaseSection />
+          {HR}
+          <OfferCardStitchShowcaseSection />
 
-      {/* ── Visitas ───────────────────────────────────────────────── */}
-      <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "32px 0 0" }} />
-      <VisitasStitchShowcaseSection />
+          {HR}
+          <VisitasStitchShowcaseSection />
 
-      {/* ── QuickFilters ──────────────────────────────────────────── */}
-      <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "32px 0 0" }} />
-      <QuickFiltersStitchShowcaseSection />
+          {HR}
+          <QuickFiltersStitchShowcaseSection />
 
-      {/* ── ListingArea ───────────────────────────────────────────── */}
-      <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "32px 0 0" }} />
-      <EmpresaProfileStitchShowcaseSection />
+          {HR}
+          <EmpresaProfileStitchShowcaseSection />
+        </>
+      )}
 
-      {/* ── Footer + Sidebar comparten FooterImageProvider (logo VMC) ── */}
+      {/* ── Footer + Sidebar — status: done — siempre visibles ───────── */}
       <FooterImageProvider>
-        <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "0" }} />
+        {HR0}
         <FooterDoneShowcaseSection />
 
-        {/* ── Sidebar ──────────────────────────────────────────────── */}
-        <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "0" }} />
+        {HR0}
         <SidebarStitchShowcaseSection />
       </FooterImageProvider>
 
-      {/* ── DetalleOfertaBar ─────────────────────────────────────────── */}
-      <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "0" }} />
-      <DetalleOfertaBarStitchShowcaseSection />
+      {/* ── Stitch (detalle) — solo en modo normal ────────────────────── */}
+      {!isDone && (
+        <>
+          {HR0}
+          <DetalleOfertaBarStitchShowcaseSection />
 
-      <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "0" }} />
-      <GalleryMainStitchShowcaseSection />
+          {HR0}
+          <GalleryMainStitchShowcaseSection />
 
-      {/* ── AuctionConditions ─────────────────────────────────────────── */}
-      <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "0" }} />
-      <AuctionConditionsStitchShowcaseSection />
+          {HR0}
+          <AuctionConditionsStitchShowcaseSection />
 
-      {/* ── InfoGeneral ───────────────────────────────────────────────── */}
-      <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "0" }} />
-      <InfoGeneralStitchShowcaseSection />
+          {HR0}
+          <InfoGeneralStitchShowcaseSection />
 
-      {/* ── Cola ──────────────────────────────────────────────────────── */}
-      <div className="mt-8 p-6 rounded-lg border" style={{ borderColor: "var(--vmc-color-border-subtle)" }}>
-        <p className="text-sm font-semibold mb-2" style={{ color: "var(--vmc-color-text-primary)" }}>
-          Siguiente en cola
-        </p>
-        <ol className="list-decimal pl-5 space-y-2 text-sm" style={{ color: "var(--vmc-color-text-secondary)" }}>
-          <li>
-            Revisar{" "}
-            <Link href="/docs/taxonomia" className="underline underline-offset-2" style={{ color: "var(--vmc-color-text-brand)" }}>
-              taxonomía
-            </Link>{" "}
-            si cambia el detalle legacy (Challenge D).
-          </li>
-          <li>Header — pipeline UX → Stitch → Frontend</li>
-          <li>
-            Fundamentos técnicos en{" "}
-            <Link href="/docs/fundamentos" className="underline underline-offset-2" style={{ color: "var(--vmc-color-text-brand)" }}>
-              /docs/fundamentos
-            </Link>
-            .
-          </li>
-        </ol>
-      </div>
+          {/* ── Cola ────────────────────────────────────────────────── */}
+          <div className="mt-8 p-6 rounded-lg border" style={{ borderColor: "var(--vmc-color-border-subtle)" }}>
+            <p className="text-sm font-semibold mb-2" style={{ color: "var(--vmc-color-text-primary)" }}>
+              Siguiente en cola
+            </p>
+            <ol className="list-decimal pl-5 space-y-2 text-sm" style={{ color: "var(--vmc-color-text-secondary)" }}>
+              <li>
+                Revisar{" "}
+                <Link href="/docs/taxonomia" className="underline underline-offset-2" style={{ color: "var(--vmc-color-text-brand)" }}>
+                  taxonomía
+                </Link>{" "}
+                si cambia el detalle legacy (Challenge D).
+              </li>
+              <li>Header — pipeline UX → Stitch → Frontend</li>
+              <li>
+                Fundamentos técnicos en{" "}
+                <Link href="/docs/fundamentos" className="underline underline-offset-2" style={{ color: "var(--vmc-color-text-brand)" }}>
+                  /docs/fundamentos
+                </Link>
+                .
+              </li>
+            </ol>
+          </div>
+        </>
+      )}
     </section>
   );
 }
