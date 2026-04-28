@@ -1,586 +1,386 @@
-# VMC Subastas — Design System Specification
-**Version 1.1.0 · "The Digital Curator"**
-
-This document is the single source of truth for the VMC Subastas design system. Any AI tool, designer, or developer reading this document must use these specifications exactly to produce components. Do not invent values — every size, color, and rule is defined here.
+# VOYAGER — Design System Visual Specification
+**Version 2.1.0 · AI-Readable · W3C DTCG 2025**
 
 ---
 
-## 1. Brand Identity & Creative Direction
+## SCOPE
 
-**Platform:** VMC Subastas — a high-value vehicle auction platform in Peru.
+This document defines the VOYAGER visual vocabulary: color tokens, typography rules, spacing scale, radius, shadows, and constraints.
 
-**Creative North Star:** "The Digital Curator." We reject the standard marketplace aesthetic. Every screen is a curated gallery — secure, exclusive, editorial. The visual language is borrowed from luxury automotive magazines: deep tonal backgrounds, intentional asymmetry, high-contrast typographic hierarchy.
+**What this document IS:**
+Token values and their semantic roles. Decision rules for typography, color, spacing, and visual hierarchy. Constraints that prevent generic output.
 
-**Atmosphere:** "The Vault" — deep purple anchors the structure. Sharp orange signals urgency. Clean cyan marks negotiation. White surfaces float above the dark foundation.
+**What this document is NOT:**
+Component definitions. UI structure. Content layout. Application logic.
+This document does not tell you what UI to build — it tells you what visual language to apply once you have a structure.
 
-**Tone:** Authoritative, precise, high-stakes. Never playful. Never generic.
+**Two operating modes — both are valid with either file:**
+- **Mode A (With reference):** You have a reference — outerHTML, Copy Element, screenshot, or any combination. Respect it. Apply VOYAGER tokens to what exists. Do not invent structure, elements, or text.
+- **Mode B (Without reference):** You have no reference. Use the decision guides in Section 8 to make visual choices from scratch.
 
 ---
 
-## 2. Colors
+## 1. Visual Identity
 
-### Primary Palette
+**Aesthetic:** Institutional precision. Every surface is a curated, editorial space — secure, exclusive, authoritative. Deep tonal backgrounds. Intentional hierarchy. High-contrast typographic structure.
 
-| Name | HEX | Usage |
+**Color atmosphere:**
+- Deep purple = structure, authority, primary brand surfaces
+- Orange = urgency, time pressure, live/active signals
+- Cyan = negotiable, interactive, informational
+- White surfaces float above the dark foundation
+
+**Density:** High-information, professional. Never sparse, never playful.
+
+**Tone:** Authoritative · Precise · High-stakes · Never generic · Never casual.
+
+---
+
+## 2. Color Tokens
+
+Token format: `--voyager-{name}`. Reference HEX shown for identification only — always use the token in code, never the HEX.
+
+### 2.1 Brand Colors
+
+| Token | HEX | Semantic Role |
 |---|---|---|
-| **The Vault (Primary)** | `#22005C` | Navigation, primary CTAs, header, sidebar background, card accent border |
-| **En Vivo (Secondary)** | `#ED8936` | Live auction badges, urgent status, CTA accent |
-| **Negociable (Tertiary)** | `#00CACE` | Negotiable status, interactive highlights, info state |
-| **Vault Dark** | `#2E0F70` | Overlays, hover states on dark surfaces |
-| **Vault Mid** | `#3B1782` | Gradient end, action primary interactive |
-
-### Surface Tiers (The Layering System)
-
-| Level | HEX | Usage |
-|---|---|---|
-| **Level 0 — Page** | `#F8FAF9` | Base page background |
-| **Level 1 — Section** | `#F2F4F3` | Sub-sections, sidebar content areas, tinted wrappers |
-| **Level 2 — Card** | `#FFFFFF` | Cards, modals, input surfaces, floating elements |
-
-### Text Colors
-
-| Name | HEX / Opacity | Usage |
-|---|---|---|
-| On Surface | `#191C1C` | Primary text — never use pure black |
-| Body | `#494550` | Card body text, secondary content |
-| Muted | `#494550` at 50% | Subtitles, secondary labels |
-| Label | `#494550` at 40% | Form labels, metadata |
-| Price Label | `#99A1AF` | "PRECIO BASE" label above price |
-| Disabled | `#4A5565` | Disabled component text |
-| On Dark | `#FFFFFF` | Text on dark (purple/sidebar) surfaces |
-| On Dark Muted | `#FFFFFF` at 60% | Secondary text on dark surfaces |
-| On Dark Subtle | `#FFFFFF` at 30% | Tertiary text on dark surfaces |
-| Link | `#3B1782` | Clickable links |
-
-### Status Colors
-
-| State | HEX | Usage |
-|---|---|---|
-| Live indicator dot | `#EF4444` | Animated dot on live auction banners |
-| Success | `#22C55E` | Successful bid, confirmed action |
-| Warning | `#FFA000` | Near-expiry, attention needed |
-| Error | `#BA1A1A` | Failed bid, rejected action, form errors |
-| Info | `#00CACE` | Informational messages |
-
-### Utility Colors
-
-| Name | HEX | Usage |
-|---|---|---|
-| Ghost Border | `#22005C` at 10% | Only permitted functional border |
-| Section Divider | `#22005C` at 5% | Subtle row separators |
-| Input Background | `#E1E3E2` | Input field fill (no border) |
-| Skeleton / Inactive | `#D1D5DC` | Loading placeholders, disabled states |
-
-### Gradient
+| `--voyager-color-vault` | `#22005C` | Primary brand color. Full page/body background. Navigation, footer, brand surfaces, primary actions. |
+| `--voyager-color-vault-mid` | `#3B1782` | Gradient end point. Links. Interactive states of primary surfaces. |
+| `--voyager-color-vault-dark` | `#2E0F70` | Overlays. Hover states on dark surfaces. |
+| `--voyager-color-live` | `#ED8936` | Urgency signal. Time pressure. "Happening now." Also used as a promotional surface color. Orange = urgency — never red. |
+| `--voyager-color-negotiable` | `#00CACE` | Negotiable / available. Interactive highlights. Informational accent. |
 
 **Vault Gradient:** `linear-gradient(135deg, #22005C 0%, #3B1782 100%)`
-Use for: Hero banners, primary action areas, sidebar background, button fills.
+Role: Primary brand surface. Use on high-prominence structural elements.
 
-### Glassmorphism
+### 2.2 Surface Hierarchy
 
-**Glass Surface:** `rgba(255, 255, 255, 0.40)` + `backdrop-blur: 8px`
-Use for: Favorite icon buttons overlaid on vehicle images. Nowhere else.
+Three levels. Never skip levels — elevation communicates importance.
+
+| Token | HEX | Level | Role |
+|---|---|---|---|
+| `--voyager-surface-page` | `#F8FAF9` | 0 — Base | Content container background. Sits on top of the vault body. |
+| `--voyager-surface-section` | `#F2F4F3` | 1 — Mid | Sub-areas and grouped zones within the content container. |
+| `--voyager-surface-card` | `#FFFFFF` | 2 — Top | Foreground elements that float above their container: cards, modals, inputs, popovers. |
+
+### 2.3 Text Colors
+
+| Token | Value | Role |
+|---|---|---|
+| `--voyager-text-primary` | `#191C1C` | Main content. Never pure black. |
+| `--voyager-text-secondary` | `#494550` | Supporting content, body text. |
+| `--voyager-text-muted` | `#494550` at 50% | Subdued labels, secondary metadata. |
+| `--voyager-text-label` | `#494550` at 40% | Form labels, fine metadata. |
+| `--voyager-text-tertiary` | `#99A1AF` | Lowest-hierarchy text — reference labels, units. |
+| `--voyager-text-disabled` | `#4A5565` | Text on disabled elements. |
+| `--voyager-text-on-dark` | `#FFFFFF` | Text on dark (vault) surfaces. |
+| `--voyager-text-on-dark-muted` | `#FFFFFF` at 60% | Secondary text on dark surfaces. |
+| `--voyager-text-on-dark-subtle` | `#FFFFFF` at 30% | Tertiary text on dark surfaces. |
+| `--voyager-text-link` | `#3B1782` | Clickable links. |
+
+### 2.4 Status Colors
+
+| Token | HEX | Role |
+|---|---|---|
+| `--voyager-status-success` | `#22C55E` | Confirmed, completed, positive outcome. |
+| `--voyager-status-warning` | `#FFA000` | Attention required. Near threshold. |
+| `--voyager-status-error` | `#BA1A1A` | Failed, rejected, invalid. Red = error only — never urgency. |
+| `--voyager-status-info` | `#00CACE` | Neutral informational message. |
+| `--voyager-status-live-dot` | `#EF4444` | Broadcasting indicator only (animated dot). Not urgency. |
+
+### 2.5 Utility Colors
+
+| Token | Value | Role |
+|---|---|---|
+| `--voyager-border-ghost` | `#22005C` at 10% | Functional border when background shift alone is insufficient. |
+| `--voyager-divider-section` | `#22005C` at 5% | Subtle row/section separator. |
+| `--voyager-input-bg` | `#E1E3E2` | Input field fill. No visible border at rest. |
+| `--voyager-skeleton` | `#D1D5DC` | Loading states, disabled visual placeholders. |
+
+**Glass effect:** `background: rgba(255,255,255,0.40); backdrop-filter: blur(8px)`
+Use only when an element overlays a photographic image and must remain legible.
+
+### 2.6 Interactive State Derivation
+
+Do not create parallel tokens for hover/active. Derive mathematically:
+
+```css
+/* Hover — darken on dark surface */
+color-mix(in oklch, var(--voyager-color-vault) 85%, oklch(1 0 0))
+
+/* Hover — lighten on light surface */
+color-mix(in oklch, var(--voyager-surface-card) 92%, var(--voyager-color-vault))
+
+/* Active / pressed */
+oklch(from var(--voyager-color-vault) calc(l - 0.08) c h)
+```
 
 ---
 
 ## 3. Typography
 
-**Single typeface system.** Everything uses **Plus Jakarta Sans** (Google Fonts).
-Monospace exception: **Roboto Mono** for VINs, license plates, lot numbers only.
+Three typefaces with strictly separate roles. Assign by element function, not by visual preference.
+
+### 3.1 Typeface Decision Rule
 
 ```
-Import: https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap
+Is this a number, measurement, code, or identifier —
+or any value that may update dynamically?
+  → Roboto Mono  +  font-variant-numeric: tabular-nums
+
+Is this body copy, description, metadata, table content,
+form helper text, or dense readable prose?
+  → Roboto
+
+Is this a heading, label, button text, badge, nav item,
+tag, or any UI chrome element?
+  → Plus Jakarta Sans
 ```
 
-### Font Weights
+When uncertain: Roboto for reading, Jakarta Sans for interaction.
 
-| Name | Value |
-|---|---|
-| Regular | 400 |
-| SemiBold | 600 |
-| Bold | 700 |
-| ExtraBold | 800 |
+### 3.2 Type Scale
 
-### Type Scale
+**Plus Jakarta Sans — Headings & UI Chrome**
 
-| Role | Size | Line Height | Weight | Tracking | Use |
-|---|---|---|---|---|---|
-| **display** | 56px | 84px | 800 | -1.5px | Hero headlines only — magazine impact |
-| **h1** | 30px | 44px | 800 | -1.5px | Page-level headings, auction price hero |
-| **h2** | 20px | 32px | 800 | -0.5px | Section headings (uppercase) |
-| **h3** | 18px | 28px | 800 | -0.5px | Sub-section headings |
-| **h4** | 14px | 20px | 700 | 0px | Featured card titles, sidebar headings |
-| **body** | 16px | 24px | 400 | 0px | Default body text |
-| **bodySm** | 14px | 20px | 400 | 0px | Secondary body, specs, descriptions |
-| **caption** | 11px | 16px | 700 | 0px | Card titles (standard), hero subtitles |
-| **label** | 12px | 20px | 600 | 0.9px | Prices, meta-info, form inputs |
-| **badge** | 10px | 16px | 700 | 1.0px | Status badge text (always uppercase) |
-| **micro** | 8px | 12px | 600 | 0px | Ultra-dense labels (exception only) |
+| Step | Size | Line Height | Weight | Role |
+|---|---|---|---|---|
+| `display-xl` | 48px | 56px | 700 | Primary hero headline. One per screen maximum. |
+| `display-lg` | 40px | 48px | 700 | Secondary hero. Section openers. |
+| `display-md` | 32px | 40px | 600 | Large section or modal title. |
+| `heading-xl` | 28px | 36px | 600 | Primary page heading. |
+| `heading-lg` | 24px | 32px | 600 | Section heading. |
+| `heading-md` | 20px | 28px | 600 | Subsection title. |
+| `heading-sm` | 18px | 24px | 500 | Widget title. Grouped label. |
+| `label-lg` | 16px | 24px | 500 | Button text. Navigation item. |
+| `label-md` | 14px | 20px | 500 | Form label. Column header. |
+| `label-sm` | 12px | 16px | 500 | Badge text. Tag. Chip. |
 
-### Typography Rules
+**Roboto — Body & Data**
 
-- **Prices:** Always use `h1` (30px) size, `tabular-nums` rendering — numbers must not shift layout
-- **Vehicle names on cards:** Always uppercase, `caption` role (11px/700)
-- **Section headings:** Always uppercase
-- **VINs, plates, lot IDs:** Roboto Mono, `tabular-nums`
-- **Never use Inter.** If any design source shows Inter, substitute Plus Jakarta Sans
+| Step | Size | Line Height | Weight | Role |
+|---|---|---|---|---|
+| `body-lg` | 18px | 28px | 400 | Lead paragraph. Prominent description. |
+| `body-md` | 16px | 24px | 400 | Standard body. Form input value. |
+| `body-sm` | 14px | 20px | 400 | Supporting copy. Helper text. |
+| `caption` | 12px | 16px | 400 | Footnote. Secondary metadata. |
+| `overline` | 10px | 14px | 500 | Category indicator. Always uppercase + letter-spacing +0.08em. |
+
+**Roboto Mono — Numeric & Identifiers**
+
+Always pair with `font-variant-numeric: tabular-nums`.
+
+| Step | Size | Line Height | Weight | Role |
+|---|---|---|---|---|
+| `numeric-xl` | 40px | 48px | 700 | Prominent primary value. |
+| `numeric-lg` | 32px | 40px | 600 | Large secondary value. |
+| `numeric-md` | 24px | 32px | 500 | Mid-size value or counter display. |
+| `numeric-sm` | 16px | 24px | 400 | Table data. Spec value. |
+| `numeric-xs` | 12px | 16px | 400 | Fine identifier. Code fragment. |
+
+### 3.3 Casing Rules
+
+```
+UPPERCASE → overline style only (category indicators, `text-transform: uppercase`)
+           → preserve if source already has it — do not add it
+
+Mixed case → everything else: headings, body, labels, button text, badge text
+           → preserve from source exactly — never transform
+
+Never apply text-transform to content you did not write.
+```
 
 ---
 
-## 4. Spacing System
+## 4. Spacing Scale
 
-**Base grid: 4px.** All spacing values are multiples of 4.
+Base grid: 4px minimum. All block spacing (padding, margin, gap) must be a multiple of 4px.
 
-| Token | Value | Use |
+| Token | Value | When to use |
 |---|---|---|
-| space-1 | 4px | Icon padding, micro gaps |
-| space-2 | 8px | Between badge and text, internal chip gap |
-| space-3 | 12px | Card internal padding |
-| space-4 | 16px | Grid column gap, standard padding |
-| space-5 | 20px | Nav padding, section inner padding |
-| space-6 | 24px | Hero padding, modal padding |
-| space-7 | 28px | — |
-| space-8 | 32px | Section vertical padding |
-| space-10 | 40px | Between sections |
-| space-12 | 48px | — |
-| space-16 | 64px | Header height, sidebar brand area height |
+| `space.025` | 2px | Hairline gap. Icon-to-text alignment. |
+| `space.050` | 4px | Tight internal gap. Icon padding. Inline spacing. |
+| `space.100` | 8px | Base unit. Standard gap between related elements. |
+| `space.150` | 12px | Comfortable internal padding in dense containers. |
+| `space.200` | 16px | Standard component padding. Grid column gap. |
+| `space.300` | 24px | Section horizontal padding. Generous component padding. |
+| `space.400` | 32px | Section vertical padding. |
+| `space.600` | 48px | Major section separation. |
+| `space.800` | 64px | Structural height unit. Large layout gap. |
+| `space.1000` | 80px | Wide layout spacing. |
+| `space.1200` | 96px | Maximum layout spacing. |
 
-### Semantic Spacing
-
-| Name | Value | Use |
-|---|---|---|
-| Card padding | 12px | Inside cards |
-| Card gap | 8px | Between card internal elements |
-| Grid gap | 16px | Between cards in a grid |
-| Section padding X | 24px | Horizontal padding of sections |
-| Section padding Y | 32px | Vertical padding of sections |
-| Between sections | 40px | Gap between major content blocks |
-| Header height | 64px | Fixed header/sidebar brand area height |
+**Snap rule:** Always use the nearest token. Never use 10px, 15px, 20px, 28px, 40px — they do not exist in this system.
 
 ---
 
 ## 5. Border Radius
 
-| Token | Value | Use |
+| Token | Value | When to use |
 |---|---|---|
-| none | 0px | Tables, data cells — never rounded |
-| sm (surface) | 4px | Cards, badges, inputs, buttons, sections |
-| md | 8px | — (reserved) |
-| lg | 16px | Modals, drawers |
-| full | 9999px | Icon buttons (circular: 28×28, 48×48) |
+| `radius.none` | 0px | Tables. Data cells. Structural dividers. |
+| `radius.sm` | 4px | **Default for almost everything:** cards, inputs, buttons, badges, sections. |
+| `radius.md` | 8px | Inner elements nested inside a `radius.lg` container. |
+| `radius.lg` | 16px | Modals. Drawers. Large floating panels. |
+| `radius.full` | 9999px | Circular elements. Pill badges. |
 
-**Rule:** Almost everything uses 4px. The system is intentionally restrained — a financial/transactional platform must feel rigorous, not soft.
+**Concentric rounding:** Inner radius = Outer container radius − Container padding.
+If a container uses `radius.lg` (16px) with 8px padding → inner elements use at most `radius.md` (8px).
 
 ---
 
 ## 6. Shadows
 
-Only two shadows are permitted in the system:
+Exactly two. Do not create new ones.
 
-| Name | Value | Use |
+| Token | Value | When to use |
 |---|---|---|
-| **Card shadow (brand-tinted)** | `0 8px 16px rgba(34, 0, 92, 0.06)` | All cards at rest — Vault-tinted |
-| **Floating shadow** | `0 8px 16px rgba(0, 0, 0, 0.10)` | Active/hover cards, modals |
-
-**Do not use generic `box-shadow` values.** If neither of these fits, the design needs to be reconsidered.
+| `shadow.sm` | `0 8px 16px rgba(34,0,92,0.06)` | Resting elevation. Subtle depth on foreground elements. |
+| `shadow.md` | `0 8px 16px rgba(0,0,0,0.10)` | Raised elevation. Hover state. Floating panels. Modals. |
 
 ---
 
-## 7. Layout
+## 7. Visual Constraints
 
-- **Max width:** 1024px, centered
-- **Body background:** `#F2F4F3`
-- **Layout pattern:** Sidebar (256px fixed) + Content area (768px)
-- **Header height:** 64px
+### Separation
+Never use `1px solid` borders to divide content areas. Separation comes from background color level shifts only.
+Exception: `--voyager-border-ghost` when a visible edge is functionally required.
 
-### Layout Structure (Desktop 1024px)
+### Interactive states
+Every interactive element must define:
+`Default → Hover → Focus → Active → Disabled → Loading → Error`
+
+Focus ring: `outline: 2px solid var(--voyager-color-vault-mid); outline-offset: 2px`
+Never use `box-shadow` for focus — it is clipped by `overflow: hidden`.
+
+Disabled: `opacity: 0.72` + `grayscale(1)`. Do not change the color.
+
+### Color constraints
+- Never use `#000000` — use `--voyager-text-primary`
+- Never write HEX in code — always reference a `--voyager-` token
+- Never use red for urgency — `--voyager-color-live` (orange) is the urgency signal. Red = error only.
+- Never use glassmorphism outside image overlay contexts
+- Never use colored backgrounds to separate content areas — use surface level shifts
+
+### Typography constraints
+- Never use Inter or any font outside this system
+- Never create new text styles — use only the locked scale
+- Never use a proportional font for numeric values that may update
+- Never omit `tabular-nums` on live numeric values
+
+### Spacing constraints
+- Never use values not in the scale (10px, 15px, 20px, 28px, 40px)
+- Never use `rem` or `em` — px from the token scale only
+
+---
+
+## 8. Decision Guide — Generating Without a Reference
+
+Use this section when you have no outerHTML and must make visual choices from scratch.
+
+### Color decisions
+
+**When to use `--voyager-color-vault` (deep purple #22005C):**
+- Primary brand surfaces: navigation, header, footer, sidebar backgrounds
+- Primary action buttons (filled, high prominence)
+- Any element that establishes authority or structural hierarchy
+- Text on light surfaces that needs maximum brand weight
+
+**When to use `--voyager-color-live` (orange #ED8936):**
+- Time-sensitive signals: "happening now", imminent deadlines, urgent status
+- Accent on elements requiring immediate user attention
+- Live/active state indicators
+- Never for errors — that is `--voyager-status-error`
+
+**When to use `--voyager-color-negotiable` (cyan #00CACE):**
+- Interactive highlights on light surfaces
+- Available / open / negotiable state
+- Informational accents (not warnings, not errors)
+- Secondary interactive accents when vault would be too heavy
+
+**When to use status colors:**
+- Success → confirmed action, positive outcome
+- Warning → approaching a limit, soft alert
+- Error → failed action, invalid state, rejection
+- Info → neutral message, no action required
+
+**When to use surface levels:**
+- `vault` → full page/body background — the dark canvas the entire layout sits on
+- `surface-page` → content container background — the first light level on top of vault
+- `surface-section` → grouped zones within the content container
+- `surface-card` → foreground elements that float above their container
+
+**When to use text hierarchy:**
+- `text-primary` → main content, headings, primary labels
+- `text-secondary` → body copy, supporting text
+- `text-muted` → secondary labels, subdued metadata
+- `text-label` → form labels, fine detail
+- `text-tertiary` → lowest-hierarchy reference text, units, codes
+- `text-on-dark` → any text placed on vault/dark surfaces
+
+### Typography decisions
 
 ```
-┌─────────────────────────────────────────┐
-│  Header — 768px (right panel only)  64px│
-├──────────┬──────────────────────────────┤
-│          │                              │
-│ Sidebar  │   Content Area               │
-│  256px   │   768px                      │
-│          │                              │
-│ (full    │                              │
-│  height  │                              │
-│  incl.   │                              │
-│  brand   │                              │
-│  area)   │                              │
-├──────────┴──────────────────────────────┤
-│  Footer — 1024px full width             │
-└─────────────────────────────────────────┘
+Is this the primary action or a UI label?        → Plus Jakarta Sans, label-lg or label-md
+Is this a heading or title?                      → Plus Jakarta Sans, heading-*
+Is this body text the user reads?                → Roboto, body-md or body-sm
+Is this a number, measurement, or identifier?    → Roboto Mono, appropriate numeric-* step
+Is this a category indicator above other text?   → Roboto overline, uppercase
 ```
 
----
-
-## 8. Core Rules
-
-### The "No-Line" Rule
-**Never use 1px solid borders to separate content areas.** Separation must come from background color shifts only (e.g., `#FFFFFF` card on `#F2F4F3` section). If a border is functionally required for accessibility, use a "Ghost Border": `#22005C` at 10% opacity.
-
-### The "Signature Finish" Rule
-Every auction card must have a **4px solid bottom border** as a brand signature. Color depends on lot status:
-- Live → `#ED8936`
-- Negotiable → `#00CACE`
-- Upcoming / New → `#22005C`
-- Closed → `#D1D5DC`
-- Featured → `#191C1C`
-
-### The "No Black" Rule
-Never use `#000000` for text. Always use `#191C1C` (on_surface).
-
-### The "No HEX in Code" Rule
-In component code, always reference design tokens. Never write HEX values directly.
-
-### The "7 States" Rule
-Every interactive component must define all 7 states: Default · Hover · Focus · Active · Disabled · Loading · Error
-
----
-
-## 9. Components
-
-### 9.1 Button (Primary)
-
-- **Background:** Vault Gradient (`135deg #22005C → #3B1782`)
-- **Text:** `#FFFFFF`, badge role (10px/700/uppercase), letter-spacing 1.0px
-- **Height:** 44px
-- **Border radius:** 4px
-- **Padding:** 0 20px
-- **States:**
-  - Hover: lighten gradient (Vault Mid `#3B1782` dominant)
-  - Focus: 2px outline `#3B1782`, 2px offset
-  - Active: scale 0.97
-  - Disabled: 72% opacity, `grayscale(1)`
-  - Loading: animated pulse, 72% opacity
-  - Error: background `#BA1A1A`
-
-### 9.2 Button (Secondary / Ghost)
-
-- **Background:** transparent
-- **Border:** 1px `#22005C` (ghost border exception — functional)
-- **Text:** `#22005C`, badge role uppercase
-- **Height:** 44px
-- **Border radius:** 4px
-
-### 9.3 Input Field
-
-- **Background:** `#E1E3E2` (no border, no outline at rest)
-- **Text:** `#191C1C`, bodySm (14px/400)
-- **Label:** Above field, caption role (11px/700/uppercase), `#494550` at 40%
-- **Height:** 48px
-- **Border radius:** 4px
-- **Focus state:** Ghost border `#22005C` 10%
-- **Error state:** Ghost border `#BA1A1A` 50%
-
-### 9.4 Badge (Status)
-
-- **Shape:** Pill — border-radius 9999px
-- **Padding:** 2px 8px
-- **Font:** badge role (10px/700/uppercase/1.0px tracking)
-- **Variants:**
-
-| Variant | Background | Text |
-|---|---|---|
-| EN VIVO | `#ED8936` | `#FFFFFF` |
-| NEGOCIABLE | `#00CACE` | `#22005C` |
-| PRÓXIMAMENTE | `#22005C` | `#FFFFFF` |
-| CERRADO | `#9CA3AF` | `#FFFFFF` |
-| DESTACADO | `#191C1C` | `#FFFFFF` |
-| NUEVO | `#3B1782` | `#FFFFFF` |
-
-- **EN VIVO** badge includes an animated orange dot (8px circle, `#EF4444`, pulse animation) to the left of text.
-
-### 9.5 Auction Card (Standard)
-
-**Dimensions:** Width flexible (fits grid), image height 132px
-
-**Structure (top to bottom):**
-1. **Image area** (132px) — `#F2F4F3` background when no image
-   - Badge overlay: top-left, 8px from edges
-   - Placeholder: centered car silhouette SVG at 25% white opacity on Vault Gradient
-2. **Content area** — 12px padding, 8px gap between elements
-   - Vehicle name: caption role (11px/700/uppercase), `#191C1C`
-   - Subtitle (year · location): label role (12px/400), `#494550` at 50%
-   - Price row: PriceDisplay component + Favorite button (right-aligned)
-   - Countdown (if active): "CIERRA EN" label + timer
-3. **Signature bottom border** — 4px solid, color by status (see Rule 9.4)
-
-**Card surface:** `#FFFFFF`, border-radius 4px, shadow `0 8px 16px rgba(34, 0, 92, 0.06)`
-
-**Favorite button:** 32×32px circular (border-radius 9999px)
-- Default: `#22005C` at 5% background, muted icon
-- Favorited: `#22005C` background, white heart icon
-- On image (Featured variant): glassmorphic — `rgba(255,255,255,0.40)` + `backdrop-blur: 8px`, white icon
-
-### 9.6 Auction Card (Featured)
-
-Same as Standard but:
-- **Image height:** 200px
-- **Vehicle name:** h4 role (14px/700)
-- **Badge + Favorite:** Both overlaid on image (glassmorphic favorite)
-- **Price:** h1 role (30px) for price amount
-- **Shadow:** Floating shadow `0 8px 16px rgba(0,0,0,0.10)`
-
-### 9.7 Auction Card (Compact)
-
-Horizontal list item, no image:
-- **Height:** ~44px
-- **Background:** `#FFFFFF`
-- **Layout:** Badge · Vehicle name (truncated) · [Countdown] · Price — all in one row
-- **Separator:** Bottom border `#22005C` at 5% (last item has no border)
-
-### 9.8 CountdownTimer
-
-- **Font:** Roboto Mono, h1 role (30px/800), `tabular-nums`
-- **Format:** HH:MM:SS
-- **States:**
-  - Default (> 5 min): `#191C1C`
-  - **Urgent (< 5 min):** `#ED8936` — orange, NOT red. Urgency signal only.
-  - Expired: `#99A1AF` — shows "CERRADO"
-- **Exposes** `data-status="default|urgent|expired"` on root element
-
-### 9.9 PriceDisplay
-
-Three contexts:
-
-| Context | Label size | Amount size | Use |
-|---|---|---|---|
-| hero | 12px/600 | 30px/800 | Auction summary widget, featured card |
-| card | 10px/600 | 16px/700 | Standard auction card |
-| compact | 10px/600 | 12px/700 | Compact card, list views |
-
-- **Label text** ("PRECIO BASE"): `#99A1AF`, uppercase, tracking 0.9px
-- **Currency symbol** ("US$"): same size as amount, `#22005C`
-- **Amount:** `#191C1C`, `tabular-nums`
-
-### 9.10 AuctionStatusBanner
-
-Full-width horizontal bar that appears below the header on detail pages.
-
-| Status | Background | Text |
-|---|---|---|
-| EN VIVO | `#ED8936` | `#22005C` |
-| PRÓXIMAMENTE | `#22005C` | `#FFFFFF` |
-| NEGOCIABLE | `#00CACE` | `#22005C` |
-| CERRADO | `#9CA3AF` | `#FFFFFF` |
-
-**Content:** Animated dot (EN VIVO only) · Status label · Separator · Lot # · Lot title · Countdown timer (right-aligned)
-
-**Exposes** `data-status="live|upcoming|negotiable|closed"` on root element.
-
-### 9.11 AuctionSummaryWidget
-
-Right-column widget on auction detail page (276px wide).
-
-**Structure:**
-- Lot ID label (`#99A1AF`, badge role)
-- Vehicle title (h3, uppercase)
-- Subtitle (bodySm, muted)
-- Status badge
-- Current price: h1 role (30px)
-- Starting price: label role (muted)
-- Total bids count
-- Countdown timer
-- Minimum bid amount (highlighted)
-
-**Surface:** `#FFFFFF`, 4px radius, brand-tinted shadow
-
-### 9.12 AuctionActionBar
-
-Full-width action bar for bidding:
-- **Full variant:** Bid amount input + "OFERTAR" primary button + participation counter
-- **Compact variant:** Condensed for mobile-like contexts
-- Participation limit shown as `X/3 participaciones`
-
-### 9.13 Header (Upgrade version)
-
-**Height:** 64px · **Width:** 768px (right panel) · **Background:** `#22005C`
-
-**Content:** Left — Breadcrumb/page title · Right — Search icon · Notifications icon · User avatar (32px circular)
-
-**No standalone logo** — logo lives in Sidebar brand area.
-
-### 9.14 Sidebar (Upgrade version)
-
-**Width:** 256px · **Full height** (includes 64px brand area at top) · **Background:** `#22005C`
-
-**Structure (top to bottom):**
-1. **Brand area** (64px): VMC logo centered/left-aligned, white
-2. **Navigation items:** Icon + label, 44px tall each
-   - Default: white at 60% opacity
-   - Active: white background at 10% opacity, white at 100%
-   - Hover: white background at 5% opacity
-3. **Bottom section:** User info or settings link
-
-### 9.15 Footer (Upgrade version)
-
-**Background:** `#22005C` · **Width:** 1024px full width · **Padding:** 32px 32px 16px
-
-**Structure:**
-- Top section (flex row): Brand column (logo + description) + Nav columns (Plataforma / Legal / Contacto + Social)
-- Bottom bar: Copyright text (left) + Cookie / Sitemap / Accessibility links (right)
-- Includes "Libros de Reclamaciones" image (Peruvian legal requirement)
-
-**Text:** White at 60% opacity for body, white at 80% for headings
-
-### 9.16 VehicleImageGallery
-
-- **Main image:** Full width, ~280px height, object-cover
-- **Thumbnails:** Row of 3–4 smaller images below, 64px tall, 4px gap
-- **Active thumbnail:** 2px `#22005C` border indicator
-- **Navigation:** Prev/Next arrows overlaid on main image (glassmorphic circles)
-
-### 9.17 VehicleSpecsRow
-
-Horizontal row of spec chips. Each chip:
-- Icon (SVG, 16×16px, `#22005C`) + label (badge role, muted) + value (label role, `#191C1C`)
-- No borders between chips — separated by spacing only
-- Icons: year calendar · km speedometer · fuel pump · gear transmission
-
-### 9.18 DataQualityBadge
-
-- **High:** `#22C55E` icon + "DATOS VERIFICADOS" label
-- **Medium:** `#FFA000` icon + "DATOS PARCIALES"
-- **Low:** `#99A1AF` icon + "DATOS BÁSICOS"
-
-### 9.19 Accordion
-
-Collapsible sections for vehicle info, terms, required documents:
-- **Header:** h4 role + chevron icon (right-aligned)
-- **Background:** `#F2F4F3`, no border
-- **Expanded background:** `#FFFFFF`
-- **Separator:** background shift only (No-Line Rule)
-- **Transition:** 300ms standard easing
-
-### 9.20 DocumentDownloadRow
-
-List item for downloadable documents:
-- **Icon:** File type icon (PDF red / XLS green / DOC blue), 20×20px
-- **Label:** bodySm (14px)
-- **Download button:** Ghost button, "DESCARGAR", badge role (10px)
-- **Separator:** No border, spacing only
-
-### 9.21 SubascoinsPromoBanner
-
-Promotional strip for SubasCoins loyalty program:
-- **Background:** Vault Gradient
-- **Text:** White
-- **Coin icon:** Yellow/gold circular icon
-- **CTA:** Secondary ghost button (white border, white text)
-
-### 9.22 HelpCenterBanner
-
-Full-width section at page bottom:
-- **Background:** `#F2F4F3`
-- **Content:** Help icon + heading (h3) + description (bodySm) + CTA button
-- **Padding:** 32px section padding
-
-### 9.23 AuctioneerSection
-
-Section grouping auction cards by seller:
-- **Header:** Seller name (h2 uppercase) + offer count + "IR AL PERFIL" link
-- **Card grid:** 4 columns, 16px gap, standard AuctionCards
-- **Background:** `#F8FAF9` page background
-
-### 9.24 TextField / SearchInput
-
-- No border at rest
-- Background: `#E1E3E2`
-- Placeholder: `#494550` at 40%
-- Search icon: left-aligned inside field, `#22005C`
-- Height: 44px, border-radius: 4px
-- Focus: ghost border `#22005C` at 10%
-
-### 9.25 Alert / Toast
-
-| Type | Background | Icon color | Text |
-|---|---|---|---|
-| Success | `#22C55E` at 10% | `#22C55E` | `#191C1C` |
-| Warning | `#FFA000` at 10% | `#FFA000` | `#191C1C` |
-| Error | `#BA1A1A` at 10% | `#BA1A1A` | `#191C1C` |
-| Info | `#00CACE` at 10% | `#00CACE` | `#191C1C` |
-
-- Border radius: 4px
-- Left accent border: 4px solid (icon color)
-- Toast: fixed position, 300ms appear/dismiss transition
-
----
-
-## 10. Interaction & Motion
-
-| Duration | Value | Use |
-|---|---|---|
-| Micro | 150ms | Hover, focus, icon transitions |
-| Standard | 300ms | Modals, accordions, page transitions |
-
-**Easing:** `cubic-bezier(0.3, 0, 0, 1)` for all transitions.
-
-**Reduced motion:** When `prefers-reduced-motion: reduce` is set, all transitions and animations are disabled.
-
----
-
-## 11. Accessibility
-
-- **Minimum contrast:** 4.5:1 for body text, 3:1 for large text and icons
-- **Financial data** (live prices, countdown timers): APCA Lc 90 minimum
-- **Focus ring:** 2px solid `#3B1782`, 2px offset — visible on all interactive elements
-- **Tab order:** Logical, top-to-bottom, left-to-right
-- **`aria-live="polite"`** on CountdownTimer and AuctionStatusBanner
-- **`tabular-nums`** on all numeric data that updates in real time
-
----
-
-## 12. Token Architecture (for AI tools)
-
-### Why Token Names Matter
-When an AI modifies component code, it treats `--color-action-primary` as an **immutable design rule**, but treats `#22005C` as an **overridable aesthetic preference**. Always use token names, never raw values, in component code.
-
-### Three-Level Hierarchy
+### Casing decisions
 
 ```
-Primitives  →  Semantic  →  Component Tokens
-(raw values)   (intent)     (component decisions)
+UPPERCASE only for:
+  - overline-style category indicators (small, above content, Roboto overline)
+  - Elements that are already uppercase in the source
 
-#22005C  →  --color-action-primary  →  BidButton.bg.default
-                                        BidButton.bg.loading
+Mixed case for everything else:
+  - All headings, labels, button text, badge text, navigation
+  - Preserve casing from any source material exactly
+  - Do not apply text-transform unless the element is an overline
 ```
 
-### Component Tokens Quick Reference
+### Spacing decisions
 
-| Component | Key tokens |
-|---|---|
-| AuctionCard | `border` color per status (live/negotiable/upcoming/closed/featured) |
-| BidButton | `bg` per state (default/hover/loading/error/disabled) |
-| Badge | `bg` and `text` per status variant |
-| CountdownTimer | `text.default` / `text.urgent` (urgent = orange #ED8936, NOT red) |
-| AuctionStatusBanner | `bg` and `text` per status |
+```
+Inside a tight element (badge, chip, icon button):   space.050 (4px) or space.100 (8px)
+Between related items in a group:                    space.100 (8px)
+Padding inside a card or container:                  space.150 (12px) or space.200 (16px)
+Between cards in a grid:                             space.200 (16px)
+Horizontal section padding:                          space.300 (24px)
+Vertical section padding:                            space.400 (32px)
+Between major page sections:                         space.600 (48px)
+```
 
-### `data-status` Attribute
-All status-driven components expose `data-status` on their root element:
-- AuctionCard: `data-status="live|negotiable|upcoming|closed|featured"`
-- AuctionStatusBanner: `data-status="live|upcoming|negotiable|closed"`
-- CountdownTimer: `data-status="default|urgent|expired"`
+### Accent border decisions
+
+When an element needs a status accent:
+- Use a `4px solid` bottom border as the accent mechanism
+- Map the semantic role to the nearest color token:
+  - Active / live / urgent → `--voyager-color-live`
+  - Available / open / negotiable → `--voyager-color-negotiable`
+  - Primary / brand / standard → `--voyager-color-vault`
+  - Inactive / disabled / closed → `--voyager-skeleton`
 
 ---
 
-## 13. Do's and Don'ts
+## 9. Mode A — Upgrade Workflow (with reference)
 
-### Do
-- Use background color shifts to create separation (not borders)
-- Overlap elements for editorial feel (image slightly breaking card container)
-- Use the Vault Gradient for hero areas and primary CTAs
-- Apply the 4px signature bottom border on every auction card
-- Keep vehicle names uppercase everywhere
-- Use `tabular-nums` on all prices and timers
-- Add generous white space — if crowded, increase section gap to 40px
+When you have a reference — outerHTML, Copy Element, screenshot, or any combination:
 
-### Don't
-- Don't use `#000000` — use `#191C1C`
-- Don't use 1px solid borders for layout separation
-- Don't use shadows other than the two defined ones
-- Don't use Inter or any font other than Plus Jakarta Sans (or Roboto Mono for codes)
-- Don't use red for urgency/countdown — red means error only
-- Don't expose primitive color names in component code
-- Don't create new spacing values — snap to the 4px grid
+1. **Structure is locked.** The reference is the contract. Do not add, remove, reorder, or rename any element. Do not change any text. Do not invent elements that are not in the reference.
+
+2. **Tokenize each color.** For every color in the source, identify its role (is it a brand color? primary text? muted text? urgency? status?) and map it to the nearest `--voyager-` token that serves the same role.
+
+3. **Apply the typeface decision rule** from Section 3 to each text element.
+
+4. **Snap all spacing** to the nearest token in the Section 4 scale.
+
+5. **Preserve all decorative visual properties.** If the source has a bottom border, a circular background, a shadow — keep it. Map its color to the nearest `--voyager-` token. Do not remove visual elements.
+
+6. **Apply radius and separation rules** from Sections 5 and 6.
+
+---
+
+*VOYAGER Design System v2.1.0 — Last updated: 2026-04-28*

@@ -7,7 +7,7 @@ import { ComponentesPreviewSection } from "../sections/ComponentesPreviewSection
 export default function DocsComponentesPage() {
   return (
     <ComponentModeProvider>
-      <div className="max-w-7xl mx-auto px-6 pb-24 pt-12">
+      <div className="px-8 pb-24 pt-10">
         <ComponentesPreviewSection />
       </div>
       <ComponentModePill />

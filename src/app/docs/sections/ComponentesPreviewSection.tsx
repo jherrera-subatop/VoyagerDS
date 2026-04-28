@@ -4,6 +4,16 @@ import { SectionTitle } from "../components/SectionTitle";
 import { FooterImageProvider } from "../components/FooterImageContext";
 import { FooterDoneShowcaseSection } from "../components/FooterDoneShowcaseSection";
 import { SidebarStitchShowcaseSection } from "../components/SidebarStitchShowcaseSection";
+import { ParticipaStitchShowcaseSection } from "../components/ParticipaStitchShowcaseSection";
+import { RelatedCardStitchShowcaseSection } from "../components/RelatedCardStitchShowcaseSection";
+import { OfferCardStitchShowcaseSection } from "../components/OfferCardStitchShowcaseSection";
+import { VisitasStitchShowcaseSection } from "../components/VisitasStitchShowcaseSection";
+import { QuickFiltersStitchShowcaseSection } from "../components/QuickFiltersStitchShowcaseSection";
+import { EmpresaProfileStitchShowcaseSection } from "../components/EmpresaProfileStitchShowcaseSection";
+import { DetalleOfertaBarStitchShowcaseSection } from "../components/DetalleOfertaBarStitchShowcaseSection";
+import { GalleryMainStitchShowcaseSection } from "../components/GalleryMainStitchShowcaseSection";
+import { AuctionConditionsStitchShowcaseSection } from "../components/AuctionConditionsStitchShowcaseSection";
+import { InfoGeneralStitchShowcaseSection } from "../components/InfoGeneralStitchShowcaseSection";
 
 export function ComponentesPreviewSection() {
   return (
@@ -55,14 +65,54 @@ export function ComponentesPreviewSection() {
         </p>
       </div>
 
+      {/* ── detail-card ───────────────────────────────────────────── */}
+      <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "32px 0 0" }} />
+      <ParticipaStitchShowcaseSection />
+
+      {/* ── RelatedCard ───────────────────────────────────────────── */}
+      <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "32px 0 0" }} />
+      <RelatedCardStitchShowcaseSection />
+
+      {/* ── OfferCard (EN VIVO / NEGOCIABLE) ─────────────────────── */}
+      <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "32px 0 0" }} />
+      <OfferCardStitchShowcaseSection />
+
+      {/* ── Visitas ───────────────────────────────────────────────── */}
+      <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "32px 0 0" }} />
+      <VisitasStitchShowcaseSection />
+
+      {/* ── QuickFilters ──────────────────────────────────────────── */}
+      <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "32px 0 0" }} />
+      <QuickFiltersStitchShowcaseSection />
+
+      {/* ── ListingArea ───────────────────────────────────────────── */}
+      <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "32px 0 0" }} />
+      <EmpresaProfileStitchShowcaseSection />
+
       {/* ── Footer + Sidebar comparten FooterImageProvider (logo VMC) ── */}
       <FooterImageProvider>
+        <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "0" }} />
         <FooterDoneShowcaseSection />
 
         {/* ── Sidebar ──────────────────────────────────────────────── */}
         <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "0" }} />
         <SidebarStitchShowcaseSection />
       </FooterImageProvider>
+
+      {/* ── DetalleOfertaBar ─────────────────────────────────────────── */}
+      <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "0" }} />
+      <DetalleOfertaBarStitchShowcaseSection />
+
+      <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "0" }} />
+      <GalleryMainStitchShowcaseSection />
+
+      {/* ── AuctionConditions ─────────────────────────────────────────── */}
+      <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "0" }} />
+      <AuctionConditionsStitchShowcaseSection />
+
+      {/* ── InfoGeneral ───────────────────────────────────────────────── */}
+      <hr style={{ border: "none", borderTop: "1px solid var(--vmc-color-border-subtle)", margin: "0" }} />
+      <InfoGeneralStitchShowcaseSection />
 
       {/* ── Cola ──────────────────────────────────────────────────────── */}
       <div className="mt-8 p-6 rounded-lg border" style={{ borderColor: "var(--vmc-color-border-subtle)" }}>
