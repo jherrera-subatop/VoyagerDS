@@ -1,3 +1,68 @@
+/**
+ * @figma-spec
+ * @component    InfoGeneral | 437x2197 | Page:Stitch
+ *
+ * @tokens
+ *   vault    : --color-vault     : #22005C
+ *   vaultMid : --color-vault-mid : #3B1782
+ *   live     : --color-live      : #ED8936
+ *   success  : --color-status-success: #22C55E
+ *   skeleton : --color-skeleton  : #C8CACC
+ *   surface  : --color-surface-card: #FFFFFF
+ *
+ * @typography
+ *   heading  : Plus Jakarta Sans | Bold    | 14px | lh:auto | "Información general" | "Condiciones del ofrecimiento"
+ *   label    : Plus Jakarta Sans | Bold    | 14px | lh:auto | "Placa:" etc.
+ *   value    : Plus Jakarta Sans | Light   | 14px | lh:auto | "AZF829" etc.
+ *   body     : Roboto            | Light   | 14px | lh:1.6  | descripción HTML
+ *   caption  : Plus Jakarta Sans | Light   | 12px | lh:auto | "Código: 61483"
+ *   h3       : Plus Jakarta Sans | Bold    | 16px | lh:auto | "Descarga toda la información:"
+ *   overline : Plus Jakarta Sans | Light   | 10px | lh:auto | "CALIDAD DE INFORMACIÓN" (uppercase)
+ *
+ * @layers
+ *   root       : COMPONENT  : 437xAuto: x:0,  y:0  : fill:surface, radius:4px, shadow:0 8px 16px oklch(0.22 0.18 285/6%)
+ *   header-row : Frame      : 437x64  : x:0,  y:0  : fill:surface, cursor:pointer
+ *   corner-TL  : SVG        : 12x12   : x:32, y:32 : stroke:live
+ *   corner-BR  : SVG        : 12x12   : x:32, y:32 : stroke:live
+ *   heading-txt: Text       : autoXauto:x:56,y:20 : style:heading, fill:vault
+ *   chevron    : SVG        : 24x24   : x:389,y:20 : stroke:live
+ *   body       : Frame      : 437xAuto: x:0,  y:64 : fill:surface, paddingX:32, paddingB:32
+ *   spec-list  : Frame      : 373xAuto: x:32, y:96 : fill:none, flex:col, divider:vault/5%
+ *   desc-txt   : Text       : 373xAuto: x:32, y:var: style:body, fill:vault
+ *   dl-section : Frame      : 373xAuto: x:32, y:var: fill:none
+ *
+ * @subcomponents
+ *   CornerTL      : inline
+ *     @tokens   stroke:live
+ *     @layers   bracket:SVG:12x12:x:0,y:0:stroke:currentColor
+ *   CornerBR      : inline
+ *     @tokens   stroke:live
+ *     @layers   bracket:SVG:12x12:x:0,y:0:stroke:currentColor
+ *   ChevronDown   : inline
+ *     @tokens   stroke:live
+ *     @layers   chevron:SVG:24x24:x:0,y:0:stroke:currentColor
+ *   SpecRow       : inline
+ *     @tokens   fill:vault
+ *     @layers   row:Frame:autoXauto:x:0,y:0:fill:none
+ *   DetalleOfertaBar : @/features/DetalleOfertaBar/DetalleOfertaBar
+ *     @tokens   border:vault | bg:vault (hover)
+ *     @layers   bar:Frame:autoX64:x:0,y:0:border:1px vault
+ *
+ * @variants
+ *   prop: variant
+ *     [x] info-general : datos técnicos del vehículo + descripción + documentos
+ *     [x] condiciones  : texto legal HTML con tipografía enriquecida + complejidad dot
+ *
+ * @states
+ *   [x] default  : abierto (open=true), muestra el cuerpo de la variante activa
+ *   [ ] hover    : (futuro) header row fondo sutil
+ *   [ ] focus    : (futuro)
+ *   [x] active   : toggle — onClick cambia open state, chevron rota 180deg
+ *   [ ] disabled : n/a
+ *   [ ] loading  : n/a
+ *   [ ] error    : n/a
+ */
+
 "use client";
 import { useState } from "react";
 import type { JSX } from "react";

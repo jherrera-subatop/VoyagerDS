@@ -31,6 +31,7 @@ const PRIMITIVE_PATTERNS = [
   "color.red-utility-*",
   "color.amber-*",
   "font.*",
+  "text.*",
   "space.*",
   "radius.*",
   "shadow.*",
@@ -58,10 +59,13 @@ export default defineConfig({
   outDir: "./src/styles/tokens/",
   plugins: [
     // OUTPUT 1: Primitive tokens — absolute values, no modes
+    // legacyHex: false → emit oklch() literals so CSS color-mix() and
+    // oklch(from var(--token) ...) relative-color syntax work natively.
     css({
       filename: "tokens-primitives.css",
       include: PRIMITIVE_PATTERNS,
       variableName: vmcVar,
+      legacyHex: false,
     }),
 
     // OUTPUT 2: Semantic tokens — light mode (default values in :root)
@@ -69,6 +73,7 @@ export default defineConfig({
       filename: "tokens-semantics-light.css",
       include: SEMANTIC_PATTERNS,
       variableName: vmcVar,
+      legacyHex: false,
       modeSelectors: [
         { mode: ".", selectors: [":root", "[data-theme='light']"] },
       ],
@@ -79,6 +84,7 @@ export default defineConfig({
       filename: "tokens-semantics-dark.css",
       include: SEMANTIC_PATTERNS,
       variableName: vmcVar,
+      legacyHex: false,
       modeSelectors: [
         {
           mode: "dark",

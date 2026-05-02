@@ -1,3 +1,44 @@
+/**
+ * @figma-spec
+ * @component    GalleryMain | 449x362 | Page:Stitch
+ *
+ * @tokens
+ *   vault     : --voyager-color-vault   : #22005C
+ *   onDark    : --voyager-text-on-dark  : #FFFFFF
+ *   surfSect  : --voyager-surface-section: #F2F4F3
+ *   glass     : color-mix(in oklch, var(--voyager-color-vault,#22005C) 45%, transparent) + blur:8px
+ *
+ * @typography
+ *   counter : Roboto Mono | Medium | 12px | lh:16px | "1/2" (tabular-nums)
+ *
+ * @layers
+ *   root       : COMPONENT : 449x362 : x:0,  y:0  : fill:surfSect, radius:4px, overflow:hidden
+ *   main-img   : Image     : 449x362 : x:0,  y:0  : fill:cover, objectPosition:center
+ *   nav-left   : Frame     : 36x36   : x:12, y:163 : fill:glass, radius:9999
+ *   nav-right  : Frame     : 36x36   : x:401,y:163 : fill:glass, radius:9999
+ *   expand-btn : Frame     : 36x36   : x:401,y:12  : fill:glass, radius:9999
+ *   chevron-L  : SVG       : 16x16   : x:10, y:10  : stroke:onDark
+ *   chevron-R  : SVG       : 16x16   : x:10, y:10  : stroke:onDark
+ *   expand-ico : SVG       : 16x16   : x:10, y:10  : stroke:onDark
+ *   counter    : Frame     : autoXauto:x:365,y:338: fill:glass, radius:9999, padding:4 10
+ *   counter-txt: Text      : autoXauto:x:10,y:4 : style:counter, fill:onDark
+ *
+ * @subcomponents
+ *   (ninguno — componente autónomo)
+ *
+ * @variants
+ *   (ninguna — un único estado)
+ *
+ * @states
+ *   [x] default  : imagen activa, contador "1/N", botones nav laterales + expand
+ *   [ ] hover    : (futuro) botones nav con opacity 0.9
+ *   [ ] focus    : (futuro)
+ *   [ ] active   : (futuro)
+ *   [ ] disabled : n/a — sin imágenes oculta navs
+ *   [ ] loading  : n/a
+ *   [ ] error    : n/a
+ */
+
 "use client";
 
 // Glass overlay allowed per DESIGN.md §2.5 — elements overlaying photographic images
@@ -10,7 +51,7 @@ interface GalleryMainProps {
 }
 
 const GLASS: CSSProperties = {
-  background: "color-mix(in oklch, var(--voyager-color-vault, #22005C) 45%, transparent)",
+  background: "color-mix(in oklch, var(--vmc-color-vault-900) 45%, transparent)",
   backdropFilter: "blur(8px)",
 };
 
@@ -58,7 +99,7 @@ function buildNavStyle(side: "left" | "right"): CSSProperties {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    color: "var(--voyager-text-on-dark, #FFFFFF)",
+    color: "var(--vmc-color-text-inverse)",
     padding: 0,
   };
 
@@ -102,7 +143,7 @@ export default function GalleryMain({ images, onExpand }: GalleryMainProps): JSX
         height: "100%",
         borderRadius: 4,
         overflow: "hidden",
-        background: "var(--voyager-surface-section, #F2F4F3)",
+        background: "var(--vmc-color-background-secondary)",
       }}
     >
       <img
@@ -139,7 +180,7 @@ export default function GalleryMain({ images, onExpand }: GalleryMainProps): JSX
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "var(--voyager-text-on-dark, #FFFFFF)",
+          color: "var(--vmc-color-text-inverse)",
           padding: 0,
         }}
       >
@@ -159,7 +200,7 @@ export default function GalleryMain({ images, onExpand }: GalleryMainProps): JSX
           fontSize: 12,
           fontWeight: 500,
           fontVariantNumeric: "tabular-nums",
-          color: "var(--voyager-text-on-dark, #FFFFFF)",
+          color: "var(--vmc-color-text-inverse)",
           lineHeight: "16px",
         }}
       >

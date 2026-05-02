@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { LoginButtonShowcaseSection } from "../components/LoginButtonShowcaseSection";
 import { SectionTitle } from "../components/SectionTitle";
 import { FooterImageProvider } from "../components/FooterImageContext";
 import { FooterDoneShowcaseSection } from "../components/FooterDoneShowcaseSection";
@@ -11,11 +12,18 @@ import { RelatedCardStitchShowcaseSection } from "../components/RelatedCardStitc
 import { OfferCardStitchShowcaseSection } from "../components/OfferCardStitchShowcaseSection";
 import { VisitasStitchShowcaseSection } from "../components/VisitasStitchShowcaseSection";
 import { QuickFiltersStitchShowcaseSection } from "../components/QuickFiltersStitchShowcaseSection";
+import { OfferTypeTileStitchShowcaseSection } from "../components/OfferTypeTileStitchShowcaseSection";
+import { CategoryTileStitchShowcaseSection } from "../components/CategoryTileStitchShowcaseSection";
 import { EmpresaProfileStitchShowcaseSection } from "../components/EmpresaProfileStitchShowcaseSection";
 import { DetalleOfertaBarStitchShowcaseSection } from "../components/DetalleOfertaBarStitchShowcaseSection";
 import { GalleryMainStitchShowcaseSection } from "../components/GalleryMainStitchShowcaseSection";
+import { GalleryFilmstripStitchShowcaseSection } from "../components/GalleryFilmstripStitchShowcaseSection";
 import { AuctionConditionsStitchShowcaseSection } from "../components/AuctionConditionsStitchShowcaseSection";
 import { InfoGeneralStitchShowcaseSection } from "../components/InfoGeneralStitchShowcaseSection";
+import { HeaderStitchShowcaseSection } from "../components/HeaderStitchShowcaseSection";
+import { FavoriteIconStitchShowcaseSection } from "../components/FavoriteIconStitchShowcaseSection";
+import { PriceIconStitchShowcaseSection } from "../components/PriceIconStitchShowcaseSection";
+import { HeroBannerStitchShowcaseSection } from "../components/HeroBannerStitchShowcaseSection";
 import { useComponentMode } from "../components/ComponentModeContext";
 
 const HR = (
@@ -83,7 +91,22 @@ export function ComponentesPreviewSection() {
       {!isDone && (
         <>
           {HR}
+          <HeaderStitchShowcaseSection />
+
+          {HR}
+          <LoginButtonShowcaseSection />
+
+          {HR}
+          <HeroBannerStitchShowcaseSection />
+
+          {HR}
           <ParticipaStitchShowcaseSection />
+
+          {HR}
+          <FavoriteIconStitchShowcaseSection />
+
+          {HR}
+          <PriceIconStitchShowcaseSection />
 
           {HR}
           <RelatedCardStitchShowcaseSection />
@@ -96,6 +119,12 @@ export function ComponentesPreviewSection() {
 
           {HR}
           <QuickFiltersStitchShowcaseSection />
+
+          {HR}
+          <OfferTypeTileStitchShowcaseSection />
+
+          {HR}
+          <CategoryTileStitchShowcaseSection />
 
           {HR}
           <EmpresaProfileStitchShowcaseSection />
@@ -119,6 +148,9 @@ export function ComponentesPreviewSection() {
 
           {HR0}
           <GalleryMainStitchShowcaseSection />
+
+          {HR0}
+          <GalleryFilmstripStitchShowcaseSection />
 
           {HR0}
           <AuctionConditionsStitchShowcaseSection />

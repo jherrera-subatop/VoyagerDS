@@ -9,4 +9,6 @@ export interface SidebarProps {
   activeItem?: string;
   /** Override del logo — solo para preview en docs. En producción omitir. */
   logoSrc?: string;
+  /** Variante colapsada: 64px, solo íconos, sin labels ni chevrones. */
+  collapsed?: boolean;
 }

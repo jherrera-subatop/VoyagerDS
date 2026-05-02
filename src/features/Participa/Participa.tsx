@@ -1,4 +1,65 @@
 /**
+ * @figma-spec
+ * @component    Participa | 317x422 | Page:Stitch
+ *
+ * @tokens
+ *   vault           : --voyager-color-vault            : #22005C
+ *   vaultMid        : --voyager-color-vault-mid        : #3B1782
+ *   live            : --voyager-color-live             : #ED8936
+ *   negotiable      : --voyager-color-negotiable       : #00CACE
+ *   surfaceCard     : --voyager-surface-card           : #FFFFFF
+ *   textOnDark      : --voyager-text-on-dark           : #FFFFFF
+ *   textOnDarkMuted : --voyager-text-on-dark-muted     : rgba(255,255,255,0.60)
+ *   shadowMd        : 0 8px 16px rgba(0,0,0,0.10)
+ *
+ * @typography
+ *   inicia-label : Plus Jakarta Sans | Regular| 14px | lh:1.25 | "Inicia"
+ *   inicia-date  : Plus Jakarta Sans | Bold   | 16px | lh:1    | "lunes 04" (uppercase)
+ *   time         : Plus Jakarta Sans | Bold   | 20px | lh:1    | "12:30 pm"
+ *   indicator-n  : Roboto Mono       | Regular| 14px | lh:auto | "93" / "0" (tabular-nums)
+ *   cta-msg      : Plus Jakarta Sans | Regular| 14px | lh:1.2  | "¡Oportunidad para el que sabe!"
+ *   btn-label    : Plus Jakarta Sans | Bold   | 18px | lh:1    | "PARTICIPA" (uppercase)
+ *   price-label  : Plus Jakarta Sans | Light  | 18px | lh:1    | "Precio Base:"
+ *   price-value  : Roboto Mono       | Bold   | 18px | lh:1    | "US$ 62,999" (tabular-nums)
+ *   commission   : Plus Jakarta Sans | Regular| 10px | lh:1.3  | "Comisión: 7.5% del valor..."
+ *
+ * @layers
+ *   root         : COMPONENT : 317x422 : x:0,  y:0   : fill:none
+ *   cp-header    : Frame     : 317x110 : x:0,  y:0   : fill:vaultGrad, paddingX:20
+ *   date-row     : Frame     : 277x48  : x:20, y:0   : fill:none, borderBottom:1px rgba(255,255,255,0.15), paddingY:12
+ *   left-date    : Frame     : 138x48  : x:0,  y:0   : fill:none
+ *   right-time   : Frame     : 138x48  : x:138,y:0   : fill:none, borderLeft:1px rgba(255,255,255,0.20), paddingLeft:24
+ *   indicator-row: Frame     : 277x62  : x:20, y:48  : fill:none, flex:row
+ *   eye-grp      : Frame     : 80xauto : x:0,  y:10  : fill:none, flex:row, alignRight
+ *   like-btn     : Frame     : 88xauto : x:104,y:-20 : fill:surfaceCard, radius:9999, shadow:shadowMd
+ *   people-grp   : Frame     : 80xauto : x:196,y:10  : fill:none, flex:row, alignLeft
+ *   cp-content   : Frame     : 317x312 : x:0,  y:110 : fill:surfaceCard, paddingX:20
+ *   cta-msg-txt  : Text      : 277xauto: x:20, y:134 : style:cta-msg, fill:live, align:center
+ *   participa-btn: Frame     : 277x68  : x:20, y:158 : fill:live, radius:4px, shadow:shadowMd
+ *   participa-txt: Text      : autoXauto:x:auto,y:24 : style:btn-label, fill:textOnDark
+ *   price-row    : Frame     : 277xauto: x:20, y:242 : fill:none, flex:row, align:center, justify:center
+ *   coin-svg     : SVG       : 28x28   : x:0,  y:0   : fill:negotiable
+ *   price-grp    : Frame     : autoXauto:x:40,y:4 : fill:none
+ *
+ * @subcomponents
+ *   IndicatorIcon : inline
+ *     @tokens   border:rgba(255,255,255,0.30) | fill:textOnDark
+ *     @layers   circle:Frame:32x32:x:0,y:0:border:1px rgba(255,255,255,0.30),radius:9999
+ *
+ * @variants
+ *   (ninguna — un único estado: is-live)
+ *
+ * @states
+ *   [x] default  : header vault gradient con fecha/hora, indicadores (93 vistas, 0 likes, 0 participantes), botón PARTICIPA naranja, precio base negotiable
+ *   [ ] hover    : (futuro) botón PARTICIPA color-mix(live 85%, black)
+ *   [ ] focus    : (futuro)
+ *   [ ] active   : (futuro)
+ *   [ ] disabled : n/a
+ *   [ ] loading  : n/a
+ *   [ ] error    : n/a
+ */
+
+/**
  * Participa — UI Upgrade
  * ─────────────────────────────────────────────────────────────────
  * Estructura 100% preservada del outerHTML legacy VMC Subastas.
@@ -20,17 +81,17 @@ import type { JSX } from "react";
 
 /* ── Token aliases ───────────────────────────────────────────── */
 const T = {
-  vault:           "var(--voyager-color-vault,            #22005C)",
-  vaultMid:        "var(--voyager-color-vault-mid,        #3B1782)",
-  live:            "var(--voyager-color-live,              #ED8936)",
-  negotiable:      "var(--voyager-color-negotiable,        #00CACE)",
-  surfaceCard:     "var(--voyager-surface-card,            #FFFFFF)",
-  textOnDark:      "var(--voyager-text-on-dark,            #FFFFFF)",
-  textOnDarkMuted: "var(--voyager-text-on-dark-muted,      rgba(255,255,255,0.60))",
-  textTertiary:    "var(--voyager-text-tertiary,           #99A1AF)",
-  borderGhost:     "var(--voyager-border-ghost,            rgba(34,0,92,0.10))",
-  shadowSm:        "0 8px 16px rgba(34,0,92,0.06)",
-  shadowMd:        "0 8px 16px rgba(0,0,0,0.10)",
+  vault:           "var(--vmc-color-vault-900)",
+  vaultMid:        "var(--vmc-color-vault-700)",
+  live:            "var(--vmc-color-status-urgent)",
+  negotiable:      "var(--vmc-color-status-negotiable)",
+  surfaceCard:     "var(--vmc-color-background-card)",
+  textOnDark:      "var(--vmc-color-text-inverse)",
+  textOnDarkMuted: "var(--vmc-color-text-on-dark-muted)",
+  textTertiary:    "var(--vmc-color-text-price-label)",
+  borderGhost:     "var(--vmc-color-border-default)",
+  shadowSm:        "var(--vmc-shadow-sm)",
+  shadowMd:        "var(--vmc-shadow-md)",
 } as const;
 
 const fontDisplay = "var(--font-display, 'Plus Jakarta Sans', sans-serif)";
@@ -348,9 +409,9 @@ export default function Participa(): JSX.Element {
                       {/* Dollar coin SVG — fills mapped to negotiable */}
                       <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 23" fill="none" style={{ width: "auto" }}>
-                          <path d="M11.3 21.8L1.9 17.8C0.4 17.1 0.4 15.1 1.9 14.5L11.3 10.4C11.8 10.2 12.3 10.2 12.8 10.4L22.2 14.5C23.7 15.1 23.7 17.1 22.2 17.8L12.8 21.8C12.3 22 11.8 22 11.3 21.8Z" fill="var(--voyager-color-negotiable, #00CACE)" fillOpacity="0.55"/>
-                          <path d="M12 23C11.7 23 11.3 22.9 11 22.8L1.5 18.6C0.6 18.2 0 17.4 0 16.4 0 15.4 0.6 14.5 1.5 14.2L11 10C11.7 9.7 12.4 9.7 13 10L22.6 14.2C23.4 14.5 24 15.4 24 16.4 24 17.4 23.4 18.2 22.6 18.6L13 22.8C12.7 22.9 12.3 23 12 23ZM12 11C11.8 11 11.7 11 11.5 11.1L1.9 15.3C1.5 15.5 1.2 15.9 1.2 16.4 1.2 16.9 1.5 17.3 1.9 17.5L11.5 21.7C11.8 21.8 12.2 21.8 12.5 21.7L22.1 17.5C22.5 17.3 22.8 16.9 22.8 16.4 22.8 15.9 22.5 15.5 22.1 15.3L12.5 11.1C12.3 11 12.2 11 12 11Z" fill="var(--voyager-color-negotiable, #00CACE)"/>
-                          <path d="M12 0C7.1 0 3 4 3 8.8 3 13.6 7.1 17.7 12 17.7 17 17.7 21 13.6 21 8.8 21 4 17 0 12 0Z" fill="var(--voyager-color-negotiable, #00CACE)"/>
+                          <path d="M11.3 21.8L1.9 17.8C0.4 17.1 0.4 15.1 1.9 14.5L11.3 10.4C11.8 10.2 12.3 10.2 12.8 10.4L22.2 14.5C23.7 15.1 23.7 17.1 22.2 17.8L12.8 21.8C12.3 22 11.8 22 11.3 21.8Z" fill="var(--vmc-color-status-negotiable)" fillOpacity="0.55"/>
+                          <path d="M12 23C11.7 23 11.3 22.9 11 22.8L1.5 18.6C0.6 18.2 0 17.4 0 16.4 0 15.4 0.6 14.5 1.5 14.2L11 10C11.7 9.7 12.4 9.7 13 10L22.6 14.2C23.4 14.5 24 15.4 24 16.4 24 17.4 23.4 18.2 22.6 18.6L13 22.8C12.7 22.9 12.3 23 12 23ZM12 11C11.8 11 11.7 11 11.5 11.1L1.9 15.3C1.5 15.5 1.2 15.9 1.2 16.4 1.2 16.9 1.5 17.3 1.9 17.5L11.5 21.7C11.8 21.8 12.2 21.8 12.5 21.7L22.1 17.5C22.5 17.3 22.8 16.9 22.8 16.4 22.8 15.9 22.5 15.5 22.1 15.3L12.5 11.1C12.3 11 12.2 11 12 11Z" fill="var(--vmc-color-status-negotiable)"/>
+                          <path d="M12 0C7.1 0 3 4 3 8.8 3 13.6 7.1 17.7 12 17.7 17 17.7 21 13.6 21 8.8 21 4 17 0 12 0Z" fill="var(--vmc-color-status-negotiable)"/>
                           <path d="M14.9 10.6C14.9 9 13.6 8.6 12.5 8.3L12.5 8.3V6.5C12.9 6.6 13.4 6.8 13.7 7.2L14.8 6C14.2 5.3 13.3 4.9 12.5 4.8V3.5H11.8V4.8C10.4 5 9.2 5.9 9.2 7.4 9.2 9 10.5 9.5 11.6 9.8 11.7 9.8 11.7 9.8 11.8 9.8V11.5C11.2 11.4 10.6 11.1 10.2 10.6L9.1 11.8C9.8 12.7 10.8 13.1 11.8 13.2V14.5H12.5V13.2C13.8 13 14.9 12.2 14.9 10.6ZM11 7.2C11 6.8 11.3 6.5 11.8 6.5V8.1C11.3 7.9 11 7.7 11 7.2ZM12.5 11.5V10C12.9 10.2 13.2 10.4 13.2 10.8 13.2 11.2 12.9 11.5 12.5 11.5Z" fill="white"/>
                         </svg>
                       </span>

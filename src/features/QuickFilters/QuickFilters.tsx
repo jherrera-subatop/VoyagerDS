@@ -1,33 +1,81 @@
 /**
+ * @figma-spec
+ * @component    QuickFilters | 766x152 | Page:Stitch
+ *
+ * @tokens
+ *   surfaceSection : --vmc-color-background-secondary : rgb(94.9% 95.69% 95.29%)  [light neutral bg]
+ *   brand          : --vmc-color-background-brand      : #22005C                  [vault-900, text/icons]
+ *   borderSubtle   : --vmc-color-border-subtle         : vault-utility-divider    [container border]
+ *   shadowSm       : --vmc-shadow-sm                   : 0 8px 16px 0 rgb(13.33% 0% 36.08% / 0.06)
+ *
+ * @typography
+ *   section-label : Plus Jakarta Sans | Bold | 12px | lh:16px | uppercase | color:brand
+ *   tab-label     : [ver OfferTypeTile @figma-spec]
+ *   ver-todas     : [ver OfferTypeTile @figma-spec]
+ *   cat-label     : [ver CategoryTile @figma-spec]
+ *
+ * @layers
+ *   root          : COMPONENT  : 766x152 : x:0,   y:0  : fill:surfaceSection, border:1px borderSubtle, radius:8px, padding:20
+ *   inner         : Frame      : 726x112 : x:20,  y:20 : fill:none, flex:row, justify:space-between
+ *   left-col      : Frame      : 33%x112 : x:0,   y:0  : fill:none
+ *   section-hdr-L : Frame      : autoXauto:x:0,y:0 : fill:none, relative (CornerTL + CornerBR)
+ *   offer-grid    : Frame      : 100%x64 : x:0,  y:32 : fill:none, grid:2cols, gap:20
+ *   right-col     : Frame      : 58%x112 : x:var, y:0  : fill:none
+ *   section-hdr-R : Frame      : autoXauto:x:0,y:0 : fill:none, relative (CornerTL + CornerBR)
+ *   cat-row       : Frame      : 100%x64 : x:0,  y:32 : fill:none, grid:4cols, gap:10
+ *
+ * @subcomponents
+ *   OfferTypeTile : @/features/OfferTypeTile/OfferTypeTile
+ *     @variants   negociable | en-vivo
+ *     @layers     card:Frame:autoX64:fill:surfaceCard,radius:4px,shadow:shadowSm
+ *   CategoryTile  : @/features/CategoryTile/CategoryTile
+ *     @variants   vehicular | maquinaria | equipos-diversos | articulos-diversos
+ *     @layers     card:Frame:1frXauto:fill:surfaceCard,radius:10px,border,shadow:shadowSm
+ *   SectionHeader : inline
+ *     @tokens     txt:brand | corners:brand
+ *     @layers     hdr:Frame:autoXauto:x:0,y:0:padding:8 12:fill:none:relative
+ *   CornerTL      : inline
+ *     @tokens     fill:brand
+ *     @layers     bracket:SVG:8x8:x:0,y:0:absolute:fill:currentColor
+ *   CornerBR      : inline
+ *     @tokens     fill:brand
+ *     @layers     bracket:SVG:8x8:bottom:0,right:0:absolute:fill:currentColor
+ *
+ * @variants
+ *   (ninguna — un único estado)
+ *
+ * @states
+ *   [x] default  : fondo claro (surfaceSection), 2 columnas: Tipo de oferta (2 tiles) + Categorías (4 tiles)
+ *   [ ] hover    : (futuro — delegado a OfferTypeTile y CategoryTile)
+ *   [ ] focus    : (futuro — delegado a OfferTypeTile y CategoryTile)
+ *   [ ] active   : (futuro)
+ *   [ ] disabled : n/a
+ *   [ ] loading  : n/a
+ *   [ ] error    : n/a
+ */
+
+/**
  * QuickFilters — UI Upgrade
  * 766×152px · Tipo de oferta + Categorías · VOYAGER v2.1.0
  *
- * Token map:
- *   bg-purple-300      → --voyager-color-vault-mid   (root bg)
- *   text-white         → --voyager-text-on-dark       (headings, corner brackets)
- *   bg-turquoise-500   → --voyager-color-negotiable   (Negociable tab)
- *   text-turquoise-500 → --voyager-color-negotiable   (Ver Todas label)
- *   bg-yellow-500      → --voyager-color-live          (En Vivo tab)
- *   text-yellow-500    → --voyager-color-live          (Ver Todas label)
- *   text-purple-300    → --voyager-color-vault-mid     (category SVG icons on white)
- *   text-purple-500    → vault-mid @ 75% white         (category text labels)
- *   bg-white / shadow-lg → surface-card / shadowLg
- *   rounded            → 4px
+ * Token map (--vmc-* · Terrazzo-generated):
+ *   container bg  → --vmc-color-background-secondary  (light neutral section)
+ *   border        → --vmc-color-border-subtle
+ *   brand/icons   → --vmc-color-background-brand      (vault-900 dark, used as fg color)
+ *   radius        → 8px
  */
 
 import type { JSX } from "react";
+import CategoryTile from "@/features/CategoryTile/CategoryTile";
+import OfferTypeTile from "@/features/OfferTypeTile/OfferTypeTile";
 
 const V = {
-  vaultMid:    "var(--voyager-color-vault-mid,    #3B1782)",
-  negotiable:  "var(--voyager-color-negotiable,   #00CACE)",
-  live:        "var(--voyager-color-live,          #ED8936)",
-  surfaceCard: "var(--voyager-surface-card,        #FFFFFF)",
-  textOnDark:  "var(--voyager-text-on-dark,        #FFFFFF)",
-  labelPurple: "color-mix(in oklch, var(--voyager-color-vault-mid, #3B1782) 75%, white)",
-  shadowLg:    "0 10px 15px rgba(0,0,0,0.12), 0 4px 6px rgba(0,0,0,0.08)",
+  container: "var(--vmc-color-background-secondary)",
+  border:    "var(--vmc-color-border-subtle)",
+  brand:     "var(--vmc-color-background-brand)",
 } as const;
 
-const fontDisplay = "var(--font-display, 'Plus Jakarta Sans', sans-serif)";
+const fontDisplay = "var(--vmc-font-display)";
 
 /* ── Corner bracket — top-left ──────────────────────────────── */
 function CornerTL(): JSX.Element {
@@ -38,7 +86,7 @@ function CornerTL(): JSX.Element {
       viewBox="0 0 10 10"
       fill="none"
       style={{ position: "absolute", top: 0, left: 0, width: 8, height: 8,
-               fill: "currentColor", color: V.textOnDark }}
+               fill: "currentColor", color: V.brand }}
     >
       <path d="M0 0H3.3V3.3H3.3V6.7H0V3.3H0V0ZM3.3 0H6.7 6.7 10V3.3H6.7 6.7 3.3V0ZM3.3 6.7H0V10H3.3V6.7Z"
         fill="currentColor" />
@@ -55,7 +103,7 @@ function CornerBR(): JSX.Element {
       viewBox="0 0 10 10"
       fill="none"
       style={{ position: "absolute", bottom: 0, right: 0, width: 8, height: 8,
-               fill: "currentColor", color: V.textOnDark }}
+               fill: "currentColor", color: V.brand }}
     >
       <path d="M10 10L6.7 10 6.7 6.7 6.7 6.7 6.7 3.3 10 3.3 10 6.7 10 6.7 10 10ZM6.7 10L3.3 10 3.3 10 0 10 0 6.7 3.3 6.7 3.3 6.7 6.7 6.7 6.7 10ZM6.7 3.3L10 3.3 10 0 6.7 0 6.7 3.3Z"
         fill="currentColor" />
@@ -74,7 +122,7 @@ function SectionHeader({ title }: { title: string }): JSX.Element {
           fontSize:      12,
           fontWeight:    700,
           lineHeight:    "16px",
-          color:         V.textOnDark,
+          color:         V.brand,
           textTransform: "uppercase",
           margin:        0,
         }}>
@@ -83,193 +131,6 @@ function SectionHeader({ title }: { title: string }): JSX.Element {
         <CornerBR />
       </div>
     </div>
-  );
-}
-
-/* ── Offer type card (Negociable / En Vivo) ─────────────────── */
-interface OfferCardProps {
-  href:      string;
-  label:     string;
-  tabColor:  string;
-  textColor: string;
-}
-
-function OfferCard({ href, label, tabColor, textColor }: OfferCardProps): JSX.Element {
-  return (
-    <a
-      href={href}
-      style={{
-        display:         "grid",
-        gridTemplateRows:"1fr 1fr",
-        height:          64,     /* h-16 */
-        background:      V.surfaceCard,
-        borderRadius:    4,
-        boxShadow:       V.shadowLg,
-        textDecoration:  "none",
-        outline:         "none",
-      }}
-    >
-      {/* Row 1 — colored tab */}
-      <div style={{
-        display:         "flex",
-        alignItems:      "center",
-        justifyContent:  "center",
-        gridRow:         "1 / 2",
-        background:      tabColor,
-        borderRadius:    "4px 4px 0 0",
-      }}>
-        <span style={{
-          fontFamily:    fontDisplay,
-          fontSize:      12,
-          fontWeight:    700,
-          color:         V.textOnDark,
-          textTransform: "uppercase",
-          textDecoration:"none",
-        }}>
-          {label}
-        </span>
-      </div>
-      {/* Row 2 — "Ver Todas" */}
-      <div style={{
-        display:        "flex",
-        alignItems:     "center",
-        justifyContent: "center",
-        gridRow:        "2 / 3",
-      }}>
-        <span style={{
-          fontFamily:    fontDisplay,
-          fontSize:      10,
-          fontWeight:    700,
-          color:         textColor,
-          textTransform: "uppercase",
-          textDecoration:"none",
-        }}>
-          Ver
-                                Todas
-        </span>
-      </div>
-    </a>
-  );
-}
-
-/* ── Category icon: Vehicular ───────────────────────────────── */
-function VehicleIcon(): JSX.Element {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24" height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      style={{ width: 32, height: 32, color: V.vaultMid }}
-    >
-      <path d="M5.5 12.9c-.5 0-.9.2-1.4.4-.4.3-.7.7-.9 1.1-.2.5-.2 1-.1 1.5s.3.9.7 1.2c.3.4.8.6 1.2.7.5.1 1 .1 1.5-.1.4-.2.8-.5 1.1-.9.3-.4.4-.9.4-1.4 0-.7-.3-1.3-.7-1.8-.5-.4-1.1-.7-1.8-.7Zm0 3.6c-.2 0-.4 0-.6-.2-.2-.1-.3-.3-.4-.5-.1-.2-.1-.4-.1-.6 0-.3.2-.5.3-.6.2-.2.4-.3.6-.3.2-.1.5 0 .7 0 .2.1.3.3.5.5.1.1.2.4.2.6 0 .3-.2.6-.4.8-.2.2-.5.3-.8.3ZM19.2 12.9c-.5 0-.9.2-1.3.4-.4.3-.8.7-.9 1.1-.2.5-.3 1-.2 1.5.1.5.3.9.7 1.2.3.4.8.6 1.3.7.4.1.9.1 1.4-.1.4-.2.8-.5 1.1-.9.3-.4.4-.9.4-1.4 0-.7-.2-1.3-.7-1.8-.5-.4-1.1-.7-1.8-.7Zm0 3.6c-.2 0-.4 0-.6-.2-.2-.1-.3-.3-.4-.5-.1-.2-.1-.4-.1-.6.1-.3.2-.5.3-.6.2-.2.4-.3.6-.3.2-.1.5 0 .7 0 .2.1.4.3.5.5.1.1.2.4.2.6 0 .3-.1.6-.4.8-.2.2-.5.3-.8.3Z"
-        fill="currentColor" />
-      <path d="m22.5 10.9-4.4-.8-3.8-3.2c-.4-.3-.8-.5-1.3-.5H7.4c-.3 0-.6.1-.9.2-.3.2-.5.4-.7.6l-2.5 2.9H1.7c-.4 0-.9.1-1.2.5-.3.3-.5.7-.5 1.2v2.1c0 .5.2 1.1.6 1.5.4.3.9.6 1.5.6h.4c-.1-.5 0-.9.1-1.4.1-.4.3-.8.6-1.1.3-.4.6-.7 1-.9.4-.2.9-.3 1.3-.3.5 0 .9.1 1.3.3.4.2.8.5 1.1.9.3.3.5.7.6 1.1.1.5.1.9 0 1.4h7.7c0-.5 0-.9.1-1.4.1-.4.3-.8.6-1.1.3-.4.6-.7 1-.9.4-.2.9-.3 1.3-.3.5 0 .9.1 1.3.3.4.2.8.5 1.1.9.3.3.5.7.6 1.1.1.5.1.9 0 1.4h.1c.4 0 .9-.2 1.2-.5.3-.4.5-.8.5-1.2v-1.7c0-.4-.1-.8-.4-1.2-.3-.3-.7-.5-1.1-.5ZM8.4 9.5c0 .1-.1.3-.2.4-.1.1-.2.2-.4.2H5.3c-.1 0-.1-.1-.2-.1 0 0 0-.1-.1-.1v-.2s0-.1.1-.1l1.6-2c.1 0 .2-.1.2-.1.1 0 .2-.1.3-.1h.6c.2 0 .3.1.4.2.1.1.2.3.2.4v1.5Zm2.8 2.7h-.7c-.2 0-.3-.1-.4-.2-.1-.1-.2-.3-.2-.4 0-.2.1-.3.2-.4.1-.1.2-.2.4-.2h.7c.2 0 .3.1.4.2.1.1.2.2.2.4 0 .1-.1.3-.2.4-.1.1-.2.2-.4.2Zm4.5-2.1h-5.4c-.2 0-.3-.1-.4-.2-.1-.1-.2-.3-.2-.4V8c0-.1.1-.3.2-.4.1-.1.2-.2.4-.2H13c.2 0 .3.1.4.2l2.5 2c.1 0 .1.1.1.1v.2s0 .1-.1.1c0 .1-.1.1-.2.1Z"
-        fill="currentColor" />
-    </svg>
-  );
-}
-
-/* ── Category icon: Maquinaria ──────────────────────────────── */
-function MachineryIcon(): JSX.Element {
-  return (
-    <svg
-      width="24" height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{ width: 32, height: 32, color: V.vaultMid }}
-    >
-      <path d="M20 7.3C19.9 7.1 19.6 7 19.4 7H16.3C16 7 15.7 7.2 15.6 7.5L13.5 12.6H11.7L10.9 5.3C10.8 4.9 10.5 4.6 10.1 4.6H1.8C1.4 4.6 1 5 1 5.4 1 5.9 1.4 6.2 1.8 6.2H2.1V12.7C2 12.6 1.9 12.6 1.8 12.6 1.4 12.6 1 13 1 13.4V15.1C1 15.5 1.2 15.7 1.5 15.8 1.9 15.4 2.6 15.1 3.3 15.1H11.9L11.8 14.2H14.1C14.4 14.2 14.7 14 14.8 13.7L16.9 8.6H19L19.5 9.3H21.4L20 7.3ZM4.7 11H3.7V6.2H4.7V11ZM6.2 11V6.2H9.4L9.9 11H6.2V11Z"
-        fill="currentColor" />
-      <path d="M19.6 10.1V10.1 12.1C21.1 12.8 22.3 13.9 23 15.3V10.1H19.6Z"
-        fill="currentColor" />
-      <path d="M16.7 15.9H3.3C2.2 15.9 1.4 16.8 1.4 17.8 1.4 18.8 2.2 19.7 3.3 19.7H16.7C17.8 19.7 18.6 18.8 18.6 17.8 18.6 16.8 17.8 15.9 16.7 15.9ZM3.5 18.6C3 18.6 2.7 18.2 2.7 17.8 2.7 17.4 3 17 3.5 17 3.9 17 4.2 17.4 4.2 17.8 4.2 18.2 3.9 18.6 3.5 18.6ZM16.6 18.6C16.2 18.6 15.9 18.2 15.9 17.8 15.9 17.4 16.2 17 16.6 17 17.1 17 17.4 17.4 17.4 17.8 17.4 18.2 17.1 18.6 16.6 18.6Z"
-        fill="currentColor" />
-    </svg>
-  );
-}
-
-/* ── Category icon: Equipos diversos ───────────────────────── */
-function BoxIcon(): JSX.Element {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24" height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      style={{ width: 32, height: 32, color: V.vaultMid }}
-    >
-      <path d="M21 8.5V5.8C21 5.5 20.8 5.3 20.5 5.3H3.6C3.3 5.3 3.1 5.5 3.1 5.8V8.5H21Z"
-        fill="currentColor" />
-      <path d="M11 12.7H13.1C13.4 12.7 13.6 12.5 13.6 12.2 13.6 11.9 13.4 11.6 13.1 11.6H11C10.7 11.6 10.4 11.9 10.4 12.2 10.4 12.5 10.7 12.7 11 12.7Z"
-        fill="currentColor" />
-      <path d="M4.1 9.5V18.5C4.1 18.8 4.3 19 4.6 19H19.4C19.7 19 19.9 18.8 19.9 18.5V9.5H4.1ZM11 10.6H13.1C14 10.6 14.7 11.3 14.7 12.2 14.7 13 14 13.8 13.1 13.8H11C10.1 13.8 9.4 13 9.4 12.2 9.4 11.3 10.1 10.6 11 10.6Z"
-        fill="currentColor" />
-    </svg>
-  );
-}
-
-/* ── Category icon: Artículos diversos ─────────────────────── */
-function StarIcon(): JSX.Element {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24" height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      style={{ width: 32, height: 32, color: V.vaultMid }}
-    >
-      <path d="M12 2C6.5 2 2 6.5 2 12 2 17.5 6.5 22 12 22 17.5 22 22 17.5 22 12 22 6.5 17.5 2 12 2ZM16.2 18L12 15.5 7.8 18 8.9 13.2 5.2 10 10.1 9.5 12 5 13.9 9.5 18.8 10 15.1 13.2 16.2 18Z"
-        fill="currentColor" />
-    </svg>
-  );
-}
-
-/* ── Category card ──────────────────────────────────────────── */
-interface CategoryCardProps {
-  href:  string;
-  icon:  JSX.Element;
-  label: string;
-}
-
-function CategoryCard({ href, icon, label }: CategoryCardProps): JSX.Element {
-  return (
-    <a
-      href={href}
-      style={{
-        boxSizing:      "border-box",
-        display:        "flex",
-        flexDirection:  "column",
-        flexShrink:     0,
-        width:          64,
-        height:         64,
-        padding:        8,
-        background:     V.surfaceCard,
-        borderRadius:   4,
-        textDecoration: "none",
-        outline:        "none",
-      }}
-    >
-      <div style={{ display: "flex", justifyContent: "center", flex: 1 }}>
-        {icon}
-      </div>
-      <div style={{
-        marginBottom:  4,
-        fontFamily:    fontDisplay,
-        fontSize:      9,
-        fontWeight:    600,
-        lineHeight:    "12px",
-        textAlign:     "center",
-        color:         V.labelPurple,
-        textTransform: "uppercase",
-        overflow:      "hidden",
-        whiteSpace:    "nowrap",
-        textOverflow:  "ellipsis",
-      }}>
-        {label}
-      </div>
-    </a>
   );
 }
 
@@ -284,8 +145,9 @@ export default function QuickFilters(): JSX.Element {
       paddingTop:   20,    /* py-5 */
       paddingBottom:20,
       marginTop:    12,    /* mt-3 */
-      background:   V.vaultMid,
-      borderRadius: 4,
+      background:   V.container,
+      border:       `1px solid ${V.border}`,
+      borderRadius: 8,
     }}>
       <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
 
@@ -300,18 +162,8 @@ export default function QuickFilters(): JSX.Element {
             marginTop:           16,
             gap:                 20,    /* gap-x-5 */
           }}>
-            <OfferCard
-              href="/negociable"
-              label="Negociable"
-              tabColor={V.negotiable}
-              textColor={V.negotiable}
-            />
-            <OfferCard
-              href="/en-vivo"
-              label="En                                vivo"
-              tabColor={V.live}
-              textColor={V.live}
-            />
+            <OfferTypeTile href="/negociable" variant="negociable" />
+            <OfferTypeTile href="/en-vivo"   variant="en-vivo"    />
           </div>
         </div>
 
@@ -327,33 +179,16 @@ export default function QuickFilters(): JSX.Element {
               style={{ display: "none" }}
             />
 
-            {/* Category cards row */}
+            {/* Category cards row — grid 4 cols fills exactly the right column */}
             <div style={{
-              display:    "flex",
-              flexDirection:"row",
-              overflowX:  "auto",
-              gap:        12,    /* gap-x-3 */
+              display:             "grid",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gap:                 10,
             }}>
-              <CategoryCard
-                href="https://www.vmcsubastas.com/subastas/vehicular.html"
-                icon={<VehicleIcon />}
-                label="Vehicular"
-              />
-              <CategoryCard
-                href="https://www.vmcsubastas.com/subastas/maquinaria.html"
-                icon={<MachineryIcon />}
-                label="Maquinaria"
-              />
-              <CategoryCard
-                href="https://www.vmcsubastas.com/subastas/equiposdiversos.html"
-                icon={<BoxIcon />}
-                label="Equipos diversos"
-              />
-              <CategoryCard
-                href="https://www.vmcsubastas.com/subastas/articulosdiversos.html"
-                icon={<StarIcon />}
-                label="Artículos diversos"
-              />
+              <CategoryTile href="https://www.vmcsubastas.com/subastas/vehicular.html"      variant="vehicular" />
+              <CategoryTile href="https://www.vmcsubastas.com/subastas/maquinaria.html"      variant="maquinaria" />
+              <CategoryTile href="https://www.vmcsubastas.com/subastas/equiposdiversos.html" variant="equipos-diversos" />
+              <CategoryTile href="https://www.vmcsubastas.com/subastas/articulosdiversos.html" variant="articulos-diversos" />
             </div>
           </div>
         </div>
@@ -362,3 +197,5 @@ export default function QuickFilters(): JSX.Element {
     </div>
   );
 }
+/ /   p r u e b a   c o d e r a b b i t  
+ 

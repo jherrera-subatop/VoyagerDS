@@ -15,38 +15,45 @@ export interface ComponentNavItem {
   label: string;
   status: "done" | "stitch" | "pending";
   group?: string;
+  hasVariants?: boolean;
 }
 
 export const COMPONENT_ITEMS: ComponentNavItem[] = [
   /* ── Navigation ──────────────────────────────── */
-  { id: "header",           label: "Header",         status: "pending", group: "Navigation" },
+  { id: "header",           label: "Header",         status: "stitch",  group: "Navigation" },
+  { id: "login-button",     label: "LoginButton",    status: "done",    group: "Navigation" },
   { id: "sidebar",          label: "menu-sidebar",   status: "done",    group: "Navigation" },
   { id: "footer-primary",   label: "Footer",         status: "done",    group: "Navigation" },
   { id: "session-header",   label: "Session Header", status: "pending", group: "Navigation" },
   /* ── Banners ─────────────────────────────────── */
-  { id: "hero-banner",      label: "hero-banner",      status: "pending", group: "Banners" },
+  { id: "hero-banner",      label: "hero-banner",      status: "stitch",  group: "Banners" },
   { id: "subaspass-banner", label: "subaspass-banner", status: "pending", group: "Banners" },
   { id: "subascoins",       label: "subascoins",       status: "pending", group: "Banners" },
   { id: "ayuda",            label: "ayuda",            status: "pending", group: "Banners" },
   { id: "category-banner",  label: "category-banner",  status: "pending", group: "Banners" },
   /* ── Cards ───────────────────────────────────── */
   { id: "related-card",     label: "related-card",  status: "stitch",  group: "Cards" },
-  { id: "offer-card",       label: "offer-card",    status: "stitch",  group: "Cards" },
+  { id: "offer-card",       label: "offer-card",    status: "stitch",  group: "Cards",       hasVariants: true },
   /* ── Publication ─────────────────────────────── */
   { id: "detail-card",        label: "detail-card",    status: "stitch",  group: "Publication" },
   { id: "tags",               label: "tags",           status: "pending", group: "Publication" },
   { id: "detalle-oferta-bar", label: "download-row",   status: "stitch",  group: "Publication" },
   { id: "gallery-main",       label: "gallery-main",   status: "stitch",  group: "Publication" },
-  { id: "gallery-thumbs",     label: "gallery-thumbs", status: "pending", group: "Publication" },
-  { id: "info-general",       label: "info-general",   status: "stitch",  group: "Publication" },
+  { id: "gallery-filmstrip",  label: "gallery-filmstrip", status: "stitch", group: "Publication" },
+  { id: "info-general",       label: "info-general",   status: "stitch",  group: "Publication", hasVariants: true },
   { id: "docs-req",           label: "docs-req",       status: "pending", group: "Publication" },
   { id: "conditions",         label: "conditions",     status: "stitch",  group: "Publication" },
   { id: "visitas",             label: "visitas",         status: "stitch",  group: "Publication" },
   { id: "related",            label: "related",        status: "pending", group: "Publication" },
   { id: "group-header",       label: "group-header",   status: "pending", group: "Publication" },
   /* ── Discovery ───────────────────────────────── */
-  { id: "quick-filters",    label: "quick-filters", status: "stitch",  group: "Discovery" },
-  { id: "listing-area",     label: "listing-area",  status: "stitch",  group: "Discovery" },
+  { id: "quick-filters",    label: "quick-filters",    status: "stitch",  group: "Discovery" },
+  { id: "offer-type-tile",  label: "offer-type-tile",  status: "stitch",  group: "Discovery", hasVariants: true },
+  { id: "category-tile",    label: "category-tile",    status: "stitch",  group: "Discovery", hasVariants: true },
+  { id: "listing-area",     label: "listing-area",   status: "stitch",  group: "Discovery" },
+  /* ── Icons ───────────────────────────────────── */
+  { id: "favorite-icon", label: "favorite-icon", status: "stitch", group: "Icons", hasVariants: true },
+  { id: "price-icon",    label: "price-icon",    status: "stitch", group: "Icons", hasVariants: true },
   /* ── Overlays ────────────────────────────────── */
   { id: "fraud-modal",      label: "fraud-modal",   status: "pending", group: "Overlays" },
   /* ── Storefront ──────────────────────────────── */
@@ -80,9 +87,9 @@ function SideNavItem({ item, active }: { item: ComponentNavItem; active: boolean
     width:          "100%",
     paddingTop:     6,
     paddingBottom:  6,
-    paddingLeft:    12,   /* space.150 */
+    paddingLeft:    12,
     paddingRight:   12,
-    borderRadius:   4,    /* radius.sm */
+    borderRadius:   4,
     cursor:         "pointer",
     border:         "none",
     textAlign:      "left",
@@ -115,10 +122,35 @@ function SideNavItem({ item, active }: { item: ComponentNavItem; active: boolean
     flexShrink:    0,
   };
 
+  const variantsBadgeStyle: CSSProperties = {
+    display:       "inline-flex",
+    alignItems:    "center",
+    gap:           3,
+    fontSize:      9,
+    fontWeight:    700,
+    fontFamily:    "monospace",
+    letterSpacing: "0.05em",
+    textTransform: "uppercase",
+    padding:       "1px 5px",
+    borderRadius:  3,
+    background:    "color-mix(in oklch, oklch(0.22 0.18 285) 12%, transparent)",
+    color:         "oklch(0.22 0.18 285)",
+    flexShrink:    0,
+    marginRight:   4,
+  };
+
   return (
     <button type="button" style={style} onClick={handleClick}>
       <span style={labelStyle}>{item.label}</span>
-      <span style={badgeStyle}>{meta.label}</span>
+      <span style={{ display: "flex", alignItems: "center", gap: 4, flexShrink: 0 }}>
+        {item.hasVariants && (
+          <span style={variantsBadgeStyle}>
+            <span style={{ fontSize: 8 }}>⬡</span>
+            var
+          </span>
+        )}
+        <span style={badgeStyle}>{meta.label}</span>
+      </span>
     </button>
   );
 }

@@ -243,7 +243,7 @@ function BrandColumn({ logoSrc }: BrandColumnProps): JSX.Element {
         width={120}
         height={32}
         className="object-contain"
-        unoptimized={logoSrc.startsWith("data:")}
+        unoptimized
       />
       <p
         className="text-xs leading-5"
