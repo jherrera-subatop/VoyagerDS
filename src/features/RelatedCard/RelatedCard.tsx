@@ -1,4 +1,63 @@
 /**
+ * @figma-spec
+ * @component    RelatedCard | 317x464 | Page:Stitch
+ *
+ * @tokens
+ *   vault       : --voyager-color-vault     : #22005C
+ *   vaultMid    : --voyager-color-vault-mid : #3B1782
+ *   live        : --voyager-color-live      : #ED8936
+ *   negotiable  : --voyager-color-negotiable: #00CACE
+ *   surfaceCard : --voyager-surface-card    : #FFFFFF
+ *   textPrimary : --voyager-text-primary    : #191C1C
+ *   textOnDark  : --voyager-text-on-dark    : #FFFFFF
+ *   shadowSm    : 0 8px 16px rgba(34,0,92,0.06)
+ *   shadowMd    : 0 8px 16px rgba(0,0,0,0.10)
+ *
+ * @typography
+ *   heading   : Plus Jakarta Sans | Bold    | 20px | lh:28px | "Ofertas Relacionadas"
+ *   name      : Plus Jakarta Sans | SemiBold| 13px | lh:18px | "BMW X1"
+ *   year      : Plus Jakarta Sans | Medium  | 10px | lh:14px | "2025" (uppercase, tracking 0.06em)
+ *   price     : Roboto Mono       | Bold    | 11px | lh:1    | "US$ 14,999" (tabular-nums)
+ *
+ * @layers
+ *   root        : COMPONENT : 317x464 : x:0,  y:0  : fill:surfaceCard, shadow:shadowSm, radius:4px, padding:24
+ *   accent-bar  : Rect      : 3x28    : x:24, y:24 : fill:vaultGrad, radius:9999
+ *   heading-txt : Text      : autoXauto:x:37,y:24 : style:heading, fill:vaultMid
+ *   grid        : Frame     : 269x400 : x:24, y:64 : fill:none, grid:2cols, gap:8
+ *   card        : Frame     : 130xAuto: x:var,y:var: fill:surfaceCard, borderBottom:8px solid live, radius:4px, overflow:hidden
+ *   card-img    : Image     : 130x112 : x:0,  y:0  : fill:cover
+ *   price-chip  : Frame     : autoXauto:x:8,y:8 : fill:vaultGrad, radius:9999, shadow:0 2px 8px rgba(34,0,92,0.30)
+ *   coin-icon   : SVG       : 14x14   : x:8,  y:4  : fill:#FFFFFF
+ *   price-txt   : Text      : autoXauto:x:28,y:4 : style:price, fill:textOnDark
+ *   heart-btn   : INSTANCE  : 28x28   : x:94, y:80 : fill:surfaceCard, shadow:shadowMd
+ *   name-txt    : Text      : autoXauto:x:12,y:120: style:name, fill:textPrimary
+ *   year-txt    : Text      : autoXauto:x:12,y:142: style:year, fill:vaultMid
+ *
+ * @subcomponents
+ *   Card     : inline
+ *     @tokens   bg:surfaceCard | border:live | shadow:shadowSm
+ *     @layers   card:Frame:130xAuto:x:0,y:0:fill:surfaceCard
+ *   CoinIcon : inline
+ *     @tokens   fill:#FFFFFF (on vault gradient)
+ *     @layers   coin:SVG:14x14:x:0,y:0:fill:white
+ *   HeartIcon: inline
+ *     @tokens   fill:vaultMid (currentColor)
+ *     @layers   heart:SVG:14x14:x:0,y:0:fill:currentColor
+ *
+ * @variants
+ *   (ninguna — un único estado)
+ *
+ * @states
+ *   [x] default  : panel blanco con grid 2×2 de mini-cards, border-b live, price chip vault gradient
+ *   [ ] hover    : (futuro)
+ *   [ ] focus    : (futuro)
+ *   [ ] active   : (futuro)
+ *   [ ] disabled : n/a
+ *   [ ] loading  : n/a
+ *   [ ] error    : n/a
+ */
+
+/**
  * RelatedCard — UI Upgrade v2
  * Estructura 100% preservada · 317×464px · VOYAGER v2.1.0
  *
@@ -22,21 +81,21 @@
 import type { JSX } from "react";
 
 const V = {
-  vault:       "var(--voyager-color-vault,     #22005C)",
-  vaultMid:    "var(--voyager-color-vault-mid, #3B1782)",
-  vaultGrad:   "linear-gradient(135deg, var(--voyager-color-vault, #22005C) 0%, var(--voyager-color-vault-mid, #3B1782) 100%)",
-  live:        "var(--voyager-color-live,       #ED8936)",
-  negotiable:  "var(--voyager-color-negotiable, #00CACE)",
-  surfaceCard: "var(--voyager-surface-card,     #FFFFFF)",
-  textPrimary: "var(--voyager-text-primary,     #191C1C)",
-  textOnDark:  "var(--voyager-text-on-dark,     #FFFFFF)",
-  textMuted:   "var(--voyager-text-secondary,   #6B6A73)",
-  shadowSm:    "0 8px 16px rgba(34,0,92,0.06)",
-  shadowMd:    "0 8px 16px rgba(0,0,0,0.10)",
+  vault:       "var(--vmc-color-background-brand)",
+  vaultMid:    "var(--vmc-color-vault-700)",
+  vaultGrad:   "linear-gradient(135deg, var(--vmc-color-background-brand) 0%, var(--vmc-color-vault-700) 100%)",
+  live:        "var(--vmc-color-card-border-live)",
+  negotiable:  "var(--vmc-color-status-negotiable)",
+  surfaceCard: "var(--vmc-color-background-card)",
+  textPrimary: "var(--vmc-color-text-primary)",
+  textOnDark:  "var(--vmc-color-text-inverse)",
+  textMuted:   "var(--vmc-color-text-secondary)",
+  shadowSm:    "var(--vmc-shadow-sm)",
+  shadowMd:    "var(--vmc-shadow-md)",
 } as const;
 
-const fontDisplay = "var(--font-display, 'Plus Jakarta Sans', sans-serif)";
-const fontMono    = "var(--font-mono,    'Roboto Mono', monospace)";
+const fontDisplay = "var(--vmc-font-display)";
+const fontMono    = "var(--vmc-font-mono)";
 
 interface CardItem {
   href:  string;
@@ -65,7 +124,7 @@ function CoinIcon(): JSX.Element {
       <path d="M12 1C7.5 1 3.7 4.6 3.7 9.1 3.7 13.6 7.5 17.4 12 17.4 16.6 17.4 20.2 13.6 20.2 9.1 20.2 4.6 16.5 1 12 1Z"
         fill="white" fillOpacity="0.9" />
       <path d="M14.9 10.8C14.9 9.2 13.6 8.8 12.5 8.5L12.4 8.5V6.7C12.9 6.8 13.4 7 13.7 7.4L14.8 6.3C14.2 5.5 13.3 5.1 12.4 5V3.7H11.8V5C10.4 5.2 9.2 6.1 9.2 7.6 9.2 9.2 10.5 9.7 11.6 10 11.7 10 11.7 10 11.8 10V11.7C11.2 11.6 10.6 11.3 10.2 10.8L9.1 12C9.8 12.9 10.8 13.3 11.8 13.4V14.7H12.4V13.4C13.8 13.2 14.9 12.3 14.9 10.8ZM10.9 7.4C10.9 7 11.3 6.7 11.8 6.7V8.3C11.3 8.1 10.9 7.9 10.9 7.4ZM12.4 11.7V10.2C12.9 10.4 13.2 10.6 13.2 11 13.2 11.4 12.9 11.7 12.4 11.7Z"
-        fill="var(--voyager-color-vault, #22005C)" />
+        fill="var(--vmc-color-background-brand)" />
     </svg>
   );
 }

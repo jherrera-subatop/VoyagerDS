@@ -62,6 +62,7 @@ const DONE_PSEUDO_STYLES = `
 
 interface NavItemRowProps {
   item: DoneNavItem;
+  collapsed?: boolean;
 }
 
 const ITEM_STYLE_DEFAULT: CSSProperties = {
@@ -99,11 +100,68 @@ const ICON_STYLE: CSSProperties = {
 
 const ICON_MUTED_STYLE: CSSProperties = {
   flexShrink: 0,
-  /* 25% opacity via color-mix sobre base-white */
   color: 'color-mix(in oklch, var(--vmc-color-icon-inverse) 25%, transparent)',
 };
 
-function DoneNavItemRow({ item }: NavItemRowProps): JSX.Element {
+const ITEM_STYLE_COLLAPSED_DEFAULT: CSSProperties = {
+  height: 40,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: 4,
+  backgroundColor: 'transparent',
+  cursor: 'default',
+  flexShrink: 0,
+};
+
+const ITEM_STYLE_COLLAPSED_ACTIVE: CSSProperties = {
+  height: 40,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: 4,
+  backgroundColor: 'rgba(255,255,255,0.10)',
+  borderLeft: '3px solid var(--vmc-color-status-negotiable, #00cace)',
+  cursor: 'default',
+  flexShrink: 0,
+};
+
+function CollapsedNavItemRow({ item }: { item: DoneNavItem }): JSX.Element {
+  let rowStyle = ITEM_STYLE_COLLAPSED_DEFAULT;
+  if (item.active) {
+    rowStyle = ITEM_STYLE_COLLAPSED_ACTIVE;
+  }
+  return (
+    <div
+      className="sidebar-done-link"
+      role="listitem"
+      tabIndex={0}
+      title={item.label}
+      style={rowStyle}
+    >
+      <svg
+        aria-hidden="true"
+        width={18}
+        height={18}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        style={ICON_STYLE}
+      >
+        <path d={item.iconPath} />
+      </svg>
+    </div>
+  );
+}
+
+function DoneNavItemRow({ item, collapsed }: NavItemRowProps): JSX.Element {
+  if (collapsed) {
+    return <CollapsedNavItemRow item={item} />;
+  }
+
   let rowStyle = ITEM_STYLE_DEFAULT;
   if (item.active) {
     rowStyle = ITEM_STYLE_ACTIVE;
@@ -162,8 +220,28 @@ function DoneNavItemRow({ item }: NavItemRowProps): JSX.Element {
   );
 }
 
-export default function SidebarDone({ className, logoSrc }: SidebarProps): JSX.Element {
+const HAMBURGER_SVG = (
+  <svg
+    aria-label="Menú"
+    width={18}
+    height={12}
+    viewBox="0 0 18 12"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    style={{ flexShrink: 0, color: 'var(--vmc-color-icon-inverse)' }}
+  >
+    <line x1="0" y1="1" x2="18" y2="1" />
+    <line x1="0" y1="6" x2="18" y2="6" />
+    <line x1="0" y1="11" x2="18" y2="11" />
+  </svg>
+);
+
+export default function SidebarDone({ className, logoSrc, collapsed }: SidebarProps): JSX.Element {
   const resolvedLogoSrc = logoSrc ?? '/images/vmc-logo-white.png';
+  const sidebarWidth = collapsed ? 64 : 256;
+
   return (
     <>
       <style>{DONE_PSEUDO_STYLES}</style>
@@ -171,50 +249,39 @@ export default function SidebarDone({ className, logoSrc }: SidebarProps): JSX.E
         className={clsx(className)}
         aria-label="Navegación principal"
         style={{
-          width: 256,
+          width: sidebarWidth,
           backgroundColor: 'var(--vmc-color-background-brand)',
           display: 'flex',
           flexDirection: 'column',
           flexShrink: 0,
+          transition: 'width 200ms var(--ease-standard, cubic-bezier(0.3,0,0,1))',
+          overflow: 'hidden',
         }}
       >
-        {/* Brand area · 64px · hamburger + wordmark */}
+        {/* Brand area · 64px */}
         <div
           style={{
             height: 64,
-            padding: '0 20px',
+            padding: collapsed ? '0' : '0 20px',
             display: 'flex',
             alignItems: 'center',
+            justifyContent: collapsed ? 'center' : 'flex-start',
             gap: 12,
             flexShrink: 0,
           }}
         >
-          {/* Hamburger — stroke vía currentColor + token */}
-          <svg
-            aria-label="Menú"
-            width={18}
-            height={12}
-            viewBox="0 0 18 12"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            style={{ flexShrink: 0, color: 'var(--vmc-color-icon-inverse)' }}
-          >
-            <line x1="0" y1="1" x2="18" y2="1" />
-            <line x1="0" y1="6" x2="18" y2="6" />
-            <line x1="0" y1="11" x2="18" y2="11" />
-          </svg>
+          {HAMBURGER_SVG}
 
-          {/* Brand: logo VMC */}
-          <Image
-            src={resolvedLogoSrc}
-            alt="VMC Subastas"
-            width={120}
-            height={27}
-            style={{ objectFit: 'contain', objectPosition: 'left' }}
-            unoptimized={resolvedLogoSrc.startsWith('data:')}
-          />
+          {!collapsed && (
+            <Image
+              src={resolvedLogoSrc}
+              alt="VMC Subastas"
+              width={120}
+              height={27}
+              style={{ objectFit: 'contain', objectPosition: 'left' }}
+              unoptimized={resolvedLogoSrc.startsWith('data:')}
+            />
+          )}
         </div>
 
         {/* Nav */}
@@ -223,40 +290,46 @@ export default function SidebarDone({ className, logoSrc }: SidebarProps): JSX.E
           style={{
             paddingTop: 20,
             paddingBottom: 20,
-            paddingLeft: 12,
-            paddingRight: 12,
+            paddingLeft: collapsed ? 0 : 12,
+            paddingRight: collapsed ? 0 : 12,
           }}
         >
-          {/* Main group */}
           <div
             role="list"
             style={{ display: 'flex', flexDirection: 'column', gap: 4 }}
           >
             {MAIN_NAV_ITEMS.map(function renderMainItem(item) {
-              return <DoneNavItemRow key={item.label} item={item} />;
+              return <DoneNavItemRow key={item.label} item={item} collapsed={collapsed} />;
             })}
           </div>
 
-          {/* Soporte section */}
-          <div style={{ marginTop: 20 }}>
-            <span
-              style={{
-                display: 'block',
-                fontSize: 12,
-                fontWeight: 700,
-                color: 'var(--vmc-color-text-on-dark-subtle)',
-                fontFamily: 'var(--font-plus-jakarta-sans, var(--font-display, sans-serif))',
-                lineHeight: '16px',
-                paddingLeft: 8,
-                marginBottom: 4,
-              }}
-            >
-              Soporte
-            </span>
-            <div role="list">
-              <DoneNavItemRow item={SUPPORT_ITEM} />
+          {!collapsed && (
+            <div style={{ marginTop: 20 }}>
+              <span
+                style={{
+                  display: 'block',
+                  fontSize: 12,
+                  fontWeight: 700,
+                  color: 'var(--vmc-color-text-on-dark-subtle)',
+                  fontFamily: 'var(--font-plus-jakarta-sans, var(--font-display, sans-serif))',
+                  lineHeight: '16px',
+                  paddingLeft: 8,
+                  marginBottom: 4,
+                }}
+              >
+                Soporte
+              </span>
+              <div role="list">
+                <DoneNavItemRow item={SUPPORT_ITEM} />
+              </div>
             </div>
-          </div>
+          )}
+
+          {collapsed && (
+            <div role="list" style={{ marginTop: 8 }}>
+              <DoneNavItemRow item={SUPPORT_ITEM} collapsed={collapsed} />
+            </div>
+          )}
         </nav>
       </aside>
     </>

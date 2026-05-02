@@ -43,6 +43,14 @@ interface ComponentShowcaseProps {
   children: ReactNode;
   doneChildren?: ReactNode;
   fullWidth?: boolean;
+  /** Renders a prominent variant-switcher strip above the preview */
+  variantSwitcher?: ReactNode;
+  /**
+   * Contenido del bloque @figma-spec extraído del TSX.
+   * Se muestra en modo NORMAL debajo del import path.
+   * Legible por humanos y agentes — fuente de verdad para push a Figma.
+   */
+  figmaSpec?: string;
 }
 
 type CopyState = "idle" | "copied";
@@ -131,6 +139,8 @@ export function ComponentShowcase({
   children,
   doneChildren,
   fullWidth = false,
+  variantSwitcher,
+  figmaSpec,
 }: ComponentShowcaseProps): JSX.Element {
   const { mode } = useComponentMode();
   const [copyState, setCopyState] = useState<CopyState>("idle");
@@ -323,15 +333,53 @@ export function ComponentShowcase({
         })}
       </div>
 
+      {/* ── Variant switcher strip ────────────────────────────────────── */}
+      {variantSwitcher && (
+        <div
+          style={{
+            display:      "flex",
+            alignItems:   "center",
+            gap:          12,
+            padding:      "10px 16px",
+            background:   "color-mix(in oklch, oklch(0.22 0.18 285) 7%, var(--vmc-color-background-primary, #fff))",
+            borderRadius: "8px 8px 0 0",
+            borderTop:    "2px solid oklch(0.22 0.18 285)",
+            borderLeft:   "1px solid color-mix(in oklch, oklch(0.22 0.18 285) 18%, transparent)",
+            borderRight:  "1px solid color-mix(in oklch, oklch(0.22 0.18 285) 18%, transparent)",
+            marginBottom: 0,
+          }}
+        >
+          {/* Pulse dot */}
+          <span className="variant-dot" aria-hidden="true" />
+          <span
+            style={{
+              fontSize:      10,
+              fontWeight:    700,
+              fontFamily:    "monospace",
+              textTransform: "uppercase",
+              letterSpacing: "0.12em",
+              color:         "oklch(0.22 0.18 285)",
+              userSelect:    "none",
+              flexShrink:    0,
+            }}
+          >
+            variantes
+          </span>
+          <div style={{ display: "flex", gap: 6, alignItems: "center", flexWrap: "wrap" }}>
+            {variantSwitcher}
+          </div>
+        </div>
+      )}
+
       {/* ── Component preview ─────────────────────────────────────────── */}
       <div
         style={{
-          borderRadius: 8,
-          border: "1px solid var(--vmc-color-border-default)",
-          overflow: "hidden",
-          background: "var(--vmc-color-background-primary)",
-          /* scroll horizontal si el contenedor supera el panel de docs */
-          overflowX: "auto",
+          borderRadius:    variantSwitcher ? "0 0 8px 8px" : 8,
+          border:          "1px solid var(--vmc-color-border-default)",
+          borderTop:       variantSwitcher ? "none" : "1px solid var(--vmc-color-border-default)",
+          overflow:        "hidden",
+          background:      "var(--vmc-color-background-primary)",
+          overflowX:       "auto",
         }}
       >
         {/* inner frame constrained to selected viewport */}
@@ -354,12 +402,102 @@ export function ComponentShowcase({
         {importPath}
       </p>
 
+      {/* ── @figma-spec block (NORMAL mode only) ──────────────────────── */}
+      {!isDoneMode && figmaSpec && <FigmaSpecBlock spec={figmaSpec} />}
+
       <style>{`
         .sc-btn:hover { opacity: 0.85; }
         .sc-btn-primary:hover { background: color-mix(in oklch, var(--vmc-color-background-brand) 85%, oklch(1 0 0)) !important; }
         .sc-btn:focus-visible, .sc-btn-primary:focus-visible { outline: 2px solid var(--vmc-color-border-focus); outline-offset: 2px; }
-        @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+        /* Variant pulse dot */
+        .variant-dot {
+          display: inline-block;
+          width: 8px; height: 8px;
+          border-radius: 9999px;
+          background: oklch(0.22 0.18 285);
+          flex-shrink: 0;
+          animation: variant-pulse 1.8s ease-in-out infinite;
+        }
+        @keyframes variant-pulse {
+          0%, 100% { opacity: 1;   transform: scale(1);    box-shadow: 0 0 0 0 oklch(0.22 0.18 285 / 55%); }
+          50%       { opacity: 0.7; transform: scale(1.15); box-shadow: 0 0 0 5px oklch(0.22 0.18 285 / 0%); }
+        }
+
+        @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
       `}</style>
+    </div>
+  );
+}
+
+/* ── @figma-spec renderer ─────────────────────────────────────────────── */
+
+interface FigmaSpecBlockProps {
+  spec: string;
+}
+
+function FigmaSpecBlock({ spec }: FigmaSpecBlockProps): JSX.Element {
+  const [open, setOpen] = useState(false);
+
+  function handleToggle(): void {
+    setOpen(function toggle(prev) { return !prev; });
+  }
+
+  return (
+    <div
+      style={{
+        marginTop: 8,
+        borderRadius: 6,
+        border: "1px solid oklch(0.22 0.18 285 / 18%)",
+        overflow: "hidden",
+        fontFamily: "monospace",
+      }}
+    >
+      {/* ── header row ── */}
+      <button
+        type="button"
+        onClick={handleToggle}
+        style={{
+          display:         "flex",
+          alignItems:      "center",
+          gap:             8,
+          width:           "100%",
+          padding:         "7px 12px",
+          background:      "oklch(0.22 0.18 285 / 6%)",
+          border:          "none",
+          cursor:          "pointer",
+          textAlign:       "left",
+          borderBottom:    open ? "1px solid oklch(0.22 0.18 285 / 14%)" : "none",
+        }}
+      >
+        <span style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "oklch(0.22 0.18 285)", userSelect: "none" }}>
+          @figma-spec
+        </span>
+        <span style={{ fontSize: 10, color: "oklch(0.22 0.18 285 / 55%)", userSelect: "none" }}>
+          — fuente de verdad · legible por agentes
+        </span>
+        <span style={{ marginLeft: "auto", fontSize: 11, color: "oklch(0.22 0.18 285 / 60%)", userSelect: "none" }}>
+          {open ? "▲" : "▼"}
+        </span>
+      </button>
+
+      {/* ── spec content ── */}
+      {open && (
+        <pre
+          style={{
+            margin:          0,
+            padding:         "12px 16px",
+            fontSize:        11,
+            lineHeight:      "18px",
+            color:           "oklch(0.22 0.18 285)",
+            background:      "oklch(0.22 0.18 285 / 3%)",
+            overflowX:       "auto",
+            whiteSpace:      "pre",
+          }}
+        >
+          {spec.trim()}
+        </pre>
+      )}
     </div>
   );
 }

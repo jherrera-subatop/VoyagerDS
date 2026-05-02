@@ -16,6 +16,7 @@
     "tokens:build": "terrazzo build",
     "tokens:check": "node scripts/token-gatekeeper.mjs",
     "tokens:audit": "node scripts/token-gatekeeper.mjs && pnpm exec terrazzo build && pnpm type-check && pnpm lint",
+    "tokens:export": "node scripts/export-tokens.mjs",
     "tokens:watch": "terrazzo build --watch",
     "verify:pages": "node scripts/verify-routes.mjs",
     "verify:pages:quick": "node scripts/verify-routes.mjs --skip-build",
@@ -23,7 +24,8 @@
     "screenshots:canonical": "node scripts/generate-canonical-screenshots.mjs",
     "jira:sync": "node scripts/jira-ops-agent/index.mjs",
     "jira:dry-run": "node scripts/jira-ops-agent/index.mjs --dry-run",
-    "jira:state": "node scripts/jira-ops-agent/index.mjs --state"
+    "jira:state": "node scripts/jira-ops-agent/index.mjs --state",
+    "figma:extract-spec": "node scripts/figma/extract-figma-spec.mjs"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.3.0",

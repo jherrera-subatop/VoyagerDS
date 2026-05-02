@@ -16,6 +16,16 @@
 @import "./tokens/tokens-semantics-light.css";
 @import "./tokens/tokens-semantics-dark.css";
 
+/* ── 1b. Font weight tokens — manual extension (Terrazzo CSS plugin does not
+         emit number/fontWeight types as CSS vars; values mirror tokens.json)  */
+:root {
+  --vmc-font-weight-light:    300;
+  --vmc-font-weight-regular:  400;
+  --vmc-font-weight-medium:   500;
+  --vmc-font-weight-semibold: 600;
+  --vmc-font-weight-bold:     700;
+}
+
 /* ── 2. Tailwind v4 theme — maps Terrazzo variables to Tailwind utilities ── */
 /*
    Pattern: --color-{name}: var(--vmc-color-{name})

@@ -32,3 +32,7 @@ Thumbs.db
 # TypeScript build info (regenerado automáticamente)
 tsconfig.tsbuildinfo
 .vercel
+
+# Token exports (generated — run pnpm tokens:export to rebuild)
+dist/tokens.figma.json
+dist/tokens.code.json

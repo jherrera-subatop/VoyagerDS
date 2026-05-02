@@ -5,7 +5,7 @@
       "name": "voyager-dev",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["dev"],
-      "port": 3000
+      "port": 3420
     }
   ]
 }

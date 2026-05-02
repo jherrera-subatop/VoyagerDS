@@ -1,3 +1,69 @@
+/**
+ * @figma-spec
+ * @component    Footer | 1024xAuto | Page:Stitch
+ *
+ * @tokens
+ *   vault        : --vmc-color-background-brand       : #22005C
+ *   textInverse  : --vmc-color-text-inverse           : #FFFFFF
+ *   textMuted    : --vmc-color-text-on-dark-muted     : rgba(255,255,255,0.60)
+ *   textSubtle   : --vmc-color-text-on-dark-subtle    : rgba(255,255,255,0.30~40%)
+ *   borderFocus  : --vmc-color-border-focus           : rgba(255,255,255,0.60)
+ *
+ * @typography
+ *   col-heading : Plus Jakarta Sans | SemiBold | 12px | lh:auto | "PLATAFORMA" etc. (uppercase, tracking 0.08em, opacity 0.8)
+ *   nav-link    : Roboto            | Regular  | 14px | lh:20px | link label
+ *   copyright   : Roboto            | Regular  | 12px | lh:16px | FOOTER_COPYRIGHT
+ *   brand-desc  : Roboto            | Regular  | 12px | lh:16px | FOOTER_BRAND_DESCRIPTION
+ *   libro-label : Plus Jakarta Sans | Bold     | 10px | lh:auto | "LIBRO DE RECLAMACIONES" (uppercase, tracking 0.08em)
+ *
+ * @layers
+ *   root        : COMPONENT : 1024xAuto: x:0,  y:0   : fill:vault
+ *   top-section : Frame     : 1024xAuto: x:0,  y:0   : fill:vault, grid:4cols, gap:32, padding:64 32 48
+ *   brand-col   : Frame     : 224xAuto : x:32, y:64  : fill:none, flex:col, gap:24
+ *   logo-img    : Image     : 120x32   : x:0,  y:0   : objectFit:contain
+ *   brand-desc  : Text      : 224xAuto : x:0,  y:40  : style:brand-desc, fill:textSubtle
+ *   social-list : Frame     : autoXauto: x:0,  y:var : fill:none, flex:row, gap:16
+ *   social-item : Frame     : 40x40    : x:var,y:0   : fill:none, radius:9999, color:textMuted
+ *   nav-col     : Frame     : 224xAuto : x:var,y:64  : fill:none, flex:col
+ *   col-head-txt: Text      : autoXauto: x:0,  y:0   : style:col-heading, fill:textInverse@80%
+ *   nav-link-el : Text      : autoXauto: x:0,  y:var : style:nav-link, fill:textMuted
+ *   libro-col   : Frame     : 224xAuto : x:800,y:64  : fill:none, flex:col, align:end, gap:8
+ *   libro-img   : Image     : 80x48    : x:auto,y:0  : objectFit:contain
+ *   libro-lbl   : Text      : autoXauto: x:auto,y:56 : style:libro-label, fill:textMuted
+ *   bottom-bar  : Frame     : 1024x72  : x:0,  y:var : fill:color-mix(vault 85%, black), paddingX:32, paddingY:24
+ *   copy-txt    : Text      : autoXauto: x:32, y:28  : style:copyright, fill:textSubtle
+ *   bottom-links: Frame     : autoXauto: x:auto,y:28 : fill:none, flex:row, gap:16
+ *
+ * @subcomponents
+ *   FooterBrandColumn       : inline
+ *     @tokens   fill:textSubtle | social:textMuted
+ *     @layers   brand-col:Frame:224xAuto:x:0,y:0:fill:none
+ *   FooterNavColumnBlock    : inline
+ *     @tokens   head:textInverse@80% | link:textMuted
+ *     @layers   nav-col:Frame:224xAuto:x:0,y:0:fill:none
+ *   FooterReclamacionesBlock: inline
+ *     @tokens   label:textMuted
+ *     @layers   libro-col:Frame:224xAuto:x:0,y:0:fill:none
+ *   FooterBottomBar         : inline
+ *     @tokens   bg:color-mix(vault 85%, black) | copy:textSubtle
+ *     @layers   bottom-bar:Frame:1024x72:x:0,y:0:fill:var
+ *   FooterSocialIcon        : inline
+ *     @tokens   fill:currentColor (textMuted)
+ *     @layers   icon:SVG:20x20:x:0,y:0:fill:currentColor
+ *
+ * @variants
+ *   (ninguna — un único estado)
+ *
+ * @states
+ *   [x] default  : footer vault, 4 columnas: brand+social, 2 nav cols, libro de reclamaciones; bottom-bar más oscuro
+ *   [x] hover    : nav links color:textInverse; social icons bg rgba(255,255,255,0.10)
+ *   [ ] focus    : focus-visible outline 2px borderFocus
+ *   [ ] active   : (futuro)
+ *   [ ] disabled : n/a
+ *   [ ] loading  : n/a
+ *   [ ] error    : n/a
+ */
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { clsx } from 'clsx';
