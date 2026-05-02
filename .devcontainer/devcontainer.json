@@ -1,0 +1,44 @@
+{
+  "name": "Voyager DS — VMC Subastas",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22"
+    }
+  },
+
+  "onCreateCommand": "npm install -g pnpm && pnpm install",
+
+  "postStartCommand": "pnpm run terrazzo build 2>/dev/null || true",
+
+  "forwardPorts": [3420],
+
+  "portsAttributes": {
+    "3420": {
+      "label": "Voyager DS Dev Server",
+      "onAutoForward": "openBrowser"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss",
+        "GitHub.copilot",
+        "eamodio.gitlens",
+        "PKief.material-icon-theme"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "tailwindCSS.experimental.classRegex": []
+      }
+    }
+  },
+
+  "remoteUser": "node"
+}

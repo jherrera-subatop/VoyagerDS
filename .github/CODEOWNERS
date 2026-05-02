@@ -1,0 +1,19 @@
+# VOYAGER DS — Code Ownership
+# Cambios en estos archivos requieren aprobación de Julio antes de merge
+
+# Token pipeline — fuente de verdad del design system
+/tokens.json @jherrera-subatop
+/terrazzo.config.mjs @jherrera-subatop
+
+# Dependencias y config crítica
+/package.json @jherrera-subatop
+/tsconfig.json @jherrera-subatop
+/next.config.ts @jherrera-subatop
+
+# Reglas del agente y gobernanza DS
+/.claude/ @jherrera-subatop
+/DESIGN.md @jherrera-subatop
+/CLAUDE.md @jherrera-subatop
+
+# src/features/ — colaboración libre (sin dueño fijo)
+# Aaron y Julio pueden trabajar aquí sin bloqueos
