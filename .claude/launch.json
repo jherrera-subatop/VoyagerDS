@@ -4,8 +4,9 @@
     {
       "name": "voyager-dev",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["dev"],
-      "port": 3000
+      "runtimeArgs": ["exec", "next", "dev", "-p", "3420"],
+      "port": 3420,
+      "cwd": "C:\\VoyagerDS\\VoyagerDS"
     }
   ]
 }

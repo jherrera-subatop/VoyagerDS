@@ -1,0 +1,1538 @@
+{
+  "$schema": "https://terrazzo.app/schema/1.0.json",
+  "color": {
+    "$description": "Palette — The Vault brand system (design.md v1.1.0). Primitives: vault/orange/cyan/neutral/green/red/amber. Semantics: Dot Notation + Voyager transactional tokens",
+    "vault-100": {
+      "$type": "color",
+      "$value": "oklch(0.9634 0.0206 301.01)",
+      "$description": "Vault tint 1 — near-white lavender, ghost hover backgrounds"
+    },
+    "vault-200": {
+      "$type": "color",
+      "$value": "oklch(0.9186 0.0457 299.28)",
+      "$description": "Vault tint 2 — light lavender, selected state backgrounds"
+    },
+    "vault-300": {
+      "$type": "color",
+      "$value": "oklch(0.8304 0.0976 298.2)",
+      "$description": "Vault tint 3 — medium-light lavender"
+    },
+    "vault-400": {
+      "$type": "color",
+      "$value": "oklch(0.723 0.1617 295.09)",
+      "$description": "Vault tint 4 — medium lavender"
+    },
+    "vault-500": {
+      "$type": "color",
+      "$value": "oklch(0.5931 0.193 291.92)",
+      "$description": "Vault tint 5 — medium-saturated purple"
+    },
+    "vault-600": {
+      "$type": "color",
+      "$value": "oklch(0.4641 0.2049 287.57)",
+      "$description": "Vault tint 6 — strong purple"
+    },
+    "vault-700": {
+      "$type": "color",
+      "$value": "oklch(0.3354 0.1624 289.86)",
+      "$description": "Vault Mid (#3B1782) — gradient end, link color, action primary interactive"
+    },
+    "vault-800": {
+      "$type": "color",
+      "$value": "oklch(0.2936 0.1491 287.66)",
+      "$description": "Vault Dark (#2E0F70) — overlays, hover states on dark surfaces"
+    },
+    "vault-900": {
+      "$type": "color",
+      "$value": "oklch(0.2418 0.1393 287.29)",
+      "$description": "THE VAULT (#22005C) — BRAND ANCHOR. Navigation, primary CTAs, header, sidebar background, card accent border"
+    },
+    "vault-1000": {
+      "$type": "color",
+      "$value": "oklch(0.2074 0.1201 286.43)",
+      "$description": "Vault deep 1 — darkest interactive vault tone"
+    },
+    "vault-1100": {
+      "$type": "color",
+      "$value": "oklch(0.1601 0.0906 290.05)",
+      "$description": "Vault deep 2"
+    },
+    "vault-1200": {
+      "$type": "color",
+      "$value": "oklch(0.114 0.0615 298.13)",
+      "$description": "Vault deep 3 — near black with vault hue"
+    },
+    "orange-100": {
+      "$type": "color",
+      "$value": "oklch(0.9826 0.0119 67.48)",
+      "$description": "En Vivo tint 1 — urgent surface, countdown background"
+    },
+    "orange-200": {
+      "$type": "color",
+      "$value": "oklch(0.9435 0.0444 75.96)",
+      "$description": "En Vivo tint 2 — subtle urgency fill"
+    },
+    "orange-300": {
+      "$type": "color",
+      "$value": "oklch(0.9013 0.0786 75.9)",
+      "$description": "En Vivo tint 3 — light urgency interactive"
+    },
+    "orange-400": {
+      "$type": "color",
+      "$value": "oklch(0.8545 0.1085 72.6)",
+      "$description": "En Vivo tint 4 — medium urgency fill"
+    },
+    "orange-500": {
+      "$type": "color",
+      "$value": "oklch(0.7976 0.1302 67.83)",
+      "$description": "En Vivo tint 5 — near anchor"
+    },
+    "orange-600": {
+      "$type": "color",
+      "$value": "oklch(0.7244 0.1533 56.07)",
+      "$description": "EN VIVO (#ED8936) — ANCHOR. Live auction badges, urgent status, CTA accent, imminent timer"
+    },
+    "orange-700": {
+      "$type": "color",
+      "$value": "oklch(0.6453 0.153 52.09)",
+      "$description": "En Vivo shade 1 — pressed state"
+    },
+    "orange-800": {
+      "$type": "color",
+      "$value": "oklch(0.5574 0.1393 49.75)",
+      "$description": "En Vivo shade 2"
+    },
+    "orange-900": {
+      "$type": "color",
+      "$value": "oklch(0.4777 0.1249 47.95)",
+      "$description": "En Vivo shade 3"
+    },
+    "orange-1000": {
+      "$type": "color",
+      "$value": "oklch(0.3967 0.1088 45.73)",
+      "$description": "En Vivo shade 4"
+    },
+    "orange-1100": {
+      "$type": "color",
+      "$value": "oklch(0.3131 0.089 44.44)",
+      "$description": "En Vivo shade 5"
+    },
+    "orange-1200": {
+      "$type": "color",
+      "$value": "oklch(0.2308 0.066 44.91)",
+      "$description": "En Vivo shade 6 — maximum contrast"
+    },
+    "cyan-100": {
+      "$type": "color",
+      "$value": "oklch(0.9758 0.0311 199.24)",
+      "$description": "Negociable tint 1 — near-white cyan"
+    },
+    "cyan-200": {
+      "$type": "color",
+      "$value": "oklch(0.9371 0.0746 200.18)",
+      "$description": "Negociable tint 2"
+    },
+    "cyan-300": {
+      "$type": "color",
+      "$value": "oklch(0.892 0.1153 197.38)",
+      "$description": "Negociable tint 3"
+    },
+    "cyan-400": {
+      "$type": "color",
+      "$value": "oklch(0.8479 0.1369 197.25)",
+      "$description": "Negociable tint 4"
+    },
+    "cyan-500": {
+      "$type": "color",
+      "$value": "oklch(0.8064 0.1372 198.35)",
+      "$description": "Negociable tint 5 — near anchor"
+    },
+    "cyan-600": {
+      "$type": "color",
+      "$value": "oklch(0.7611 0.1296 197.33)",
+      "$description": "NEGOCIABLE (#00CACE) — ANCHOR. Negotiable status, interactive highlights, info state"
+    },
+    "cyan-700": {
+      "$type": "color",
+      "$value": "oklch(0.6635 0.113 197.07)",
+      "$description": "Negociable shade 1"
+    },
+    "cyan-800": {
+      "$type": "color",
+      "$value": "oklch(0.5622 0.0958 196.65)",
+      "$description": "Negociable shade 2"
+    },
+    "cyan-900": {
+      "$type": "color",
+      "$value": "oklch(0.4564 0.0777 197.2)",
+      "$description": "Negociable shade 3"
+    },
+    "cyan-1000": {
+      "$type": "color",
+      "$value": "oklch(0.351 0.0597 198.13)",
+      "$description": "Negociable shade 4"
+    },
+    "cyan-1100": {
+      "$type": "color",
+      "$value": "oklch(0.2399 0.0408 197.48)",
+      "$description": "Negociable shade 5"
+    },
+    "cyan-1200": {
+      "$type": "color",
+      "$value": "oklch(0.1696 0.0288 198.94)",
+      "$description": "Negociable shade 6 — near black"
+    },
+    "neutral-100": {
+      "$type": "color",
+      "$value": "oklch(0.9833 0.0025 167.35)",
+      "$description": "Neutral 1 (#F8FAF9) — Level 0 page background. Warm off-white base canvas"
+    },
+    "neutral-200": {
+      "$type": "color",
+      "$value": "oklch(0.9654 0.0025 166.64)",
+      "$description": "Neutral 2 (#F2F4F3) — Level 1 section background. Sub-sections, sidebar content, tinted wrappers"
+    },
+    "neutral-300": {
+      "$type": "color",
+      "$value": "oklch(0.941 0.0034 146.77)",
+      "$description": "Neutral 3 — subtle border alternative, hover on surfaces"
+    },
+    "neutral-400": {
+      "$type": "color",
+      "$value": "oklch(0.914 0.0025 166.86)",
+      "$description": "Neutral 4 (#E1E3E2) — Input field background, skeleton base"
+    },
+    "neutral-500": {
+      "$type": "color",
+      "$value": "oklch(0.872 0.0106 261.74)",
+      "$description": "Neutral 5 (#D1D5DC) — Skeleton / inactive elements, closed badge background"
+    },
+    "neutral-600": {
+      "$type": "color",
+      "$value": "oklch(0.8002 0.0169 262.76)",
+      "$description": "Neutral 6 — mid-gray, subtle icon fills"
+    },
+    "neutral-700": {
+      "$type": "color",
+      "$value": "oklch(0.7071 0.0224 261.74)",
+      "$description": "Neutral 7 (#99A1AF) — Price label text, muted icons, placeholder text anchor"
+    },
+    "neutral-800": {
+      "$type": "color",
+      "$value": "oklch(0.551 0.0234 264.33)",
+      "$description": "Neutral 8 — secondary icon, supporting metadata"
+    },
+    "neutral-900": {
+      "$type": "color",
+      "$value": "oklch(0.3985 0.019 302.04)",
+      "$description": "Neutral 9 (#494550) — BODY TEXT ANCHOR. Card body text, secondary content, form descriptions"
+    },
+    "neutral-1000": {
+      "$type": "color",
+      "$value": "oklch(0.4461 0.0299 257.73)",
+      "$description": "Neutral 10 (#4A5565) — Disabled component text"
+    },
+    "neutral-1100": {
+      "$type": "color",
+      "$value": "oklch(0.3227 0.0239 271.6)",
+      "$description": "Neutral 11 — deep gray, high contrast secondary"
+    },
+    "neutral-1200": {
+      "$type": "color",
+      "$value": "oklch(0.2233 0.0046 197.06)",
+      "$description": "Neutral 12 (#191C1C) — ON SURFACE ANCHOR. Primary text — never use pure black"
+    },
+    "green-100": {
+      "$type": "color",
+      "$value": "oklch(0.9825 0.0165 163.02)",
+      "$description": "Green tint 1 — success surface"
+    },
+    "green-200": {
+      "$type": "color",
+      "$value": "oklch(0.9637 0.0394 164.17)",
+      "$description": "Green tint 2"
+    },
+    "green-300": {
+      "$type": "color",
+      "$value": "oklch(0.8974 0.0908 157.69)",
+      "$description": "Green tint 3"
+    },
+    "green-400": {
+      "$type": "color",
+      "$value": "oklch(0.8226 0.1412 156.07)",
+      "$description": "Green tint 4"
+    },
+    "green-500": {
+      "$type": "color",
+      "$value": "oklch(0.7591 0.1738 151.52)",
+      "$description": "Green tint 5 — near anchor"
+    },
+    "green-600": {
+      "$type": "color",
+      "$value": "oklch(0.7227 0.192 149.6)",
+      "$description": "SUCCESS (#22C55E) — ANCHOR. Successful bid, confirmed action, market bullish signal"
+    },
+    "green-700": {
+      "$type": "color",
+      "$value": "oklch(0.647 0.1747 149.32)",
+      "$description": "Green shade 1"
+    },
+    "green-800": {
+      "$type": "color",
+      "$value": "oklch(0.5606 0.1529 149.21)",
+      "$description": "Green shade 2"
+    },
+    "green-900": {
+      "$type": "color",
+      "$value": "oklch(0.4771 0.1316 148.96)",
+      "$description": "Green shade 3"
+    },
+    "green-1000": {
+      "$type": "color",
+      "$value": "oklch(0.3932 0.1095 148.67)",
+      "$description": "Green shade 4"
+    },
+    "green-1100": {
+      "$type": "color",
+      "$value": "oklch(0.305 0.084 149.07)",
+      "$description": "Green shade 5"
+    },
+    "green-1200": {
+      "$type": "color",
+      "$value": "oklch(0.2132 0.059 148.47)",
+      "$description": "Green shade 6 — deep green"
+    },
+    "red-100": {
+      "$type": "color",
+      "$value": "oklch(0.9691 0.0151 17.13)",
+      "$description": "Red tint 1 — error surface"
+    },
+    "red-200": {
+      "$type": "color",
+      "$value": "oklch(0.9322 0.0343 17.66)",
+      "$description": "Red tint 2"
+    },
+    "red-300": {
+      "$type": "color",
+      "$value": "oklch(0.8546 0.0789 18.78)",
+      "$description": "Red tint 3"
+    },
+    "red-400": {
+      "$type": "color",
+      "$value": "oklch(0.7685 0.1369 20.71)",
+      "$description": "Red tint 4"
+    },
+    "red-500": {
+      "$type": "color",
+      "$value": "oklch(0.697 0.1749 22.71)",
+      "$description": "Red tint 5 — near live anchor"
+    },
+    "red-600": {
+      "$type": "color",
+      "$value": "oklch(0.6369 0.2078 25.32)",
+      "$description": "LIVE (#EF4444) — ANCHOR. Animated dot on live auction banners. Red = error signal ONLY, never urgency/countdown"
+    },
+    "red-700": {
+      "$type": "color",
+      "$value": "oklch(0.5672 0.2035 26.68)",
+      "$description": "Red shade 1"
+    },
+    "red-800": {
+      "$type": "color",
+      "$value": "oklch(0.5213 0.1941 27.3)",
+      "$description": "Red shade 2"
+    },
+    "red-900": {
+      "$type": "color",
+      "$value": "oklch(0.506 0.1926 27.69)",
+      "$description": "ERROR (#BA1A1A) — ANCHOR. Failed bid, rejected action, form errors"
+    },
+    "red-1000": {
+      "$type": "color",
+      "$value": "oklch(0.4369 0.1707 28.19)",
+      "$description": "Red shade 4"
+    },
+    "red-1100": {
+      "$type": "color",
+      "$value": "oklch(0.3632 0.1439 28.47)",
+      "$description": "Red shade 5"
+    },
+    "red-1200": {
+      "$type": "color",
+      "$value": "oklch(0.2865 0.1148 28.71)",
+      "$description": "Red shade 6 — deep red"
+    },
+    "amber-100": {
+      "$type": "color",
+      "$value": "oklch(0.9785 0.0309 92.93)",
+      "$description": "Amber tint 1 — warning surface"
+    },
+    "amber-200": {
+      "$type": "color",
+      "$value": "oklch(0.9462 0.0799 93.62)",
+      "$description": "Amber tint 2"
+    },
+    "amber-300": {
+      "$type": "color",
+      "$value": "oklch(0.9116 0.1292 93.25)",
+      "$description": "Amber tint 3"
+    },
+    "amber-400": {
+      "$type": "color",
+      "$value": "oklch(0.8768 0.1622 90.58)",
+      "$description": "Amber tint 4"
+    },
+    "amber-500": {
+      "$type": "color",
+      "$value": "oklch(0.8272 0.171 80.53)",
+      "$description": "Amber tint 5 — near anchor"
+    },
+    "amber-600": {
+      "$type": "color",
+      "$value": "oklch(0.784 0.1719 68.1)",
+      "$description": "WARNING (#FFA000) — ANCHOR. Near-expiry alert, attention needed"
+    },
+    "amber-700": {
+      "$type": "color",
+      "$value": "oklch(0.6901 0.1597 61.36)",
+      "$description": "Amber shade 1"
+    },
+    "amber-800": {
+      "$type": "color",
+      "$value": "oklch(0.5932 0.1492 53.68)",
+      "$description": "Amber shade 2"
+    },
+    "amber-900": {
+      "$type": "color",
+      "$value": "oklch(0.5026 0.1376 47.63)",
+      "$description": "Amber shade 3"
+    },
+    "amber-1000": {
+      "$type": "color",
+      "$value": "oklch(0.4125 0.1234 42.45)",
+      "$description": "Amber shade 4"
+    },
+    "amber-1100": {
+      "$type": "color",
+      "$value": "oklch(0.3235 0.1064 37.78)",
+      "$description": "Amber shade 5"
+    },
+    "amber-1200": {
+      "$type": "color",
+      "$value": "oklch(0.2375 0.0827 35.29)",
+      "$description": "Amber shade 6 — deep amber"
+    },
+    "base-white": {
+      "$type": "color",
+      "$value": "oklch(1 0.0001 263.28)",
+      "$description": "Absolute white #FFFFFF — Level 2 card; inverse text/icon on Vault (semantic layer references this, never raw white)"
+    },
+    "base-black": {
+      "$type": "color",
+      "$value": "oklch(0 0 0)",
+      "$description": "Absolute black #000000 — scrim base only; never body text (No Black Rule)"
+    },
+    "base-scrim": {
+      "$type": "color",
+      "$value": "oklch(0 0 0 / 0.5)",
+      "$description": "Modal overlay — base-black at 50% opacity"
+    },
+    "vault-utility-ghost": {
+      "$type": "color",
+      "$value": "oklch(0.2418 0.1393 287.29 / 0.1)",
+      "$description": "The Vault #22005C at 10% — ghost border (DESIGN.md utility)"
+    },
+    "vault-utility-divider": {
+      "$type": "color",
+      "$value": "oklch(0.2418 0.1393 287.29 / 0.05)",
+      "$description": "The Vault #22005C at 5% — section row divider"
+    },
+    "red-utility-error-ghost": {
+      "$type": "color",
+      "$value": "oklch(0.506 0.1926 27.69 / 0.5)",
+      "$description": "Error #BA1A1A at 50% — input error ghost border"
+    },
+    "neutral-utility-muted": {
+      "$type": "color",
+      "$value": "oklch(0.3985 0.019 302.04 / 0.5)",
+      "$description": "Same chroma as neutral-900 at 50% alpha — tertiary / muted body (DESIGN.md Muted)"
+    },
+    "neutral-utility-label": {
+      "$type": "color",
+      "$value": "oklch(0.3985 0.019 302.04 / 0.4)",
+      "$description": "Same chroma as neutral-900 at 40% alpha — form labels (DESIGN.md Label)"
+    },
+    "neutral-utility-badge-closed": {
+      "$type": "color",
+      "$value": "oklch(0.7137 0.0192 261.39)",
+      "$description": "CERRADO badge fill (#9CA3AF) — single primitive; semantics alias only"
+    },
+    "base-inverse-muted": {
+      "$type": "color",
+      "$value": "oklch(1 0.0001 263.28 / 0.6)",
+      "$description": "White 60% — secondary text on Vault/sidebar (DESIGN.md On Dark Muted)"
+    },
+    "base-inverse-subtle": {
+      "$type": "color",
+      "$value": "oklch(1 0.0001 263.28 / 0.3)",
+      "$description": "White 30% — tertiary on dark surfaces (DESIGN.md On Dark Subtle)"
+    },
+    "background": {
+      "$description": "Semantic background tokens — light mode surface hierarchy from design.md",
+      "primary": {
+        "$type": "color",
+        "$value": "{color.neutral-100}",
+        "$description": "Page canvas (#F8FAF9) — Level 0 base page background"
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{color.neutral-200}",
+        "$description": "Section background (#F2F4F3) — Level 1, sub-sections, sidebar content areas"
+      },
+      "tertiary": {
+        "$type": "color",
+        "$value": "{color.neutral-300}",
+        "$description": "Tertiary surface — nested containers, table row hover"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{color.neutral-1200}",
+        "$description": "Inverse surface (#191C1C) — tooltips, dark toasts"
+      },
+      "brand": {
+        "$type": "color",
+        "$value": "{color.vault-900}",
+        "$description": "Brand surface (#22005C) — sidebar, header, footer, primary CTAs"
+      },
+      "interactive": {
+        "$type": "color",
+        "$value": "{color.vault-100}",
+        "$description": "Interactive element rest background — ghost hover on vault surfaces"
+      },
+      "interactive-hover": {
+        "$type": "color",
+        "$value": "{color.vault-200}",
+        "$description": "Interactive element hover background"
+      },
+      "interactive-active": {
+        "$type": "color",
+        "$value": "{color.vault-700}",
+        "$description": "Interactive element active/pressed background"
+      },
+      "interactive-selected": {
+        "$type": "color",
+        "$value": "{color.vault-100}",
+        "$description": "Selected item background (nav item, list row)"
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.neutral-400}",
+        "$description": "Disabled element background (#E1E3E2)"
+      },
+      "overlay": {
+        "$type": "color",
+        "$value": "{color.base-scrim}",
+        "$description": "Modal/drawer overlay — base-scrim (black 50%)"
+      },
+      "card": {
+        "$type": "color",
+        "$value": "{color.base-white}",
+        "$description": "Card surface (#FFFFFF) — Level 2 via primitive base-white"
+      },
+      "input": {
+        "$type": "color",
+        "$value": "{color.neutral-400}",
+        "$description": "Input field fill (#E1E3E2) — no border at rest per design.md"
+      },
+      "urgency": {
+        "low": {
+          "$type": "color",
+          "$value": "{color.amber-100}",
+          "$description": "Low urgency surface — standard countdown background"
+        },
+        "high": {
+          "$type": "color",
+          "$value": "{color.orange-100}",
+          "$description": "High urgency surface — near-expiry countdown"
+        },
+        "critical": {
+          "$type": "color",
+          "$value": "{color.red-100}",
+          "$description": "Critical urgency surface — error states"
+        }
+      }
+    },
+    "text": {
+      "$description": "Semantic text tokens — design.md text color system. No pure black rule enforced",
+      "primary": {
+        "$type": "color",
+        "$value": "{color.neutral-1200}",
+        "$description": "Primary text (#191C1C) — paragraphs, table content. Never #000000"
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{color.neutral-900}",
+        "$description": "Secondary text (#494550) — card body, secondary content, descriptions"
+      },
+      "tertiary": {
+        "$type": "color",
+        "$value": "{color.neutral-utility-muted}",
+        "$description": "Muted text (#494550 at 50%) — subtitles, secondary labels via neutral-utility-muted"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{color.base-white}",
+        "$description": "Inverse text (#FFFFFF) — text on dark (vault/sidebar) surfaces via base-white"
+      },
+      "brand": {
+        "$type": "color",
+        "$value": "{color.vault-900}",
+        "$description": "Brand text (#22005C) — emphasized brand references"
+      },
+      "brand-hover": {
+        "$type": "color",
+        "$value": "{color.vault-700}",
+        "$description": "Link text (#3B1782) — clickable links, interactive text"
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.neutral-1000}",
+        "$description": "Disabled text (#4A5565) — disabled component labels"
+      },
+      "placeholder": {
+        "$type": "color",
+        "$value": "{color.neutral-utility-label}",
+        "$description": "Placeholder text (#494550 at 40%) — form labels / placeholders via neutral-utility-label"
+      },
+      "price-label": {
+        "$type": "color",
+        "$value": "{color.neutral-700}",
+        "$description": "Price label text (#99A1AF) — 'PRECIO BASE' label above price amount"
+      },
+      "on-dark-muted": {
+        "$type": "color",
+        "$value": "{color.base-inverse-muted}",
+        "$description": "Secondary text on dark surfaces (#FFFFFF at 60%) — sidebar nav default"
+      },
+      "on-dark-subtle": {
+        "$type": "color",
+        "$value": "{color.base-inverse-subtle}",
+        "$description": "Tertiary text on dark surfaces (#FFFFFF at 30%) — sidebar footer"
+      },
+      "market": {
+        "bullish": {
+          "$type": "color",
+          "$value": "{color.green-600}",
+          "$description": "Market bullish text (#22C55E) — positive price movement"
+        },
+        "bearish": {
+          "$type": "color",
+          "$value": "{color.red-600}",
+          "$description": "Market bearish text (#EF4444) — negative price movement"
+        }
+      }
+    },
+    "border": {
+      "$description": "Semantic border tokens — design.md No-Line Rule: only ghost borders permitted for functional separation",
+      "default": {
+        "$type": "color",
+        "$value": "{color.vault-utility-ghost}",
+        "$description": "Ghost Border (#22005C at 10%) — only permitted functional border per No-Line Rule"
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": "{color.vault-utility-divider}",
+        "$description": "Section Divider (#22005C at 5%) — subtle row separators, compact list items"
+      },
+      "strong": {
+        "$type": "color",
+        "$value": "{color.vault-900}",
+        "$description": "Strong border — full vault color for card signature bottom border (upcoming)"
+      },
+      "brand": {
+        "$type": "color",
+        "$value": "{color.vault-900}",
+        "$description": "Brand border (#22005C) — nav active indicator, selected state border"
+      },
+      "focus": {
+        "$type": "color",
+        "$value": "{color.vault-700}",
+        "$description": "Focus ring (#3B1782) — 2px solid, 2px offset on all interactive elements"
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{color.red-utility-error-ghost}",
+        "$description": "Error border (#BA1A1A at 50%) — input error state ghost border"
+      },
+      "verified": {
+        "$type": "color",
+        "$value": "{color.cyan-600}",
+        "$description": "Verified border (#00CACE) — DataQualityBadge high state, verified thumbnails"
+      }
+    },
+    "icon": {
+      "$description": "Semantic icon tokens",
+      "primary": {
+        "$type": "color",
+        "$value": "{color.neutral-1200}",
+        "$description": "Primary icon (#191C1C) — default icon fill on light surfaces"
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{color.neutral-900}",
+        "$description": "Secondary icon (#494550) — supporting icons, decorative elements"
+      },
+      "tertiary": {
+        "$type": "color",
+        "$value": "{color.neutral-700}",
+        "$description": "Tertiary icon (#99A1AF) — muted icons, inactive states"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{color.base-white}",
+        "$description": "Inverse icon (#FFFFFF) — icons on dark/vault surfaces via base-white"
+      },
+      "brand": {
+        "$type": "color",
+        "$value": "{color.vault-900}",
+        "$description": "Brand icon (#22005C) — search icon in fields, vault-colored icons"
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.neutral-700}",
+        "$description": "Disabled icon (#99A1AF) — inactive interactive icons"
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{color.red-900}",
+        "$description": "Error icon (#BA1A1A) — error state indicators"
+      },
+      "success": {
+        "$type": "color",
+        "$value": "{color.green-600}",
+        "$description": "Success icon (#22C55E) — success state, DataQualityBadge high"
+      }
+    },
+    "status": {
+      "$description": "Status semantic tokens — maps to design.md Section 6 status colors",
+      "live": {
+        "$type": "color",
+        "$value": "{color.red-600}",
+        "$description": "Live indicator (#EF4444) — animated dot on EN VIVO badges. Red = live/active, NOT urgency"
+      },
+      "success": {
+        "$type": "color",
+        "$value": "{color.green-600}",
+        "$description": "Success (#22C55E) — confirmed bid, action success"
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "{color.amber-600}",
+        "$description": "Warning (#FFA000) — near-expiry, attention required"
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{color.red-900}",
+        "$description": "Error (#BA1A1A) — failed bid, rejected action, form error"
+      },
+      "info": {
+        "$type": "color",
+        "$value": "{color.cyan-600}",
+        "$description": "Info (#00CACE) — informational messages"
+      },
+      "negotiable": {
+        "$type": "color",
+        "$value": "{color.cyan-600}",
+        "$description": "Negotiable (#00CACE) — NEGOCIABLE auction status accent"
+      },
+      "urgent": {
+        "$type": "color",
+        "$value": "{color.orange-600}",
+        "$description": "Urgent (#ED8936) — imminent timer (< 5min), countdown urgency. Orange NOT red — red is error only"
+      }
+    },
+    "badge": {
+      "$description": "Badge variant tokens — background + text pairs per design.md Section 9.4",
+      "live": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.orange-600}",
+          "$description": "EN VIVO badge background (#ED8936)"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{color.base-white}",
+          "$description": "EN VIVO badge text (white)"
+        }
+      },
+      "negotiable": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.cyan-600}",
+          "$description": "NEGOCIABLE badge background (#00CACE)"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{color.vault-900}",
+          "$description": "NEGOCIABLE badge text (#22005C) — dark on light cyan"
+        }
+      },
+      "upcoming": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.vault-900}",
+          "$description": "PRÓXIMAMENTE badge background (#22005C)"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{color.base-white}",
+          "$description": "PRÓXIMAMENTE badge text (white)"
+        }
+      },
+      "closed": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.neutral-utility-badge-closed}",
+          "$description": "CERRADO badge background (#9CA3AF) via neutral-utility-badge-closed"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{color.base-white}",
+          "$description": "CERRADO badge text (white)"
+        }
+      },
+      "featured": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.neutral-1200}",
+          "$description": "DESTACADO badge background (#191C1C)"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{color.base-white}",
+          "$description": "DESTACADO badge text (white)"
+        }
+      },
+      "new": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.vault-700}",
+          "$description": "NUEVO badge background (#3B1782)"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{color.base-white}",
+          "$description": "NUEVO badge text (white)"
+        }
+      }
+    },
+    "card": {
+      "$description": "Card Signature Finish tokens — 4px solid bottom border per design.md No-Line Rule exception",
+      "border": {
+        "live": {
+          "$type": "color",
+          "$value": "{color.orange-600}",
+          "$description": "Live card bottom border (#ED8936)"
+        },
+        "negotiable": {
+          "$type": "color",
+          "$value": "{color.cyan-600}",
+          "$description": "Negotiable card bottom border (#00CACE)"
+        },
+        "upcoming": {
+          "$type": "color",
+          "$value": "{color.vault-900}",
+          "$description": "Upcoming card bottom border (#22005C)"
+        },
+        "closed": {
+          "$type": "color",
+          "$value": "{color.neutral-500}",
+          "$description": "Closed card bottom border (#D1D5DC)"
+        },
+        "featured": {
+          "$type": "color",
+          "$value": "{color.neutral-1200}",
+          "$description": "Featured card bottom border (#191C1C)"
+        }
+      }
+    },
+    "timer": {
+      "$description": "Voyager countdown timer state tokens — design.md Section 9.8",
+      "standard": {
+        "$type": "color",
+        "$value": "{color.neutral-1200}",
+        "$description": "Standard timer text (#191C1C) — countdown above 5min, normal auction pace"
+      },
+      "imminent": {
+        "$type": "color",
+        "$value": "{color.orange-600}",
+        "$description": "Imminent timer text (#ED8936) — countdown under 5min. ORANGE not red — red = error only"
+      }
+    },
+    "action": {
+      "$description": "Voyager CTA action tokens",
+      "execute": {
+        "bid": {
+          "$type": "color",
+          "$value": "{color.vault-900}",
+          "$description": "Bid button base (#22005C) — use Vault Gradient in CSS: linear-gradient(135deg, #22005C 0%, #3B1782 100%)"
+        },
+        "withdraw": {
+          "$type": "color",
+          "$value": "{color.red-900}",
+          "$description": "Withdraw/error action (#BA1A1A)"
+        }
+      }
+    },
+    "surface": {
+      "$description": "Voyager contextual surface tokens",
+      "processing": {
+        "$type": "color",
+        "$value": "{color.cyan-100}",
+        "$description": "Processing surface (#E0FEFF) — bid submission in progress, negotiation active state"
+      }
+    }
+  },
+  "font": {
+    "$description": "Font family primitives — 3 typefaces with distinct roles (IB Fundamentos). DESIGN.md (Stitch) alinea principalmente color; tipografía sigue este modelo salvo decisión explícita",
+    "display": {
+      "$type": "fontFamily",
+      "$value": [
+        "Plus Jakarta Sans",
+        "sans-serif"
+      ],
+      "$description": "Display and UI font — headings, labels, CTAs, navigation. Communicates brand, modernity, premium trust"
+    },
+    "body": {
+      "$type": "fontFamily",
+      "$value": [
+        "Roboto",
+        "sans-serif"
+      ],
+      "$description": "Body and data font — paragraphs, table content, metadata, form text. Communicates legibility, density, technical precision"
+    },
+    "mono": {
+      "$type": "fontFamily",
+      "$value": [
+        "Roboto Mono",
+        "monospace"
+      ],
+      "$description": "Numeric font — prices, countdown timers, bid amounts, lot codes. Eliminates jitter on WebSocket updates via native monospaced layout"
+    }
+  },
+  "text": {
+    "$description": "Typography composite tokens — 20 locked text styles. No component creates new styles outside this set",
+    "display-xl": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.display}",
+        "fontSize": {
+          "value": 48,
+          "unit": "px"
+        },
+        "fontWeight": 700,
+        "lineHeight": 1.1667,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      },
+      "$description": "Display XL — hero headlines, major auction event titles. Plus Jakarta Sans 48/56 w700"
+    },
+    "display-lg": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.display}",
+        "fontSize": {
+          "value": 40,
+          "unit": "px"
+        },
+        "fontWeight": 700,
+        "lineHeight": 1.2,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      },
+      "$description": "Display LG — section hero titles, prominent page headings. Plus Jakarta Sans 40/48 w700"
+    },
+    "display-md": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.display}",
+        "fontSize": {
+          "value": 32,
+          "unit": "px"
+        },
+        "fontWeight": 600,
+        "lineHeight": 1.25,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      },
+      "$description": "Display MD — modal headings, feature section titles. Plus Jakarta Sans 32/40 w600"
+    },
+    "heading-xl": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.display}",
+        "fontSize": {
+          "value": 28,
+          "unit": "px"
+        },
+        "fontWeight": 600,
+        "lineHeight": 1.2857,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      },
+      "$description": "Heading XL — primary page headings, auction lot titles. Plus Jakarta Sans 28/36 w600"
+    },
+    "heading-lg": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.display}",
+        "fontSize": {
+          "value": 24,
+          "unit": "px"
+        },
+        "fontWeight": 600,
+        "lineHeight": 1.3333,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      },
+      "$description": "Heading LG — section headings, card headers. Plus Jakarta Sans 24/32 w600"
+    },
+    "heading-md": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.display}",
+        "fontSize": {
+          "value": 20,
+          "unit": "px"
+        },
+        "fontWeight": 600,
+        "lineHeight": 1.4,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      },
+      "$description": "Heading MD — subsection titles, dialog headings. Plus Jakarta Sans 20/28 w600"
+    },
+    "heading-sm": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.display}",
+        "fontSize": {
+          "value": 18,
+          "unit": "px"
+        },
+        "fontWeight": 500,
+        "lineHeight": 1.3333,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      },
+      "$description": "Heading SM — widget titles, grouped form section labels. Plus Jakarta Sans 18/24 w500"
+    },
+    "body-lg": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.body}",
+        "fontSize": {
+          "value": 18,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "lineHeight": 1.5556,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      },
+      "$description": "Body LG — lead copy, prominent descriptions. Roboto 18/28 w400"
+    },
+    "body-md": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.body}",
+        "fontSize": {
+          "value": 16,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "lineHeight": 1.5,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      },
+      "$description": "Body MD — standard body text, form input text, table cell content. Roboto 16/24 w400"
+    },
+    "body-sm": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.body}",
+        "fontSize": {
+          "value": 14,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "lineHeight": 1.4286,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      },
+      "$description": "Body SM — supporting copy, secondary descriptions, helper text. Roboto 14/20 w400"
+    },
+    "label-lg": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.display}",
+        "fontSize": {
+          "value": 16,
+          "unit": "px"
+        },
+        "fontWeight": 500,
+        "lineHeight": 1.5,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      },
+      "$description": "Label LG — button labels, prominent form labels, nav items. Plus Jakarta Sans 16/24 w500"
+    },
+    "label-md": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.display}",
+        "fontSize": {
+          "value": 14,
+          "unit": "px"
+        },
+        "fontWeight": 500,
+        "lineHeight": 1.4286,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      },
+      "$description": "Label MD — standard form labels, table column headers, chip labels. Plus Jakarta Sans 14/20 w500"
+    },
+    "label-sm": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.display}",
+        "fontSize": {
+          "value": 12,
+          "unit": "px"
+        },
+        "fontWeight": 500,
+        "lineHeight": 1.3333,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      },
+      "$description": "Label SM — badge labels, tag text, compact UI labels. Plus Jakarta Sans 12/16 w500"
+    },
+    "caption": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.body}",
+        "fontSize": {
+          "value": 12,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "lineHeight": 1.3333,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      },
+      "$description": "Caption — footnotes, image captions, secondary metadata. Roboto 12/16 w400"
+    },
+    "overline": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.body}",
+        "fontSize": {
+          "value": 10,
+          "unit": "px"
+        },
+        "fontWeight": 500,
+        "lineHeight": 1.4,
+        "letterSpacing": {
+          "value": 0.08,
+          "unit": "em"
+        }
+      },
+      "$extensions": {
+        "voyager": {
+          "textTransform": "uppercase"
+        }
+      },
+      "$description": "Overline — category labels, section type indicators. Roboto 10/14 w500 uppercase tracking+0.08em"
+    },
+    "numeric-xl": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.mono}",
+        "fontSize": {
+          "value": 40,
+          "unit": "px"
+        },
+        "fontWeight": 700,
+        "lineHeight": 1.2,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      },
+      "$extensions": {
+        "voyager": {
+          "fontVariantNumeric": "tabular-nums"
+        }
+      },
+      "$description": "Numeric XL — live bid price in active auction. Roboto Mono 40/48 w700 tabular-nums"
+    },
+    "numeric-lg": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.mono}",
+        "fontSize": {
+          "value": 32,
+          "unit": "px"
+        },
+        "fontWeight": 600,
+        "lineHeight": 1.25,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      },
+      "$extensions": {
+        "voyager": {
+          "fontVariantNumeric": "tabular-nums"
+        }
+      },
+      "$description": "Numeric LG — current price in auction card. Roboto Mono 32/40 w600 tabular-nums"
+    },
+    "numeric-md": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.mono}",
+        "fontSize": {
+          "value": 24,
+          "unit": "px"
+        },
+        "fontWeight": 500,
+        "lineHeight": 1.3333,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      },
+      "$extensions": {
+        "voyager": {
+          "fontVariantNumeric": "tabular-nums"
+        }
+      },
+      "$description": "Numeric MD — countdown timer display. Roboto Mono 24/32 w500 tabular-nums"
+    },
+    "numeric-sm": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.mono}",
+        "fontSize": {
+          "value": 16,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "lineHeight": 1.5,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      },
+      "$extensions": {
+        "voyager": {
+          "fontVariantNumeric": "tabular-nums"
+        }
+      },
+      "$description": "Numeric SM — table data values, vehicle spec numbers. Roboto Mono 16/24 w400 tabular-nums"
+    },
+    "numeric-xs": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.mono}",
+        "fontSize": {
+          "value": 12,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "lineHeight": 1.3333,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      },
+      "$extensions": {
+        "voyager": {
+          "fontVariantNumeric": "tabular-nums"
+        }
+      },
+      "$description": "Numeric XS — lot IDs, VIN fragments, metadata codes. Roboto Mono 12/16 w400 tabular-nums"
+    }
+  },
+  "space": {
+    "100": {
+      "$type": "dimension",
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      },
+      "$description": "space.100 — 8px. BASE UNIT. Standard gap between related elements"
+    },
+    "150": {
+      "$type": "dimension",
+      "$value": {
+        "value": 12,
+        "unit": "px"
+      },
+      "$description": "space.150 — 12px. Card internal padding, list item gap"
+    },
+    "200": {
+      "$type": "dimension",
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      },
+      "$description": "space.200 — 16px. Standard component internal padding, grid gap"
+    },
+    "300": {
+      "$type": "dimension",
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      },
+      "$description": "space.300 — 24px. Section horizontal padding, hero padding"
+    },
+    "400": {
+      "$type": "dimension",
+      "$value": {
+        "value": 32,
+        "unit": "px"
+      },
+      "$description": "space.400 — 32px. Section vertical padding, between sections"
+    },
+    "600": {
+      "$type": "dimension",
+      "$value": {
+        "value": 48,
+        "unit": "px"
+      },
+      "$description": "space.600 — 48px. Major section separation"
+    },
+    "800": {
+      "$type": "dimension",
+      "$value": {
+        "value": 64,
+        "unit": "px"
+      },
+      "$description": "space.800 — 64px. Header height, sidebar brand area height"
+    },
+    "1000": {
+      "$type": "dimension",
+      "$value": {
+        "value": 80,
+        "unit": "px"
+      },
+      "$description": "space.1000 — 80px. Large layout gap"
+    },
+    "1200": {
+      "$type": "dimension",
+      "$value": {
+        "value": 96,
+        "unit": "px"
+      },
+      "$description": "space.1200 — 96px. Maximum layout spacing"
+    },
+    "$description": "Spacing scale — Atlassian multiplier model. space.100 = 8px base unit. Use these tokens exclusively; never raw pixel values",
+    "025": {
+      "$type": "dimension",
+      "$value": {
+        "value": 2,
+        "unit": "px"
+      },
+      "$description": "space.025 — 2px. Icon-to-text gap, hairline padding inside dense badges"
+    },
+    "050": {
+      "$type": "dimension",
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      },
+      "$description": "space.050 — 4px. Tight intra-component gap, icon padding"
+    }
+  },
+  "radius": {
+    "$description": "Border radius scale — 5 steps. Sharp edges dominate: financial platform precision over consumer softness",
+    "none": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0,
+        "unit": "px"
+      },
+      "$description": "radius.none — 0px. Tables, data cells — never rounded"
+    },
+    "sm": {
+      "$type": "dimension",
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      },
+      "$description": "radius.sm — 4px. DEFAULT. Cards, badges, inputs, buttons, sections — almost everything"
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      },
+      "$description": "radius.md — 8px. Reserved"
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      },
+      "$description": "radius.lg — 16px. Modals, drawers"
+    },
+    "full": {
+      "$type": "dimension",
+      "$value": {
+        "value": 9999,
+        "unit": "px"
+      },
+      "$description": "radius.full — 9999px. Icon buttons circular (28×28, 48×48), pill badges"
+    }
+  },
+  "shadow": {
+    "$description": "Elevation shadows — exactly 2 permitted per design.md. No generic box-shadow values allowed",
+    "sm": {
+      "$type": "shadow",
+      "$value": {
+        "color": "oklch(0.2418 0.1393 287.29 / 0.06)",
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 8,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 16,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "shadow.sm — Card shadow, brand-tinted (0 8px 16px rgba(34,0,92,0.06)). All cards at rest — Vault tinted elevation"
+    },
+    "md": {
+      "$type": "shadow",
+      "$value": {
+        "color": "oklch(0 0 0 / 0.1)",
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 8,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 16,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "shadow.md — Floating shadow (0 8px 16px rgba(0,0,0,0.10)). Active/hover cards, modals, popovers"
+    }
+  },
+  "motion": {
+    "$description": "Motion tokens — 4 duration levels + 2 easing curves. Financial UI: motion serves clarity, never decoration",
+    "duration": {
+      "instant": {
+        "$type": "duration",
+        "$value": {
+          "value": 0,
+          "unit": "ms"
+        },
+        "$description": "motion.duration.instant — 0ms. WebSocket price/timer updates. NO fade-in: instant data = trust in data freshness"
+      },
+      "fast": {
+        "$type": "duration",
+        "$value": {
+          "value": 100,
+          "unit": "ms"
+        },
+        "$description": "motion.duration.fast — 100ms. Micro-interactions: hover states, button presses, checkbox toggles"
+      },
+      "moderate": {
+        "$type": "duration",
+        "$value": {
+          "value": 220,
+          "unit": "ms"
+        },
+        "$description": "motion.duration.moderate — 220ms. Component transitions: modal open/close, dropdown expand, drawer slide"
+      },
+      "slow": {
+        "$type": "duration",
+        "$value": {
+          "value": 350,
+          "unit": "ms"
+        },
+        "$description": "motion.duration.slow — 350ms. Page-level transitions, skeleton to content reveal"
+      }
+    },
+    "easing": {
+      "standard": {
+        "$type": "cubicBezier",
+        "$value": [
+          0.3,
+          0,
+          0,
+          1
+        ],
+        "$description": "motion.easing.standard — cubic-bezier(0.3, 0, 0, 1). General-purpose easing per design.md"
+      },
+      "entrance": {
+        "$type": "cubicBezier",
+        "$value": [
+          0,
+          0,
+          0.2,
+          1
+        ],
+        "$description": "motion.easing.entrance — cubic-bezier(0, 0, 0.2, 1). Elements entering the screen: modals, drawers, notifications"
+      }
+    }
+  }
+}

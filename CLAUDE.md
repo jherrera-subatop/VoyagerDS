@@ -6,10 +6,30 @@
 - RTK Query (estado async) · Zustand (estado UI)
 - Terrazzo (token pipeline) · Tokens Studio (Figma sync)
 
+## 🚨 REGLA DE SERVIDOR — OBLIGATORIA PARA EL AGENTE
+
+**NUNCA usar Bash/PowerShell para levantar el servidor de desarrollo.**
+**SIEMPRE usar `preview_start` con el nombre `voyager-dev`.**
+
+Razón: Bash en background acumula procesos Node en Task Manager y explota la PC del usuario.
+`preview_start` detecta si ya hay un servidor corriendo y lo reutiliza — nunca duplica.
+
+```
+# ✅ CORRECTO — única forma permitida
+preview_start("voyager-dev")  → http://localhost:3420
+
+# ❌ PROHIBIDO
+Bash: pnpm dev
+Bash: pnpm exec next dev
+PowerShell: pnpm dev
+```
+
+Config en: `.claude/launch.json`
+
 ## Comandos esenciales
 ```bash
-pnpm dev          # desarrollo local → http://localhost:3420 (script fijo; otro puerto: pnpm exec next dev -p <puerto>)
-pnpm dev:turbo    # opcional: Turbopack (rápido; si algo falla, borrar .next y usar pnpm dev)
+pnpm dev          # SOLO si el usuario lo corre manualmente en su terminal → http://localhost:3420
+pnpm dev:full     # tokens + servidor (solo cuando tokens.json cambia)
 pnpm build        # build producción
 pnpm lint         # linter
 pnpm type-check   # verificación TypeScript
