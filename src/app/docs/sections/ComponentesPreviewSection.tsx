@@ -12,6 +12,7 @@ import { OfferCardStitchShowcaseSection } from "../components/OfferCardStitchSho
 import { VisitasStitchShowcaseSection } from "../components/VisitasStitchShowcaseSection";
 import { QuickFiltersStitchShowcaseSection } from "../components/QuickFiltersStitchShowcaseSection";
 import { EmpresaProfileStitchShowcaseSection } from "../components/EmpresaProfileStitchShowcaseSection";
+import { BracketTitleStitchShowcaseSection } from "../components/BracketTitleStitchShowcaseSection";
 import { DetalleOfertaBarStitchShowcaseSection } from "../components/DetalleOfertaBarStitchShowcaseSection";
 import { GalleryMainStitchShowcaseSection } from "../components/GalleryMainStitchShowcaseSection";
 import { AuctionConditionsStitchShowcaseSection } from "../components/AuctionConditionsStitchShowcaseSection";
@@ -99,6 +100,9 @@ export function ComponentesPreviewSection() {
 
           {HR}
           <EmpresaProfileStitchShowcaseSection />
+
+          {HR}
+          <BracketTitleStitchShowcaseSection />
         </>
       )}
 

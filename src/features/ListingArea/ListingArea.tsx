@@ -17,6 +17,32 @@
 
 import type { JSX } from "react";
 
+const STYLES = `
+  .vmc-profile-link {
+    border-radius: 4px;
+    padding: 6px 10px;
+    transition: background-color 150ms cubic-bezier(0.3,0,0,1),
+                transform 150ms cubic-bezier(0.3,0,0,1);
+  }
+  .vmc-profile-link svg {
+    transition: transform 150ms cubic-bezier(0.3,0,0,1);
+  }
+  .vmc-profile-link:hover {
+    background-color: #E4E6E5;
+  }
+  .vmc-profile-link:hover svg {
+    transform: translateX(3px);
+  }
+  .vmc-profile-link:active {
+    background-color: color-mix(in srgb, #3B1782 22%, #FFFFFF);
+    transform: scale(0.97);
+  }
+  .vmc-profile-link:focus-visible {
+    outline: 2px solid #3B1782;
+    outline-offset: 2px;
+  }
+`;
+
 const V = {
   vaultMid:    "var(--voyager-color-vault-mid, #3B1782)",
   live:        "var(--voyager-color-live,       #ED8936)",
@@ -310,6 +336,7 @@ function ListingCard({ card }: { card: CardItem }): JSX.Element {
 export default function ListingArea(): JSX.Element {
   return (
     <section style={{ width: "100%", maxWidth: 718 }}>
+      <style dangerouslySetInnerHTML={{ __html: STYLES }} />
 
       {/* Header row */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
@@ -346,6 +373,7 @@ export default function ListingArea(): JSX.Element {
         {/* Right — "Ir al perfil" link */}
         <a
           href="https://www.vmcsubastas.com/santander.html"
+          className="vmc-profile-link"
           style={{
             display:        "inline-flex",
             alignItems:     "center",

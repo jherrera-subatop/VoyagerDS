@@ -1,12 +1,21 @@
+export interface SidebarSubItem {
+  label:     string;
+  count?:    number;
+  children?: SidebarSubItem[];
+}
+
 export interface SidebarNavItem {
-  label: string;
-  iconPath: string;
-  active?: boolean;
+  label:         string;
+  iconPath:      string;
+  active?:       boolean;
+  sectionBefore?: string;
+  children?:     SidebarSubItem[];
 }
 
 export interface SidebarProps {
-  className?: string;
-  activeItem?: string;
-  /** Override del logo — solo para preview en docs. En producción omitir. */
-  logoSrc?: string;
+  className?:         string;
+  logoSrc?:           string;
+  defaultActive?:     string | null;
+  defaultExpanded?:   string[];
+  defaultCollapsed?:  boolean;
 }

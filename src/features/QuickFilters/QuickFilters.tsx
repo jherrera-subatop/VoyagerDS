@@ -17,14 +17,56 @@
 
 import type { JSX } from "react";
 
+const STYLES = `
+  .vmc-offer-card {
+    transition: transform 150ms cubic-bezier(0.3,0,0,1),
+                box-shadow 150ms cubic-bezier(0.3,0,0,1);
+    cursor: pointer;
+  }
+  .vmc-offer-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.14);
+  }
+  .vmc-offer-card:hover > div:first-child {
+    filter: brightness(0.90);
+  }
+  .vmc-offer-card:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.10);
+  }
+  .vmc-offer-card:active > div:first-child {
+    filter: brightness(0.82);
+  }
+  .vmc-category-card {
+    transition: transform 150ms cubic-bezier(0.3,0,0,1),
+                box-shadow 150ms cubic-bezier(0.3,0,0,1),
+                background 150ms cubic-bezier(0.3,0,0,1);
+    cursor: pointer;
+  }
+  .vmc-category-card:hover {
+    background: color-mix(in srgb, #FFFFFF 92%, #3B1782) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.14);
+  }
+  .vmc-category-card:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.10);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .vmc-offer-card, .vmc-category-card { transition: none; }
+  }
+`;
+
 const V = {
-  vaultMid:    "var(--voyager-color-vault-mid,    #3B1782)",
-  negotiable:  "var(--voyager-color-negotiable,   #00CACE)",
-  live:        "var(--voyager-color-live,          #ED8936)",
-  surfaceCard: "var(--voyager-surface-card,        #FFFFFF)",
-  textOnDark:  "var(--voyager-text-on-dark,        #FFFFFF)",
-  labelPurple: "color-mix(in oklch, var(--voyager-color-vault-mid, #3B1782) 75%, white)",
-  shadowLg:    "0 10px 15px rgba(0,0,0,0.12), 0 4px 6px rgba(0,0,0,0.08)",
+  vaultMid:       "var(--voyager-color-vault-mid,      #3B1782)",
+  negotiable:     "var(--voyager-color-negotiable,     #00CACE)",
+  live:           "var(--voyager-color-live,            #ED8936)",
+  surfaceCard:    "var(--voyager-surface-card,          #FFFFFF)",
+  surfaceSection: "var(--voyager-color-surface-section, #F2F4F3)",
+  textOnDark:     "var(--voyager-text-on-dark,          #FFFFFF)",
+  labelPurple:    "color-mix(in oklch, var(--voyager-color-vault-mid, #3B1782) 75%, white)",
+  shadowLg:       "0 10px 15px rgba(0,0,0,0.12), 0 4px 6px rgba(0,0,0,0.08)",
+  shadowCard:     "0 2px 8px rgba(0,0,0,0.08)",
 } as const;
 
 const fontDisplay = "var(--font-display, 'Plus Jakarta Sans', sans-serif)";
@@ -38,7 +80,7 @@ function CornerTL(): JSX.Element {
       viewBox="0 0 10 10"
       fill="none"
       style={{ position: "absolute", top: 0, left: 0, width: 8, height: 8,
-               fill: "currentColor", color: V.textOnDark }}
+               fill: "currentColor", color: V.vaultMid }}
     >
       <path d="M0 0H3.3V3.3H3.3V6.7H0V3.3H0V0ZM3.3 0H6.7 6.7 10V3.3H6.7 6.7 3.3V0ZM3.3 6.7H0V10H3.3V6.7Z"
         fill="currentColor" />
@@ -55,7 +97,7 @@ function CornerBR(): JSX.Element {
       viewBox="0 0 10 10"
       fill="none"
       style={{ position: "absolute", bottom: 0, right: 0, width: 8, height: 8,
-               fill: "currentColor", color: V.textOnDark }}
+               fill: "currentColor", color: V.vaultMid }}
     >
       <path d="M10 10L6.7 10 6.7 6.7 6.7 6.7 6.7 3.3 10 3.3 10 6.7 10 6.7 10 10ZM6.7 10L3.3 10 3.3 10 0 10 0 6.7 3.3 6.7 3.3 6.7 6.7 6.7 6.7 10ZM6.7 3.3L10 3.3 10 0 6.7 0 6.7 3.3Z"
         fill="currentColor" />
@@ -74,7 +116,7 @@ function SectionHeader({ title }: { title: string }): JSX.Element {
           fontSize:      12,
           fontWeight:    700,
           lineHeight:    "16px",
-          color:         V.textOnDark,
+          color:         V.vaultMid,
           textTransform: "uppercase",
           margin:        0,
         }}>
@@ -98,13 +140,14 @@ function OfferCard({ href, label, tabColor, textColor }: OfferCardProps): JSX.El
   return (
     <a
       href={href}
+      className="vmc-offer-card"
       style={{
         display:         "grid",
-        gridTemplateRows:"1fr 1fr",
-        height:          64,     /* h-16 */
+        gridTemplateRows:"3fr 2fr",
+        height:          88,
         background:      V.surfaceCard,
-        borderRadius:    4,
-        boxShadow:       V.shadowLg,
+        borderRadius:    8,
+        boxShadow:       V.shadowCard,
         textDecoration:  "none",
         outline:         "none",
       }}
@@ -116,11 +159,11 @@ function OfferCard({ href, label, tabColor, textColor }: OfferCardProps): JSX.El
         justifyContent:  "center",
         gridRow:         "1 / 2",
         background:      tabColor,
-        borderRadius:    "4px 4px 0 0",
+        borderRadius:    "8px 8px 0 0",
       }}>
         <span style={{
           fontFamily:    fontDisplay,
-          fontSize:      12,
+          fontSize:      13,
           fontWeight:    700,
           color:         V.textOnDark,
           textTransform: "uppercase",
@@ -138,14 +181,13 @@ function OfferCard({ href, label, tabColor, textColor }: OfferCardProps): JSX.El
       }}>
         <span style={{
           fontFamily:    fontDisplay,
-          fontSize:      10,
+          fontSize:      11,
           fontWeight:    700,
           color:         textColor,
           textTransform: "uppercase",
           textDecoration:"none",
         }}>
-          Ver
-                                Todas
+          VER TODAS
         </span>
       </div>
     </a>
@@ -220,7 +262,7 @@ function StarIcon(): JSX.Element {
       fill="none"
       style={{ width: 32, height: 32, color: V.vaultMid }}
     >
-      <path d="M12 2C6.5 2 2 6.5 2 12 2 17.5 6.5 22 12 22 17.5 22 22 17.5 22 12 22 6.5 17.5 2 12 2ZM16.2 18L12 15.5 7.8 18 8.9 13.2 5.2 10 10.1 9.5 12 5 13.9 9.5 18.8 10 15.1 13.2 16.2 18Z"
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
         fill="currentColor" />
     </svg>
   );
@@ -237,35 +279,34 @@ function CategoryCard({ href, icon, label }: CategoryCardProps): JSX.Element {
   return (
     <a
       href={href}
+      className="vmc-category-card"
       style={{
         boxSizing:      "border-box",
         display:        "flex",
         flexDirection:  "column",
-        flexShrink:     0,
-        width:          64,
-        height:         64,
-        padding:        8,
+        alignItems:     "center",
+        justifyContent: "center",
+        flex:           1,
+        minWidth:       80,
+        minHeight:      88,
+        padding:        12,
+        gap:            8,
         background:     V.surfaceCard,
-        borderRadius:   4,
+        borderRadius:   12,
+        boxShadow:      V.shadowCard,
         textDecoration: "none",
         outline:        "none",
       }}
     >
-      <div style={{ display: "flex", justifyContent: "center", flex: 1 }}>
-        {icon}
-      </div>
+      {icon}
       <div style={{
-        marginBottom:  4,
         fontFamily:    fontDisplay,
-        fontSize:      9,
-        fontWeight:    600,
-        lineHeight:    "12px",
+        fontSize:      10,
+        fontWeight:    700,
+        lineHeight:    "14px",
         textAlign:     "center",
-        color:         V.labelPurple,
+        color:         V.vaultMid,
         textTransform: "uppercase",
-        overflow:      "hidden",
-        whiteSpace:    "nowrap",
-        textOverflow:  "ellipsis",
       }}>
         {label}
       </div>
@@ -276,15 +317,17 @@ function CategoryCard({ href, icon, label }: CategoryCardProps): JSX.Element {
 /* ── Root component ──────────────────────────────────────────── */
 export default function QuickFilters(): JSX.Element {
   return (
+    <>
+    <style dangerouslySetInnerHTML={{ __html: STYLES }} />
     <div style={{
       width:        "100%",
       maxWidth:     766,
-      paddingLeft:  20,    /* px-5 */
-      paddingRight: 20,
-      paddingTop:   20,    /* py-5 */
+      paddingLeft:  24,
+      paddingRight: 24,
+      paddingTop:   20,
       paddingBottom:20,
-      marginTop:    12,    /* mt-3 */
-      background:   V.vaultMid,
+      marginTop:    12,
+      background:   V.surfaceSection,
       borderRadius: 4,
     }}>
       <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
@@ -308,7 +351,7 @@ export default function QuickFilters(): JSX.Element {
             />
             <OfferCard
               href="/en-vivo"
-              label="En                                vivo"
+              label="En Vivo"
               tabColor={V.live}
               textColor={V.live}
             />
@@ -329,10 +372,11 @@ export default function QuickFilters(): JSX.Element {
 
             {/* Category cards row */}
             <div style={{
-              display:    "flex",
+              display:      "flex",
               flexDirection:"row",
-              overflowX:  "auto",
-              gap:        12,    /* gap-x-3 */
+              alignItems:   "stretch",
+              overflowX:    "auto",
+              gap:          16,
             }}>
               <CategoryCard
                 href="https://www.vmcsubastas.com/subastas/vehicular.html"
@@ -360,5 +404,6 @@ export default function QuickFilters(): JSX.Element {
 
       </div>
     </div>
+    </>
   );
 }
