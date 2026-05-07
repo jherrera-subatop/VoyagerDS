@@ -32,6 +32,7 @@ const PRIMITIVE_PATTERNS = [
   "color.amber-*",
   "font.*",
   "space.*",
+  "icon.size.*",
   "radius.*",
   "shadow.*",
   "motion.duration.*",

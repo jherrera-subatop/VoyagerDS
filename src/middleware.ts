@@ -41,6 +41,9 @@ function isPublicPathname(pathname: string): boolean {
   if (pathname === "/preview" || pathname.startsWith("/preview/")) {
     return true;
   }
+  if (pathname === "/borrador" || pathname.startsWith("/borrador/")) {
+    return true;
+  }
   return false;
 }
 

@@ -1,0 +1,34 @@
+{
+  "icon": {
+    "$description": {
+      "$type": "other",
+      "$value": "Icon dimension tokens — glyph box width/height only. Pair with color.icon.* for fill. Do not use space.* for icon pixel size; use icon.size.*"
+    },
+    "size": {
+      "$description": {
+        "$type": "other",
+        "$value": "Semantic icon sizes (t-shirt). xs/sm/lg alias space scale; md is 20px for heading-sm / emphasis row alignment"
+      },
+      "xs": {
+        "$type": "dimension",
+        "$value": "12px",
+        "$description": "icon.size.xs — 12px (alias space.150). Chevrons, dense table metadata, inline with label-sm / caption"
+      },
+      "sm": {
+        "$type": "dimension",
+        "$value": "16px",
+        "$description": "icon.size.sm — 16px (alias space.200). Default UI + data tables, nav items beside body-md"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "20px",
+        "$description": "icon.size.md — 20px. Aligns with heading-sm line box; primary row icons, emphasis without lg jump"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "24px",
+        "$description": "icon.size.lg — 24px (alias space.300). Section headers, empty states, toolbar actions beside label-lg"
+      }
+    }
+  }
+}

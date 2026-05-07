@@ -210,7 +210,20 @@ Base grid: 4px minimum. All block spacing (padding, margin, gap) must be a multi
 | `space.1000` | 80px | Wide layout spacing. |
 | `space.1200` | 96px | Maximum layout spacing. |
 
-**Snap rule:** Always use the nearest token. Never use 10px, 15px, 20px, 28px, 40px — they do not exist in this system.
+### Icon glyph sizes (`icon.size.*`)
+
+Semantic width/height for SVG icons. Compiled as `--vmc-icon-size-*`; in Tailwind use **`size-icon-*`**, **`w-icon-*`**, **`h-icon-*`** (theme maps them via `--spacing-icon-*`). **Do not** use `space.*` tokens as a stand-in for icon pixel dimensions—`space` is for layout gaps and padding only.
+
+| Token | Value | Typical use |
+|---|---|---|
+| `icon.size.xs` | 12px (alias `space.150`) | Chevrons, dense metadata, inline with `label-sm` / caption |
+| `icon.size.sm` | 16px (alias `space.200`) | Default UI, data tables, nav beside `body-md` |
+| `icon.size.md` | 20px | Row emphasis; pairs with `heading-sm` line box |
+| `icon.size.lg` | 24px (alias `space.300`) | Section headers, empty states, toolbar beside `label-lg` |
+
+**Touch targets (WCAG 2.5.8):** The glyph may stay small (e.g. `icon.size.sm`). Interactive controls must meet at least **24×24 CSS px** (stricter on mobile)—add transparent padding with `space.050` / `space.100` on the hit target wrapper, not by inflating the SVG alone.
+
+**Snap rule:** Always use the nearest token for **layout** spacing. Do not invent stray px (10px, 15px, 28px, 40px) outside the `space.*` scale. **Exception:** `icon.size.md` is the sanctioned **20px** step for icon glyphs only—not for generic padding or margins.
 
 ---
 
@@ -269,7 +282,7 @@ Disabled: `opacity: 0.72` + `grayscale(1)`. Do not change the color.
 - Never omit `tabular-nums` on live numeric values
 
 ### Spacing constraints
-- Never use values not in the scale (10px, 15px, 20px, 28px, 40px)
+- Never use values not in the **layout** scale (10px, 15px, 28px, 40px, etc.). **`icon.size.md` (20px)** is allowed only for icon glyph dimensions.
 - Never use `rem` or `em` — px from the token scale only
 
 ---

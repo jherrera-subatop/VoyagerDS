@@ -8,8 +8,6 @@ import { ComponentShowcase } from "./ComponentShowcase";
 const STITCH_PROJECT_ID = "344497491706707189";
 const STITCH_SCREEN_ID = "offer-card-pending";
 
-const VARIANTS: OfferCardVariant[] = ["en-vivo", "negociable"];
-
 interface VariantPillProps {
   label: string;
   active: boolean;

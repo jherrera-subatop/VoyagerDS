@@ -23,50 +23,61 @@ const STYLES = `
                 box-shadow 150ms cubic-bezier(0.3,0,0,1);
     cursor: pointer;
   }
+  .vmc-offer-card:focus-visible {
+    outline: 2px solid var(--voyager-color-vault-mid, #3B1782);
+    outline-offset: 2px;
+  }
+  .vmc-offer-tab {
+    transition: filter 150ms cubic-bezier(0.3,0,0,1);
+  }
   .vmc-offer-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.14);
+    box-shadow: 0 8px 20px oklch(0.22 0.18 285 / 16%);
   }
-  .vmc-offer-card:hover > div:first-child {
-    filter: brightness(0.90);
+  .vmc-offer-card:hover .vmc-offer-tab {
+    filter: brightness(0.92);
   }
   .vmc-offer-card:active {
     transform: scale(0.97);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.10);
+    box-shadow: inset 0 2px 4px oklch(0.22 0.18 285 / 12%), 0 1px 3px oklch(0.22 0.18 285 / 8%);
   }
-  .vmc-offer-card:active > div:first-child {
-    filter: brightness(0.82);
+  .vmc-offer-card:active .vmc-offer-tab {
+    filter: brightness(0.80);
   }
+
   .vmc-category-card {
     transition: transform 150ms cubic-bezier(0.3,0,0,1),
                 box-shadow 150ms cubic-bezier(0.3,0,0,1),
                 background 150ms cubic-bezier(0.3,0,0,1);
     cursor: pointer;
   }
+  .vmc-category-card:focus-visible {
+    outline: 2px solid var(--voyager-color-vault-mid, #3B1782);
+    outline-offset: 2px;
+  }
   .vmc-category-card:hover {
-    background: color-mix(in srgb, #FFFFFF 92%, #3B1782) !important;
+    background: color-mix(in oklch, var(--voyager-surface-card, #FFFFFF) 94%, var(--voyager-color-vault-mid, #3B1782)) !important;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.14);
+    box-shadow: 0 8px 20px oklch(0.22 0.18 285 / 12%);
   }
   .vmc-category-card:active {
     transform: scale(0.97);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.10);
+    box-shadow: 0 2px 6px oklch(0.22 0.18 285 / 8%);
   }
   @media (prefers-reduced-motion: reduce) {
-    .vmc-offer-card, .vmc-category-card { transition: none; }
+    .vmc-offer-card, .vmc-offer-tab, .vmc-category-card { transition: none; }
   }
 `;
 
 const V = {
-  vaultMid:       "var(--voyager-color-vault-mid,      #3B1782)",
-  negotiable:     "var(--voyager-color-negotiable,     #00CACE)",
-  live:           "var(--voyager-color-live,            #ED8936)",
-  surfaceCard:    "var(--voyager-surface-card,          #FFFFFF)",
-  surfaceSection: "var(--voyager-color-surface-section, #F2F4F3)",
-  textOnDark:     "var(--voyager-text-on-dark,          #FFFFFF)",
-  labelPurple:    "color-mix(in oklch, var(--voyager-color-vault-mid, #3B1782) 75%, white)",
-  shadowLg:       "0 10px 15px rgba(0,0,0,0.12), 0 4px 6px rgba(0,0,0,0.08)",
-  shadowCard:     "0 2px 8px rgba(0,0,0,0.08)",
+  vaultMid:          "var(--voyager-color-vault-mid,      #3B1782)",
+  negotiable:        "var(--voyager-color-negotiable,     #00CACE)",
+  live:              "var(--voyager-color-live,            #ED8936)",
+  surfaceCard:       "var(--voyager-surface-card,          #FFFFFF)",
+  surfaceSection:    "var(--voyager-color-surface-section, #F2F4F3)",
+  textOnDark:        "var(--voyager-text-on-dark,          #FFFFFF)",
+  labelPurple:       "color-mix(in oklch, var(--voyager-color-vault-mid, #3B1782) 75%, white)",
+  shadowCard:        "0 4px 12px oklch(0.22 0.18 285 / 10%)",
 } as const;
 
 const fontDisplay = "var(--font-display, 'Plus Jakarta Sans', sans-serif)";
@@ -130,10 +141,10 @@ function SectionHeader({ title }: { title: string }): JSX.Element {
 
 /* ── Offer type card (Negociable / En Vivo) ─────────────────── */
 interface OfferCardProps {
-  href:      string;
-  label:     string;
-  tabColor:  string;
-  textColor: string;
+  href:       string;
+  label:      string;
+  tabColor:   string;
+  textColor:  string;
 }
 
 function OfferCard({ href, label, tabColor, textColor }: OfferCardProps): JSX.Element {
@@ -142,50 +153,52 @@ function OfferCard({ href, label, tabColor, textColor }: OfferCardProps): JSX.El
       href={href}
       className="vmc-offer-card"
       style={{
-        display:         "grid",
-        gridTemplateRows:"3fr 2fr",
-        height:          88,
-        background:      V.surfaceCard,
-        borderRadius:    8,
-        boxShadow:       V.shadowCard,
-        textDecoration:  "none",
-        outline:         "none",
+        display:       "flex",
+        flexDirection: "column",
+        height:        88,
+        borderRadius:  8,
+        boxShadow:     V.shadowCard,
+        textDecoration:"none",
+        overflow:      "hidden",
       }}
     >
-      {/* Row 1 — colored tab */}
-      <div style={{
-        display:         "flex",
-        alignItems:      "center",
-        justifyContent:  "center",
-        gridRow:         "1 / 2",
-        background:      tabColor,
-        borderRadius:    "8px 8px 0 0",
-      }}>
+      {/* Tab — gradient */}
+      <div
+        className="vmc-offer-tab"
+        style={{
+          display:        "flex",
+          alignItems:     "center",
+          justifyContent: "center",
+          flex:           "0 0 53px",
+          background:     tabColor,
+        }}
+      >
         <span style={{
           fontFamily:    fontDisplay,
           fontSize:      13,
           fontWeight:    700,
+          lineHeight:    "16px",
           color:         V.textOnDark,
           textTransform: "uppercase",
-          textDecoration:"none",
         }}>
           {label}
         </span>
       </div>
-      {/* Row 2 — "Ver Todas" */}
+      {/* VER TODAS */}
       <div style={{
         display:        "flex",
         alignItems:     "center",
         justifyContent: "center",
-        gridRow:        "2 / 3",
+        flex:           "0 0 35px",
+        background:     V.surfaceCard,
       }}>
         <span style={{
           fontFamily:    fontDisplay,
           fontSize:      11,
           fontWeight:    700,
+          lineHeight:    "14px",
           color:         textColor,
           textTransform: "uppercase",
-          textDecoration:"none",
         }}>
           VER TODAS
         </span>
@@ -292,10 +305,9 @@ function CategoryCard({ href, icon, label }: CategoryCardProps): JSX.Element {
         padding:        12,
         gap:            8,
         background:     V.surfaceCard,
-        borderRadius:   12,
+        borderRadius:   8,
         boxShadow:      V.shadowCard,
         textDecoration: "none",
-        outline:        "none",
       }}
     >
       {icon}

@@ -13,13 +13,13 @@ import { useEffect, useState } from "react";
 export interface ComponentNavItem {
   id: string;
   label: string;
-  status: "done" | "stitch" | "pending";
+  status: "done" | "qa" | "pending";
   group?: string;
 }
 
 export const COMPONENT_ITEMS: ComponentNavItem[] = [
   /* ── Navigation ──────────────────────────────── */
-  { id: "header",           label: "Header",         status: "pending", group: "Navigation" },
+  { id: "header",           label: "Header",         status: "qa",      group: "Navigation" },
   { id: "sidebar",          label: "menu-sidebar",   status: "done",    group: "Navigation" },
   { id: "footer-primary",   label: "Footer",         status: "done",    group: "Navigation" },
   { id: "session-header",   label: "Session Header", status: "pending", group: "Navigation" },
@@ -30,23 +30,23 @@ export const COMPONENT_ITEMS: ComponentNavItem[] = [
   { id: "ayuda",            label: "ayuda",            status: "pending", group: "Banners" },
   { id: "category-banner",  label: "category-banner",  status: "pending", group: "Banners" },
   /* ── Cards ───────────────────────────────────── */
-  { id: "related-card",     label: "related-card",  status: "stitch",  group: "Cards" },
-  { id: "offer-card",       label: "offer-card",    status: "stitch",  group: "Cards" },
+  { id: "related-card",     label: "related-card",  status: "qa",  group: "Cards" },
+  { id: "offer-card",       label: "offer-card",    status: "qa",  group: "Cards" },
   /* ── Publication ─────────────────────────────── */
-  { id: "detail-card",        label: "detail-card",    status: "stitch",  group: "Publication" },
+  { id: "detail-card",        label: "detail-card",    status: "qa",  group: "Publication" },
   { id: "tags",               label: "tags",           status: "pending", group: "Publication" },
-  { id: "detalle-oferta-bar", label: "download-row",   status: "stitch",  group: "Publication" },
-  { id: "gallery-main",       label: "gallery-main",   status: "stitch",  group: "Publication" },
+  { id: "detalle-oferta-bar", label: "download-row",   status: "qa",  group: "Publication" },
+  { id: "gallery-main",       label: "gallery-main",   status: "qa",  group: "Publication" },
   { id: "gallery-thumbs",     label: "gallery-thumbs", status: "pending", group: "Publication" },
-  { id: "info-general",       label: "info-general",   status: "stitch",  group: "Publication" },
+  { id: "info-general",       label: "info-general",   status: "qa",  group: "Publication" },
   { id: "docs-req",           label: "docs-req",       status: "pending", group: "Publication" },
-  { id: "conditions",         label: "conditions",     status: "stitch",  group: "Publication" },
-  { id: "visitas",             label: "visitas",         status: "stitch",  group: "Publication" },
+  { id: "conditions",         label: "conditions",     status: "qa",  group: "Publication" },
+  { id: "visitas",             label: "visitas",         status: "qa",  group: "Publication" },
   { id: "related",            label: "related",        status: "pending", group: "Publication" },
   { id: "group-header",       label: "group-header",   status: "pending", group: "Publication" },
   /* ── Discovery ───────────────────────────────── */
-  { id: "quick-filters",    label: "quick-filters", status: "stitch",  group: "Discovery" },
-  { id: "listing-area",     label: "listing-area",  status: "stitch",  group: "Discovery" },
+  { id: "quick-filters",    label: "quick-filters", status: "qa",  group: "Discovery" },
+  { id: "listing-area",     label: "listing-area",  status: "qa",  group: "Discovery" },
   /* ── Overlays ────────────────────────────────── */
   { id: "fraud-modal",      label: "fraud-modal",   status: "pending", group: "Overlays" },
   /* ── Storefront ──────────────────────────────── */
@@ -55,7 +55,7 @@ export const COMPONENT_ITEMS: ComponentNavItem[] = [
 
 const STATUS_META: Record<ComponentNavItem["status"], { label: string; color: string }> = {
   done:    { label: "done",      color: "var(--vmc-color-status-success, #22c55e)" },
-  stitch:  { label: "stitch",    color: "var(--vmc-color-live,            #ED8936)" },
+  qa:      { label: "qa",        color: "var(--vmc-color-live,            #ED8936)" },
   pending: { label: "pendiente", color: "var(--vmc-color-text-tertiary,   #99A1AF)" },
 };
 

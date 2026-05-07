@@ -161,6 +161,22 @@ export function ComponentShowcase({
     setViewport(v);
   }
 
+  let previewWidth: number | "100%" = 1024;
+  let previewMinWidth: number | 0 = 1024;
+  if (fullWidth) {
+    previewWidth = "100%";
+    previewMinWidth = 0;
+  } else if (viewport === "mobile") {
+    previewWidth = 420;
+    previewMinWidth = 420;
+  } else if (viewport === "tablet") {
+    previewWidth = 640;
+    previewMinWidth = 640;
+  } else {
+    previewWidth = 1024;
+    previewMinWidth = 1024;
+  }
+
   return (
     <div id={id} className="mt-12" style={{ scrollMarginTop: 96 }}>
       {/* ── Header ────────────────────────────────────────────────────── */}
@@ -337,8 +353,8 @@ export function ComponentShowcase({
         {/* inner frame constrained to selected viewport */}
         <div
           style={{
-            width: viewport === "desktop" ? 1024 : viewport === "tablet" ? 640 : 420,
-            minWidth: viewport === "desktop" ? 1024 : viewport === "tablet" ? 640 : 420,
+            width: previewWidth,
+            minWidth: previewMinWidth,
             margin: "0 auto",
             transition: "width 200ms ease",
           }}

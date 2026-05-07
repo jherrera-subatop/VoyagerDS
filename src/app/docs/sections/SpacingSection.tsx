@@ -34,6 +34,13 @@ const MOTION = [
   { token: "slow", value: "350ms", desc: "Page transitions, skeleton" },
 ];
 
+const ICON_SIZES = [
+  { token: "xs", px: 12, tw: "size-icon-xs", desc: "Metadatos densos, esquinas TL/BR" },
+  { token: "sm", px: 16, tw: "size-icon-sm", desc: "Default tablas y UI general" },
+  { token: "md", px: 20, tw: "size-icon-md", desc: "Énfasis fila; alias tipográfico heading-sm" },
+  { token: "lg", px: 24, tw: "size-icon-lg", desc: "Cabeceras, chevron sección" },
+];
+
 export function SpacingSection() {
   return (
     <section>
@@ -44,6 +51,7 @@ export function SpacingSection() {
       />
 
       <div className="grid grid-cols-2 gap-6">
+        <div className="space-y-6">
         {/* Spacing */}
         <div
           className="rounded-lg border p-6"
@@ -104,6 +112,59 @@ export function SpacingSection() {
               </div>
             ))}
           </div>
+        </div>
+
+        <div
+          className="rounded-lg border p-6"
+          style={{
+            background: "var(--vmc-color-background-secondary)",
+            borderColor: "var(--vmc-color-border-default)",
+          }}
+        >
+          <p
+            className="text-xs font-mono mb-4 uppercase tracking-wider"
+            style={{ color: "var(--vmc-color-text-tertiary)" }}
+          >
+            ICON GLYPH — icon.size.* → Tailwind size-icon-*
+          </p>
+          <p
+            className="text-xs mb-3"
+            style={{ color: "var(--vmc-color-text-secondary)" }}
+          >
+            Variables CSS: <code className="font-mono">--vmc-icon-size-*</code>. Objetivos táctiles: padding con{" "}
+            <code className="font-mono">space.*</code>, no agrandar solo el trazo (WCAG 2.5.8).
+          </p>
+          <div className="space-y-2">
+            {ICON_SIZES.map(({ token, px, tw, desc }) => (
+              <div key={token} className="flex items-center gap-3">
+                <div
+                  className="rounded-sm shrink-0 bg-[var(--vmc-color-vault-500)]"
+                  style={{ width: `${px}px`, height: `${px}px` }}
+                />
+                <div className="flex flex-wrap items-baseline gap-2 min-w-0">
+                  <code
+                    className="text-xs font-mono shrink-0"
+                    style={{ color: "var(--vmc-color-text-brand)" }}
+                  >
+                    icon.size.{token}
+                  </code>
+                  <code
+                    className="text-xs font-mono shrink-0"
+                    style={{ color: "var(--vmc-color-text-secondary)" }}
+                  >
+                    {tw}
+                  </code>
+                  <span className="text-xs shrink-0" style={{ color: "var(--vmc-color-text-secondary)" }}>
+                    {px}px
+                  </span>
+                  <span className="text-xs" style={{ color: "var(--vmc-color-text-tertiary)" }}>
+                    {desc}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
         </div>
 
         <div className="space-y-6">

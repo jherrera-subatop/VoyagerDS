@@ -1,0 +1,455 @@
+{
+  "color": {
+    "background": {
+      "$description": "Semantic background tokens — light mode surface hierarchy from design.md",
+      "primary": {
+        "$type": "color",
+        "$value": "{color.neutral-100}",
+        "$description": "Page canvas (#F8FAF9) — Level 0 base page background"
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{color.neutral-200}",
+        "$description": "Section background (#F2F4F3) — Level 1, sub-sections, sidebar content areas"
+      },
+      "tertiary": {
+        "$type": "color",
+        "$value": "{color.neutral-300}",
+        "$description": "Tertiary surface — nested containers, table row hover"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{color.neutral-1200}",
+        "$description": "Inverse surface (#191C1C) — tooltips, dark toasts"
+      },
+      "brand": {
+        "$type": "color",
+        "$value": "{color.vault-900}",
+        "$description": "Brand surface (#22005C) — sidebar, header, footer, primary CTAs"
+      },
+      "interactive": {
+        "$type": "color",
+        "$value": "{color.vault-100}",
+        "$description": "Interactive element rest background — ghost hover on vault surfaces"
+      },
+      "interactive-hover": {
+        "$type": "color",
+        "$value": "{color.vault-200}",
+        "$description": "Interactive element hover background"
+      },
+      "interactive-active": {
+        "$type": "color",
+        "$value": "{color.vault-700}",
+        "$description": "Interactive element active/pressed background"
+      },
+      "interactive-selected": {
+        "$type": "color",
+        "$value": "{color.vault-100}",
+        "$description": "Selected item background (nav item, list row)"
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.neutral-400}",
+        "$description": "Disabled element background (#E1E3E2)"
+      },
+      "overlay": {
+        "$type": "color",
+        "$value": "{color.base-scrim}",
+        "$description": "Modal/drawer overlay — base-scrim (black 50%)"
+      },
+      "card": {
+        "$type": "color",
+        "$value": "{color.base-white}",
+        "$description": "Card surface (#FFFFFF) — Level 2 via primitive base-white"
+      },
+      "input": {
+        "$type": "color",
+        "$value": "{color.neutral-400}",
+        "$description": "Input field fill (#E1E3E2) — no border at rest per design.md"
+      },
+      "urgency": {
+        "low": {
+          "$type": "color",
+          "$value": "{color.amber-100}",
+          "$description": "Low urgency surface — standard countdown background"
+        },
+        "high": {
+          "$type": "color",
+          "$value": "{color.orange-100}",
+          "$description": "High urgency surface — near-expiry countdown"
+        },
+        "critical": {
+          "$type": "color",
+          "$value": "{color.red-100}",
+          "$description": "Critical urgency surface — error states"
+        }
+      }
+    },
+    "text": {
+      "$description": "Semantic text tokens — design.md text color system. No pure black rule enforced",
+      "primary": {
+        "$type": "color",
+        "$value": "{color.neutral-1200}",
+        "$description": "Primary text (#191C1C) — paragraphs, table content. Never #000000"
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{color.neutral-900}",
+        "$description": "Secondary text (#494550) — card body, secondary content, descriptions"
+      },
+      "tertiary": {
+        "$type": "color",
+        "$value": "{color.neutral-utility-muted}",
+        "$description": "Muted text (#494550 at 50%) — subtitles, secondary labels via neutral-utility-muted"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{color.base-white}",
+        "$description": "Inverse text (#FFFFFF) — text on dark (vault/sidebar) surfaces via base-white"
+      },
+      "brand": {
+        "$type": "color",
+        "$value": "{color.vault-900}",
+        "$description": "Brand text (#22005C) — emphasized brand references"
+      },
+      "brand-hover": {
+        "$type": "color",
+        "$value": "{color.vault-700}",
+        "$description": "Link text (#3B1782) — clickable links, interactive text"
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.neutral-1000}",
+        "$description": "Disabled text (#4A5565) — disabled component labels"
+      },
+      "placeholder": {
+        "$type": "color",
+        "$value": "{color.neutral-utility-label}",
+        "$description": "Placeholder text (#494550 at 40%) — form labels / placeholders via neutral-utility-label"
+      },
+      "price-label": {
+        "$type": "color",
+        "$value": "{color.neutral-700}",
+        "$description": "Price label text (#99A1AF) — 'PRECIO BASE' label above price amount"
+      },
+      "on-dark-muted": {
+        "$type": "color",
+        "$value": "{color.base-inverse-muted}",
+        "$description": "Secondary text on dark surfaces (#FFFFFF at 60%) — sidebar nav default"
+      },
+      "on-dark-subtle": {
+        "$type": "color",
+        "$value": "{color.base-inverse-subtle}",
+        "$description": "Tertiary text on dark surfaces (#FFFFFF at 30%) — sidebar footer"
+      },
+      "market": {
+        "bullish": {
+          "$type": "color",
+          "$value": "{color.green-600}",
+          "$description": "Market bullish text (#22C55E) — positive price movement"
+        },
+        "bearish": {
+          "$type": "color",
+          "$value": "{color.red-600}",
+          "$description": "Market bearish text (#EF4444) — negative price movement"
+        }
+      }
+    },
+    "border": {
+      "$description": "Semantic border tokens — design.md No-Line Rule: only ghost borders permitted for functional separation",
+      "default": {
+        "$type": "color",
+        "$value": "{color.vault-utility-ghost}",
+        "$description": "Ghost Border (#22005C at 10%) — only permitted functional border per No-Line Rule"
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": "{color.vault-utility-divider}",
+        "$description": "Section Divider (#22005C at 5%) — subtle row separators, compact list items"
+      },
+      "strong": {
+        "$type": "color",
+        "$value": "{color.vault-900}",
+        "$description": "Strong border — full vault color for card signature bottom border (upcoming)"
+      },
+      "brand": {
+        "$type": "color",
+        "$value": "{color.vault-900}",
+        "$description": "Brand border (#22005C) — nav active indicator, selected state border"
+      },
+      "focus": {
+        "$type": "color",
+        "$value": "{color.vault-700}",
+        "$description": "Focus ring (#3B1782) — 2px solid, 2px offset on all interactive elements"
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{color.red-utility-error-ghost}",
+        "$description": "Error border (#BA1A1A at 50%) — input error state ghost border"
+      },
+      "verified": {
+        "$type": "color",
+        "$value": "{color.cyan-600}",
+        "$description": "Verified border (#00CACE) — DataQualityBadge high state, verified thumbnails"
+      }
+    },
+    "icon": {
+      "$description": "Semantic icon tokens",
+      "primary": {
+        "$type": "color",
+        "$value": "{color.neutral-1200}",
+        "$description": "Primary icon (#191C1C) — default icon fill on light surfaces"
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{color.neutral-900}",
+        "$description": "Secondary icon (#494550) — supporting icons, decorative elements"
+      },
+      "tertiary": {
+        "$type": "color",
+        "$value": "{color.neutral-700}",
+        "$description": "Tertiary icon (#99A1AF) — muted icons, inactive states"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{color.base-white}",
+        "$description": "Inverse icon (#FFFFFF) — icons on dark/vault surfaces via base-white"
+      },
+      "brand": {
+        "$type": "color",
+        "$value": "{color.vault-900}",
+        "$description": "Brand icon (#22005C) — search icon in fields, vault-colored icons"
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.neutral-700}",
+        "$description": "Disabled icon (#99A1AF) — inactive interactive icons"
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{color.red-900}",
+        "$description": "Error icon (#BA1A1A) — error state indicators"
+      },
+      "success": {
+        "$type": "color",
+        "$value": "{color.green-600}",
+        "$description": "Success icon (#22C55E) — success state, DataQualityBadge high"
+      }
+    },
+    "status": {
+      "$description": "Status semantic tokens — maps to design.md Section 6 status colors",
+      "live": {
+        "$type": "color",
+        "$value": "{color.red-600}",
+        "$description": "Live indicator (#EF4444) — animated dot on EN VIVO badges. Red = live/active, NOT urgency"
+      },
+      "success": {
+        "$type": "color",
+        "$value": "{color.green-600}",
+        "$description": "Success (#22C55E) — confirmed bid, action success"
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "{color.amber-600}",
+        "$description": "Warning (#FFA000) — near-expiry, attention required"
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{color.red-900}",
+        "$description": "Error (#BA1A1A) — failed bid, rejected action, form error"
+      },
+      "info": {
+        "$type": "color",
+        "$value": "{color.cyan-600}",
+        "$description": "Info (#00CACE) — informational messages"
+      },
+      "negotiable": {
+        "$type": "color",
+        "$value": "{color.cyan-600}",
+        "$description": "Negotiable (#00CACE) — NEGOCIABLE auction status accent"
+      },
+      "urgent": {
+        "$type": "color",
+        "$value": "{color.orange-600}",
+        "$description": "Urgent (#ED8936) — imminent timer (< 5min), countdown urgency. Orange NOT red — red is error only"
+      }
+    },
+    "badge": {
+      "$description": "Badge variant tokens — background + text pairs per design.md Section 9.4",
+      "live": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.orange-600}",
+          "$description": "EN VIVO badge background (#ED8936)"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{color.base-white}",
+          "$description": "EN VIVO badge text (white)"
+        }
+      },
+      "negotiable": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.cyan-600}",
+          "$description": "NEGOCIABLE badge background (#00CACE)"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{color.vault-900}",
+          "$description": "NEGOCIABLE badge text (#22005C) — dark on light cyan"
+        }
+      },
+      "upcoming": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.vault-900}",
+          "$description": "PRÓXIMAMENTE badge background (#22005C)"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{color.base-white}",
+          "$description": "PRÓXIMAMENTE badge text (white)"
+        }
+      },
+      "closed": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.neutral-utility-badge-closed}",
+          "$description": "CERRADO badge background (#9CA3AF) via neutral-utility-badge-closed"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{color.base-white}",
+          "$description": "CERRADO badge text (white)"
+        }
+      },
+      "featured": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.neutral-1200}",
+          "$description": "DESTACADO badge background (#191C1C)"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{color.base-white}",
+          "$description": "DESTACADO badge text (white)"
+        }
+      },
+      "new": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.vault-700}",
+          "$description": "NUEVO badge background (#3B1782)"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{color.base-white}",
+          "$description": "NUEVO badge text (white)"
+        }
+      }
+    },
+    "card": {
+      "$description": "Card Signature Finish tokens — 4px solid bottom border per design.md No-Line Rule exception",
+      "border": {
+        "live": {
+          "$type": "color",
+          "$value": "{color.orange-600}",
+          "$description": "Live card bottom border (#ED8936)"
+        },
+        "negotiable": {
+          "$type": "color",
+          "$value": "{color.cyan-600}",
+          "$description": "Negotiable card bottom border (#00CACE)"
+        },
+        "upcoming": {
+          "$type": "color",
+          "$value": "{color.vault-900}",
+          "$description": "Upcoming card bottom border (#22005C)"
+        },
+        "closed": {
+          "$type": "color",
+          "$value": "{color.neutral-500}",
+          "$description": "Closed card bottom border (#D1D5DC)"
+        },
+        "featured": {
+          "$type": "color",
+          "$value": "{color.neutral-1200}",
+          "$description": "Featured card bottom border (#191C1C)"
+        }
+      }
+    },
+    "timer": {
+      "$description": "Voyager countdown timer state tokens — design.md Section 9.8",
+      "standard": {
+        "$type": "color",
+        "$value": "{color.neutral-1200}",
+        "$description": "Standard timer text (#191C1C) — countdown above 5min, normal auction pace"
+      },
+      "imminent": {
+        "$type": "color",
+        "$value": "{color.orange-600}",
+        "$description": "Imminent timer text (#ED8936) — countdown under 5min. ORANGE not red — red = error only"
+      }
+    },
+    "action": {
+      "$description": "Voyager CTA action tokens",
+      "execute": {
+        "bid": {
+          "$type": "color",
+          "$value": "{color.vault-900}",
+          "$description": "Bid button base (#22005C) — use Vault Gradient in CSS: linear-gradient(135deg, #22005C 0%, #3B1782 100%)"
+        },
+        "withdraw": {
+          "$type": "color",
+          "$value": "{color.red-900}",
+          "$description": "Withdraw/error action (#BA1A1A)"
+        }
+      }
+    },
+    "surface": {
+      "$description": "Voyager contextual surface tokens",
+      "processing": {
+        "$type": "color",
+        "$value": "{color.cyan-100}",
+        "$description": "Processing surface (#E0FEFF) — bid submission in progress, negotiation active state"
+      }
+    },
+    "$description": {
+      "$type": "other",
+      "$value": "Semantic color tokens — alias layer referencing Primitives"
+    }
+  },
+  "icon": {
+    "$description": {
+      "$type": "other",
+      "$value": "Icon glyph dimensions — semantic aliases to Primitives icon.size.*. Icon fill/tint lives under color.icon.* only."
+    },
+    "size": {
+      "$description": {
+        "$type": "other",
+        "$value": "1:1 aliases to primitives; re-map here for density/compact themes without renaming primitive keys."
+      },
+      "xs": {
+        "$type": "dimension",
+        "$value": "{icon.size.xs}",
+        "$description": "Semantic → primitive icon.size.xs (12px)"
+      },
+      "sm": {
+        "$type": "dimension",
+        "$value": "{icon.size.sm}",
+        "$description": "Semantic → primitive icon.size.sm (16px)"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "{icon.size.md}",
+        "$description": "Semantic → primitive icon.size.md (20px)"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "{icon.size.lg}",
+        "$description": "Semantic → primitive icon.size.lg (24px)"
+      }
+    }
+  }
+}

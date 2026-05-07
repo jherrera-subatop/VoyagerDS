@@ -125,7 +125,11 @@ function validateToken(token, path, type) {
 
   // ── Rule 5: Dimension format ────────────────────────────────────────────────
   if (type === "dimension") {
+    const cleanPath = path.replace(/^\./, "");
     if (typeof value === "string") {
+      if (isAlias(value) && cleanPath.startsWith("icon.size.")) {
+        return;
+      }
       fail(path, `Dimension must be { value, unit } object, got string "${value}"`);
     } else if (!isDimensionObject(value)) {
       fail(path, "Dimension must be { value: number, unit: string } object");

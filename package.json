@@ -16,6 +16,8 @@
     "tokens:build": "terrazzo build",
     "tokens:check": "node scripts/token-gatekeeper.mjs",
     "tokens:audit": "node scripts/token-gatekeeper.mjs && pnpm exec terrazzo build && pnpm type-check && pnpm lint",
+    "tokens:figma-sync": "node scripts/sync-tokens-figma-json.mjs",
+    "tokens:studio": "pnpm tokens:figma-sync && node scripts/build-token-studio-json.mjs",
     "tokens:watch": "terrazzo build --watch",
     "verify:pages": "node scripts/verify-routes.mjs",
     "verify:pages:quick": "node scripts/verify-routes.mjs --skip-build",
