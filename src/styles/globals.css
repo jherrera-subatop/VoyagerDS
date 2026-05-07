@@ -192,6 +192,12 @@
   --spacing-1000: var(--vmc-space-1000);
   --spacing-1200: var(--vmc-space-1200);
 
+  /* ── Icon glyph sizes — use for w-/h-/size-* (Tailwind spacing namespace) ─ */
+  --spacing-icon-xs: var(--vmc-icon-size-xs);
+  --spacing-icon-sm: var(--vmc-icon-size-sm);
+  --spacing-icon-md: var(--vmc-icon-size-md);
+  --spacing-icon-lg: var(--vmc-icon-size-lg);
+
   /* ── Border radius ──────────────────────────────────────────────────────── */
   --radius-none: var(--vmc-radius-none);
   --radius-sm: var(--vmc-radius-sm);

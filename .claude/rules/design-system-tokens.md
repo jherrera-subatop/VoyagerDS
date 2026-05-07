@@ -206,6 +206,8 @@ form.input.gap        ← sí, consistencia en todos los forms
 button.padding.sm/md  ← sí, propagación global instantánea
 ```
 
+**Icon glyph sizes (`icon.size.*`):** dimensiones del glifo SVG (no confundir con `space.*`). `xs`/`sm`/`lg` son alias a `space.150` / `200` / `300`; `md` = 20px fijo (emparejado con tipografía `heading-sm`). Compilado a `--vmc-icon-size-*`; en Tailwind v4 `@theme` → utilidades `size-icon-*` vía `--spacing-icon-*`. Área táctil: padding con `space.*`, WCAG 2.5.8.
+
 ---
 
 ## 5. Tipografía

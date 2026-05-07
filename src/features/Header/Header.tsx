@@ -13,23 +13,26 @@ function AvatarIcon(): JSX.Element {
 }
 
 const STYLES = `
-  /* ── Botón INGRESA (guest) ── */
+  /* ── Botón INGRESA (guest) — mismo estilo que pill logged-in ── */
   .vmc-header-btn {
     display:        inline-flex;
     align-items:    center;
+    gap:            10px;
     height:         38px;
     padding:        0 16px 0 4px;
-    border:         none;
+    border:         1.5px solid var(--voyager-color-live, #ED8936);
     border-radius:  9999px;
-    background:     var(--voyager-color-live, #ED8936);
+    background:     linear-gradient(135deg,
+                      rgba(237,137,54,0.14) 0%,
+                      rgba(237,137,54,0.05) 100%);
     color:          #FFFFFF;
     font-family:    var(--font-display, 'Plus Jakarta Sans', sans-serif);
     font-size:      13px;
     font-weight:    700;
     letter-spacing: 0.02em;
     cursor:         pointer;
-    transition:     background-color 150ms cubic-bezier(0.3,0,0,1),
-                    transform 150ms cubic-bezier(0.3,0,0,1);
+    transition:     background 150ms cubic-bezier(0.3,0,0,1),
+                    transform  150ms cubic-bezier(0.3,0,0,1);
   }
   .vmc-header-btn__icon {
     display:         flex;
@@ -38,12 +41,20 @@ const STYLES = `
     width:           30px;
     height:          30px;
     border-radius:   9999px;
-    background:      rgba(255,255,255,0.20);
-    margin-right:    10px;
+    border:          1.5px solid rgba(237,137,54,0.50);
+    background:      rgba(237,137,54,0.15);
     flex-shrink:     0;
   }
-  .vmc-header-btn:hover { background: color-mix(in srgb, #ED8936 85%, #000000); }
-  .vmc-header-btn:active { background: color-mix(in srgb, #ED8936 75%, #000000); transform: scale(0.97); }
+  .vmc-header-btn:hover {
+    background: linear-gradient(135deg, rgba(237,137,54,0.42) 0%, rgba(237,137,54,0.22) 100%);
+  }
+  .vmc-header-btn:active {
+    background: linear-gradient(135deg,
+      color-mix(in oklch, var(--voyager-color-live, #ED8936) 55%, oklch(0 0 0)) 0%,
+      color-mix(in oklch, var(--voyager-color-live, #ED8936) 35%, oklch(0 0 0)) 100%);
+    border-color: color-mix(in oklch, var(--voyager-color-live, #ED8936) 70%, oklch(0 0 0));
+    transform: scale(0.97);
+  }
   .vmc-header-btn:focus-visible { outline: 2px solid rgba(255,255,255,0.6); outline-offset: 2px; }
 
   /* ── Pill usuario logueado ── */
@@ -62,8 +73,22 @@ const STYLES = `
     font-family:    var(--font-display, 'Plus Jakarta Sans', sans-serif);
     font-size:      13px;
     font-weight:    400;
-    cursor:         default;
+    cursor:         pointer;
+    transition:     background 150ms cubic-bezier(0.3,0,0,1),
+                    border-color 150ms cubic-bezier(0.3,0,0,1),
+                    transform    150ms cubic-bezier(0.3,0,0,1);
   }
+  .vmc-header-user:hover {
+    background: linear-gradient(135deg, rgba(237,137,54,0.42) 0%, rgba(237,137,54,0.22) 100%);
+  }
+  .vmc-header-user:active {
+    background: linear-gradient(135deg,
+      color-mix(in oklch, var(--voyager-color-live, #ED8936) 55%, oklch(0 0 0)) 0%,
+      color-mix(in oklch, var(--voyager-color-live, #ED8936) 35%, oklch(0 0 0)) 100%);
+    border-color: color-mix(in oklch, var(--voyager-color-live, #ED8936) 70%, oklch(0 0 0));
+    transform: scale(0.97);
+  }
+  .vmc-header-user:focus-visible { outline: 2px solid rgba(255,255,255,0.6); outline-offset: 2px; }
   .vmc-header-user__icon {
     display:         flex;
     align-items:     center;
@@ -81,7 +106,7 @@ const STYLES = `
   }
 `;
 
-export default function Header({ className, onIngresa, user }: HeaderProps): JSX.Element {
+export default function Header({ className, onIngresa, onUserClick, user }: HeaderProps): JSX.Element {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: STYLES }} />
@@ -89,7 +114,7 @@ export default function Header({ className, onIngresa, user }: HeaderProps): JSX
         className={className}
         style={{
           width:           '100%',
-          maxWidth:        795,
+          maxWidth:        1024,
           height:          64,
           backgroundColor: 'var(--voyager-color-vault, #22005C)',
           display:         'flex',
@@ -102,12 +127,17 @@ export default function Header({ className, onIngresa, user }: HeaderProps): JSX
         }}
       >
         {user !== undefined ? (
-          <div className="vmc-header-user" aria-label={`Bienvenido, ${user}`}>
+          <button
+            type="button"
+            className="vmc-header-user"
+            onClick={onUserClick}
+            aria-label={`Bienvenido, ${user}`}
+          >
             <span className="vmc-header-user__icon">
               <AvatarIcon />
             </span>
             Bienvenido, <strong>{user}</strong>
-          </div>
+          </button>
         ) : (
           <button
             type="button"

@@ -88,7 +88,7 @@ interface SpecRowProps {
 
 function CornerTL(): JSX.Element {
   return (
-    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" className="absolute top-0 left-0 w-3 h-3 transition-colors duration-200" style={{ color: "var(--color-live, #ED8936)" }}>
+    <svg viewBox="0 0 24 24" fill="none" className="absolute top-0 left-0 size-icon-xs transition-colors duration-200" aria-hidden style={{ color: "var(--color-live, #ED8936)" }}>
       <path d="M2 12 L2 2 L12 2" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
     </svg>
   );
@@ -96,7 +96,7 @@ function CornerTL(): JSX.Element {
 
 function CornerBR(): JSX.Element {
   return (
-    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" className="absolute bottom-0 right-0 w-3 h-3 transition-colors duration-200" style={{ color: "var(--color-live, #ED8936)" }}>
+    <svg viewBox="0 0 24 24" fill="none" className="absolute bottom-0 right-0 size-icon-xs transition-colors duration-200" aria-hidden style={{ color: "var(--color-live, #ED8936)" }}>
       <path d="M12 22 L22 22 L22 12" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
     </svg>
   );
@@ -105,8 +105,10 @@ function CornerBR(): JSX.Element {
 function ChevronDown({ open }: { open: boolean }): JSX.Element {
   return (
     <svg
-      viewBox="0 0 24 24" width="24" height="24" fill="none"
-      className="w-6 h-6 transition-transform duration-200"
+      viewBox="0 0 24 24"
+      fill="none"
+      className="size-icon-lg transition-transform duration-200"
+      aria-hidden
       style={{
         color: "var(--color-live, #ED8936)",
         transform: open ? "rotate(180deg)" : "rotate(0deg)",

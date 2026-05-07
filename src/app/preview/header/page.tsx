@@ -16,7 +16,7 @@ export default function HeaderPreviewPage(): JSX.Element {
     <div style={{
       display:        'flex',
       flexDirection:  'column',
-      alignItems:     'flex-start',
+      alignItems:     'stretch',
       justifyContent: 'center',
       minHeight:      '100vh',
       padding:        48,

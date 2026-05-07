@@ -1,0 +1,34 @@
+{
+  "icon": {
+    "$description": {
+      "$type": "other",
+      "$value": "Icon glyph dimensions — semantic aliases to Primitives icon.size.*. Icon fill/tint lives under color.icon.* only."
+    },
+    "size": {
+      "$description": {
+        "$type": "other",
+        "$value": "1:1 aliases to primitives; re-map here for density/compact themes without renaming primitive keys."
+      },
+      "xs": {
+        "$type": "dimension",
+        "$value": "{icon.size.xs}",
+        "$description": "Semantic → primitive icon.size.xs (12px)"
+      },
+      "sm": {
+        "$type": "dimension",
+        "$value": "{icon.size.sm}",
+        "$description": "Semantic → primitive icon.size.sm (16px)"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "{icon.size.md}",
+        "$description": "Semantic → primitive icon.size.md (20px)"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "{icon.size.lg}",
+        "$description": "Semantic → primitive icon.size.lg (24px)"
+      }
+    }
+  }
+}
