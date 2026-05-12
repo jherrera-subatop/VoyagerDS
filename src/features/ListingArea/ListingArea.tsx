@@ -67,7 +67,7 @@ function CornerTL(): JSX.Element {
       fill="currentColor"
       aria-hidden="true"
       style={{ position: "absolute", top: 0, left: 0, width: 10, height: 10,
-               fill: V.vaultMid }}
+               fill: V.live }}
     >
       <path d="M5.75 22C7.82107 22 9.5 20.3211 9.5 18.25L9.5 9.5H18.25C20.3211 9.5 22 7.82107 22 5.75C22 3.67893 20.3211 2 18.25 2L7 2C4.23858 2 2 4.23858 2 7L2 18.25C2 20.3211 3.67893 22 5.75 22Z" />
     </svg>
@@ -83,7 +83,7 @@ function CornerBR(): JSX.Element {
       fill="currentColor"
       aria-hidden="true"
       style={{ position: "absolute", bottom: 0, right: 0, width: 10, height: 10,
-               fill: V.vaultMid }}
+               fill: V.live }}
     >
       <path d="M18.25 2C16.1789 2 14.5 3.67893 14.5 5.75V14.5L5.75 14.5C3.67893 14.5 2 16.1789 2 18.25C2 20.3211 3.67893 22 5.75 22H17C19.7614 22 22 19.7614 22 17V5.75C22 3.67893 20.3211 2 18.25 2Z" />
     </svg>
@@ -187,27 +187,33 @@ function ClockBadge(): JSX.Element {
 
 /* ── Card data ───────────────────────────────────────────────── */
 interface CardItem {
-  href:     string;
-  name:     string;
-  year:     string;
-  price:    string;
-  sr:       string;
-  hasBadge: boolean;
+  href:       string;
+  name:       string;
+  year:       string;
+  price:      string;
+  sr:         string;
+  hasBadge:   boolean;
+  status:     "live" | "negotiable";
 }
 
 const CARDS: CardItem[] = [
-  { href: "/oferta/61511", name: "Chevrolet Joy Sedan", year: "2021", price: "US$ 5,699",  sr: "Chevrolet Joy Sedan 2021", hasBadge: false },
-  { href: "/oferta/61510", name: "Chery Tiggo 2",       year: "2023", price: "US$ 6,699",  sr: "Chery Tiggo 2 2023",       hasBadge: false },
-  { href: "/oferta/61460", name: "Peugeot New 2008",    year: "2022", price: "US$ 7,999",  sr: "Peugeot New 2008 2022",    hasBadge: false },
-  { href: "/oferta/61506", name: "Nissan Xtrail",       year: "2022", price: "US$ 20,999", sr: "Nissan Xtrail 2022",       hasBadge: true  },
+  { href: "/oferta/61511", name: "Chevrolet Joy Sedan", year: "2021", price: "US$ 5,699",  sr: "Chevrolet Joy Sedan 2021", hasBadge: false, status: "live"       },
+  { href: "/oferta/61510", name: "Chery Tiggo 2",       year: "2023", price: "US$ 6,699",  sr: "Chery Tiggo 2 2023",       hasBadge: false, status: "live"       },
+  { href: "/oferta/61460", name: "Peugeot New 2008",    year: "2022", price: "US$ 7,999",  sr: "Peugeot New 2008 2022",    hasBadge: false, status: "negotiable" },
+  { href: "/oferta/61506", name: "Nissan Xtrail",       year: "2022", price: "US$ 20,999", sr: "Nissan Xtrail 2022",       hasBadge: true,  status: "live"       },
 ];
+
+function cardBorderColor(status: CardItem["status"]): string {
+  if (status === "negotiable") { return V.negotiable; }
+  return V.live;
+}
 
 /* ── Single listing card ─────────────────────────────────────── */
 function ListingCard({ card }: { card: CardItem }): JSX.Element {
   return (
     <div style={{
       background:   V.surfaceCard,
-      borderBottom: `8px solid ${V.live}`,
+      borderBottom: `8px solid ${cardBorderColor(card.status)}`,
       borderRadius: 8,
       boxShadow:    V.shadowLg,
       overflow:     "hidden",
@@ -251,7 +257,7 @@ function ListingCard({ card }: { card: CardItem }): JSX.Element {
               fontSize:     16,
               fontWeight:   700,
               lineHeight:   "20px",
-              color:        V.textPrimary,
+              color:        V.vaultMid,
               overflow:     "hidden",
               whiteSpace:   "nowrap",
               textOverflow: "ellipsis",
@@ -364,7 +370,7 @@ export default function ListingArea(): JSX.Element {
               color:      V.textPrimary,
               margin:     0,
             }}>
-              9 Ofertas
+              10 Ofertas
             </p>
             <CornerBR />
           </div>

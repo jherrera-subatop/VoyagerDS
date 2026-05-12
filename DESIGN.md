@@ -396,4 +396,35 @@ When you have a reference — outerHTML, Copy Element, screenshot, or any combin
 
 ---
 
-*VOYAGER Design System v2.1.0 — Last updated: 2026-04-28*
+## 10. Accessibility Exceptions — Documented Brand Decisions
+
+Exceptions registered here are **intentional, reviewed decisions** — not oversights.
+Each exception records what fails, why it was accepted, and what mitigations apply.
+
+### EXC-001 · gradient-live + white text (2026-05-08)
+
+**Component:** OfferType card header / CTA buttons using `gradientdef-live`
+**Gradient stops:** `orange-500` (0%) → `orange-600` (50%) → `orange-700` (100%)
+**Text color:** white `#FFFFFF`
+**WCAG 1.4.3 result:**
+- orange-500 vs white: 1.85:1 ✗
+- orange-600 vs white: 2.55:1 ✗
+- orange-700 vs white: 3.47:1 ✗ (passes AA large text ≥24px only)
+
+**Why accepted:**
+Orange as a brand accent color is structurally incompatible with white text at WCAG AA (4.5:1) while remaining visually vibrant. Darkening to orange-800/900 achieves compliance but loses the live/urgent energy that is core to the VMC brand signal. This is a known industry trade-off — major platforms (Fanta, MercadoLibre, multiple LATAM e-commerce) make the same exception on warm accent gradients.
+
+**Mitigations applied:**
+- Text shadow effect `TextW3C` (0, 1px, 3px, rgba(0,0,0,0.45)) on all text over this gradient
+- "EN VIVO" label is large bold text — closest threshold is AA large (3:1); orange-700 at 3.47:1 meets this on the darkest stop
+- Pressed state uses `orange-800 → orange-900` which passes AA natively (4.96:1 / 6.94:1)
+- No numeric or financial data is rendered over this gradient
+
+**SEO / GEO impact:** None. Contrast ratios are not indexed by search crawlers or AI content engines.
+**Legal exposure (Peru):** Low. No active law equivalent to ADA (US) or EN 301 549 (EU) as of 2026-05-08. Monitor for future regulation.
+
+**Revisit trigger:** If Peru adopts mandatory WCAG 2.2 AA compliance legislation, migrate to `orange-800 → orange-900` + white text (pre-calculated, passes natively).
+
+---
+
+*VOYAGER Design System v2.1.0 — Last updated: 2026-05-08*

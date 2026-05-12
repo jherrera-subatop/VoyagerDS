@@ -1,3 +1,4 @@
+import type { JSX } from "react";
 import { SectionTitle } from "../components/SectionTitle";
 
 interface SwatchProps {
@@ -336,6 +337,111 @@ export function ColorSection() {
           />
         </div>
       </div>
+
+      {/* ── Gradientes ─────────────────────────────────────────────────── */}
+      <div
+        className="rounded-lg border p-6 mt-6 space-y-8"
+        style={{
+          background: "var(--vmc-color-background-secondary)",
+          borderColor: "var(--vmc-color-border-default)",
+        }}
+      >
+        <div className="flex items-center gap-2 mb-2">
+          <span
+            className="text-xs font-mono px-2 py-0.5 rounded"
+            style={{ background: "var(--vmc-color-vault-900)", color: "var(--vmc-color-neutral-100)" }}
+          >
+            GRADIENTES
+          </span>
+          <span className="text-xs" style={{ color: "var(--vmc-color-text-tertiary)" }}>
+            Default · Hover · Pressed — 135deg lineal · stops DS variables
+          </span>
+        </div>
+
+        <div className="space-y-10">
+          <GradientFamily
+            name="gradientdef-vault"
+            label="Vault — púrpura"
+            states={[
+              { label: "Default", stops: ["--vmc-color-vault-900", "--vmc-color-vault-700"], pcts: ["0%", "100%"] },
+              { label: "Hover", stops: ["--vmc-color-vault-800", "--vmc-color-vault-600"], pcts: ["0%", "100%"] },
+              { label: "Pressed", stops: ["--vmc-color-vault-1000", "--vmc-color-vault-800"], pcts: ["0%", "100%"] },
+            ]}
+          />
+          <GradientFamily
+            name="gradientdef-live"
+            label="Live — naranja (EXC-001)"
+            states={[
+              { label: "Default", stops: ["--vmc-color-orange-500", "--vmc-color-orange-600", "--vmc-color-orange-700"], pcts: ["0%", "50%", "100%"] },
+              { label: "Hover", stops: ["--vmc-color-orange-600", "--vmc-color-orange-700", "--vmc-color-orange-800"], pcts: ["0%", "50%", "100%"] },
+              { label: "Pressed", stops: ["--vmc-color-orange-800", "--vmc-color-orange-900"], pcts: ["0%", "100%"] },
+            ]}
+          />
+          <GradientFamily
+            name="gradientdef-cyan"
+            label="Cyan — negociable"
+            states={[
+              { label: "Default", stops: ["--vmc-color-cyan-500", "--vmc-color-cyan-600", "--vmc-color-cyan-700"], pcts: ["0%", "50%", "100%"] },
+              { label: "Hover", stops: ["--vmc-color-cyan-600", "--vmc-color-cyan-700", "--vmc-color-cyan-800"], pcts: ["0%", "50%", "100%"] },
+              { label: "Pressed", stops: ["--vmc-color-cyan-800", "--vmc-color-cyan-900"], pcts: ["0%", "100%"] },
+            ]}
+          />
+        </div>
+      </div>
     </section>
+  );
+}
+
+interface GradientState {
+  label: string;
+  stops: string[];
+  pcts: string[];
+}
+
+interface GradientFamilyProps {
+  name: string;
+  label: string;
+  states: GradientState[];
+}
+
+function GradientFamily({ name, label, states }: GradientFamilyProps): JSX.Element {
+  return (
+    <div>
+      <p className="text-xs font-mono mb-4" style={{ color: "var(--vmc-color-text-secondary)" }}>
+        <span
+          className="px-1.5 py-0.5 rounded mr-2"
+          style={{ background: "var(--vmc-color-background-tertiary)", color: "var(--vmc-color-text-primary)" }}
+        >
+          {name}
+        </span>
+        {label}
+      </p>
+      <div className="flex gap-6 flex-wrap">
+        {states.map((state) => {
+          const gradientStops = state.stops
+            .map((s, i) => `var(${s}) ${state.pcts[i]}`)
+            .join(", ");
+          const bg = `linear-gradient(135deg, ${gradientStops})`;
+          return (
+            <div key={state.label} className="flex flex-col gap-2" style={{ minWidth: 160 }}>
+              <div
+                className="h-16 rounded"
+                style={{ background: bg, minWidth: 160 }}
+              />
+              <p className="text-xs font-semibold" style={{ color: "var(--vmc-color-text-primary)" }}>
+                {state.label}
+              </p>
+              <div className="space-y-0.5">
+                {state.stops.map((s, i) => (
+                  <p key={s} className="text-xs font-mono leading-tight" style={{ color: "var(--vmc-color-text-tertiary)" }}>
+                    {state.pcts[i]} → {s.replace("--vmc-color-", "color/")}
+                  </p>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }

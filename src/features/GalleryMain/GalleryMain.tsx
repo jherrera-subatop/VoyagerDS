@@ -10,8 +10,9 @@ interface GalleryMainProps {
 }
 
 const GLASS: CSSProperties = {
-  background: "color-mix(in oklch, var(--voyager-color-vault, #22005C) 45%, transparent)",
-  backdropFilter: "blur(8px)",
+  background: "oklch(0 0 0 / 42%)",
+  backdropFilter: "blur(10px)",
+  WebkitBackdropFilter: "blur(10px)",
 };
 
 function ChevronLeft(): JSX.Element {

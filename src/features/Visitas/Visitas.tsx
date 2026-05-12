@@ -31,6 +31,7 @@ const V = {
   borderSubtle:"color-mix(in oklch, var(--voyager-color-vault, #22005C) 8%, white)",
   skeleton:    "color-mix(in oklch, var(--voyager-color-vault, #22005C) 6%, white)",
   vaultGrad:   "linear-gradient(135deg, var(--voyager-color-vault, #22005C) 0%, var(--voyager-color-vault-mid, #3B1782) 100%)",
+  liveGrad:    "linear-gradient(135deg, var(--color-orange-500) 0%, var(--color-orange-600) 50%, var(--color-orange-700) 100%)",
   shadowSm:    "0 1px 3px rgba(34,0,92,0.10), 0 1px 2px rgba(34,0,92,0.06)",
 } as const;
 
@@ -206,7 +207,7 @@ export default function Visitas(): JSX.Element {
                   fontWeight:  300,
                   lineHeight:  1,
                   textAlign:   "center",
-                  color:       V.vaultBody,
+                  color:       "oklch(15% 0.008 200)",
                   margin:      0,
                 }}>
                   Para agendar tu visita:
@@ -230,7 +231,7 @@ export default function Visitas(): JSX.Element {
                       fontWeight:      700,
                       lineHeight:      "24px",
                       color:           V.textOnDark,
-                      background:      V.vaultGrad,
+                      background:      V.liveGrad,
                       borderRadius:    4,
                       border:          "none",
                       cursor:          "pointer",
