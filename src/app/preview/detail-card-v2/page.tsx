@@ -736,7 +736,7 @@ export default function DetailCardV2Page(): JSX.Element {
           {/* Columna derecha — orange chips + pequeño Participa + orange ghost Ingresa */}
           <div style={{ display: "flex", flexDirection: "column", gap: 24, flexShrink: 0 }}>
             <DetailCardV2Small />
-            <AuctionConditions chipStyle="orange" />
+            <AuctionConditions chipStyle="vault" variant="flush" />
             <VisitasCardP3 />
           </div>
 

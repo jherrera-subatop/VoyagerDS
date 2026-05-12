@@ -14,7 +14,7 @@ function resolveActiveStyle(chipStyle: ChipStyle): CSSProperties {
     return {
       background: "linear-gradient(135deg, oklch(0.48 0.22 280) 0%, oklch(0.28 0.20 285) 100%)",
       color: "#FFFFFF",
-      boxShadow: "0 0 0 1px oklch(0.22 0.18 285 / 18%), 0 4px 14px oklch(0.22 0.18 285 / 38%)",
+      boxShadow: "0 0 0 1.5px oklch(0.72 0.16 55 / 55%), 0 2px 8px oklch(0.22 0.18 285 / 30%)",
     };
   }
   if (chipStyle === "orange") {
@@ -82,16 +82,27 @@ function ConditionChip({ label, active, chipStyle }: ConditionChipProps): JSX.El
 interface AuctionConditionsProps {
   chipStyle?: ChipStyle;
   bg?: string;
+  variant?: "card" | "flush";
 }
 
-export default function AuctionConditions({ chipStyle = "live", bg = "var(--color-surface-card, #FFFFFF)" }: AuctionConditionsProps): JSX.Element {
+export default function AuctionConditions({
+  chipStyle = "live",
+  bg,
+  variant = "card",
+}: AuctionConditionsProps): JSX.Element {
+  const isFlush = variant === "flush";
+  const resolvedBg = bg ?? (isFlush
+    ? "var(--color-surface-section, oklch(0.96 0.004 160))"
+    : "var(--color-surface-card, #FFFFFF)");
+
   return (
     <div
       style={{
         width: 311,
-        backgroundColor: bg,
+        backgroundColor: resolvedBg,
         borderRadius: 8,
-        boxShadow: "var(--shadow-card, 0 8px 16px oklch(0.22 0.18 285 / 6%))",
+        boxShadow: isFlush ? "none" : "var(--shadow-card, 0 8px 16px oklch(0.22 0.18 285 / 6%))",
+        borderLeft: isFlush ? "4px solid var(--color-vault, #22005C)" : undefined,
         padding: "16px 16px 20px",
         display: "flex",
         flexWrap: "wrap",
