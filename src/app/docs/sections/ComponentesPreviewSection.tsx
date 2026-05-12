@@ -14,6 +14,7 @@ import { QuickFiltersStitchShowcaseSection } from "../components/QuickFiltersSti
 import { EmpresaProfileStitchShowcaseSection } from "../components/EmpresaProfileStitchShowcaseSection";
 import { BracketTitleStitchShowcaseSection } from "../components/BracketTitleStitchShowcaseSection";
 import { HeaderStitchShowcaseSection } from "../components/HeaderStitchShowcaseSection";
+import { ListingAreaDoneShowcaseSection } from "../components/ListingAreaDoneShowcaseSection";
 import { DetalleOfertaBarStitchShowcaseSection } from "../components/DetalleOfertaBarStitchShowcaseSection";
 import { GalleryMainStitchShowcaseSection } from "../components/GalleryMainStitchShowcaseSection";
 import { AuctionConditionsStitchShowcaseSection } from "../components/AuctionConditionsStitchShowcaseSection";
@@ -109,6 +110,10 @@ export function ComponentesPreviewSection() {
           <BracketTitleStitchShowcaseSection />
         </>
       )}
+
+      {/* ── ListingArea — status: done — siempre visible ─────────────── */}
+      {HR0}
+      <ListingAreaDoneShowcaseSection />
 
       {/* ── Footer + Sidebar — status: done — siempre visibles ───────── */}
       <FooterImageProvider>

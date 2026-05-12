@@ -46,7 +46,7 @@ export const COMPONENT_ITEMS: ComponentNavItem[] = [
   { id: "group-header",       label: "group-header",   status: "pending", group: "Publication" },
   /* ── Discovery ───────────────────────────────── */
   { id: "quick-filters",    label: "quick-filters", status: "qa",  group: "Discovery" },
-  { id: "listing-area",     label: "listing-area",  status: "qa",  group: "Discovery" },
+  { id: "listing-area",     label: "listing-area",  status: "done",  group: "Discovery" },
   /* ── Overlays ────────────────────────────────── */
   { id: "fraud-modal",      label: "fraud-modal",   status: "pending", group: "Overlays" },
   /* ── Storefront ──────────────────────────────── */

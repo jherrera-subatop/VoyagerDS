@@ -9,6 +9,7 @@ const AREAS = [
   { href: "/docs/taxonomia", label: "Taxonomía", prefix: "/docs/taxonomia" },
   { href: "/docs/fundamentos", label: "Fundamentos", prefix: "/docs/fundamentos" },
   { href: "/docs/componentes", label: "Componentes", prefix: "/docs/componentes" },
+  { href: "/docs/previews", label: "Previews", prefix: "/docs/previews" },
   { href: "/docs/design-spec", label: "DESIGN.md", prefix: "/docs/design-spec" },
 ] as const;
 
