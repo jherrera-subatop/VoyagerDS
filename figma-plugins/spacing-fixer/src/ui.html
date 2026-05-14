@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+  /* ── Reset ──────────────────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ── Tokens (Vault palette) ─────────────────────────────────────────────── */
+  :root {
+    --vault:       #22005C;
+    --vault-mid:   #3B1782;
+    --vault-light: #EDE8F5;
+    --orange:      #ED8936;
+    --orange-bg:   #FFF3E0;
+    --green:       #2E7D32;
+    --green-bg:    #E8F5E9;
+    --surface:     #F8FAF9;
+    --card:        #FFFFFF;
+    --text-main:   #1a1020;
+    --text-muted:  #6B6580;
+    --border:      rgba(34, 0, 92, 0.10);
+    --radius:      6px;
+  }
+
+  /* ── Base ───────────────────────────────────────────────────────────────── */
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 12px;
+    background: var(--surface);
+    color: var(--text-main);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── Header ─────────────────────────────────────────────────────────────── */
+  .header {
+    background: var(--vault);
+    color: #fff;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .header-title {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+  .header-subtitle {
+    font-size: 10px;
+    opacity: 0.6;
+    margin-top: 1px;
+  }
+
+  /* ── Toolbar ─────────────────────────────────────────────────────────────── */
+  .toolbar {
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
+    background: var(--card);
+    flex-shrink: 0;
+  }
+
+  /* ── Buttons ─────────────────────────────────────────────────────────────── */
+  .btn {
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 12px;
+    transition: opacity 0.1s, transform 0.1s;
+    letter-spacing: 0.03em;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  .btn-primary {
+    background: var(--vault);
+    color: #fff;
+  }
+  .btn-primary:not(:disabled):hover { background: var(--vault-mid); }
+
+  .btn-success {
+    background: var(--green);
+    color: #fff;
+  }
+  .btn-success:not(:disabled):hover { opacity: 0.88; }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--vault);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:not(:disabled):hover { background: var(--vault-light); }
+
+  .btn-sm { padding: 4px 8px; font-size: 10px; }
+
+  /* ── Stats bar ──────────────────────────────────────────────────────────── */
+  .stats {
+    padding: 8px 16px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+  .stat {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .stat-value {
+    font-weight: 700;
+    color: var(--text-main);
+  }
+  .stat-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-auto  { background: var(--green); }
+  .dot-abs   { background: var(--orange); }
+  .dot-total { background: var(--vault); }
+
+  /* ── Select all bar ──────────────────────────────────────────────────────── */
+  .select-bar {
+    padding: 6px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
+    background: var(--vault-light);
+    flex-shrink: 0;
+  }
+  .select-bar label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--vault);
+    cursor: pointer;
+  }
+
+  /* ── List ───────────────────────────────────────────────────────────────── */
+  .list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 0;
+  }
+  .list::-webkit-scrollbar { width: 4px; }
+  .list::-webkit-scrollbar-track { background: transparent; }
+  .list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* ── Violation item ──────────────────────────────────────────────────────── */
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.08s;
+  }
+  .item:last-child { border-bottom: none; }
+  .item:hover { background: rgba(34, 0, 92, 0.03); }
+  .item.selected { background: var(--vault-light); }
+
+  .item-check { margin-top: 2px; flex-shrink: 0; cursor: pointer; accent-color: var(--vault); }
+
+  .item-body { flex: 1; min-width: 0; }
+  .item-frame {
+    font-size: 10px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 2px;
+  }
+  .item-detail {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .item-prop {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-main);
+  }
+  .item-arrow {
+    color: var(--text-muted);
+    font-size: 10px;
+  }
+  .item-current {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-decoration: line-through;
+  }
+  .item-suggested {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--green);
+  }
+  .item-token {
+    font-size: 10px;
+    font-family: monospace;
+    background: var(--vault-light);
+    color: var(--vault);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+  .item-delta {
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+
+  /* ── Kind badge ─────────────────────────────────────────────────────────── */
+  .kind-badge {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 1px 5px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    text-transform: uppercase;
+  }
+  .kind-auto {
+    background: var(--green-bg);
+    color: var(--green);
+  }
+  .kind-abs {
+    background: var(--orange-bg);
+    color: #B45309;
+  }
+
+  /* ── Footer ─────────────────────────────────────────────────────────────── */
+  .footer {
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    border-top: 1px solid var(--border);
+    background: var(--card);
+    flex-shrink: 0;
+  }
+  .footer-left {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .footer-right { display: flex; gap: 6px; }
+
+  /* ── Empty / loading states ─────────────────────────────────────────────── */
+  .state-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--text-muted);
+    padding: 32px;
+    text-align: center;
+  }
+  .state-icon { font-size: 32px; }
+  .state-title { font-size: 13px; font-weight: 600; color: var(--text-main); }
+  .state-body { font-size: 11px; line-height: 1.5; }
+
+  /* ── Toast ──────────────────────────────────────────────────────────────── */
+  .toast {
+    position: fixed;
+    bottom: 64px;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    background: var(--vault);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 100;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div>
+    <div class="header-title">Voyager Spacing Fixer</div>
+    <div class="header-subtitle">Escala: 2 · 4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 · 80 · 96 px</div>
+  </div>
+</div>
+
+<!-- Toolbar -->
+<div class="toolbar">
+  <button class="btn btn-primary" id="btn-scan">Escanear</button>
+  <span id="scan-scope" style="font-size:11px; color:var(--text-muted)">Selecciona frames o escanea toda la página</span>
+</div>
+
+<!-- Stats bar (hidden until scan) -->
+<div class="stats" id="stats-bar" style="display:none">
+  <div class="stat">
+    <div class="stat-dot dot-total"></div>
+    <span>Total: <span class="stat-value" id="stat-total">0</span></span>
+  </div>
+  <div class="stat">
+    <div class="stat-dot dot-auto"></div>
+    <span>Auto-layout: <span class="stat-value" id="stat-auto">0</span></span>
+  </div>
+  <div class="stat">
+    <div class="stat-dot dot-abs"></div>
+    <span>Absoluto: <span class="stat-value" id="stat-abs">0</span></span>
+  </div>
+</div>
+
+<!-- Select all bar (hidden until scan) -->
+<div class="select-bar" id="select-bar" style="display:none">
+  <label>
+    <input type="checkbox" id="chk-all" />
+    Seleccionar todos
+  </label>
+  <span id="selected-count" style="font-size:11px; color:var(--text-muted); margin-left:auto"></span>
+</div>
+
+<!-- Main content -->
+<div id="main-content" style="flex:1; display:flex; flex-direction:column; overflow:hidden">
+  <!-- Initial state -->
+  <div class="state-box" id="state-initial">
+    <div class="state-icon">📐</div>
+    <div class="state-title">Listo para escanear</div>
+    <div class="state-body">
+      Selecciona uno o más frames en Figma y presiona <strong>Escanear</strong>.<br>
+      Sin selección, escanea toda la página activa.
+    </div>
+  </div>
+
+  <!-- Results list (hidden initially) -->
+  <div class="list" id="violations-list" style="display:none"></div>
+
+  <!-- No violations state -->
+  <div class="state-box" id="state-clean" style="display:none">
+    <div class="state-icon">✅</div>
+    <div class="state-title">Todo alineado</div>
+    <div class="state-body">Todos los espaciados respetan la escala de tokens de Voyager.</div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer" id="footer" style="display:none">
+  <div class="footer-left" id="footer-hint"></div>
+  <div class="footer-right">
+    <button class="btn btn-ghost btn-sm" id="btn-fix-selected" disabled>Corregir selección</button>
+    <button class="btn btn-success btn-sm" id="btn-fix-all" disabled>Corregir todo</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── State ────────────────────────────────────────────────────────────────
+  let violations = [];
+  let selected = new Set();
+
+  // ── DOM refs ─────────────────────────────────────────────────────────────
+  const btnScan        = document.getElementById('btn-scan');
+  const btnFixSelected = document.getElementById('btn-fix-selected');
+  const btnFixAll      = document.getElementById('btn-fix-all');
+  const chkAll         = document.getElementById('chk-all');
+  const statTotal      = document.getElementById('stat-total');
+  const statAuto       = document.getElementById('stat-auto');
+  const statAbs        = document.getElementById('stat-abs');
+  const statsBar       = document.getElementById('stats-bar');
+  const selectBar      = document.getElementById('select-bar');
+  const selectedCount  = document.getElementById('selected-count');
+  const violationsList = document.getElementById('violations-list');
+  const stateInitial   = document.getElementById('state-initial');
+  const stateClean     = document.getElementById('state-clean');
+  const footer         = document.getElementById('footer');
+  const footerHint     = document.getElementById('footer-hint');
+  const toast          = document.getElementById('toast');
+
+  // ── Toast helper ─────────────────────────────────────────────────────────
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, 2400);
+  }
+
+  // ── Render violations ────────────────────────────────────────────────────
+  function renderViolations() {
+    violationsList.innerHTML = '';
+
+    violations.forEach(function(v) {
+      const item = document.createElement('div');
+      item.className = 'item' + (selected.has(v.vid) ? ' selected' : '');
+      item.dataset.vid = v.vid;
+
+      const isAuto = v.kind === 'auto-layout';
+
+      const frameName = isAuto ? v.nodeName : v.parentName;
+      const propLabel = isAuto ? v.property : v.label;
+      const kindLabel = isAuto ? 'auto' : 'abs';
+      const kindClass = isAuto ? 'kind-auto' : 'kind-abs';
+
+      item.innerHTML =
+        '<input type="checkbox" class="item-check" ' + (selected.has(v.vid) ? 'checked' : '') + ' />' +
+        '<div class="item-body">' +
+          '<div class="item-frame">' + escHtml(frameName) + '</div>' +
+          '<div class="item-detail">' +
+            '<span class="item-prop">' + escHtml(propLabel) + '</span>' +
+            '<span class="item-arrow">→</span>' +
+            '<span class="item-current">' + v.current + 'px</span>' +
+            '<span class="item-arrow">→</span>' +
+            '<span class="item-suggested">' + v.suggested + 'px</span>' +
+            '<span class="item-token">' + v.token + '</span>' +
+            '<span class="item-delta">Δ' + Math.round(v.delta) + 'px</span>' +
+          '</div>' +
+        '</div>' +
+        '<span class="kind-badge ' + kindClass + '">' + kindLabel + '</span>';
+
+      const chk = item.querySelector('.item-check');
+      chk.addEventListener('change', function() {
+        if (chk.checked) {
+          selected.add(v.vid);
+          item.classList.add('selected');
+        } else {
+          selected.delete(v.vid);
+          item.classList.remove('selected');
+        }
+        updateSelectionUI();
+      });
+
+      violationsList.appendChild(item);
+    });
+  }
+
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  // ── Update UI based on selection ──────────────────────────────────────────
+  function updateSelectionUI() {
+    const n = selected.size;
+    selectedCount.textContent = n > 0 ? n + ' seleccionados' : '';
+    btnFixSelected.disabled = n === 0;
+    btnFixAll.disabled = violations.length === 0;
+    chkAll.indeterminate = n > 0 && n < violations.length;
+    chkAll.checked = n > 0 && n === violations.length;
+
+    if (n > 0) {
+      footerHint.textContent = n + ' de ' + violations.length + ' seleccionados';
+    } else {
+      footerHint.textContent = violations.length + ' violación' + (violations.length !== 1 ? 'es' : '') + ' encontrada' + (violations.length !== 1 ? 's' : '');
+    }
+  }
+
+  // ── Show results ──────────────────────────────────────────────────────────
+  function showResults(data, fixedCount) {
+    violations = data;
+    selected.clear();
+
+    const autoCount = violations.filter(function(v) { return v.kind === 'auto-layout'; }).length;
+    const absCount  = violations.filter(function(v) { return v.kind === 'absolute'; }).length;
+
+    statTotal.textContent = violations.length;
+    statAuto.textContent  = autoCount;
+    statAbs.textContent   = absCount;
+    statsBar.style.display = '';
+
+    stateInitial.style.display = 'none';
+    stateClean.style.display   = 'none';
+    footer.style.display       = '';
+
+    if (violations.length === 0) {
+      violationsList.style.display = 'none';
+      selectBar.style.display      = 'none';
+      stateClean.style.display     = '';
+      footer.style.display         = 'none';
+
+      if (fixedCount > 0) {
+        showToast('✓ ' + fixedCount + ' corrección' + (fixedCount !== 1 ? 'es' : '') + ' aplicada' + (fixedCount !== 1 ? 's' : ''));
+      }
+    } else {
+      violationsList.style.display = '';
+      selectBar.style.display      = '';
+      renderViolations();
+      updateSelectionUI();
+
+      if (fixedCount > 0) {
+        showToast('✓ ' + fixedCount + ' corrección' + (fixedCount !== 1 ? 'es' : '') + ' aplicada' + (fixedCount !== 1 ? 's' : '') + ' · ' + violations.length + ' restante' + (violations.length !== 1 ? 's' : ''));
+      }
+    }
+  }
+
+  // ── Event handlers ────────────────────────────────────────────────────────
+  function handleScan() {
+    btnScan.disabled = true;
+    btnScan.textContent = 'Escaneando…';
+    parent.postMessage({ pluginMessage: { type: 'scan' } }, '*');
+  }
+
+  function handleFixSelected() {
+    const fixes = violations.filter(function(v) { return selected.has(v.vid); });
+    if (fixes.length === 0) return;
+    btnFixSelected.disabled = true;
+    btnFixAll.disabled = true;
+    parent.postMessage({ pluginMessage: { type: 'fix', fixes: fixes } }, '*');
+  }
+
+  function handleFixAll() {
+    if (violations.length === 0) return;
+    btnFixSelected.disabled = true;
+    btnFixAll.disabled = true;
+    parent.postMessage({ pluginMessage: { type: 'fix', fixes: violations } }, '*');
+  }
+
+  function handleSelectAll() {
+    if (chkAll.checked) {
+      violations.forEach(function(v) { selected.add(v.vid); });
+    } else {
+      selected.clear();
+    }
+    renderViolations();
+    updateSelectionUI();
+  }
+
+  btnScan.addEventListener('click', handleScan);
+  btnFixSelected.addEventListener('click', handleFixSelected);
+  btnFixAll.addEventListener('click', handleFixAll);
+  chkAll.addEventListener('change', handleSelectAll);
+
+  // ── Message from code.ts ──────────────────────────────────────────────────
+  window.onmessage = function(event) {
+    const msg = event.data.pluginMessage;
+    if (!msg) return;
+
+    if (msg.type === 'result') {
+      btnScan.disabled = false;
+      btnScan.textContent = 'Escanear';
+      showResults(msg.violations || [], msg.fixedCount || 0);
+    }
+  };
+</script>
+</body>
+</html>

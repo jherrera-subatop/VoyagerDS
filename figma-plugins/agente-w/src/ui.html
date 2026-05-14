@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 12px;
+    background: #1A1A1A;
+    color: #E0E0E0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── Header ── */
+  .hdr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px 9px;
+    border-bottom: 1px solid #2C2C2C;
+    flex-shrink: 0;
+  }
+  .hdr-logo {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .hdr-w {
+    width: 22px; height: 22px;
+    background: linear-gradient(135deg, #22005C 0%, #4A2090 100%);
+    border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 800; color: #ED8936;
+    letter-spacing: -0.5px;
+    flex-shrink: 0;
+  }
+  .hdr-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #E0E0E0;
+  }
+  .hdr-sub {
+    font-size: 9px;
+    color: #555;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Scan bar ── */
+  .scan-bar {
+    display: flex;
+    gap: 6px;
+    padding: 10px 14px;
+    border-bottom: 1px solid #252525;
+    flex-shrink: 0;
+  }
+  .btn {
+    flex: 1;
+    height: 26px;
+    border-radius: 4px;
+    border: none;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: opacity 120ms, background 120ms;
+    outline: none;
+  }
+  .btn:focus-visible { outline: 2px solid #ED8936; outline-offset: 2px; }
+  .btn:hover { opacity: 0.85; }
+  .btn:active { opacity: 0.7; }
+  .btn-sel  { background: #22005C; color: #FFFFFF; }
+  .btn-page { background: #2C2C2C; color: #999; }
+
+  /* ── Summary ── */
+  .summary {
+    padding: 7px 14px;
+    font-size: 10px;
+    color: #666;
+    border-bottom: 1px solid #252525;
+    display: none;
+    flex-shrink: 0;
+  }
+  .summary b      { color: #C0C0C0; }
+  .summary .fail  { color: #F87171; font-weight: 700; }
+  .summary .pass  { color: #34D399; font-weight: 700; }
+
+  /* ── Issues list ── */
+  .issues {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .issues::-webkit-scrollbar { width: 4px; }
+  .issues::-webkit-scrollbar-track { background: transparent; }
+  .issues::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+
+  /* ── Issue card ── */
+  .card {
+    padding: 9px 14px;
+    border-bottom: 1px solid #252525;
+    transition: background 80ms;
+  }
+  .card:hover { background: #222; }
+  .card.is-pass { opacity: 0.55; }
+
+  .card-hdr {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .card-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: #E0E0E0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 170px;
+    line-height: 1.3;
+  }
+  .card-parent {
+    font-size: 9px;
+    color: #555;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 170px;
+  }
+  .badges {
+    display: flex;
+    gap: 3px;
+    flex-shrink: 0;
+  }
+  .badge {
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .b-fail  { background: rgba(248,113,113,0.14); color: #F87171; }
+  .b-warn  { background: rgba(251,191,36,0.13);  color: #FBB124; }
+  .b-ok    { background: rgba(52,211,153,0.12);  color: #34D399; }
+  .b-adv   { background: rgba(168,85,247,0.13);  color: #C084FC; } /* advisory */
+
+  /* ── Colors row ── */
+  .colors-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 5px;
+  }
+  .swatch {
+    width: 14px; height: 14px;
+    border-radius: 3px;
+    border: 1px solid rgba(255,255,255,0.10);
+    flex-shrink: 0;
+  }
+  .arrow { font-size: 9px; color: #444; }
+  .meta  { font-size: 10px; color: #666; margin-left: 2px; }
+  .meta b { color: #C0C0C0; }
+
+  /* ── Fix row ── */
+  .fix-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+    padding-top: 5px;
+    border-top: 1px solid #2A2A2A;
+  }
+  .fix-label {
+    flex: 1;
+    font-size: 10px;
+    color: #777;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .fix-label b { color: #ED8936; }
+  .fix-target {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #555;
+    background: #2A2A2A;
+    padding: 1px 5px;
+    border-radius: 3px;
+    margin-right: 2px;
+  }
+  .btn-fix {
+    padding: 2px 9px;
+    border-radius: 3px;
+    border: none;
+    background: #ED8936;
+    color: #1A0800;
+    font-size: 9px;
+    font-weight: 800;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    transition: opacity 120ms;
+    flex-shrink: 0;
+    outline: none;
+  }
+  .btn-fix:hover { opacity: 0.85; }
+  .btn-fix:active { opacity: 0.65; }
+  .btn-fix:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 2px; }
+  .btn-fix:disabled { opacity: 0.35; cursor: default; }
+  .btn-fix.applied { background: #34D399; color: #000; }
+
+  /* ── States ── */
+  .state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    gap: 10px;
+    color: #444;
+    padding: 32px 20px;
+    text-align: center;
+  }
+  .state-icon {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, #22005C 0%, #4A2090 100%);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 800; color: #ED8936;
+  }
+  .state-text { font-size: 11px; color: #555; line-height: 1.5; }
+  .state-ok .state-icon { background: rgba(52,211,153,0.15); color: #34D399; font-size: 18px; }
+  .state-err .state-icon { background: rgba(248,113,113,0.12); color: #F87171; font-size: 14px; }
+
+  .loading {
+    display: none;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .spinner {
+    width: 20px; height: 20px;
+    border: 2px solid #333;
+    border-top-color: #ED8936;
+    border-radius: 50%;
+    animation: spin 600ms linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text { font-size: 10px; color: #555; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="hdr">
+  <div class="hdr-logo">
+    <div class="hdr-w">W</div>
+    <div>
+      <div class="hdr-title">Agente W</div>
+    </div>
+  </div>
+  <span class="hdr-sub">WCAG 2.2 + APCA</span>
+</div>
+
+<!-- Scan bar -->
+<div class="scan-bar">
+  <button class="btn btn-sel"  id="btn-sel">Selección</button>
+  <button class="btn btn-page" id="btn-page">Página</button>
+</div>
+
+<!-- Summary -->
+<div class="summary" id="summary"></div>
+
+<!-- Loading -->
+<div class="loading" id="loading">
+  <div class="spinner"></div>
+  <div class="loading-text">Escaneando...</div>
+</div>
+
+<!-- Issues / empty state -->
+<div class="issues" id="issues">
+  <div class="state" id="empty-state">
+    <div class="state-icon">W</div>
+    <div class="state-text">Selecciona frames o layers<br>y presiona <b>Selección</b></div>
+  </div>
+</div>
+
+<script>
+  /* ── Utils ── */
+  function toHex(r, g, b) {
+    return '#' + [r, g, b]
+      .map(c => Math.round(c * 255).toString(16).padStart(2, '0'))
+      .join('');
+  }
+
+  function el(id) { return document.getElementById(id); }
+
+  /* ── State helpers ── */
+  function showLoading() {
+    el('loading').style.display = 'flex';
+    el('issues').style.display = 'none';
+    el('summary').style.display = 'none';
+  }
+
+  function showIssues() {
+    el('loading').style.display = 'none';
+    el('issues').style.display = 'block';
+  }
+
+  /* ── Scan triggers ── */
+  el('btn-sel').addEventListener('click', function() {
+    showLoading();
+    parent.postMessage({ pluginMessage: { type: 'scan-selection' } }, '*');
+  });
+
+  el('btn-page').addEventListener('click', function() {
+    showLoading();
+    parent.postMessage({ pluginMessage: { type: 'scan-page' } }, '*');
+  });
+
+  /* ── Render ── */
+  function renderResults(issues) {
+    showIssues();
+
+    var fails = issues.filter(function(i) { return !i.pass; }).length;
+    var passes = issues.length - fails;
+
+    if (issues.length === 0) {
+      el('summary').style.display = 'none';
+      el('issues').innerHTML =
+        '<div class="state state-ok" id="empty-state">' +
+        '<div class="state-icon">✓</div>' +
+        '<div class="state-text">Sin problemas de accesibilidad<br>en la selección</div>' +
+        '</div>';
+      return;
+    }
+
+    el('summary').style.display = 'block';
+    el('summary').innerHTML =
+      '<b>' + issues.length + '</b> pares · ' +
+      '<span class="fail">' + fails + ' fallos</span> · ' +
+      '<span class="pass">' + passes + ' OK</span>';
+
+    var html = '';
+    for (var i = 0; i < issues.length; i++) {
+      var r = issues[i];
+      var fgHex  = toHex(r.fgColor.r, r.fgColor.g, r.fgColor.b);
+      var bgHex  = toHex(r.bgColor.r, r.bgColor.g, r.bgColor.b);
+      var sugHex = r.suggestedColor ? toHex(r.suggestedColor.r, r.suggestedColor.g, r.suggestedColor.b) : '';
+
+      /* Badges */
+      var wcagBadge = r.wcagAAA
+        ? '<span class="badge b-ok">AAA</span>'
+        : r.wcagAA
+          ? '<span class="badge b-warn">AA</span>'
+          : '<span class="badge b-fail">AA ✗</span>';
+
+      var apcaBadge;
+      if (r.apcaPass) {
+        apcaBadge = '<span class="badge b-ok">Lc ' + r.apcaLc + '</span>';
+      } else if (r.wcagAA) {
+        /* Pasa WCAG pero falla APCA → advisory (WCAG 3.0 draft) */
+        apcaBadge = '<span class="badge b-adv">Lc ' + r.apcaLc + ' ⚠</span>';
+      } else {
+        apcaBadge = '<span class="badge b-fail">Lc ' + r.apcaLc + ' ✗</span>';
+      }
+
+      /* Fix row */
+      var fixRow = '';
+      if (r.suggestedVarId && !r.pass) {
+        var fixLabel = r.fixTarget === 'bg' ? 'Fondo' : 'Texto';
+        fixRow =
+          '<div class="fix-row">' +
+          '<div class="swatch" style="background:' + sugHex + '"></div>' +
+          '<div class="fix-label"><span class="fix-target">' + fixLabel + '</span> → <b>' + escHtml(r.suggestedVarName) + '</b></div>' +
+          '<button class="btn-fix"' +
+            ' data-fix-node="' + r.fixNodeId + '"' +
+            ' data-var="' + r.suggestedVarId + '"' +
+            ' data-fix-target="' + r.fixTarget + '"' +
+          '>Aplicar</button>' +
+          '</div>';
+      }
+
+      /* Card */
+      html +=
+        '<div class="card' + (r.pass ? ' is-pass' : '') + '">' +
+        '<div class="card-hdr">' +
+        '<div>' +
+        '<div class="card-name" title="' + escHtml(r.nodeName) + '">' + escHtml(r.nodeName) + '</div>' +
+        (r.parentName ? '<div class="card-parent">' + escHtml(r.parentName) + '</div>' : '') +
+        '</div>' +
+        '<div class="badges">' + wcagBadge + apcaBadge + '</div>' +
+        '</div>' +
+        '<div class="colors-row">' +
+        '<div class="swatch" style="background:' + fgHex + '"></div>' +
+        '<span class="arrow">▸</span>' +
+        '<div class="swatch" style="background:' + bgHex + '"></div>' +
+        '<span class="meta"><b>' + r.wcagRatio + ':1</b> · ' + r.fontSize + 'px/w' + r.fontWeight + '</span>' +
+        (r.fgVarName ? '<span class="meta" style="margin-left:4px;color:#555">' + escHtml(r.fgVarName) + '</span>' : '') +
+        '</div>' +
+        fixRow +
+        '</div>';
+    }
+
+    el('issues').innerHTML = html;
+
+    /* Fix buttons */
+    el('issues').querySelectorAll('.btn-fix').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        var fixNodeId  = e.currentTarget.getAttribute('data-fix-node');
+        var varId      = e.currentTarget.getAttribute('data-var');
+        var fixTarget  = e.currentTarget.getAttribute('data-fix-target');
+        e.currentTarget.disabled = true;
+        e.currentTarget.textContent = '...';
+        parent.postMessage({ pluginMessage: { type: 'apply-fix', fixNodeId: fixNodeId, varId: varId, fixTarget: fixTarget } }, '*');
+      });
+    });
+  }
+
+  /* ── Escape HTML ── */
+  function escHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  /* ── Messages from plugin ── */
+  window.onmessage = function(event) {
+    var msg = event.data.pluginMessage;
+    if (!msg) return;
+
+    if (msg.type === 'results') {
+      renderResults(msg.issues);
+    }
+
+    if (msg.type === 'fix-applied') {
+      var btn = el('issues') && el('issues').querySelector('[data-node="' + msg.nodeId + '"]');
+      if (btn) {
+        btn.textContent = '✓';
+        btn.classList.add('applied');
+        btn.disabled = true;
+      }
+    }
+
+    if (msg.type === 'error') {
+      el('loading').style.display = 'none';
+      el('issues').style.display = 'block';
+      el('issues').innerHTML =
+        '<div class="state state-err">' +
+        '<div class="state-icon">!</div>' +
+        '<div class="state-text" style="color:#F87171">' + escHtml(msg.message) + '</div>' +
+        '</div>';
+    }
+  };
+</script>
+</body>
+</html>

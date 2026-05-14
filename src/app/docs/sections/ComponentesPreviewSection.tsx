@@ -82,6 +82,64 @@ export function ComponentesPreviewSection() {
         </p>
       </div>
 
+      {/* ── secondary-live — nueva variante outline naranja ───────────── */}
+      <div
+        className="rounded-lg border p-6 space-y-4 mt-4"
+        style={{
+          background: "var(--vmc-color-background-secondary)",
+          borderColor: "var(--vmc-color-border-default)",
+        }}
+      >
+        <p className="text-sm font-semibold" style={{ color: "var(--vmc-color-text-primary)" }}>
+          Button — variante <code className="font-mono text-xs px-1 py-0.5 rounded" style={{ background: "var(--vmc-color-background-tertiary)" }}>secondary-live</code>
+        </p>
+        <p className="text-sm" style={{ color: "var(--vmc-color-text-secondary)" }}>
+          Outline ghost con borde en gradiente En Vivo (orange-500 → orange-600 → orange-700).
+          Hover: fondo naranja 8% opacidad. Active: fondo 14% + borde orange-700.
+          Técnica: background-clip padding-box / border-box — radio concéntrico preservado.
+        </p>
+
+        {/* Sobre fondo blanco */}
+        <div className="rounded p-4 space-y-3" style={{ background: "var(--vmc-color-surface-card, #fff)" }}>
+          <p className="text-xs font-mono" style={{ color: "var(--vmc-color-text-tertiary)" }}>
+            sobre fondo blanco (surface-card)
+          </p>
+          <div className="flex flex-wrap gap-3 items-center">
+            <Button variant="secondary-live" type="button">
+              Ingresa
+            </Button>
+            <Button variant="secondary-live" type="button">
+              Agendar visita
+            </Button>
+            <Button variant="secondary-live" loading type="button">
+              Cargando
+            </Button>
+            <Button variant="secondary-live" disabled type="button">
+              Deshabilitado
+            </Button>
+          </div>
+        </div>
+
+        {/* Comparación side-by-side primary vs secondary-live */}
+        <div className="rounded p-4 space-y-3" style={{ background: "var(--vmc-color-surface-card, #fff)" }}>
+          <p className="text-xs font-mono" style={{ color: "var(--vmc-color-text-tertiary)" }}>
+            comparación primary ↔ secondary-live
+          </p>
+          <div className="flex flex-wrap gap-3 items-center">
+            <Button variant="primary" type="button">
+              Ingresa
+            </Button>
+            <Button variant="secondary-live" type="button">
+              Ingresa
+            </Button>
+          </div>
+        </div>
+
+        <p className="text-xs font-mono" style={{ color: "var(--vmc-color-text-tertiary)" }}>
+          {'<Button variant="secondary-live">Ingresa</Button>'}
+        </p>
+      </div>
+
       {/* ── Stitch / pending — solo en modo normal ───────────────────── */}
       {!isDone && (
         <>

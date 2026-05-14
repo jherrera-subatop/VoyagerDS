@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "lib": ["ES6"],
+    "strict": true,
+    "module": "none",
+    "outFile": "code.js",
+    "skipLibCheck": true
+  },
+  "include": ["src/code.ts"]
+}

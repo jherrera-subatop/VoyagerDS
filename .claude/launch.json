@@ -6,7 +6,7 @@
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["exec", "next", "dev", "-p", "3420"],
       "port": 3420,
-      "cwd": "C:\\VoyagerDS\\VoyagerDS"
+      "cwd": "/Users/usuario/Desktop/voyager-vmc"
     }
   ]
 }

@@ -48,6 +48,18 @@ function buildVariantStyle(variant: ButtonVariant): CSSProperties {
     return s;
   }
 
+  if (variant === "secondary-live") {
+    const s: CSSProperties = { ...base };
+    s.minHeight = "47px";
+    // Gradient border via background-clip trick.
+    // Layer 1 (padding-box): solid white fill — background state managed in .vmc-btn-sl CSS class.
+    // Layer 2 (border-box): orange gradient visible through the transparent border.
+    // DO NOT set s.background here — .vmc-btn-sl CSS class owns it so hover/active can override.
+    s.border = "2px solid transparent";
+    s.color = "var(--vmc-color-orange-500)";
+    return s;
+  }
+
   if (variant === "destructive") {
     const s: CSSProperties = { ...base };
     s.background = "var(--vmc-color-red-900)";
@@ -59,9 +71,12 @@ function buildVariantStyle(variant: ButtonVariant): CSSProperties {
   return base;
 }
 
-function buildClassName(loading: boolean, disabled: boolean | undefined): string {
-  let c =
-    "inline-flex items-center justify-center transition-[transform,filter,opacity] duration-fast ease-standard hover:brightness-110 active:scale-[0.97]";
+function buildClassName(loading: boolean, disabled: boolean | undefined, variant: ButtonVariant): string {
+  const isSecondaryLive = variant === "secondary-live";
+  let c = cn(
+    "inline-flex items-center justify-center transition-[transform,filter,opacity] duration-fast ease-standard active:scale-[0.97]",
+    isSecondaryLive ? "vmc-btn-sl" : "hover:brightness-110"
+  );
   if (loading) {
     c = cn(c, "animate-pulse opacity-[0.72]");
   }
@@ -82,7 +97,7 @@ export default function Button({
 }: Readonly<ButtonProps>) {
   const isDisabled = Boolean(disabled) || loading;
   const variantStyle = buildVariantStyle(variant);
-  const mergedClassName = cn(buildClassName(loading, disabled), className);
+  const mergedClassName = cn(buildClassName(loading, disabled, variant), className);
 
   let dataLoading: string | undefined;
   if (loading) {

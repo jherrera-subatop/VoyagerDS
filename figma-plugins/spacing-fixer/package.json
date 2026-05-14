@@ -1,0 +1,12 @@
+{
+  "name": "voyager-spacing-fixer",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc --outFile code.js --module none src/code.ts",
+    "watch": "tsc --outFile code.js --module none --watch src/code.ts"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.101.0",
+    "typescript": "^5.4.0"
+  }
+}

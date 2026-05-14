@@ -1,0 +1,8 @@
+{
+  "name": "Agente W — Auditor de Accesibilidad",
+  "id": "agente-w-vmc-subastas-001",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "src/ui.html",
+  "editorType": ["figma"]
+}

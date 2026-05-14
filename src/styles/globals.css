@@ -250,3 +250,39 @@
     font-variant-numeric: tabular-nums;
   }
 }
+
+/* ── Button secondary-live — gradient border (orange En Vivo) ───────────────
+   background-clip trick: inner padding-box fill + outer border-box gradient.
+   Must live in CSS (not inline styles) so :hover/:active can update the fill
+   without breaking the gradient border layer.
+   ─────────────────────────────────────────────────────────────────────────── */
+@layer components {
+  .vmc-btn-sl {
+    background:
+      linear-gradient(oklch(1 0 0), oklch(1 0 0)) padding-box,
+      linear-gradient(135deg, var(--vmc-color-orange-500) 0%, var(--vmc-color-orange-600) 50%, var(--vmc-color-orange-700) 100%) border-box;
+  }
+
+  .vmc-btn-sl:hover:not(:disabled):not([data-loading="true"]) {
+    background:
+      linear-gradient(
+        color-mix(in oklch, var(--vmc-color-orange-600) 8%, oklch(1 0 0)),
+        color-mix(in oklch, var(--vmc-color-orange-600) 8%, oklch(1 0 0))
+      ) padding-box,
+      linear-gradient(135deg, var(--vmc-color-orange-500) 0%, var(--vmc-color-orange-600) 50%, var(--vmc-color-orange-700) 100%) border-box;
+  }
+
+  .vmc-btn-sl:active:not(:disabled):not([data-loading="true"]) {
+    background:
+      linear-gradient(
+        color-mix(in oklch, var(--vmc-color-orange-700) 14%, oklch(1 0 0)),
+        color-mix(in oklch, var(--vmc-color-orange-700) 14%, oklch(1 0 0))
+      ) padding-box,
+      linear-gradient(135deg, var(--vmc-color-orange-700) 0%, var(--vmc-color-orange-700) 100%) border-box;
+  }
+
+  .vmc-btn-sl:focus-visible {
+    outline: 2px solid var(--vmc-color-orange-500);
+    outline-offset: 2px;
+  }
+}
