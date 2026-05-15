@@ -51,6 +51,8 @@ export const COMPONENT_ITEMS: ComponentNavItem[] = [
   { id: "fraud-modal",      label: "fraud-modal",   status: "pending", group: "Overlays" },
   /* ── Storefront ──────────────────────────────── */
   { id: "empresa-profile",  label: "empresa-profile", status: "pending", group: "Storefront" },
+  /* ── Auth ───────────────────────────────────────── */
+  { id: "sign-in",          label: "SignIn",           status: "stitch",  group: "Auth" },
 ];
 
 const STATUS_META: Record<ComponentNavItem["status"], { label: string; color: string }> = {

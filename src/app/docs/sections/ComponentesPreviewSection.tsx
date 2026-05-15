@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { ButtonGhost } from "@/components/ui/ButtonGhost";
 import { SectionTitle } from "../components/SectionTitle";
 import { FooterImageProvider } from "../components/FooterImageContext";
 import { FooterDoneShowcaseSection } from "../components/FooterDoneShowcaseSection";
@@ -19,6 +20,7 @@ import { DetalleOfertaBarStitchShowcaseSection } from "../components/DetalleOfer
 import { GalleryMainStitchShowcaseSection } from "../components/GalleryMainStitchShowcaseSection";
 import { AuctionConditionsStitchShowcaseSection } from "../components/AuctionConditionsStitchShowcaseSection";
 import { InfoGeneralStitchShowcaseSection } from "../components/InfoGeneralStitchShowcaseSection";
+import { SignInStitchShowcaseSection } from "../components/SignInStitchShowcaseSection";
 import { useComponentMode } from "../components/ComponentModeContext";
 
 const HR = (
@@ -140,6 +142,43 @@ export function ComponentesPreviewSection() {
         </p>
       </div>
 
+      {/* ── ButtonGhost — status: done ───────────────────────────────────── */}
+      <div
+        className="rounded-lg border p-6 space-y-4 mt-6"
+        style={{
+          background: "var(--vmc-color-background-secondary)",
+          borderColor: "var(--vmc-color-border-default)",
+        }}
+      >
+        <p className="text-sm font-semibold" style={{ color: "var(--vmc-color-text-primary)" }}>
+          ButtonGhost (`btn-ghost` en TAXONOMY.md)
+        </p>
+        <p className="text-sm" style={{ color: "var(--vmc-color-text-secondary)" }}>
+          Siempre sobre fondos naranja/gradiente. Default: borde white + texto white. Hover: fondo white + texto
+          orange-600. Pressed: fondo orange-700. Plus Jakarta Sans 16px/500, 300×47px.
+        </p>
+        <div
+          className="flex flex-wrap gap-6 items-center justify-center p-8 rounded-md"
+          style={{ background: "var(--vmc-color-orange-600)" }}
+        >
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-xs" style={{ color: "oklch(1 0 0 / 70%)" }}>Default</span>
+            <ButtonGhost type="button">Ver ofertas relacionadas</ButtonGhost>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-xs" style={{ color: "oklch(1 0 0 / 70%)" }}>Disabled</span>
+            <ButtonGhost type="button" disabled>Ver ofertas relacionadas</ButtonGhost>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-xs" style={{ color: "oklch(1 0 0 / 70%)" }}>Loading</span>
+            <ButtonGhost type="button" loading>Ver ofertas relacionadas</ButtonGhost>
+          </div>
+        </div>
+        <p className="text-xs font-mono pt-2" style={{ color: "var(--vmc-color-text-tertiary)" }}>
+          {"import { ButtonGhost } from \"@/components/ui/ButtonGhost\";"}
+        </p>
+      </div>
+
       {/* ── Stitch / pending — solo en modo normal ───────────────────── */}
       {!isDone && (
         <>
@@ -196,6 +235,9 @@ export function ComponentesPreviewSection() {
 
           {HR0}
           <InfoGeneralStitchShowcaseSection />
+
+          {HR0}
+          <SignInStitchShowcaseSection />
 
           {/* ── Cola ────────────────────────────────────────────────── */}
           <div className="mt-8 p-6 rounded-lg border" style={{ borderColor: "var(--vmc-color-border-subtle)" }}>

@@ -4,7 +4,7 @@
   "private": true,
   "packageManager": "pnpm@10.33.0",
   "scripts": {
-    "postinstall": "node scripts/token-gatekeeper.mjs && pnpm exec terrazzo build",
+    "postinstall": "node scripts/token-gatekeeper.mjs",
     "dev": "next dev -p 3420",
     "dev:turbo": "next dev --turbopack -p 3420",
     "dev:full": "node scripts/token-gatekeeper.mjs && terrazzo build && next dev -p 3420",
@@ -19,6 +19,7 @@
     "tokens:figma-sync": "node scripts/sync-tokens-figma-json.mjs",
     "tokens:studio": "pnpm tokens:figma-sync && node scripts/build-token-studio-json.mjs",
     "tokens:watch": "terrazzo build --watch",
+    "kill:node": "powershell -Command \"Get-Process node -ErrorAction SilentlyContinue | Stop-Process -Force\"",
     "verify:pages": "node scripts/verify-routes.mjs",
     "verify:pages:quick": "node scripts/verify-routes.mjs --skip-build",
     "wireframe:parity": "node scripts/wireframe-parity-check.mjs",
