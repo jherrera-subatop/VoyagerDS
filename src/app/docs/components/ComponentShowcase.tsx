@@ -46,7 +46,7 @@ interface ComponentShowcaseProps {
 }
 
 type CopyState = "idle" | "copied";
-type Viewport = "mobile" | "tablet" | "desktop";
+type Viewport = "mobile" | "desktop";
 
 interface ViewportOption {
   id: Viewport;
@@ -57,7 +57,6 @@ interface ViewportOption {
 
 const VIEWPORT_OPTIONS: ViewportOption[] = [
   { id: "mobile",  label: "420",  width: 420,   icon: "📱" },
-  { id: "tablet",  label: "640",  width: 640,   icon: "📟" },
   { id: "desktop", label: "1024", width: 1024,   icon: "🖥" },
 ];
 
@@ -169,9 +168,6 @@ export function ComponentShowcase({
   } else if (viewport === "mobile") {
     previewWidth = 420;
     previewMinWidth = 420;
-  } else if (viewport === "tablet") {
-    previewWidth = 640;
-    previewMinWidth = 640;
   } else {
     previewWidth = 1024;
     previewMinWidth = 1024;

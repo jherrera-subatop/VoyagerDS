@@ -5,21 +5,41 @@ const F = "var(--font-display, 'Plus Jakarta Sans', sans-serif)";
 
 interface StateRowProps {
   label:    string;
+  note?:    string;
   children: React.ReactNode;
 }
 
-function StateRow({ label, children }: StateRowProps): JSX.Element {
+function StateRow({ label, note, children }: StateRowProps): JSX.Element {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-      <p style={{ fontFamily: F, fontSize: 11, fontWeight: 700,
-        textTransform: "uppercase", letterSpacing: "0.08em",
-        color: "var(--vmc-color-text-tertiary)", margin: 0 }}>
-        {label}
-      </p>
+      <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+        <p style={{ fontFamily: F, fontSize: 11, fontWeight: 700,
+          textTransform: "uppercase", letterSpacing: "0.08em",
+          color: "var(--vmc-color-text-tertiary)", margin: 0 }}>
+          {label}
+        </p>
+        {note && (
+          <p style={{ fontFamily: F, fontSize: 11, fontWeight: 400,
+            color: "var(--vmc-color-text-tertiary)", margin: 0, opacity: 0.7 }}>
+            {note}
+          </p>
+        )}
+      </div>
       {children}
     </div>
   );
 }
+
+const HOVER_STYLE: React.CSSProperties = {
+  filter: "brightness(1.10)",
+  width: "100%",
+};
+
+const ACTIVE_STYLE: React.CSSProperties = {
+  transform: "scale(0.97)",
+  filter: "brightness(1.10)",
+  width: "100%",
+};
 
 export default function ButtonPrimaryPreviewPage(): JSX.Element {
   return (
@@ -45,11 +65,27 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
             <Button variant="primary" style={{ width: "100%" }}>Participa</Button>
           </StateRow>
 
+          <StateRow label="Hover" note="simulado">
+            <Button variant="primary" style={{ ...HOVER_STYLE }}>Participa</Button>
+          </StateRow>
+
+          <StateRow label="Focus" note="outline visible en teclado">
+            <Button variant="primary" style={{ width: "100%",
+              outline: "2px solid var(--vmc-color-vault-mid)",
+              outlineOffset: "2px" }}>
+              Participa
+            </Button>
+          </StateRow>
+
+          <StateRow label="Active / Pressed" note="simulado">
+            <Button variant="primary" style={{ ...ACTIVE_STYLE }}>Participa</Button>
+          </StateRow>
+
           <StateRow label="Loading">
             <Button variant="primary" loading style={{ width: "100%" }}>Participa</Button>
           </StateRow>
 
-          <StateRow label="Disabled">
+          <StateRow label="Disabled" note="opacity 72% + grayscale">
             <Button variant="primary" disabled style={{ width: "100%" }}>Participa</Button>
           </StateRow>
 

@@ -20,7 +20,7 @@ function labelTypographyStyle(): CSSProperties {
   };
 }
 
-function buildVariantStyle(variant: ButtonVariant): CSSProperties {
+function buildVariantStyle(variant: ButtonVariant, disabled: boolean): CSSProperties {
   const base: CSSProperties = {
     minHeight: "44px",
     paddingLeft: "20px",
@@ -35,6 +35,9 @@ function buildVariantStyle(variant: ButtonVariant): CSSProperties {
     s.background = "linear-gradient(135deg, var(--vmc-color-vault-900) 0%, var(--vmc-color-vault-700) 100%)";
     s.color = "var(--vmc-color-text-inverse)";
     s.borderWidth = "0";
+    if (disabled) {
+      s.cursor = "not-allowed";
+    }
     return s;
   }
 
@@ -96,7 +99,7 @@ export default function Button({
   ...rest
 }: Readonly<ButtonProps>) {
   const isDisabled = Boolean(disabled) || loading;
-  const variantStyle = buildVariantStyle(variant);
+  const variantStyle = buildVariantStyle(variant, Boolean(disabled));
   const mergedClassName = cn(buildClassName(loading, disabled, variant), className);
 
   let dataLoading: string | undefined;

@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 export interface ComponentNavItem {
   id: string;
   label: string;
-  status: "done" | "qa" | "pending";
+  status: "done" | "qa" | "stitch" | "pending";
   group?: string;
 }
 
@@ -58,6 +58,7 @@ export const COMPONENT_ITEMS: ComponentNavItem[] = [
 const STATUS_META: Record<ComponentNavItem["status"], { label: string; color: string }> = {
   done:    { label: "done",      color: "var(--vmc-color-status-success, #22c55e)" },
   qa:      { label: "qa",        color: "var(--vmc-color-live,            #ED8936)" },
+  stitch:  { label: "stitch",    color: "var(--vmc-color-text-brand,      #3B1782)" },
   pending: { label: "pendiente", color: "var(--vmc-color-text-tertiary,   #99A1AF)" },
 };
 
