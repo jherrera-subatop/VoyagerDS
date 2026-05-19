@@ -1,95 +1,1466 @@
+"use client";
+
 import type { JSX } from "react";
-import Button from "@/components/ui/Button/Button";
 
-const F = "var(--font-display, 'Plus Jakarta Sans', sans-serif)";
+const BUTTON_CSS = `
+  @property --vbtn-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 135deg;
+  }
+  @property --vbtn-stop-a {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: oklch(0.72 0.16 55);
+  }
+  @property --vbtn-stop-b {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: oklch(0.55 0.22 285);
+  }
 
-interface StateRowProps {
-  label:    string;
-  note?:    string;
-  children: React.ReactNode;
+  /* ── MD Primary ── */
+  .pvbtn {
+    --vbtn-stop-a: var(--vmc-color-orange-600);
+    --vbtn-stop-b: var(--vmc-color-vault-500);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 56px;
+    border-radius: var(--vmc-radius-full);
+    border: 2.5px solid transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--vmc-font-display);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--vmc-color-base-white);
+    text-shadow: 0 1px 3px rgb(0% 0% 0% / 0.25);
+    background-image:
+      linear-gradient(var(--vbtn-angle), var(--vbtn-stop-a) 0%, var(--vbtn-stop-a) 40%, var(--vbtn-stop-b) 100%),
+      linear-gradient(135deg,
+        var(--vmc-color-base-white) 0%,
+        var(--vmc-color-orange-400) 25%,
+        var(--vmc-color-vault-400)  75%,
+        var(--vmc-color-base-white) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip:   padding-box, border-box;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.28),
+      0 2px 6px rgb(92.94% 53.73% 21.18% / 0.30);
+    transition:
+      --vbtn-angle  0.4s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      --vbtn-stop-a 0.35s ease,
+      --vbtn-stop-b 0.35s ease,
+      transform     0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow    0.25s ease;
+    transform: translateZ(0);
+  }
+  .pvbtn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.17) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .pvbtn::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(135deg, var(--vmc-color-orange-600), var(--vmc-color-vault-500));
+    filter: blur(14px);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease, filter 0.3s ease;
+  }
+  .pvbtn:hover {
+    --vbtn-angle:  220deg;
+    --vbtn-stop-a: var(--vmc-color-orange-400);
+    --vbtn-stop-b: var(--vmc-color-vault-400);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.22),
+      0 8px 24px rgb(51.76% 37.65% 89.8% / 0.35),
+      0 4px 10px rgb(92.94% 53.73% 21.18% / 0.40);
+  }
+  .pvbtn:hover::after { opacity: 0.45; filter: blur(18px); }
+  .pvbtn:active {
+    --vbtn-angle:  135deg;
+    --vbtn-stop-a: var(--vmc-color-orange-700);
+    --vbtn-stop-b: var(--vmc-color-vault-600);
+    transform: scale(0.97) translateY(1px);
+    box-shadow:
+      inset 0 2px 5px rgb(0% 0% 0% / 0.22),
+      0 1px 3px rgb(0% 0% 0% / 0.12);
+  }
+  .pvbtn:active::after { opacity: 0; }
+  .pvbtn:focus-visible {
+    outline: 3px solid transparent;
+    outline-offset: 4px;
+    transform: scale(0.98);
+    box-shadow:
+      0 0 0 2px var(--vmc-color-base-white),
+      0 0 0 5px var(--vmc-color-vault-500),
+      0 8px 16px -4px rgb(51.76% 37.65% 89.8% / 0.30);
+  }
+  .pvbtn:focus-visible::after { opacity: 0.2; }
+  .pvbtn:disabled {
+    background-image: none;
+    background-color: var(--vmc-color-background-disabled);
+    color: var(--vmc-color-neutral-700);
+    text-shadow: none;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+    border-color: transparent;
+  }
+  .pvbtn:disabled::after { display: none; }
+
+  /* Frozen states */
+  .pvbtn--hover {
+    --vbtn-angle:  220deg;
+    --vbtn-stop-a: var(--vmc-color-orange-400);
+    --vbtn-stop-b: var(--vmc-color-vault-400);
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.22),
+      0 8px 24px rgb(51.76% 37.65% 89.8% / 0.35),
+      0 4px 10px rgb(92.94% 53.73% 21.18% / 0.40) !important;
+  }
+  .pvbtn--pressed {
+    --vbtn-angle:  135deg;
+    --vbtn-stop-a: var(--vmc-color-orange-700);
+    --vbtn-stop-b: var(--vmc-color-vault-600);
+    transform: scale(0.97) translateY(1px) !important;
+    box-shadow:
+      inset 0 2px 5px rgb(0% 0% 0% / 0.22),
+      0 1px 3px rgb(0% 0% 0% / 0.12) !important;
+  }
+  .pvbtn--pressed::after { opacity: 0 !important; }
+
+  /* ── SM variant — 40px, icon slot ── */
+  .pvbtn-sm {
+    --vbtn-stop-a: var(--vmc-color-orange-600);
+    --vbtn-stop-b: var(--vmc-color-vault-500);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 16px 0 4px;
+    border-radius: var(--vmc-radius-full);
+    border: 2px solid transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--vmc-font-display);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--vmc-color-base-white);
+    text-shadow: 0 1px 2px rgb(0% 0% 0% / 0.20);
+    background-image:
+      linear-gradient(var(--vbtn-angle), var(--vbtn-stop-a) 0%, var(--vbtn-stop-a) 40%, var(--vbtn-stop-b) 100%),
+      linear-gradient(135deg,
+        var(--vmc-color-base-white) 0%,
+        var(--vmc-color-orange-400) 25%,
+        var(--vmc-color-vault-400) 75%,
+        var(--vmc-color-base-white) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.25),
+      0 2px 6px rgb(92.94% 53.73% 21.18% / 0.25);
+    transition:
+      --vbtn-angle  0.4s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      --vbtn-stop-a 0.35s ease,
+      --vbtn-stop-b 0.35s ease,
+      transform     0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow    0.25s ease;
+    transform: translateZ(0);
+  }
+  .pvbtn-sm::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.15) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .pvbtn-sm:hover {
+    --vbtn-angle:  220deg;
+    --vbtn-stop-a: var(--vmc-color-orange-400);
+    --vbtn-stop-b: var(--vmc-color-vault-400);
+    transform: translateY(-1px) scale(1.02);
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.20),
+      0 6px 18px rgb(51.76% 37.65% 89.8% / 0.30),
+      0 3px 8px rgb(92.94% 53.73% 21.18% / 0.35);
+  }
+  .pvbtn-sm:active {
+    --vbtn-angle:  135deg;
+    --vbtn-stop-a: var(--vmc-color-orange-700);
+    --vbtn-stop-b: var(--vmc-color-vault-600);
+    transform: scale(0.97) translateY(1px);
+    box-shadow: inset 0 2px 4px rgb(0% 0% 0% / 0.22), 0 1px 2px rgb(0% 0% 0% / 0.10);
+  }
+  .pvbtn-sm:focus-visible {
+    outline: none;
+    transform: scale(0.98);
+    box-shadow: 0 0 0 2px var(--vmc-color-base-white), 0 0 0 4px var(--vmc-color-vault-500);
+  }
+
+  .pvbtn-sm--hover {
+    --vbtn-angle:  220deg;
+    --vbtn-stop-a: var(--vmc-color-orange-400);
+    --vbtn-stop-b: var(--vmc-color-vault-400);
+    transform: translateY(-1px) scale(1.02) !important;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.20),
+      0 6px 18px rgb(51.76% 37.65% 89.8% / 0.30),
+      0 3px 8px rgb(92.94% 53.73% 21.18% / 0.35) !important;
+  }
+  .pvbtn-sm--pressed {
+    --vbtn-angle:  135deg;
+    --vbtn-stop-a: var(--vmc-color-orange-700);
+    --vbtn-stop-b: var(--vmc-color-vault-600);
+    transform: scale(0.97) translateY(1px) !important;
+    box-shadow: inset 0 2px 4px rgb(0% 0% 0% / 0.22), 0 1px 2px rgb(0% 0% 0% / 0.10) !important;
+  }
+
+  .pvbtn-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgb(100% 100% 100% / 0.20);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ── SM Auth / Logged-in — cinematic dark variant ── */
+  .pvbtn-auth {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 16px 0 4px;
+    border-radius: var(--vmc-radius-full);
+    border: 2px solid transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--vmc-font-display);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--vmc-color-base-white);
+    /* Fill: vault gradient con profundidad · Ring: naranja dominante → vault claro */
+    background-image:
+      linear-gradient(135deg, var(--vmc-color-vault-700) 0%, var(--vmc-color-vault-900) 100%),
+      linear-gradient(135deg,
+        var(--vmc-color-orange-600) 0%,
+        var(--vmc-color-orange-400) 45%,
+        var(--vmc-color-vault-400) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.15),
+      0 0 16px rgb(92.94% 53.73% 21.18% / 0.25);
+    transition:
+      transform     0.2s cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow    0.25s ease;
+    transform: translateZ(0);
+  }
+  /* Inset shine — mismo tratamiento que pvbtn */
+  .pvbtn-auth::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.12) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  /* Split-chroma glow detrás */
+  .pvbtn-auth::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(135deg, var(--vmc-color-orange-600), var(--vmc-color-vault-500));
+    filter: blur(12px);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+  }
+  .pvbtn-auth:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.18),
+      0 0 24px rgb(92.94% 53.73% 21.18% / 0.40),
+      0 4px 16px rgb(13.33% 0% 36.08% / 0.50);
+  }
+  .pvbtn-auth:hover::after { opacity: 0.35; }
+  .pvbtn-auth:active {
+    transform: scale(0.97) translateY(1px);
+    box-shadow: inset 0 2px 5px rgb(0% 0% 0% / 0.35), 0 1px 2px rgb(0% 0% 0% / 0.15);
+  }
+  .pvbtn-auth:active::after { opacity: 0; }
+  .pvbtn-auth:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px var(--vmc-color-vault-900),
+      0 0 0 4px var(--vmc-color-orange-500),
+      0 0 12px rgb(92.94% 53.73% 21.18% / 0.30);
+  }
+
+  .pvbtn-auth-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgb(92.94% 53.73% 21.18% / 0.22);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+  .pvbtn-auth-username {
+    color: var(--vmc-color-orange-400);
+    font-weight: 700;
+    text-shadow: 0 0 8px rgb(92.94% 53.73% 21.18% / 0.55);
+  }
+
+  /* ── Auth B — Glass: fill casi transparente, ring naranja define forma ── */
+  .pvbtn-auth-b {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 16px 0 4px;
+    border-radius: var(--vmc-radius-full);
+    border: 2px solid transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--vmc-font-display);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--vmc-color-base-white);
+    background-image:
+      linear-gradient(135deg, rgb(13.33% 0% 36.08% / 0.35), rgb(13.33% 0% 36.08% / 0.55)),
+      linear-gradient(135deg,
+        var(--vmc-color-orange-500) 0%,
+        var(--vmc-color-orange-400) 40%,
+        var(--vmc-color-vault-400) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: inset 0 1px 0 rgb(100% 100% 100% / 0.10);
+    transition: transform 0.2s ease, box-shadow 0.25s ease;
+    transform: translateZ(0);
+  }
+  .pvbtn-auth-b::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.08) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .pvbtn-auth-b:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.14),
+      0 0 20px rgb(92.94% 53.73% 21.18% / 0.30);
+  }
+  .pvbtn-auth-b:active {
+    transform: scale(0.97) translateY(1px);
+    box-shadow: inset 0 2px 4px rgb(0% 0% 0% / 0.25);
+  }
+  .pvbtn-auth-b-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgb(100% 100% 100% / 0.10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+  .pvbtn-auth-b-username {
+    color: var(--vmc-color-orange-400);
+    font-weight: 700;
+  }
+
+  /* ── Auth C — Warm Dark: fill con tinte naranja, ring dorado-cálido ── */
+  .pvbtn-auth-c {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 16px 0 4px;
+    border-radius: var(--vmc-radius-full);
+    border: 2px solid transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--vmc-font-display);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--vmc-color-base-white);
+    /* Fill: vault oscuro con undertone naranja en top-left */
+    background-image:
+      linear-gradient(135deg,
+        color-mix(in oklch, var(--vmc-color-vault-800) 80%, var(--vmc-color-orange-900)) 0%,
+        var(--vmc-color-vault-900) 100%
+      ),
+      linear-gradient(135deg,
+        var(--vmc-color-orange-400) 0%,
+        var(--vmc-color-orange-600) 35%,
+        var(--vmc-color-vault-500) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.12),
+      inset 0 0 32px rgb(92.94% 53.73% 21.18% / 0.08);
+    transition: transform 0.2s ease, box-shadow 0.25s ease;
+    transform: translateZ(0);
+  }
+  .pvbtn-auth-c::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.10) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .pvbtn-auth-c::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(135deg, var(--vmc-color-orange-600), var(--vmc-color-vault-500));
+    filter: blur(12px);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+  }
+  .pvbtn-auth-c:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.16),
+      inset 0 0 32px rgb(92.94% 53.73% 21.18% / 0.12),
+      0 0 22px rgb(92.94% 53.73% 21.18% / 0.35),
+      0 4px 14px rgb(13.33% 0% 36.08% / 0.45);
+  }
+  .pvbtn-auth-c:hover::after { opacity: 0.30; }
+  .pvbtn-auth-c:active {
+    transform: scale(0.97) translateY(1px);
+    box-shadow: inset 0 2px 5px rgb(0% 0% 0% / 0.30);
+  }
+  .pvbtn-auth-c-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: color-mix(in oklch, var(--vmc-color-orange-900) 60%, rgb(100% 100% 100% / 0.05));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+  .pvbtn-auth-c-username {
+    color: var(--vmc-color-orange-300);
+    font-weight: 700;
+    text-shadow: 0 0 10px rgb(92.94% 53.73% 21.18% / 0.45);
+  }
+
+  /* ── Auth D — Primary Clone: mismo fill naranja→vault que "Participa" ── */
+  .pvbtn-auth-d {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 16px 0 4px;
+    border-radius: var(--vmc-radius-full);
+    border: 2px solid transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--vmc-font-display);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--vmc-color-base-white);
+    text-shadow: 0 1px 2px rgb(0% 0% 0% / 0.22);
+    background-image:
+      linear-gradient(var(--vbtn-angle), var(--vbtn-stop-a) 0%, var(--vbtn-stop-a) 40%, var(--vbtn-stop-b) 100%),
+      linear-gradient(135deg,
+        var(--vmc-color-base-white) 0%,
+        var(--vmc-color-orange-400) 25%,
+        var(--vmc-color-vault-400) 75%,
+        var(--vmc-color-base-white) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.28),
+      0 2px 6px rgb(92.94% 53.73% 21.18% / 0.30);
+    transition:
+      --vbtn-angle  0.4s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      --vbtn-stop-a 0.35s ease,
+      --vbtn-stop-b 0.35s ease,
+      transform     0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow    0.25s ease;
+    transform: translateZ(0);
+  }
+  .pvbtn-auth-d::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.17) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .pvbtn-auth-d::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(135deg, var(--vmc-color-orange-600), var(--vmc-color-vault-500));
+    filter: blur(12px);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+  }
+  .pvbtn-auth-d:hover {
+    --vbtn-angle:  220deg;
+    --vbtn-stop-a: var(--vmc-color-orange-400);
+    --vbtn-stop-b: var(--vmc-color-vault-400);
+    transform: translateY(-1px) scale(1.02);
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.22),
+      0 8px 20px rgb(51.76% 37.65% 89.8% / 0.35),
+      0 4px 10px rgb(92.94% 53.73% 21.18% / 0.40);
+  }
+  .pvbtn-auth-d:hover::after { opacity: 0.40; filter: blur(16px); }
+  .pvbtn-auth-d:active {
+    --vbtn-angle:  135deg;
+    --vbtn-stop-a: var(--vmc-color-orange-700);
+    --vbtn-stop-b: var(--vmc-color-vault-600);
+    transform: scale(0.97) translateY(1px);
+    box-shadow: inset 0 2px 5px rgb(0% 0% 0% / 0.22), 0 1px 2px rgb(0% 0% 0% / 0.10);
+  }
+  .pvbtn-auth-d-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgb(0% 0% 0% / 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+  .pvbtn-auth-d-username {
+    font-weight: 700;
+    opacity: 0.92;
+  }
+
+  /* ── Auth E — Vault→Orange invertido: vault izq, naranja der, username blanco ── */
+  .pvbtn-auth-e {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 16px 0 4px;
+    border-radius: var(--vmc-radius-full);
+    border: 2px solid transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--vmc-font-display);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--vmc-color-base-white);
+    text-shadow: 0 1px 2px rgb(0% 0% 0% / 0.25);
+    background-image:
+      linear-gradient(135deg,
+        var(--vmc-color-vault-600) 0%,
+        var(--vmc-color-vault-500) 45%,
+        var(--vmc-color-orange-500) 100%
+      ),
+      linear-gradient(135deg,
+        var(--vmc-color-vault-400) 0%,
+        var(--vmc-color-base-white) 40%,
+        var(--vmc-color-orange-400) 75%,
+        var(--vmc-color-base-white) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.22),
+      0 2px 8px rgb(51.76% 37.65% 89.8% / 0.35);
+    transition:
+      transform     0.2s cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow    0.25s ease;
+    transform: translateZ(0);
+  }
+  .pvbtn-auth-e::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.15) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .pvbtn-auth-e::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(135deg, var(--vmc-color-vault-500), var(--vmc-color-orange-500));
+    filter: blur(12px);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+  }
+  .pvbtn-auth-e:hover {
+    transform: translateY(-1px) scale(1.02);
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.20),
+      0 8px 22px rgb(51.76% 37.65% 89.8% / 0.40),
+      0 4px 10px rgb(92.94% 53.73% 21.18% / 0.35);
+  }
+  .pvbtn-auth-e:hover::after { opacity: 0.38; }
+  .pvbtn-auth-e:active {
+    transform: scale(0.97) translateY(1px);
+    box-shadow: inset 0 2px 5px rgb(0% 0% 0% / 0.25), 0 1px 2px rgb(0% 0% 0% / 0.10);
+  }
+  .pvbtn-auth-e-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgb(100% 100% 100% / 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+  .pvbtn-auth-e-username {
+    font-weight: 700;
+    color: var(--vmc-color-orange-200);
+  }
+
+  /* ── Auth F — Split: mitad izq vault-oscuro, mitad der naranja quemado ── */
+  .pvbtn-auth-f {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 16px 0 4px;
+    border-radius: var(--vmc-radius-full);
+    border: 2px solid transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--vmc-font-display);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--vmc-color-base-white);
+    text-shadow: 0 1px 3px rgb(0% 0% 0% / 0.30);
+    background-image:
+      linear-gradient(100deg,
+        var(--vmc-color-vault-800) 0%,
+        var(--vmc-color-vault-700) 38%,
+        var(--vmc-color-orange-600) 62%,
+        var(--vmc-color-orange-500) 100%
+      ),
+      linear-gradient(135deg,
+        var(--vmc-color-vault-500) 0%,
+        var(--vmc-color-orange-400) 50%,
+        var(--vmc-color-orange-300) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.20),
+      0 2px 8px rgb(92.94% 53.73% 21.18% / 0.35),
+      0 2px 8px rgb(51.76% 37.65% 89.8% / 0.20);
+    transition:
+      transform     0.2s cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow    0.25s ease;
+    transform: translateZ(0);
+  }
+  .pvbtn-auth-f::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.14) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .pvbtn-auth-f::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(100deg, var(--vmc-color-vault-600), var(--vmc-color-orange-500));
+    filter: blur(14px);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+  }
+  .pvbtn-auth-f:hover {
+    transform: translateY(-1px) scale(1.02);
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.18),
+      0 8px 22px rgb(92.94% 53.73% 21.18% / 0.45),
+      0 4px 12px rgb(51.76% 37.65% 89.8% / 0.30);
+  }
+  .pvbtn-auth-f:hover::after { opacity: 0.45; filter: blur(18px); }
+  .pvbtn-auth-f:active {
+    transform: scale(0.97) translateY(1px);
+    box-shadow: inset 0 2px 5px rgb(0% 0% 0% / 0.28), 0 1px 2px rgb(0% 0% 0% / 0.12);
+  }
+  .pvbtn-auth-f-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgb(0% 0% 0% / 0.20);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+  .pvbtn-auth-f-username {
+    font-weight: 700;
+    color: var(--vmc-color-orange-200);
+    text-shadow: 0 0 8px rgb(92.94% 53.73% 21.18% / 0.50);
+  }
+
+  /* ── MD Secondary — vault-dominant, mismo sistema cinematic ── */
+  @property --vsec-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 160deg;
+  }
+  @property --vsec-stop-a {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: oklch(0.38 0.20 285);
+  }
+  @property --vsec-stop-b {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: oklch(0.28 0.18 285);
+  }
+
+  .psec {
+    --vsec-stop-a: var(--vmc-color-vault-500);
+    --vsec-stop-b: var(--vmc-color-vault-700);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 56px;
+    border-radius: var(--vmc-radius-full);
+    border: 2.5px solid transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--vmc-font-display);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--vmc-color-base-white);
+    text-shadow: 0 1px 3px rgb(0% 0% 0% / 0.30);
+    background-image:
+      linear-gradient(var(--vsec-angle), var(--vsec-stop-a) 0%, var(--vsec-stop-b) 100%),
+      linear-gradient(135deg,
+        var(--vmc-color-vault-300) 0%,
+        var(--vmc-color-base-white) 35%,
+        var(--vmc-color-vault-400) 65%,
+        var(--vmc-color-vault-300) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.22),
+      0 2px 8px rgb(51.76% 37.65% 89.8% / 0.30);
+    transition:
+      --vsec-angle  0.4s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      --vsec-stop-a 0.35s ease,
+      --vsec-stop-b 0.35s ease,
+      transform     0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow    0.25s ease;
+    transform: translateZ(0);
+  }
+  .psec::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.16) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .psec::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(135deg, var(--vmc-color-vault-400), var(--vmc-color-vault-600));
+    filter: blur(14px);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease, filter 0.3s ease;
+  }
+  .psec:hover {
+    --vsec-angle:  220deg;
+    --vsec-stop-a: var(--vmc-color-vault-400);
+    --vsec-stop-b: var(--vmc-color-vault-600);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.20),
+      0 8px 24px rgb(51.76% 37.65% 89.8% / 0.40),
+      0 4px 10px rgb(51.76% 37.65% 89.8% / 0.25);
+  }
+  .psec:hover::after { opacity: 0.45; filter: blur(18px); }
+  .psec:active {
+    --vsec-angle:  160deg;
+    --vsec-stop-a: var(--vmc-color-vault-700);
+    --vsec-stop-b: var(--vmc-color-vault-900);
+    transform: scale(0.97) translateY(1px);
+    box-shadow:
+      inset 0 2px 5px rgb(0% 0% 0% / 0.28),
+      0 1px 3px rgb(0% 0% 0% / 0.14);
+  }
+  .psec:active::after { opacity: 0; }
+  .psec:focus-visible {
+    outline: none;
+    transform: scale(0.98);
+    box-shadow:
+      0 0 0 2px var(--vmc-color-base-white),
+      0 0 0 5px var(--vmc-color-vault-400),
+      0 8px 16px -4px rgb(51.76% 37.65% 89.8% / 0.35);
+  }
+  .psec:disabled {
+    background-image: none;
+    background-color: var(--vmc-color-background-disabled);
+    color: var(--vmc-color-neutral-700);
+    text-shadow: none;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+    border-color: transparent;
+  }
+  .psec:disabled::after { display: none; }
+
+  .psec--hover {
+    --vsec-angle:  220deg;
+    --vsec-stop-a: var(--vmc-color-vault-400);
+    --vsec-stop-b: var(--vmc-color-vault-600);
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.20),
+      0 8px 24px rgb(51.76% 37.65% 89.8% / 0.40),
+      0 4px 10px rgb(51.76% 37.65% 89.8% / 0.25) !important;
+  }
+  .psec--pressed {
+    --vsec-angle:  160deg;
+    --vsec-stop-a: var(--vmc-color-vault-700);
+    --vsec-stop-b: var(--vmc-color-vault-900);
+    transform: scale(0.97) translateY(1px) !important;
+    box-shadow:
+      inset 0 2px 5px rgb(0% 0% 0% / 0.28),
+      0 1px 3px rgb(0% 0% 0% / 0.14) !important;
+  }
+  .psec--pressed::after { opacity: 0 !important; }
+
+  /* ── MD Ghost — sobre fondo naranja/live ── */
+  .pghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 28px;
+    border-radius: var(--vmc-radius-full);
+    border: 2px solid rgb(100% 100% 100% / 0.75);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--vmc-font-display);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--vmc-color-base-white);
+    background: transparent;
+    text-shadow: 0 1px 3px rgb(0% 0% 0% / 0.18);
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.20),
+      0 0 0 1px rgb(100% 100% 100% / 0.15);
+    transition:
+      background    0.25s ease,
+      border-color  0.25s ease,
+      color         0.25s ease,
+      transform     0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow    0.25s ease;
+    transform: translateZ(0);
+  }
+  /* Inset shine */
+  .pghost::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.10) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  /* White glow */
+  .pghost::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: var(--vmc-radius-full);
+    background: rgb(100% 100% 100% / 0.60);
+    filter: blur(14px);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease, filter 0.3s ease;
+  }
+  .pghost:hover {
+    background: linear-gradient(135deg, rgb(100% 100% 100% / 1) 0%, oklch(0.97 0.03 55) 100%);
+    border-color: rgb(100% 100% 100% / 1);
+    color: var(--vmc-color-orange-600);
+    text-shadow: none;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.50),
+      0 6px 20px rgb(0% 0% 0% / 0.20);
+  }
+  .pghost:hover::after { opacity: 0.40; filter: blur(18px); }
+  .pghost:active {
+    background: linear-gradient(135deg, var(--vmc-color-orange-700) 0%, oklch(0.52 0.18 45) 100%);
+    border-color: var(--vmc-color-orange-700);
+    color: var(--vmc-color-base-white);
+    text-shadow: 0 1px 3px rgb(0% 0% 0% / 0.25);
+    transform: scale(0.97) translateY(1px);
+    box-shadow: inset 0 2px 5px rgb(0% 0% 0% / 0.22);
+  }
+  .pghost:active::after { opacity: 0; }
+  .pghost:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px var(--vmc-color-orange-600),
+      0 0 0 4px rgb(100% 100% 100% / 0.80);
+  }
+  .pghost:disabled {
+    background: transparent;
+    border-color: rgb(100% 100% 100% / 0.30);
+    color: rgb(100% 100% 100% / 0.35);
+    text-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+  .pghost:disabled::after { display: none; }
+
+  .pghost--hover {
+    background: linear-gradient(135deg, rgb(100% 100% 100% / 1) 0%, oklch(0.97 0.03 55) 100%) !important;
+    border-color: rgb(100% 100% 100% / 1) !important;
+    color: var(--vmc-color-orange-600) !important;
+    text-shadow: none !important;
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.50),
+      0 6px 20px rgb(0% 0% 0% / 0.20) !important;
+  }
+  .pghost--pressed {
+    background: linear-gradient(135deg, var(--vmc-color-orange-700) 0%, oklch(0.52 0.18 45) 100%) !important;
+    border-color: var(--vmc-color-orange-700) !important;
+    color: var(--vmc-color-base-white) !important;
+    transform: scale(0.97) translateY(1px) !important;
+    box-shadow: inset 0 2px 5px rgb(0% 0% 0% / 0.22) !important;
+  }
+
+  /* ── LikeButton ── */
+  .plike {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    background: var(--vmc-color-surface-card, #fff);
+    box-shadow:
+      0 2px 8px rgb(51.76% 37.65% 89.8% / 0.12),
+      inset 0 1px 0 rgb(100% 100% 100% / 0.90);
+    transition:
+      transform   0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow  0.25s ease;
+    transform: translateZ(0);
+  }
+  .plike::after {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--vmc-color-vault-400) 0%, transparent 70%);
+    filter: blur(10px);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+  }
+  .plike:hover {
+    transform: scale(1.10) translateY(-1px);
+    box-shadow:
+      0 4px 16px rgb(51.76% 37.65% 89.8% / 0.22),
+      inset 0 1px 0 rgb(100% 100% 100% / 0.90);
+  }
+  .plike:hover::after { opacity: 0.55; }
+  .plike:active { transform: scale(0.94); }
+
+  /* Sizes */
+  .plike--sm { width: 32px;  height: 32px; }
+  .plike--md { width: 44px;  height: 44px; }
+  .plike--lg { width: 60px;  height: 60px; }
+
+  /* Active/liked */
+  .plike--active {
+    background: linear-gradient(135deg,
+      var(--vmc-color-vault-100, oklch(0.93 0.06 285)) 0%,
+      var(--vmc-color-vault-200, oklch(0.87 0.09 285)) 100%
+    );
+    box-shadow:
+      0 3px 12px rgb(51.76% 37.65% 89.8% / 0.28),
+      inset 0 1px 0 rgb(100% 100% 100% / 0.70);
+  }
+  .plike--active::after { opacity: 0.30; }
+  .plike--active:hover::after { opacity: 0.55; }
+
+  /* Disabled */
+  .plike--disabled {
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.45;
+    pointer-events: none;
+  }
+  .plike--disabled::after { display: none; }
+
+  /* Skeleton */
+  .plike--skeleton {
+    background: var(--vmc-color-background-disabled, oklch(0.88 0.01 220));
+    box-shadow: none;
+    cursor: default;
+    pointer-events: none;
+    animation: plike-pulse 1.6s ease-in-out infinite;
+  }
+  .plike--skeleton::after { display: none; }
+
+  @keyframes plike-pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.45; }
+  }
+`;
+
+const F = "var(--vmc-font-display, 'Plus Jakarta Sans', sans-serif)";
+
+function HeartOutline({ size }: { size: number }): JSX.Element {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+      stroke="var(--vmc-color-vault-600, oklch(0.38 0.20 285))"
+      strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+    </svg>
+  );
 }
 
-function StateRow({ label, note, children }: StateRowProps): JSX.Element {
+function HeartFilled({ size }: { size: number }): JSX.Element {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-      <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
-        <p style={{ fontFamily: F, fontSize: 11, fontWeight: 700,
-          textTransform: "uppercase", letterSpacing: "0.08em",
-          color: "var(--vmc-color-text-tertiary)", margin: 0 }}>
-          {label}
+    <svg width={size} height={size} viewBox="0 0 24 24"
+      fill="var(--vmc-color-vault-700, oklch(0.30 0.20 285))" stroke="none">
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+    </svg>
+  );
+}
+
+const USER_ICON = (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="8" r="4"/>
+    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+  </svg>
+);
+
+interface SectionLabelProps { title: string; subtitle?: string; dark?: boolean; }
+
+function SectionLabel({ title, subtitle, dark }: SectionLabelProps): JSX.Element {
+  return (
+    <div style={{ padding: "14px 24px", borderBottom: `1px solid ${dark ? "rgb(100% 100% 100% / 0.08)" : "var(--vmc-color-vault-utility-ghost)"}` }}>
+      <p style={{ fontFamily: F, fontSize: 11, fontWeight: 700,
+        textTransform: "uppercase", letterSpacing: "0.10em",
+        color: dark ? "var(--vmc-color-base-inverse-muted)" : "var(--vmc-color-text-primary)", margin: 0 }}>
+        {title}
+      </p>
+      {subtitle && (
+        <p style={{ fontFamily: F, fontSize: 11,
+          color: dark ? "var(--vmc-color-base-inverse-subtle)" : "var(--vmc-color-text-tertiary)", margin: "2px 0 0" }}>
+          {subtitle}
         </p>
-        {note && (
-          <p style={{ fontFamily: F, fontSize: 11, fontWeight: 400,
-            color: "var(--vmc-color-text-tertiary)", margin: 0, opacity: 0.7 }}>
-            {note}
-          </p>
-        )}
-      </div>
+      )}
+    </div>
+  );
+}
+
+interface StateColProps { label: string; children: React.ReactNode; dark?: boolean; }
+
+function StateCol({ label, children, dark }: StateColProps): JSX.Element {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 6 }}>
+      <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+        textTransform: "uppercase", letterSpacing: "0.08em",
+        color: dark ? "var(--vmc-color-base-inverse-subtle)" : "var(--vmc-color-text-tertiary)", margin: 0 }}>
+        {label}
+      </p>
       {children}
     </div>
   );
 }
 
-const HOVER_STYLE: React.CSSProperties = {
-  filter: "brightness(1.10)",
-  width: "100%",
-};
-
-const ACTIVE_STYLE: React.CSSProperties = {
-  transform: "scale(0.97)",
-  filter: "brightness(1.10)",
-  width: "100%",
-};
-
 export default function ButtonPrimaryPreviewPage(): JSX.Element {
   return (
-    <main style={{ background: "var(--vmc-color-background-secondary)",
-      minHeight: "100vh", display: "flex", justifyContent: "center", padding: "40px 0" }}>
+    <main style={{
+      background: "var(--vmc-color-background-secondary)",
+      minHeight: "100vh",
+      display: "flex",
+      justifyContent: "center",
+      padding: "40px 0",
+    }}>
+      <style dangerouslySetInnerHTML={{ __html: BUTTON_CSS }} />
 
-      <div style={{ width: 420, display: "flex", flexDirection: "column",
-        borderRadius: 4, overflow: "hidden",
-        outline: "1px solid rgba(0,0,0,0.1)",
-        boxShadow: "0 8px 32px rgba(0,0,0,0.10)" }}>
+      <div style={{
+        width: 720,
+        display: "flex",
+        flexDirection: "column",
+        borderRadius: 4,
+        overflow: "hidden",
+        outline: "1px solid rgb(0% 0% 0% / 0.10)",
+        boxShadow: "0 8px 32px rgb(0% 0% 0% / 0.10)",
+      }}>
 
-        <div style={{ background: "#FFFFFF", display: "flex", flexDirection: "column",
-          gap: 24, padding: 24 }}>
-
+        {/* ── Page header ── */}
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "16px 24px",
+          borderBottom: "1px solid var(--vmc-color-vault-utility-ghost)" }}>
           <p style={{ fontFamily: F, fontSize: 11, fontWeight: 700,
             textTransform: "uppercase", letterSpacing: "0.10em",
-            color: "var(--vmc-color-text-primary)", margin: 0,
-            borderBottom: "1px solid var(--vmc-color-border-subtle)", paddingBottom: 12 }}>
-            Button Primary — Estados
+            color: "var(--vmc-color-text-primary)", margin: "0 0 2px" }}>
+            Button Primary
           </p>
-
-          <StateRow label="Default">
-            <Button variant="primary" style={{ width: "100%" }}>Participa</Button>
-          </StateRow>
-
-          <StateRow label="Hover" note="simulado">
-            <Button variant="primary" style={{ ...HOVER_STYLE }}>Participa</Button>
-          </StateRow>
-
-          <StateRow label="Focus" note="outline visible en teclado">
-            <Button variant="primary" style={{ width: "100%",
-              outline: "2px solid var(--vmc-color-vault-mid)",
-              outlineOffset: "2px" }}>
-              Participa
-            </Button>
-          </StateRow>
-
-          <StateRow label="Active / Pressed" note="simulado">
-            <Button variant="primary" style={{ ...ACTIVE_STYLE }}>Participa</Button>
-          </StateRow>
-
-          <StateRow label="Loading">
-            <Button variant="primary" loading style={{ width: "100%" }}>Participa</Button>
-          </StateRow>
-
-          <StateRow label="Disabled" note="opacity 72% + grayscale">
-            <Button variant="primary" disabled style={{ width: "100%" }}>Participa</Button>
-          </StateRow>
-
+          <p style={{ fontFamily: F, fontSize: 11, color: "var(--vmc-color-text-tertiary)", margin: 0 }}>
+            Mix Cinematic + Tactile · v2.0 upgrade
+          </p>
         </div>
+
+        {/* ─────────────────────────────────────────────
+            1. MD — Primary + Secondary
+        ───────────────────────────────────────────── */}
+        <SectionLabel title="MD · Primary & Secondary" subtitle="48px · Participa / Ingresa" />
+
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px",
+          borderBottom: "1px solid var(--vmc-color-vault-utility-ghost)" }}>
+
+          {/* Column headers */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 16 }}>
+            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase", letterSpacing: "0.08em",
+              color: "var(--vmc-color-orange-500)", margin: 0 }}>
+              Primary
+            </p>
+            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase", letterSpacing: "0.08em",
+              color: "var(--vmc-color-vault-400)", margin: 0 }}>
+              Secondary
+            </p>
+            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase", letterSpacing: "0.08em",
+              color: "var(--vmc-color-orange-600)", margin: 0 }}>
+              Ghost <span style={{ fontWeight: 400, opacity: 0.6 }}>· sobre live</span>
+            </p>
+          </div>
+
+          {/* State rows */}
+          {(["Default", "Hover", "Pressed", "Disabled"] as const).map(function renderRow(state) {
+            const isHover    = state === "Hover";
+            const isPressed  = state === "Pressed";
+            const isDisabled = state === "Disabled";
+            return (
+              <div key={state} style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
+                gap: 12, marginBottom: 12, alignItems: "flex-end" }}>
+                <StateCol label={state}>
+                  <button
+                    className={`pvbtn${isHover ? " pvbtn--hover" : ""}${isPressed ? " pvbtn--pressed" : ""}`}
+                    type="button"
+                    disabled={isDisabled}
+                  >
+                    Participa
+                  </button>
+                </StateCol>
+                <StateCol label={state}>
+                  <button
+                    className={`psec${isHover ? " psec--hover" : ""}${isPressed ? " psec--pressed" : ""}`}
+                    type="button"
+                    disabled={isDisabled}
+                  >
+                    Ingresa
+                  </button>
+                </StateCol>
+                <StateCol label={state}>
+                  <div style={{ background: "var(--vmc-color-orange-500)",
+                    borderRadius: 8, padding: "12px 16px", display: "inline-block" }}>
+                    <button
+                      className={`pghost${isHover ? " pghost--hover" : ""}${isPressed ? " pghost--pressed" : ""}`}
+                      type="button"
+                      disabled={isDisabled}
+                    >
+                      Ver ofertas
+                    </button>
+                  </div>
+                </StateCol>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Live demo MD */}
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "24px",
+          display: "flex", flexDirection: "column", gap: 10,
+          borderBottom: "1px solid var(--vmc-color-vault-utility-ghost)" }}>
+          <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+            textTransform: "uppercase", letterSpacing: "0.08em",
+            color: "var(--vmc-color-text-tertiary)", margin: 0 }}>
+            Demo interactivo
+          </p>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, padding: "16px 0" }}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <button className="pvbtn" type="button">Participa</button>
+            </div>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <button className="psec" type="button">Ingresa</button>
+            </div>
+            <div style={{ display: "flex", justifyContent: "center",
+              background: "var(--vmc-color-orange-500)", borderRadius: 8, padding: "12px" }}>
+              <button className="pghost" type="button">Ver ofertas relacionadas</button>
+            </div>
+          </div>
+        </div>
+
+        {/* ─────────────────────────────────────────────
+            2. SM — "Ingresa" (Guest)
+        ───────────────────────────────────────────── */}
+        <SectionLabel title="SM · Ingresa — Guest" subtitle="40px · icono usuario · header nav" />
+
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px",
+          display: "flex", gap: 20, flexWrap: "wrap",
+          borderBottom: "1px solid var(--vmc-color-vault-utility-ghost)" }}>
+          <StateCol label="Default">
+            <button className="pvbtn-sm" type="button">
+              <span className="pvbtn-icon">{USER_ICON}</span>
+              Ingresa
+            </button>
+          </StateCol>
+          <StateCol label="Hover">
+            <button className="pvbtn-sm pvbtn-sm--hover" type="button">
+              <span className="pvbtn-icon">{USER_ICON}</span>
+              Ingresa
+            </button>
+          </StateCol>
+          <StateCol label="Pressed">
+            <button className="pvbtn-sm pvbtn-sm--pressed" type="button">
+              <span className="pvbtn-icon">{USER_ICON}</span>
+              Ingresa
+            </button>
+          </StateCol>
+        </div>
+
+        {/* Live demo SM */}
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "24px",
+          display: "flex", flexDirection: "column", gap: 10,
+          borderBottom: "1px solid var(--vmc-color-vault-utility-ghost)" }}>
+          <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+            textTransform: "uppercase", letterSpacing: "0.08em",
+            color: "var(--vmc-color-text-tertiary)", margin: 0 }}>
+            Demo interactivo
+          </p>
+          <div style={{ display: "flex", justifyContent: "center", padding: "24px 0" }}>
+            <button className="pvbtn-sm" type="button">
+              <span className="pvbtn-icon">{USER_ICON}</span>
+              Ingresa
+            </button>
+          </div>
+        </div>
+
+        {/* ─────────────────────────────────────────────
+            3. SM — Logged In (sobre vault)
+        ───────────────────────────────────────────── */}
+        <SectionLabel title="SM · Logged In — sobre header vault" dark />
+
+        <div style={{ background: "var(--vmc-color-vault-900)", padding: "20px 24px",
+          borderBottom: "1px solid rgb(100% 100% 100% / 0.08)" }}>
+
+          {/* A / B / C — variantes oscuras */}
+          <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+            textTransform: "uppercase", letterSpacing: "0.08em",
+            color: "rgb(100% 100% 100% / 0.30)", margin: "0 0 10px" }}>
+            Oscuras / glass
+          </p>
+          <div style={{ display: "flex", gap: 20, flexWrap: "wrap", marginBottom: 20 }}>
+
+            <StateCol label="A — Cinematic Dark" dark>
+              <button className="pvbtn-auth" type="button">
+                <span className="pvbtn-auth-icon">{USER_ICON}</span>
+                Bienvenido,{" "}
+                <span className="pvbtn-auth-username">ZAEX5G</span>
+              </button>
+            </StateCol>
+
+            <StateCol label="B — Glass" dark>
+              <button className="pvbtn-auth-b" type="button">
+                <span className="pvbtn-auth-b-icon">{USER_ICON}</span>
+                Bienvenido,{" "}
+                <span className="pvbtn-auth-b-username">ZAEX5G</span>
+              </button>
+            </StateCol>
+
+            <StateCol label="C — Warm Dark" dark>
+              <button className="pvbtn-auth-c" type="button">
+                <span className="pvbtn-auth-c-icon">{USER_ICON}</span>
+                Bienvenido,{" "}
+                <span className="pvbtn-auth-c-username">ZAEX5G</span>
+              </button>
+            </StateCol>
+
+          </div>
+
+          {/* D / E / F — estilo primary (fill sólido) */}
+          <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+            textTransform: "uppercase", letterSpacing: "0.08em",
+            color: "rgb(100% 100% 100% / 0.30)", margin: "0 0 10px" }}>
+            Estilo primary (fill sólido)
+          </p>
+          <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
+
+            <StateCol label="D — Primary Clone" dark>
+              <button className="pvbtn-auth-d" type="button">
+                <span className="pvbtn-auth-d-icon">{USER_ICON}</span>
+                Bienvenido,{" "}
+                <span className="pvbtn-auth-d-username">ZAEX5G</span>
+              </button>
+            </StateCol>
+
+            <StateCol label="E — Vault→Orange" dark>
+              <button className="pvbtn-auth-e" type="button">
+                <span className="pvbtn-auth-e-icon">{USER_ICON}</span>
+                Bienvenido,{" "}
+                <span className="pvbtn-auth-e-username">ZAEX5G</span>
+              </button>
+            </StateCol>
+
+            <StateCol label="F — Split Bicolor" dark>
+              <button className="pvbtn-auth-f" type="button">
+                <span className="pvbtn-auth-f-icon">{USER_ICON}</span>
+                Bienvenido,{" "}
+                <span className="pvbtn-auth-f-username">ZAEX5G</span>
+              </button>
+            </StateCol>
+
+          </div>
+        </div>
+
+        {/* ─────────────────────────────────────────────
+            4. LikeButton
+        ───────────────────────────────────────────── */}
+        <SectionLabel title="LikeButton" subtitle="3 tamaños · Default / Active / Disabled / Skeleton" />
+
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px" }}>
+
+          {/* Column headers */}
+          <div style={{ display: "grid", gridTemplateColumns: "72px 1fr 1fr 1fr 1fr",
+            marginBottom: 16, alignItems: "center" }}>
+            <span />
+            {(["Default", "Active", "Disabled", "Skeleton"] as const).map(function col(s) {
+              return (
+                <p key={s} style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+                  textTransform: "uppercase", letterSpacing: "0.08em",
+                  color: "var(--vmc-color-text-tertiary)", margin: 0, textAlign: "center" }}>
+                  {s}
+                </p>
+              );
+            })}
+          </div>
+
+          {/* Size rows */}
+          {([
+            { label: "Small",  cls: "plike--sm", icon: 14 },
+            { label: "Medium", cls: "plike--md", icon: 20 },
+            { label: "Large",  cls: "plike--lg", icon: 28 },
+          ] as const).map(function sizeRow({ label, cls, icon }) {
+            return (
+              <div key={label} style={{ display: "grid",
+                gridTemplateColumns: "72px 1fr 1fr 1fr 1fr",
+                marginBottom: 20, alignItems: "center" }}>
+                <p style={{ fontFamily: F, fontSize: 11, fontWeight: 600,
+                  color: "var(--vmc-color-text-secondary)", margin: 0 }}>
+                  {label}
+                </p>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <button className={`plike ${cls}`} type="button" aria-label="Me gusta">
+                    <HeartOutline size={icon} />
+                  </button>
+                </div>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <button className={`plike ${cls} plike--active`} type="button" aria-label="Me gusta">
+                    <HeartFilled size={icon} />
+                  </button>
+                </div>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <button className={`plike ${cls} plike--disabled`} type="button" aria-label="Me gusta" disabled>
+                    <HeartOutline size={icon} />
+                  </button>
+                </div>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <button className={`plike ${cls} plike--skeleton`} type="button" aria-label="Me gusta" />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
       </div>
     </main>
   );
