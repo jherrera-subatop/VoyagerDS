@@ -1250,14 +1250,14 @@ const BUTTON_CSS = `
     border: 1.5px solid transparent;
     background-image:
       linear-gradient(160deg,
-        oklch(0.26 0.19 285) 0%,
-        oklch(0.17 0.15 285) 100%
+        oklch(0.36 0.22 285) 0%,
+        oklch(0.22 0.18 285) 100%
       ),
       linear-gradient(135deg,
-        oklch(0.50 0.22 285) 0%,
-        oklch(1 0 0 / 0.20) 38%,
-        oklch(0.38 0.20 285) 72%,
-        oklch(0.50 0.22 285) 100%
+        oklch(0.52 0.23 285) 0%,
+        oklch(1 0 0 / 0.22) 38%,
+        oklch(0.40 0.21 285) 72%,
+        oklch(0.52 0.23 285) 100%
       );
     background-origin: padding-box, border-box;
     background-clip: padding-box, border-box;
