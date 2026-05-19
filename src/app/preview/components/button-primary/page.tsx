@@ -1134,6 +1134,113 @@ const BUTTON_CSS = `
     0%, 100% { opacity: 1; }
     50%       { opacity: 0.40; }
   }
+
+  /* ── PriceIcon · Cinematic upgrade ── */
+  .pprice-wrap {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .pprice {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    /* Teal fill + shimmer ring */
+    background-image:
+      linear-gradient(135deg,
+        var(--vmc-color-negotiable, oklch(0.78 0.14 195)) 0%,
+        oklch(0.65 0.16 195) 100%
+      ),
+      linear-gradient(135deg,
+        oklch(0.88 0.08 195) 0%,
+        rgb(100% 100% 100%) 40%,
+        oklch(0.72 0.14 195) 75%,
+        oklch(0.88 0.08 195) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: 0 2px 8px oklch(0.78 0.14 195 / 0.25);
+    transition:
+      transform   0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow  0.25s ease;
+    transform: translateZ(0);
+  }
+  /* Inset shine */
+  .pprice::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.45) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  /* Teal glow */
+  .pprice::after {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--vmc-color-negotiable, oklch(0.78 0.14 195)) 0%, transparent 70%);
+    filter: blur(10px);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Sizes */
+  .pprice--sm { width: 32px; height: 32px; }
+  .pprice--md { width: 44px; height: 44px; }
+  .pprice--lg { width: 60px; height: 60px; }
+
+  /* Disabled */
+  .pprice-wrap--disabled .pprice {
+    background-image:
+      linear-gradient(135deg, oklch(0.82 0.02 220) 0%, oklch(0.76 0.02 220) 100%),
+      linear-gradient(135deg, oklch(0.88 0.01 220) 0%, oklch(0.88 0.01 220) 100%);
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: none;
+    cursor: default;
+    pointer-events: none;
+    opacity: 0.55;
+  }
+  .pprice-wrap--disabled .pprice::before { display: none; }
+  .pprice-wrap--disabled .pprice::after  { display: none; }
+
+  /* Skeleton */
+  .pprice-wrap--skeleton .pprice {
+    background-image: none;
+    background-color: var(--vmc-color-background-disabled, oklch(0.88 0.01 220));
+    border-color: transparent;
+    box-shadow: none;
+    cursor: default;
+    pointer-events: none;
+    animation: plike-pulse 1.6s ease-in-out infinite;
+  }
+  .pprice-wrap--skeleton .pprice::before { display: none; }
+  .pprice-wrap--skeleton .pprice::after  { display: none; }
+  .pprice-wrap--skeleton .pprice-shelf   { display: none; }
+
+  /* ── PriceIcon shelf — Contact shadow ── */
+  .pprice-shelf {
+    border-radius: 50%;
+    background: oklch(0.62 0.15 195 / 0.50);
+    filter: blur(5px);
+  }
+  .pprice-wrap--sm .pprice-shelf { width: 26px; height: 6px;  margin-top: 4px; }
+  .pprice-wrap--md .pprice-shelf { width: 36px; height: 8px;  margin-top: 5px; }
+  .pprice-wrap--lg .pprice-shelf { width: 50px; height: 10px; margin-top: 6px; }
+
+  /* Disabled: shelf invisible pero mantiene posición */
+  .pprice-wrap--disabled .pprice-shelf { visibility: hidden; }
 `;
 
 const F = "var(--vmc-font-display, 'Plus Jakarta Sans', sans-serif)";
@@ -1167,6 +1274,34 @@ function HeartFilledWhite({ size }: { size: number }): JSX.Element {
 }
 
 interface LikeDemoProps { cls: string; icon: number; }
+
+function DollarIcon({ size }: { size: number }): JSX.Element {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+      stroke="rgb(100% 100% 100% / 0.92)" strokeWidth="2.2"
+      strokeLinecap="round" strokeLinejoin="round">
+      <line x1="12" y1="1" x2="12" y2="23"/>
+      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+    </svg>
+  );
+}
+
+interface PriceDemoProps { sizeCls: string; wrapCls: string; icon: number; }
+
+function PriceDemo({ sizeCls, wrapCls, icon }: PriceDemoProps): JSX.Element {
+  const [active, setActive] = useState(false);
+  function handleToggle(): void { setActive(!active); }
+  const stateCls = active ? "pprice-wrap--active" : "";
+  return (
+    <div className={`pprice-wrap ${wrapCls} ${stateCls}`} onClick={handleToggle}
+      style={{ cursor: "pointer" }}>
+      <button className={`pprice ${sizeCls}`} type="button" aria-label="Ver precio">
+        <DollarIcon size={icon} />
+      </button>
+      <div className="pprice-shelf" />
+    </div>
+  );
+}
 
 function LikeDemo({ cls, icon }: LikeDemoProps): JSX.Element {
   const [liked, setLiked] = useState(false);
@@ -1548,6 +1683,71 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
               <LikeDemo cls="plike--lg" icon={27} />
             </div>
           </div>
+        </div>
+
+        {/* ─────────────────────────────────────────────
+            5. PriceIcon
+        ───────────────────────────────────────────── */}
+        <SectionLabel title="PriceIcon" subtitle="Contact shadow · Default / Disabled / Skeleton" />
+
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px" }}>
+
+          {/* Header row */}
+          <div style={{ display: "grid", gridTemplateColumns: "72px 1fr 1fr 1fr",
+            gap: 0, alignItems: "center", marginBottom: 4 }}>
+            <span />
+            {(["Default", "Disabled", "Skeleton"] as const).map(function h(s) {
+              return (
+                <p key={s} style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+                  textTransform: "uppercase", letterSpacing: "0.07em",
+                  color: "var(--vmc-color-text-tertiary)", margin: "0 0 10px",
+                  textAlign: "center" }}>
+                  {s}
+                </p>
+              );
+            })}
+          </div>
+
+          {([
+            { label: "Small",  sizeCls: "pprice--sm", wrapCls: "pprice-wrap--sm", icon: 13 },
+            { label: "Medium", sizeCls: "pprice--md", wrapCls: "pprice-wrap--md", icon: 19 },
+            { label: "Large",  sizeCls: "pprice--lg", wrapCls: "pprice-wrap--lg", icon: 27 },
+          ] as const).map(function sizeRow({ label, sizeCls, wrapCls, icon }) {
+            return (
+              <div key={label} style={{ display: "grid",
+                gridTemplateColumns: "72px 1fr 1fr 1fr",
+                marginBottom: 20, alignItems: "center" }}>
+                <p style={{ fontFamily: F, fontSize: 10, fontWeight: 600,
+                  color: "var(--vmc-color-text-secondary)", margin: 0 }}>
+                  {label}
+                </p>
+                {/* Default */}
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <div className={`pprice-wrap ${wrapCls}`}>
+                    <button className={`pprice ${sizeCls}`} type="button">
+                      <DollarIcon size={icon} />
+                    </button>
+                    <div className="pprice-shelf" />
+                  </div>
+                </div>
+                {/* Disabled — shelf invisible, mantiene posición en Y */}
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <div className={`pprice-wrap ${wrapCls} pprice-wrap--disabled`}>
+                    <button className={`pprice ${sizeCls}`} type="button" disabled>
+                      <DollarIcon size={icon} />
+                    </button>
+                    <div className="pprice-shelf" />
+                  </div>
+                </div>
+                {/* Skeleton — bola gris simple, sin shelf */}
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <div className={`pprice-wrap ${wrapCls} pprice-wrap--skeleton`}>
+                    <button className={`pprice ${sizeCls}`} type="button" />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
       </div>
