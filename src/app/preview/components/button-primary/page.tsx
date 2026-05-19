@@ -1249,21 +1249,22 @@ const BUTTON_CSS = `
     border-radius: var(--vmc-radius-full, 9999px);
     border: 1.5px solid transparent;
     background-image:
-      linear-gradient(160deg,
-        oklch(0.36 0.22 285) 0%,
-        oklch(0.22 0.18 285) 100%
+      linear-gradient(135deg,
+        oklch(0.48 0.24 285) 0%,
+        oklch(0.48 0.24 285) 30%,
+        oklch(0.20 0.17 285) 100%
       ),
       linear-gradient(135deg,
-        oklch(0.52 0.23 285) 0%,
-        oklch(1 0 0 / 0.22) 38%,
-        oklch(0.40 0.21 285) 72%,
-        oklch(0.52 0.23 285) 100%
+        oklch(0.65 0.20 285) 0%,
+        oklch(1 0 0 / 0.40) 38%,
+        oklch(0.45 0.22 285) 68%,
+        oklch(0.65 0.20 285) 100%
       );
     background-origin: padding-box, border-box;
     background-clip: padding-box, border-box;
     box-shadow:
-      0 2px 14px oklch(0.22 0.18 285 / 0.50),
-      inset 0 1px 0 oklch(1 0 0 / 0.07);
+      0 3px 16px oklch(0.22 0.18 285 / 0.55),
+      inset 0 1px 0 oklch(1 0 0 / 0.10);
     position: relative;
     overflow: visible;
   }
