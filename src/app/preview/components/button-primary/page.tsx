@@ -1241,6 +1241,149 @@ const BUTTON_CSS = `
 
   /* Disabled: shelf invisible pero mantiene posición */
   .pprice-wrap--disabled .pprice-shelf { visibility: hidden; }
+
+  /* ── PriceTag · cinematic vault pill ── */
+  .ptag {
+    display: inline-flex;
+    align-items: center;
+    border-radius: var(--vmc-radius-full, 9999px);
+    border: 1.5px solid transparent;
+    background-image:
+      linear-gradient(160deg,
+        oklch(0.26 0.19 285) 0%,
+        oklch(0.17 0.15 285) 100%
+      ),
+      linear-gradient(135deg,
+        oklch(0.50 0.22 285) 0%,
+        oklch(1 0 0 / 0.20) 38%,
+        oklch(0.38 0.20 285) 72%,
+        oklch(0.50 0.22 285) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow:
+      0 2px 14px oklch(0.22 0.18 285 / 0.50),
+      inset 0 1px 0 oklch(1 0 0 / 0.07);
+    position: relative;
+    overflow: visible;
+  }
+  /* Inset shine */
+  .ptag::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(180deg, oklch(1 0 0 / 0.07) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  /* Sizes */
+  .ptag--sm { height: 26px; padding: 0 10px 0 3px; gap: 5px; }
+  .ptag--md { height: 32px; padding: 0 14px 0 4px; gap: 7px; }
+  .ptag--lg { height: 40px; padding: 0 18px 0 5px; gap: 9px; }
+
+  /* Teal $ icon inside tag */
+  .ptag-icon {
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1.5px solid transparent;
+    background-image:
+      linear-gradient(135deg,
+        var(--vmc-color-negotiable, oklch(0.78 0.14 195)) 0%,
+        oklch(0.65 0.16 195) 100%
+      ),
+      linear-gradient(135deg,
+        oklch(0.88 0.08 195) 0%,
+        oklch(1 0 0) 40%,
+        oklch(0.72 0.14 195) 75%,
+        oklch(0.88 0.08 195) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow:
+      0 1px 8px oklch(0.78 0.14 195 / 0.45),
+      inset 0 1px 0 oklch(1 0 0 / 0.30);
+    position: relative;
+    overflow: hidden;
+  }
+  /* Icon inset shine */
+  .ptag-icon::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(180deg, oklch(1 0 0 / 0.40) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .ptag--sm .ptag-icon { width: 20px; height: 20px; }
+  .ptag--md .ptag-icon { width: 24px; height: 24px; }
+  .ptag--lg .ptag-icon { width: 30px; height: 30px; }
+
+  /* Price text group */
+  .ptag-text {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 2px;
+    position: relative;
+    z-index: 1;
+  }
+  .ptag-currency {
+    font-family: var(--vmc-font-display);
+    font-weight: 700;
+    color: oklch(0.86 0.10 195);
+    line-height: 1;
+  }
+  .ptag-amount {
+    font-family: var(--vmc-font-display);
+    font-weight: 800;
+    color: oklch(1 0 0);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .ptag--sm .ptag-currency,
+  .ptag--sm .ptag-amount { font-size: 11px; }
+  .ptag--md .ptag-currency,
+  .ptag--md .ptag-amount { font-size: 13px; }
+  .ptag--lg .ptag-currency,
+  .ptag--lg .ptag-amount { font-size: 16px; }
+
+  /* Disabled */
+  .ptag--disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+    background-image:
+      linear-gradient(135deg, oklch(0.52 0.03 220) 0%, oklch(0.44 0.02 220) 100%),
+      linear-gradient(135deg, oklch(0.60 0.02 220) 0%, oklch(0.60 0.02 220) 100%);
+    box-shadow: none;
+  }
+  .ptag--disabled .ptag-icon {
+    background-image:
+      linear-gradient(135deg, oklch(0.72 0.01 220) 0%, oklch(0.62 0.01 220) 100%),
+      linear-gradient(135deg, oklch(0.80 0.01 220) 0%, oklch(0.80 0.01 220) 100%);
+    box-shadow: none;
+  }
+
+  /* Skeleton */
+  @keyframes ptag-pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.45; }
+  }
+  .ptag--skeleton {
+    background-image: none;
+    background-color: oklch(0.82 0.02 220);
+    border-color: transparent;
+    box-shadow: none;
+    animation: ptag-pulse 1.6s ease-in-out infinite;
+    min-width: 96px;
+  }
+  .ptag--skeleton .ptag-icon,
+  .ptag--skeleton .ptag-text { visibility: hidden; }
 `;
 
 const F = "var(--vmc-font-display, 'Plus Jakarta Sans', sans-serif)";
@@ -1743,6 +1886,83 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   <div className={`pprice-wrap ${wrapCls} pprice-wrap--skeleton`}>
                     <button className={`pprice ${sizeCls}`} type="button" />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* ─────────────────────────────────────────────
+            6. PriceTag
+        ───────────────────────────────────────────── */}
+        <SectionLabel title="PriceTag" subtitle="vault pill · icono teal + precio · 26 / 32 / 40px" />
+
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px" }}>
+
+          {/* Header row */}
+          <div style={{ display: "grid", gridTemplateColumns: "72px 1fr 1fr 1fr",
+            gap: 0, alignItems: "center", marginBottom: 4 }}>
+            <span />
+            {(["Default", "Disabled", "Skeleton"] as const).map(function h(s) {
+              return (
+                <p key={s} style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+                  textTransform: "uppercase", letterSpacing: "0.07em",
+                  color: "var(--vmc-color-text-tertiary)", margin: "0 0 10px",
+                  textAlign: "center" }}>
+                  {s}
+                </p>
+              );
+            })}
+          </div>
+
+          {([
+            { label: "Small",  sizeCls: "ptag--sm", icon: 7  },
+            { label: "Medium", sizeCls: "ptag--md", icon: 9  },
+            { label: "Large",  sizeCls: "ptag--lg", icon: 11 },
+          ] as const).map(function sizeRow({ label, sizeCls, icon }) {
+            return (
+              <div key={label} style={{ display: "grid",
+                gridTemplateColumns: "72px 1fr 1fr 1fr",
+                marginBottom: 20, alignItems: "center" }}>
+                <p style={{ fontFamily: F, fontSize: 10, fontWeight: 600,
+                  color: "var(--vmc-color-text-secondary)", margin: 0 }}>
+                  {label}
+                </p>
+                {/* Default */}
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <div className={`ptag ${sizeCls}`}>
+                    <div className="ptag-icon">
+                      <DollarIcon size={icon} />
+                    </div>
+                    <div className="ptag-text">
+                      <span className="ptag-currency">US$</span>
+                      <span className="ptag-amount">14,999</span>
+                    </div>
+                  </div>
+                </div>
+                {/* Disabled */}
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <div className={`ptag ${sizeCls} ptag--disabled`}>
+                    <div className="ptag-icon">
+                      <DollarIcon size={icon} />
+                    </div>
+                    <div className="ptag-text">
+                      <span className="ptag-currency">US$</span>
+                      <span className="ptag-amount">14,999</span>
+                    </div>
+                  </div>
+                </div>
+                {/* Skeleton */}
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <div className={`ptag ${sizeCls} ptag--skeleton`}>
+                    <div className="ptag-icon">
+                      <DollarIcon size={icon} />
+                    </div>
+                    <div className="ptag-text">
+                      <span className="ptag-currency">US$</span>
+                      <span className="ptag-amount">14,999</span>
+                    </div>
                   </div>
                 </div>
               </div>
