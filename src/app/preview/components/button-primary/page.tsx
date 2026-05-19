@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import type { JSX } from "react";
 
 const BUTTON_CSS = `
@@ -1008,24 +1009,45 @@ const BUTTON_CSS = `
     box-shadow: inset 0 2px 5px rgb(0% 0% 0% / 0.22) !important;
   }
 
-  /* ── LikeButton ── */
+  /* ── LikeButton · Cinematic upgrade ── */
   .plike {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    border: none;
+    border: 2px solid transparent;
     cursor: pointer;
     position: relative;
-    background: var(--vmc-color-surface-card, #fff);
-    box-shadow:
-      0 2px 8px rgb(51.76% 37.65% 89.8% / 0.12),
-      inset 0 1px 0 rgb(100% 100% 100% / 0.90);
+    overflow: hidden;
+    /* Gradient ring: white fill + vault shimmer border */
+    background-image:
+      linear-gradient(180deg, rgb(100% 100% 100%) 0%, rgb(100% 100% 100%) 100%),
+      linear-gradient(135deg,
+        var(--vmc-color-vault-200, oklch(0.87 0.09 285)) 0%,
+        rgb(100% 100% 100%) 40%,
+        var(--vmc-color-vault-300, oklch(0.80 0.12 285)) 75%,
+        var(--vmc-color-vault-200, oklch(0.87 0.09 285)) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: 0 2px 8px rgb(51.76% 37.65% 89.8% / 0.14);
     transition:
-      transform   0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
-      box-shadow  0.25s ease;
+      transform     0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow    0.25s ease,
+      background-image 0.25s ease;
     transform: translateZ(0);
   }
+  /* Inset shine */
+  .plike::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.55) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  /* Vault glow */
   .plike::after {
     content: '';
     position: absolute;
@@ -1039,53 +1061,78 @@ const BUTTON_CSS = `
   }
   .plike:hover {
     transform: scale(1.10) translateY(-1px);
-    box-shadow:
-      0 4px 16px rgb(51.76% 37.65% 89.8% / 0.22),
-      inset 0 1px 0 rgb(100% 100% 100% / 0.90);
+    box-shadow: 0 5px 18px rgb(51.76% 37.65% 89.8% / 0.26);
   }
   .plike:hover::after { opacity: 0.55; }
-  .plike:active { transform: scale(0.94); }
+  .plike:active { transform: scale(0.92); }
 
   /* Sizes */
-  .plike--sm { width: 32px;  height: 32px; }
-  .plike--md { width: 44px;  height: 44px; }
-  .plike--lg { width: 60px;  height: 60px; }
+  .plike--sm { width: 32px; height: 32px; }
+  .plike--md { width: 44px; height: 44px; }
+  .plike--lg { width: 60px; height: 60px; }
 
-  /* Active/liked */
+  /* Active/liked — vault gradient fill + orange→vault ring */
   .plike--active {
-    background: linear-gradient(135deg,
-      var(--vmc-color-vault-100, oklch(0.93 0.06 285)) 0%,
-      var(--vmc-color-vault-200, oklch(0.87 0.09 285)) 100%
-    );
+    background-image:
+      linear-gradient(135deg,
+        var(--vmc-color-vault-500, oklch(0.45 0.20 285)) 0%,
+        var(--vmc-color-vault-700, oklch(0.30 0.20 285)) 100%
+      ),
+      linear-gradient(135deg,
+        var(--vmc-color-orange-400) 0%,
+        rgb(100% 100% 100%) 40%,
+        var(--vmc-color-vault-400, oklch(0.55 0.20 285)) 75%,
+        var(--vmc-color-vault-300, oklch(0.80 0.12 285)) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
     box-shadow:
-      0 3px 12px rgb(51.76% 37.65% 89.8% / 0.28),
-      inset 0 1px 0 rgb(100% 100% 100% / 0.70);
+      0 3px 14px rgb(51.76% 37.65% 89.8% / 0.35),
+      inset 0 1px 0 rgb(100% 100% 100% / 0.22);
   }
-  .plike--active::after { opacity: 0.30; }
-  .plike--active:hover::after { opacity: 0.55; }
+  .plike--active::before {
+    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.18) 0%, transparent 50%);
+  }
+  .plike--active::after { opacity: 0.35; }
+  .plike--active:hover::after { opacity: 0.60; }
+
+  /* Heart pop — played when active class applied */
+  @keyframes plike-heart-pop {
+    0%   { transform: scale(1); }
+    35%  { transform: scale(1.40); }
+    65%  { transform: scale(0.85); }
+    85%  { transform: scale(1.10); }
+    100% { transform: scale(1); }
+  }
+  .plike--active svg {
+    animation: plike-heart-pop 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
 
   /* Disabled */
   .plike--disabled {
     cursor: not-allowed;
     box-shadow: none;
-    opacity: 0.45;
+    opacity: 0.40;
     pointer-events: none;
   }
   .plike--disabled::after { display: none; }
 
   /* Skeleton */
   .plike--skeleton {
-    background: var(--vmc-color-background-disabled, oklch(0.88 0.01 220));
+    background-image: none;
+    background-color: var(--vmc-color-background-disabled, oklch(0.88 0.01 220));
+    border-color: transparent;
     box-shadow: none;
     cursor: default;
     pointer-events: none;
     animation: plike-pulse 1.6s ease-in-out infinite;
   }
-  .plike--skeleton::after { display: none; }
+  .plike--skeleton::before { display: none; }
+  .plike--skeleton::after  { display: none; }
 
   @keyframes plike-pulse {
     0%, 100% { opacity: 1; }
-    50%       { opacity: 0.45; }
+    50%       { opacity: 0.40; }
   }
 `;
 
@@ -1107,6 +1154,32 @@ function HeartFilled({ size }: { size: number }): JSX.Element {
       fill="var(--vmc-color-vault-700, oklch(0.30 0.20 285))" stroke="none">
       <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
     </svg>
+  );
+}
+
+function HeartFilledWhite({ size }: { size: number }): JSX.Element {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24"
+      fill="rgb(100% 100% 100% / 0.92)" stroke="none">
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+    </svg>
+  );
+}
+
+interface LikeDemoProps { cls: string; icon: number; }
+
+function LikeDemo({ cls, icon }: LikeDemoProps): JSX.Element {
+  const [liked, setLiked] = useState(false);
+  function handleToggle(): void { setLiked(!liked); }
+  return (
+    <button
+      className={`plike ${cls}${liked ? " plike--active" : ""}`}
+      type="button"
+      aria-label={liked ? "Quitar like" : "Me gusta"}
+      onClick={handleToggle}
+    >
+      {liked ? <HeartFilledWhite size={icon} /> : <HeartOutline size={icon} />}
+    </button>
   );
 }
 
@@ -1426,9 +1499,9 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
 
           {/* Size rows */}
           {([
-            { label: "Small",  cls: "plike--sm", icon: 14 },
-            { label: "Medium", cls: "plike--md", icon: 20 },
-            { label: "Large",  cls: "plike--lg", icon: 28 },
+            { label: "Small",  cls: "plike--sm", icon: 13 },
+            { label: "Medium", cls: "plike--md", icon: 19 },
+            { label: "Large",  cls: "plike--lg", icon: 27 },
           ] as const).map(function sizeRow({ label, cls, icon }) {
             return (
               <div key={label} style={{ display: "grid",
@@ -1445,7 +1518,7 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
                 </div>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   <button className={`plike ${cls} plike--active`} type="button" aria-label="Me gusta">
-                    <HeartFilled size={icon} />
+                    <HeartFilledWhite size={icon} />
                   </button>
                 </div>
                 <div style={{ display: "flex", justifyContent: "center" }}>
@@ -1459,6 +1532,22 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
               </div>
             );
           })}
+
+          {/* Demo interactivo — click para toggle */}
+          <div style={{ borderTop: "1px solid var(--vmc-color-vault-utility-ghost)",
+            paddingTop: 16, marginTop: 4 }}>
+            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase", letterSpacing: "0.08em",
+              color: "var(--vmc-color-text-tertiary)", margin: "0 0 14px" }}>
+              Demo interactivo — click para toggle + heart pop
+            </p>
+            <div style={{ display: "flex", gap: 24, alignItems: "center", justifyContent: "center",
+              padding: "16px 0" }}>
+              <LikeDemo cls="plike--sm" icon={13} />
+              <LikeDemo cls="plike--md" icon={19} />
+              <LikeDemo cls="plike--lg" icon={27} />
+            </div>
+          </div>
         </div>
 
       </div>
