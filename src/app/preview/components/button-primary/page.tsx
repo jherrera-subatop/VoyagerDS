@@ -1244,7 +1244,7 @@ const BUTTON_CSS = `
 
   /* ── OfferType · cinematic card ── */
   .poftype {
-    width: 160px;
+    width: 110px;
     border-radius: var(--vmc-radius-lg, 16px);
     overflow: hidden;
     cursor: pointer;
@@ -1261,7 +1261,7 @@ const BUTTON_CSS = `
 
   /* Top colored section */
   .poftype-top {
-    height: 96px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1269,44 +1269,44 @@ const BUTTON_CSS = `
     overflow: hidden;
     transition: background 0.22s ease;
   }
-  /* Inset shine */
+  /* Inset shine — muy sutil, colores vivos no aguantan brillo fuerte */
   .poftype-top::before {
     content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(180deg,
-      oklch(1 0 0 / 0.18) 0%,
-      transparent 55%
+      oklch(1 0 0 / 0.07) 0%,
+      transparent 60%
     );
     pointer-events: none;
     z-index: 1;
   }
-  /* Bottom edge shadow separator */
+  /* Bottom edge separator */
   .poftype-top::after {
     content: '';
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    height: 4px;
-    background: linear-gradient(180deg, transparent 0%, oklch(0 0 0 / 0.10) 100%);
+    height: 3px;
+    background: linear-gradient(180deg, transparent 0%, oklch(0 0 0 / 0.08) 100%);
     pointer-events: none;
     z-index: 1;
   }
 
   .poftype-label {
     font-family: var(--vmc-font-display);
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     color: oklch(1 0 0);
-    text-shadow: 0 1px 4px oklch(0 0 0 / 0.18);
+    text-shadow: 0 1px 3px oklch(0 0 0 / 0.12);
     position: relative;
     z-index: 2;
   }
 
   /* Bottom white section */
   .poftype-bottom {
-    height: 56px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1314,7 +1314,7 @@ const BUTTON_CSS = `
   }
   .poftype-cta {
     font-family: var(--vmc-font-display);
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.10em;
