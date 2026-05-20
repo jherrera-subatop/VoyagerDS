@@ -1332,14 +1332,7 @@ const BUTTON_CSS = `
     color: oklch(0.62 0.16 195);
   }
 
-  /* Hover */
-  .poftype--negotiable:hover .poftype-top,
-  .poftype--negotiable.poftype--hover .poftype-top {
-    background: linear-gradient(180deg,
-      oklch(0.90 0.11 195) 0%,
-      oklch(0.82 0.14 195) 100%
-    );
-  }
+  /* Hover — sin cambio de color, solo lift */
   /* Focus / pressed */
   .poftype--negotiable.poftype--focus .poftype-top {
     background: linear-gradient(180deg,
@@ -1359,14 +1352,7 @@ const BUTTON_CSS = `
     color: oklch(0.58 0.18 45);
   }
 
-  /* Hover */
-  .poftype--live:hover .poftype-top,
-  .poftype--live.poftype--hover .poftype-top {
-    background: linear-gradient(180deg,
-      oklch(0.84 0.16 58) 0%,
-      oklch(0.76 0.17 55) 100%
-    );
-  }
+  /* Hover — sin cambio de color, solo lift */
   /* Focus / pressed */
   .poftype--live.poftype--focus .poftype-top {
     background: linear-gradient(180deg,
@@ -1651,6 +1637,36 @@ function StateCol({ label, children, dark }: StateColProps): JSX.Element {
         {label}
       </p>
       {children}
+    </div>
+  );
+}
+
+interface OfferTypeDemoCardProps {
+  variant: "negotiable" | "live";
+  label: string;
+}
+
+function OfferTypeDemoCard({ variant, label }: OfferTypeDemoCardProps): JSX.Element {
+  const [pressed, setPressed] = useState(false);
+  function handlePress(): void { setPressed(true); }
+  function handleRelease(): void { setPressed(false); }
+  const focusCls = pressed ? "poftype--focus" : "";
+  return (
+    <div
+      className={`poftype poftype--${variant} ${focusCls}`}
+      onMouseDown={handlePress}
+      onMouseUp={handleRelease}
+      onMouseLeave={handleRelease}
+      role="button"
+      tabIndex={0}
+      aria-label={label}
+    >
+      <div className="poftype-top">
+        <span className="poftype-label">{label}</span>
+      </div>
+      <div className="poftype-bottom">
+        <span className="poftype-cta">VER TODAS</span>
+      </div>
     </div>
   );
 }
@@ -2127,6 +2143,20 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
               <div className="poftype-bottom">
                 <span className="poftype-cta">VER TODAS</span>
               </div>
+            </div>
+          </div>
+
+          {/* Live demo */}
+          <div style={{ marginTop: 24, padding: "16px 0 4px",
+            borderTop: "1px solid var(--vmc-color-vault-utility-ghost)" }}>
+            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase", letterSpacing: "0.08em",
+              color: "var(--vmc-color-text-tertiary)", margin: "0 0 16px" }}>
+              Live — hover + click
+            </p>
+            <div style={{ display: "flex", gap: 16 }}>
+              <OfferTypeDemoCard variant="negotiable" label="NEGOCIABLE" />
+              <OfferTypeDemoCard variant="live" label="EN VIVO" />
             </div>
           </div>
 
