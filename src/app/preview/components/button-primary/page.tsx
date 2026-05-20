@@ -235,6 +235,270 @@ const BUTTON_CSS = `
     box-shadow: inset 0 2px 4px rgb(0% 0% 0% / 0.22), 0 1px 2px rgb(0% 0% 0% / 0.10) !important;
   }
 
+  /* ══════════════════════════════════════════════════════════════
+     .pbtn — Button System (Variant × Size × State × Icon × Width)
+     ══════════════════════════════════════════════════════════════ */
+
+  /* Spin keyframe for loading spinner */
+  @keyframes pbtn-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ── Base ── */
+  .pbtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+    border-radius: var(--vmc-radius-sm, 4px);
+    cursor: pointer;
+    font-family: var(--vmc-font-display, 'Plus Jakarta Sans', sans-serif);
+    font-weight: 600;
+    position: relative;
+    text-decoration: none;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease,
+      border-color 0.15s ease,
+      box-shadow 0.15s ease,
+      transform 0.15s cubic-bezier(0.25, 0.8, 0.25, 1);
+    white-space: nowrap;
+    outline: none;
+  }
+  .pbtn:focus-visible {
+    outline: 2px solid oklch(0.50 0.22 285);
+    outline-offset: 3px;
+    transform: none;
+  }
+  .pbtn--focus {
+    outline: 2px solid oklch(0.50 0.22 285) !important;
+    outline-offset: 3px !important;
+    transform: none !important;
+  }
+  .pbtn:disabled,
+  .pbtn--disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* ── Sizes ── */
+  .pbtn--sm {
+    height: 36px;
+    font-size: 13px;
+    padding: 0 16px;
+    gap: 6px;
+  }
+  .pbtn--md {
+    height: 44px;
+    font-size: 14px;
+    padding: 0 20px;
+    gap: 8px;
+  }
+  .pbtn--lg {
+    height: 52px;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 0 28px;
+    gap: 10px;
+  }
+
+  /* ── Icon slots ── */
+  .pbtn-icon-left,
+  .pbtn-icon-right {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  /* ── Icon-only modifier ── */
+  .pbtn--icon-only {
+    padding: 0;
+    border-radius: var(--vmc-radius-sm, 4px);
+  }
+  .pbtn--icon-only.pbtn--sm { width: 36px; }
+  .pbtn--icon-only.pbtn--md { width: 44px; }
+  .pbtn--icon-only.pbtn--lg { width: 52px; }
+  .pbtn--icon-only .pbtn-label { display: none; }
+
+  /* ── Full Width ── */
+  .pbtn--full { width: 100%; }
+
+  /* ── Loading state ── */
+  .pbtn--loading {
+    cursor: wait !important;
+    pointer-events: none;
+  }
+  .pbtn--loading .pbtn-label,
+  .pbtn--loading .pbtn-icon-left,
+  .pbtn--loading .pbtn-icon-right {
+    opacity: 0;
+  }
+  .pbtn--loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    animation: pbtn-spin 0.7s linear infinite;
+  }
+
+  /* ══ PRIMARY ══ */
+  .pbtn--primary {
+    background-color: oklch(0.22 0.18 285);
+    color: oklch(1 0 0);
+    box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.15);
+  }
+  .pbtn--primary:hover,
+  .pbtn--primary.pbtn--hover {
+    background-color: color-mix(in oklch, oklch(0.22 0.18 285) 85%, oklch(1 0 0));
+    transform: translateY(-1px);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 0.15),
+      0 4px 12px oklch(0.22 0.18 285 / 0.35);
+  }
+  .pbtn--primary:active,
+  .pbtn--primary.pbtn--active {
+    background-color: oklch(from oklch(0.22 0.18 285) calc(l - 0.08) c h);
+    transform: scale(0.97) translateY(1px);
+    box-shadow: inset 0 2px 4px oklch(0 0 0 / 0.20);
+  }
+  .pbtn--primary:disabled,
+  .pbtn--primary.pbtn--disabled {
+    background-color: oklch(0.90 0.004 285);
+    color: oklch(0.55 0.06 285);
+    box-shadow: none;
+  }
+  .pbtn--primary.pbtn--loading {
+    background-color: oklch(0.22 0.18 285);
+  }
+  .pbtn--primary.pbtn--loading::after {
+    border-top-color: oklch(1 0 0);
+    border-right-color: oklch(1 0 0 / 0.35);
+  }
+
+  /* ══ SECONDARY ══ */
+  .pbtn--secondary {
+    background-color: transparent;
+    border: 1.5px solid oklch(0.22 0.18 285);
+    color: oklch(0.22 0.18 285);
+  }
+  .pbtn--secondary:hover,
+  .pbtn--secondary.pbtn--hover {
+    background-color: oklch(0.22 0.18 285 / 0.06);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px oklch(0.22 0.18 285 / 0.18);
+  }
+  .pbtn--secondary:active,
+  .pbtn--secondary.pbtn--active {
+    background-color: oklch(0.22 0.18 285 / 0.12);
+    transform: scale(0.97) translateY(1px);
+    box-shadow: inset 0 2px 4px oklch(0.22 0.18 285 / 0.15);
+  }
+  .pbtn--secondary:disabled,
+  .pbtn--secondary.pbtn--disabled {
+    background-color: transparent;
+    border-color: oklch(0.90 0.004 285);
+    color: oklch(0.55 0.06 285);
+  }
+  .pbtn--secondary.pbtn--loading::after {
+    border-top-color: oklch(0.22 0.18 285);
+    border-right-color: oklch(0.22 0.18 285 / 0.35);
+  }
+
+  /* ══ TERTIARY ══ */
+  .pbtn--tertiary {
+    background-color: oklch(0.22 0.18 285 / 0.08);
+    color: oklch(0.22 0.18 285);
+    border: none;
+  }
+  .pbtn--tertiary:hover,
+  .pbtn--tertiary.pbtn--hover {
+    background-color: oklch(0.22 0.18 285 / 0.14);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px oklch(0.22 0.18 285 / 0.12);
+  }
+  .pbtn--tertiary:active,
+  .pbtn--tertiary.pbtn--active {
+    background-color: oklch(0.22 0.18 285 / 0.20);
+    transform: scale(0.97) translateY(1px);
+  }
+  .pbtn--tertiary:disabled,
+  .pbtn--tertiary.pbtn--disabled {
+    background-color: oklch(0.90 0.004 285);
+    color: oklch(0.55 0.06 285);
+  }
+  .pbtn--tertiary.pbtn--loading::after {
+    border-top-color: oklch(0.22 0.18 285);
+    border-right-color: oklch(0.22 0.18 285 / 0.35);
+  }
+
+  /* ══ GHOST ══ */
+  .pbtn--ghost {
+    background-color: transparent;
+    border: none;
+    color: oklch(0.22 0.18 285);
+  }
+  .pbtn--ghost:hover,
+  .pbtn--ghost.pbtn--hover {
+    background-color: oklch(0.22 0.18 285 / 0.06);
+    transform: translateY(-1px);
+  }
+  .pbtn--ghost:active,
+  .pbtn--ghost.pbtn--active {
+    background-color: oklch(0.22 0.18 285 / 0.12);
+    transform: scale(0.97) translateY(1px);
+  }
+  .pbtn--ghost:disabled,
+  .pbtn--ghost.pbtn--disabled {
+    color: oklch(0.55 0.06 285);
+  }
+  .pbtn--ghost.pbtn--loading::after {
+    border-top-color: oklch(0.22 0.18 285);
+    border-right-color: oklch(0.22 0.18 285 / 0.35);
+  }
+
+  /* ══ DANGER ══ */
+  .pbtn--danger {
+    background-color: oklch(0.42 0.20 20);
+    color: oklch(1 0 0);
+    box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.15);
+  }
+  .pbtn--danger:hover,
+  .pbtn--danger.pbtn--hover {
+    background-color: color-mix(in oklch, oklch(0.42 0.20 20) 85%, oklch(1 0 0));
+    transform: translateY(-1px);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 0.15),
+      0 4px 12px oklch(0.42 0.20 20 / 0.35);
+  }
+  .pbtn--danger:active,
+  .pbtn--danger.pbtn--active {
+    background-color: oklch(from oklch(0.42 0.20 20) calc(l - 0.08) c h);
+    transform: scale(0.97) translateY(1px);
+    box-shadow: inset 0 2px 4px oklch(0 0 0 / 0.20);
+  }
+  .pbtn--danger:disabled,
+  .pbtn--danger.pbtn--disabled {
+    background-color: oklch(0.90 0.004 285);
+    color: oklch(0.55 0.06 285);
+    box-shadow: none;
+  }
+  .pbtn--danger.pbtn--loading {
+    background-color: oklch(0.42 0.20 20);
+  }
+  .pbtn--danger.pbtn--loading::after {
+    border-top-color: oklch(1 0 0);
+    border-right-color: oklch(1 0 0 / 0.35);
+  }
+
+  /* ══════════════════════════════════════════════════════════════
+     END .pbtn system
+     ══════════════════════════════════════════════════════════════ */
+
   .pvbtn-icon {
     width: 32px;
     height: 32px;
@@ -2046,6 +2310,152 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
           <p style={{ fontFamily: F, fontSize: 11, color: "var(--vmc-color-text-tertiary)", margin: 0 }}>
             Mix Cinematic + Tactile · v2.0 upgrade
           </p>
+        </div>
+
+        {/* ═══════════════════════════════════════════════════════════
+            0. Button System (.pbtn) — Full Figma Property Matrix
+        ═══════════════════════════════════════════════════════════ */}
+        <SectionLabel title="Button System · .pbtn" subtitle="Variant × Size × State × Icon × Width" />
+
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px",
+          borderBottom: "1px solid var(--vmc-color-vault-utility-ghost)" }}>
+
+          {/* ── Row 1: 5 Variants × MD ── */}
+          <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+            textTransform: "uppercase", letterSpacing: "0.08em",
+            color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
+            Variants · MD · Default
+          </p>
+          <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap", marginBottom: 24 }}>
+            <button type="button" className="pbtn pbtn--md pbtn--primary">
+              <span className="pbtn-label">Primary</span>
+            </button>
+            <button type="button" className="pbtn pbtn--md pbtn--secondary">
+              <span className="pbtn-label">Secondary</span>
+            </button>
+            <button type="button" className="pbtn pbtn--md pbtn--tertiary">
+              <span className="pbtn-label">Tertiary</span>
+            </button>
+            <button type="button" className="pbtn pbtn--md pbtn--ghost">
+              <span className="pbtn-label">Ghost</span>
+            </button>
+            <button type="button" className="pbtn pbtn--md pbtn--danger">
+              <span className="pbtn-label">Danger</span>
+            </button>
+          </div>
+
+          {/* ── Row 2: 3 Sizes × Primary ── */}
+          <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+            textTransform: "uppercase", letterSpacing: "0.08em",
+            color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
+            Sizes · Primary
+          </p>
+          <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap", marginBottom: 24 }}>
+            <button type="button" className="pbtn pbtn--sm pbtn--primary">
+              <span className="pbtn-label">SM · 36px</span>
+            </button>
+            <button type="button" className="pbtn pbtn--md pbtn--primary">
+              <span className="pbtn-label">MD · 44px</span>
+            </button>
+            <button type="button" className="pbtn pbtn--lg pbtn--primary">
+              <span className="pbtn-label">LG · 52px</span>
+            </button>
+          </div>
+
+          {/* ── Row 3: States × Primary MD ── */}
+          <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+            textTransform: "uppercase", letterSpacing: "0.08em",
+            color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
+            States · Primary · MD
+          </p>
+          <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap", marginBottom: 24 }}>
+            <button type="button" className="pbtn pbtn--md pbtn--primary">
+              <span className="pbtn-label">Default</span>
+            </button>
+            <button type="button" className="pbtn pbtn--md pbtn--primary pbtn--hover">
+              <span className="pbtn-label">Hover</span>
+            </button>
+            <button type="button" className="pbtn pbtn--md pbtn--primary pbtn--focus">
+              <span className="pbtn-label">Focus</span>
+            </button>
+            <button type="button" className="pbtn pbtn--md pbtn--primary pbtn--active">
+              <span className="pbtn-label">Active</span>
+            </button>
+            <button type="button" className="pbtn pbtn--md pbtn--primary pbtn--disabled" aria-disabled="true">
+              <span className="pbtn-label">Disabled</span>
+            </button>
+            <button type="button" className="pbtn pbtn--md pbtn--primary pbtn--loading" aria-label="Cargando">
+              <span className="pbtn-label">Loading</span>
+            </button>
+          </div>
+
+          {/* ── Row 4: Icon variants × Primary MD ── */}
+          <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+            textTransform: "uppercase", letterSpacing: "0.08em",
+            color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
+            Icons · Primary · MD
+          </p>
+          <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap", marginBottom: 24 }}>
+            {/* Icon Left */}
+            <button type="button" className="pbtn pbtn--md pbtn--primary">
+              <span className="pbtn-icon-left">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              </span>
+              <span className="pbtn-label">Icon Left</span>
+            </button>
+            {/* Icon Right */}
+            <button type="button" className="pbtn pbtn--md pbtn--primary">
+              <span className="pbtn-label">Icon Right</span>
+              <span className="pbtn-icon-right">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </span>
+            </button>
+            {/* Icon Only */}
+            <button type="button" className="pbtn pbtn--md pbtn--primary pbtn--icon-only" aria-label="Continuar">
+              <span className="pbtn-icon-left">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </span>
+            </button>
+            {/* Full Width — own container */}
+            <div style={{ flex: 1, minWidth: 180 }}>
+              <button type="button" className="pbtn pbtn--md pbtn--primary pbtn--full">
+                <span className="pbtn-label">Full Width</span>
+              </button>
+            </div>
+          </div>
+
+          {/* ── Row 5: Danger variant states ── */}
+          <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+            textTransform: "uppercase", letterSpacing: "0.08em",
+            color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
+            Danger · States · MD
+          </p>
+          <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap", marginBottom: 0 }}>
+            <button type="button" className="pbtn pbtn--md pbtn--danger">
+              <span className="pbtn-label">Default</span>
+            </button>
+            <button type="button" className="pbtn pbtn--md pbtn--danger pbtn--hover">
+              <span className="pbtn-label">Hover</span>
+            </button>
+            <button type="button" className="pbtn pbtn--md pbtn--danger pbtn--active">
+              <span className="pbtn-label">Active</span>
+            </button>
+            <button type="button" className="pbtn pbtn--md pbtn--danger pbtn--disabled" aria-disabled="true">
+              <span className="pbtn-label">Disabled</span>
+            </button>
+          </div>
+
         </div>
 
         {/* ─────────────────────────────────────────────
