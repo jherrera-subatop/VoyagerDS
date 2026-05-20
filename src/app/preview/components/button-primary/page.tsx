@@ -1536,15 +1536,10 @@ const BUTTON_CSS = `
     z-index: -1;
     transition: opacity 0.28s ease;
   }
-  /* Icon wrap — blanco puro + sombra sutil */
+  /* Icon wrap — sin background, icono directo sobre la card */
   .pcatcard-icon-wrap {
     width: 36px;
     height: 36px;
-    border-radius: 8px;
-    background: oklch(1 0 0);
-    box-shadow:
-      inset 0 1px 0 oklch(1 0 0),
-      0 1px 4px oklch(0.22 0.18 285 / 0.10);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1552,7 +1547,6 @@ const BUTTON_CSS = `
     color: var(--vmc-color-vault, oklch(0.22 0.18 285));
     position: relative;
     z-index: 2;
-    transition: box-shadow 0.2s ease;
   }
   .pcatcard-label {
     font-family: var(--vmc-font-display);
@@ -1597,13 +1591,7 @@ const BUTTON_CSS = `
   .pcatcard--hover::after {
     opacity: 0.30;
   }
-  /* Icon wrap — permanece blanco en hover */
-  .pcatcard:hover .pcatcard-icon-wrap,
-  .pcatcard--hover .pcatcard-icon-wrap {
-    box-shadow:
-      inset 0 1px 0 oklch(1 0 0),
-      0 2px 6px oklch(0.22 0.18 285 / 0.14);
-  }
+  /* icon-wrap sin cambio en hover — sin background que cambiar */
   /* Focus / pressed */
   .pcatcard--focus {
     transform: scale(0.96) !important;
@@ -1890,67 +1878,257 @@ function StateCol({ label, children, dark }: StateColProps): JSX.Element {
   );
 }
 
-/* ── CategoryCard icons — v3 · geometric modern · strokeWidth 1.8 ── */
+/* ──────────────────────────────────────────────────────────────────
+   ICON EXPLORATION — 4 familias para revisión del usuario
+   ────────────────────────────────────────────────────────────────── */
+
+/* Shared stroke props helper */
+const IC = { fill: "none", strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+const VAULT = "var(--vmc-color-vault, oklch(0.22 0.18 285))";
+const VAULT_FILL = { fill: VAULT, stroke: "none" } as const;
+
+/* ── FAMILIA A — Vehículos de tránsito / herramientas reales ── */
+function ExA_Vehicular({ s }: { s: number }): JSX.Element {
+  return (
+    <svg width={s} height={s} viewBox="0 0 24 24" {...IC} stroke={VAULT} strokeWidth="1.8">
+      {/* Volante — 3 radios + hub */}
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="2.5" />
+      <line x1="12" y1="3" x2="12" y2="9.5" />
+      <line x1="20.2" y1="16.5" x2="14.6" y2="13.2" />
+      <line x1="3.8" y1="16.5" x2="9.4" y2="13.2" />
+    </svg>
+  );
+}
+function ExA_Maquinaria({ s }: { s: number }): JSX.Element {
+  return (
+    <svg width={s} height={s} viewBox="0 0 24 24" {...IC} stroke={VAULT} strokeWidth="1.8">
+      {/* Llave inglesa — path clásico */}
+      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+    </svg>
+  );
+}
+function ExA_Equipos({ s }: { s: number }): JSX.Element {
+  return (
+    <svg width={s} height={s} viewBox="0 0 24 24" {...IC} stroke={VAULT} strokeWidth="1.8">
+      {/* Rayo / eléctrico */}
+      <path d="M13 2L4.5 13.5H11L10 22L20 10H13.5L13 2Z" />
+    </svg>
+  );
+}
+function ExA_Articulos({ s }: { s: number }): JSX.Element {
+  return (
+    <svg width={s} height={s} viewBox="0 0 24 24" {...IC} stroke={VAULT} strokeWidth="1.8">
+      {/* Martillo de subasta */}
+      <path d="M14.5 2L22 9.5L19.5 12L12 4.5Z" />
+      <path d="M12 4.5L5 11.5L8.5 15L15.5 8Z" />
+      <line x1="2" y1="22" x2="9" y2="15" strokeWidth="2.5" />
+    </svg>
+  );
+}
+
+/* ── FAMILIA B — Siluetas geométricas más abstractas ── */
+function ExB_Vehicular({ s }: { s: number }): JSX.Element {
+  return (
+    <svg width={s} height={s} viewBox="0 0 24 24" {...IC} stroke={VAULT} strokeWidth="1.8">
+      {/* Auto — vista lateral muy limpia, una sola path */}
+      <path d="M2 14Q2 11.5 5 11.5L8.5 11.5L11.5 7L12.5 7L15.5 11.5L19 11.5Q22 11.5 22 14V16Q22 17 21 17H3Q2 17 2 16Z" />
+      <circle cx="7.5" cy="19" r="2" {...VAULT_FILL} />
+      <circle cx="16.5" cy="19" r="2" {...VAULT_FILL} />
+    </svg>
+  );
+}
+function ExB_Maquinaria({ s }: { s: number }): JSX.Element {
+  return (
+    <svg width={s} height={s} viewBox="0 0 24 24" {...IC} stroke={VAULT} strokeWidth="1.8">
+      {/* Engranaje — 6 dientes + círculo interior */}
+      <path d="M12 3L14.5 4.5V6L16.5 5L19 7L18 9L19.5 10.5L19.5 13.5L18 15L19 17L16.5 19L14.5 18V19.5L12 21L9.5 19.5V18L7.5 19L5 17L6 15L4.5 13.5V10.5L6 9L5 7L7.5 5L9.5 6V4.5Z" />
+      <circle cx="12" cy="12" r="3.5" />
+    </svg>
+  );
+}
+function ExB_Equipos({ s }: { s: number }): JSX.Element {
+  return (
+    <svg width={s} height={s} viewBox="0 0 24 24" {...IC} stroke={VAULT} strokeWidth="1.8">
+      {/* Monitor / pantalla */}
+      <rect x="2" y="3" width="20" height="14" rx="2" />
+      <line x1="8" y1="21" x2="16" y2="21" />
+      <line x1="12" y1="17" x2="12" y2="21" />
+    </svg>
+  );
+}
+function ExB_Articulos({ s }: { s: number }): JSX.Element {
+  return (
+    <svg width={s} height={s} viewBox="0 0 24 24" {...IC} stroke={VAULT} strokeWidth="1.8">
+      {/* Caja / paquete — perspectiva 3D */}
+      <path d="M20 7L12 3L4 7V17L12 21L20 17V7Z" />
+      <line x1="4" y1="7" x2="12" y2="11" />
+      <line x1="20" y1="7" x2="12" y2="11" />
+      <line x1="12" y1="11" x2="12" y2="21" />
+    </svg>
+  );
+}
+
+/* ── FAMILIA C — Stroke con gradiente vault→orange ── */
+function GradStroke({ id, children, s }: { id: string; children: React.ReactNode; s: number }): JSX.Element {
+  return (
+    <svg width={s} height={s} viewBox="0 0 24 24" {...IC} strokeWidth="1.8"
+      strokeLinecap="round" strokeLinejoin="round" fill="none">
+      <defs>
+        {/* Gradiente vault monocromático — mismo espíritu que el corazón del LikeButton */}
+        <linearGradient id={id} x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%"   stopColor="oklch(0.50 0.22 285)" />
+          <stop offset="55%"  stopColor="oklch(0.32 0.20 285)" />
+          <stop offset="100%" stopColor="oklch(0.20 0.16 285)" />
+        </linearGradient>
+      </defs>
+      <g stroke={`url(#${id})`}>{children}</g>
+    </svg>
+  );
+}
+function ExC_Vehicular({ s }: { s: number }): JSX.Element {
+  return (
+    <GradStroke id="gc-v" s={s}>
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="2.5" />
+      <line x1="12" y1="3" x2="12" y2="9.5" />
+      <line x1="20.2" y1="16.5" x2="14.6" y2="13.2" />
+      <line x1="3.8" y1="16.5" x2="9.4" y2="13.2" />
+    </GradStroke>
+  );
+}
+function ExC_Maquinaria({ s }: { s: number }): JSX.Element {
+  return (
+    <GradStroke id="gc-m" s={s}>
+      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+    </GradStroke>
+  );
+}
+function ExC_Equipos({ s }: { s: number }): JSX.Element {
+  return (
+    <GradStroke id="gc-e" s={s}>
+      <path d="M13 2L4.5 13.5H11L10 22L20 10H13.5L13 2Z" />
+    </GradStroke>
+  );
+}
+function ExC_Articulos({ s }: { s: number }): JSX.Element {
+  return (
+    <GradStroke id="gc-a" s={s}>
+      <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z" />
+      <circle cx="7" cy="7" r="1.5" fill="#E8872E" stroke="none" />
+    </GradStroke>
+  );
+}
+
+/* ── FAMILIA D — Filled sólido (sin stroke) ── */
+function ExD_Vehicular({ s }: { s: number }): JSX.Element {
+  return (
+    <svg width={s} height={s} viewBox="0 0 24 24" fill={VAULT}>
+      <path d="M2 14Q2 11 5 11L8.5 11L11.5 7L12.5 7L15.5 11L19 11Q22 11 22 14V16Q22 17.5 21 17.5H3Q2 17.5 2 16Z" />
+      <circle cx="7.5" cy="19.5" r="2.5" />
+      <circle cx="16.5" cy="19.5" r="2.5" />
+    </svg>
+  );
+}
+function ExD_Maquinaria({ s }: { s: number }): JSX.Element {
+  return (
+    <svg width={s} height={s} viewBox="0 0 24 24" fill={VAULT}>
+      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+    </svg>
+  );
+}
+function ExD_Equipos({ s }: { s: number }): JSX.Element {
+  return (
+    <svg width={s} height={s} viewBox="0 0 24 24" fill={VAULT}>
+      <path d="M13 2L4.5 13.5H11L10 22L20 10H13.5L13 2Z" />
+    </svg>
+  );
+}
+function ExD_Articulos({ s }: { s: number }): JSX.Element {
+  return (
+    <svg width={s} height={s} viewBox="0 0 24 24" fill={VAULT}>
+      <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z" />
+    </svg>
+  );
+}
+
+/* ── CategoryCard icons — v4 · vault gradient · strokeWidth 1.8 ── */
+
+/* Shared vault gradient palette */
+const VGRAD_STOPS = (
+  <>
+    <stop offset="0%"   stopColor="oklch(0.50 0.22 285)" />
+    <stop offset="50%"  stopColor="oklch(0.32 0.20 285)" />
+    <stop offset="100%" stopColor="oklch(0.18 0.16 285)" />
+  </>
+);
+
 function IconVehicular({ size }: { size: number }): JSX.Element {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
-      stroke="var(--vmc-color-vault, oklch(0.22 0.18 285))"
       strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      {/* Cabin — sharp geometric trapezoid */}
-      <path d="M5 10l2.5-4h9L19 10" />
-      {/* Body — rounded rect flush with cabin base */}
-      <rect x="2.5" y="10" width="19" height="4.5" rx="2" />
-      {/* Wheels — solid filled circles, sit below body */}
-      <circle cx="8" cy="17" r="2.2"
-        fill="var(--vmc-color-vault, oklch(0.22 0.18 285))" stroke="none" />
-      <circle cx="16" cy="17" r="2.2"
-        fill="var(--vmc-color-vault, oklch(0.22 0.18 285))" stroke="none" />
+      <defs>
+        <linearGradient id="vg-vehicular" x1="0%" y1="0%" x2="100%" y2="100%">
+          {VGRAD_STOPS}
+        </linearGradient>
+      </defs>
+      <g stroke="url(#vg-vehicular)">
+        {/* Volante — 3 radios + anillo exterior + hub central */}
+        <circle cx="12" cy="12" r="9" />
+        <circle cx="12" cy="12" r="2.5" />
+        <line x1="12" y1="3" x2="12" y2="9.5" />
+        <line x1="20.2" y1="16.5" x2="14.6" y2="13.2" />
+        <line x1="3.8" y1="16.5" x2="9.4" y2="13.2" />
+      </g>
     </svg>
   );
 }
 function IconMaquinaria({ size }: { size: number }): JSX.Element {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
-      stroke="var(--vmc-color-vault, oklch(0.22 0.18 285))"
       strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      {/* Tower crane — ultra-geometric, instantly architectural */}
-      {/* Vertical mast */}
-      <line x1="8" y1="21" x2="8" y2="4" />
-      {/* Horizontal jib (main + counter combined) */}
-      <path d="M4 7L8 4L21 4" />
-      {/* Hoist rope */}
-      <line x1="18" y1="4" x2="18" y2="14" />
-      {/* Load — filled circle, same duotone accent as wheels */}
-      <circle cx="18" cy="15.5" r="2"
-        fill="var(--vmc-color-vault, oklch(0.22 0.18 285))" stroke="none" />
+      <defs>
+        <linearGradient id="vg-maquinaria" x1="0%" y1="0%" x2="100%" y2="100%">
+          {VGRAD_STOPS}
+        </linearGradient>
+      </defs>
+      <g stroke="url(#vg-maquinaria)">
+        {/* Llave inglesa — path clásico, limpio */}
+        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+      </g>
     </svg>
   );
 }
 function IconEquipos({ size }: { size: number }): JSX.Element {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
-      stroke="var(--vmc-color-vault, oklch(0.22 0.18 285))"
       strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      {/* Toolbox — clean 3-element design, universally "equipment" */}
-      {/* Box body */}
-      <rect x="3" y="9" width="18" height="11" rx="2" />
-      {/* Handle arch */}
-      <path d="M9 9V6.5a1 1 0 011-1h4a1 1 0 011 1V9" />
-      {/* Tray divider */}
-      <line x1="3" y1="13.5" x2="21" y2="13.5" />
+      <defs>
+        <linearGradient id="vg-equipos" x1="0%" y1="0%" x2="100%" y2="100%">
+          {VGRAD_STOPS}
+        </linearGradient>
+      </defs>
+      <g stroke="url(#vg-equipos)">
+        {/* Rayo — equipos eléctricos / energía */}
+        <path d="M13 2L4.5 13.5H11L10 22L20 10H13.5L13 2Z" />
+      </g>
     </svg>
   );
 }
 function IconArticulos({ size }: { size: number }): JSX.Element {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
-      stroke="var(--vmc-color-vault, oklch(0.22 0.18 285))"
       strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      {/* Price tag — single-path elegance, perfect for artículos en subasta */}
-      <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z" />
-      {/* Tag hole — filled accent */}
-      <circle cx="7" cy="7" r="1.5"
-        fill="var(--vmc-color-vault, oklch(0.22 0.18 285))" stroke="none" />
+      <defs>
+        <linearGradient id="vg-articulos" x1="0%" y1="0%" x2="100%" y2="100%">
+          {VGRAD_STOPS}
+        </linearGradient>
+      </defs>
+      <g stroke="url(#vg-articulos)">
+        {/* Etiqueta de precio — perfecta para artículos en subasta */}
+        <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z" />
+        <circle cx="7" cy="7" r="1.5" fill="url(#vg-articulos)" stroke="none" />
+      </g>
     </svg>
   );
 }
@@ -2641,6 +2819,81 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
                       <span className="ptag-amount">14,999</span>
                     </div>
                   </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* ─────────────────────────────────────────────
+            ICON EXPLORATION
+        ───────────────────────────────────────────── */}
+        <SectionLabel
+          title="Icon Exploration"
+          subtitle="4 familias · elige dirección antes de implementar"
+        />
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px" }}>
+          {([
+            {
+              family: "A — Volante · Llave · Rayo · Mazo",
+              note: "Sujetos reconocibles, trazo fino",
+              icons: [
+                { label: "VEHICULAR",        icon: <ExA_Vehicular s={26} /> },
+                { label: "MAQUINARIA",       icon: <ExA_Maquinaria s={26} /> },
+                { label: "EQUIPOS DIVERSOS", icon: <ExA_Equipos s={26} /> },
+                { label: "ARTÍCULOS DIVER.", icon: <ExA_Articulos s={26} /> },
+              ],
+            },
+            {
+              family: "B — Auto limpio · Engranaje · Monitor · Caja",
+              note: "Siluetas geométricas, más abstractas",
+              icons: [
+                { label: "VEHICULAR",        icon: <ExB_Vehicular s={26} /> },
+                { label: "MAQUINARIA",       icon: <ExB_Maquinaria s={26} /> },
+                { label: "EQUIPOS DIVERSOS", icon: <ExB_Equipos s={26} /> },
+                { label: "ARTÍCULOS DIVER.", icon: <ExB_Articulos s={26} /> },
+              ],
+            },
+            {
+              family: "C — Gradiente vault (claro→oscuro)",
+              note: "Mismos sujetos que A · stroke degradado vault monocromático",
+              icons: [
+                { label: "VEHICULAR",        icon: <ExC_Vehicular s={26} /> },
+                { label: "MAQUINARIA",       icon: <ExC_Maquinaria s={26} /> },
+                { label: "EQUIPOS DIVERSOS", icon: <ExC_Equipos s={26} /> },
+                { label: "ARTÍCULOS DIVER.", icon: <ExC_Articulos s={26} /> },
+              ],
+            },
+            {
+              family: "D — Filled sólido (sin stroke)",
+              note: "Bold · iOS / Material style",
+              icons: [
+                { label: "VEHICULAR",        icon: <ExD_Vehicular s={26} /> },
+                { label: "MAQUINARIA",       icon: <ExD_Maquinaria s={26} /> },
+                { label: "EQUIPOS DIVERSOS", icon: <ExD_Equipos s={26} /> },
+                { label: "ARTÍCULOS DIVER.", icon: <ExD_Articulos s={26} /> },
+              ],
+            },
+          ] as const).map(function exploRow(row) {
+            return (
+              <div key={row.family} style={{ marginBottom: 28 }}>
+                <p style={{ fontFamily: F, fontSize: 11, fontWeight: 700,
+                  color: "var(--vmc-color-text-primary)", margin: "0 0 2px" }}>
+                  {row.family}
+                </p>
+                <p style={{ fontFamily: F, fontSize: 10,
+                  color: "var(--vmc-color-text-tertiary)", margin: "0 0 12px" }}>
+                  {row.note}
+                </p>
+                <div style={{ display: "flex", gap: 12 }}>
+                  {row.icons.map(function exploCard(ic) {
+                    return (
+                      <div key={ic.label} className="pcatcard">
+                        <div className="pcatcard-icon-wrap">{ic.icon}</div>
+                        <span className="pcatcard-label">{ic.label}</span>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             );
