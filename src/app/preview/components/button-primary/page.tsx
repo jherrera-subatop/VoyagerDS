@@ -1322,17 +1322,36 @@ const BUTTON_CSS = `
   }
 
   /* ── Variant: NEGOCIABLE ── */
+  .poftype--negotiable {
+    box-shadow:
+      0 0 0 1.5px oklch(0.78 0.14 195 / 0.40),
+      0 4px 14px oklch(0 0 0 / 0.10),
+      0 1px 4px  oklch(0 0 0 / 0.06);
+  }
   .poftype--negotiable .poftype-top {
     background: linear-gradient(180deg,
       oklch(0.84 0.13 195) 0%,
       var(--vmc-color-negotiable, oklch(0.78 0.14 195)) 100%
     );
   }
+  .poftype--negotiable .poftype-bottom {
+    background: color-mix(in oklch,
+      oklch(1 0 0) 95%,
+      var(--vmc-color-negotiable, oklch(0.78 0.14 195))
+    );
+  }
   .poftype--negotiable .poftype-cta {
-    color: oklch(0.62 0.16 195);
+    color: oklch(0.58 0.17 195);
   }
 
-  /* Hover — sin cambio de color, solo lift */
+  /* Hover */
+  .poftype--negotiable:hover,
+  .poftype--negotiable.poftype--hover {
+    box-shadow:
+      0 0 0 1.5px oklch(0.78 0.14 195 / 0.55),
+      0 8px 20px oklch(0.78 0.14 195 / 0.22),
+      0 2px 6px  oklch(0 0 0 / 0.08);
+  }
   /* Focus / pressed */
   .poftype--negotiable.poftype--focus .poftype-top {
     background: linear-gradient(180deg,
@@ -1342,17 +1361,36 @@ const BUTTON_CSS = `
   }
 
   /* ── Variant: EN VIVO ── */
+  .poftype--live {
+    box-shadow:
+      0 0 0 1.5px oklch(0.72 0.16 55 / 0.40),
+      0 4px 14px oklch(0 0 0 / 0.10),
+      0 1px 4px  oklch(0 0 0 / 0.06);
+  }
   .poftype--live .poftype-top {
     background: linear-gradient(180deg,
       oklch(0.78 0.17 55) 0%,
       var(--vmc-color-live, oklch(0.72 0.16 55)) 100%
     );
   }
+  .poftype--live .poftype-bottom {
+    background: color-mix(in oklch,
+      oklch(1 0 0) 95%,
+      var(--vmc-color-live, oklch(0.72 0.16 55))
+    );
+  }
   .poftype--live .poftype-cta {
-    color: oklch(0.58 0.18 45);
+    color: oklch(0.54 0.18 45);
   }
 
-  /* Hover — sin cambio de color, solo lift */
+  /* Hover */
+  .poftype--live:hover,
+  .poftype--live.poftype--hover {
+    box-shadow:
+      0 0 0 1.5px oklch(0.72 0.16 55 / 0.55),
+      0 8px 20px oklch(0.72 0.16 55 / 0.22),
+      0 2px 6px  oklch(0 0 0 / 0.08);
+  }
   /* Focus / pressed */
   .poftype--live.poftype--focus .poftype-top {
     background: linear-gradient(180deg,
@@ -1365,9 +1403,6 @@ const BUTTON_CSS = `
   .poftype:hover,
   .poftype--hover {
     transform: translateY(-2px);
-    box-shadow:
-      0 6px 16px oklch(0 0 0 / 0.14),
-      0 2px 6px  oklch(0 0 0 / 0.08);
   }
 
   /* ── Focus / pressed ── */
@@ -1376,6 +1411,78 @@ const BUTTON_CSS = `
     box-shadow:
       0 2px 8px oklch(0 0 0 / 0.10),
       inset 0 2px 6px oklch(0 0 0 / 0.12) !important;
+  }
+
+  /* ── CategoryCard · cinematic upgrade ── */
+  .pcatcard {
+    width: 93px;
+    height: 92px;
+    border-radius: var(--vmc-radius-md, 8px);
+    background: oklch(1 0 0);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+    gap: 8px;
+    cursor: pointer;
+    position: relative;
+    box-shadow:
+      0 0 0 1.5px oklch(0.22 0.18 285 / 0.12),
+      0 2px 8px  oklch(0.22 0.18 285 / 0.07);
+    transition:
+      background  0.18s ease,
+      transform   0.15s cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow  0.18s ease;
+    transform: translateZ(0);
+    outline: none;
+  }
+  /* Icon wrap — vault-tinted rounded container */
+  .pcatcard-icon-wrap {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: oklch(0.22 0.18 285 / 0.07);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--vmc-color-vault, oklch(0.22 0.18 285));
+    transition: background 0.18s ease;
+  }
+  .pcatcard-label {
+    font-family: var(--vmc-font-display);
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--vmc-color-vault, oklch(0.22 0.18 285));
+    text-align: center;
+    line-height: 1.35;
+  }
+  /* Hover */
+  .pcatcard:hover,
+  .pcatcard--hover {
+    background: oklch(0.96 0.005 285);
+    transform: translateY(-1px);
+    box-shadow:
+      0 0 0 1.5px oklch(0.22 0.18 285 / 0.22),
+      0 5px 14px oklch(0.22 0.18 285 / 0.12);
+  }
+  .pcatcard:hover .pcatcard-icon-wrap,
+  .pcatcard--hover .pcatcard-icon-wrap {
+    background: oklch(0.22 0.18 285 / 0.11);
+  }
+  /* Focus / pressed */
+  .pcatcard--focus {
+    background: oklch(0.92 0.008 285) !important;
+    transform: scale(0.96) !important;
+    box-shadow:
+      0 0 0 1.5px oklch(0.22 0.18 285 / 0.24),
+      0 1px 4px  oklch(0.22 0.18 285 / 0.10) !important;
+  }
+  .pcatcard--focus .pcatcard-icon-wrap {
+    background: oklch(0.22 0.18 285 / 0.13);
   }
 
   /* ── PriceTag · cinematic vault pill ── */
@@ -1637,6 +1744,73 @@ function StateCol({ label, children, dark }: StateColProps): JSX.Element {
         {label}
       </p>
       {children}
+    </div>
+  );
+}
+
+/* ── CategoryCard icons — modern line style ── */
+function IconVehicular({ size }: { size: number }): JSX.Element {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 13h2l2-5h10l2 5h2v4H3v-4z" />
+      <circle cx="7.5" cy="17" r="1.5" />
+      <circle cx="16.5" cy="17" r="1.5" />
+      <path d="M9.5 8l.6-2h3.8l.6 2" />
+    </svg>
+  );
+}
+function IconMaquinaria({ size }: { size: number }): JSX.Element {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="14" width="9" height="6" rx="1.5" />
+      <path d="M6.5 14V9.5" />
+      <path d="M6.5 9.5L15 4" />
+      <path d="M15 4l2.5 8.5-11 2" />
+      <circle cx="18" cy="19" r="2" />
+      <path d="M11 19h5" />
+    </svg>
+  );
+}
+function IconEquipos({ size }: { size: number }): JSX.Element {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+      <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+      <line x1="12" y1="22.08" x2="12" y2="12" />
+    </svg>
+  );
+}
+function IconArticulos({ size }: { size: number }): JSX.Element {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </svg>
+  );
+}
+
+interface CategoryCardDemoProps { icon: React.ReactNode; label: string; }
+
+function CategoryCardDemo({ icon, label }: CategoryCardDemoProps): JSX.Element {
+  const [pressed, setPressed] = useState(false);
+  function handlePress(): void { setPressed(true); }
+  function handleRelease(): void { setPressed(false); }
+  const focusCls = pressed ? "pcatcard--focus" : "";
+  return (
+    <div
+      className={`pcatcard ${focusCls}`}
+      onMouseDown={handlePress}
+      onMouseUp={handleRelease}
+      onMouseLeave={handleRelease}
+      role="button"
+      tabIndex={0}
+      aria-label={label}
+    >
+      <div className="pcatcard-icon-wrap">{icon}</div>
+      <span className="pcatcard-label">{label}</span>
     </div>
   );
 }
@@ -2163,7 +2337,74 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
         </div>
 
         {/* ─────────────────────────────────────────────
-            7. PriceTag
+            7. CategoryCard
+        ───────────────────────────────────────────── */}
+        <SectionLabel title="CategoryCard" subtitle="93×92px · icon-wrap vault · Default / Hover / Focus" />
+
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px" }}>
+
+          {(() => {
+            const CATS = [
+              { key: "vehicular",  label: "VEHICULAR",          icon: <IconVehicular size={20} /> },
+              { key: "maquinaria", label: "MAQUINARIA",         icon: <IconMaquinaria size={20} /> },
+              { key: "equipos",    label: "EQUIPOS DIVERSOS",   icon: <IconEquipos size={20} /> },
+              { key: "articulos",  label: "ARTÍCULOS DIVERSOS", icon: <IconArticulos size={20} /> },
+            ] as const;
+
+            const STATES = [
+              { label: "Default", mod: ""                },
+              { label: "Hover",   mod: "pcatcard--hover" },
+              { label: "Focus",   mod: "pcatcard--focus" },
+            ] as const;
+
+            return (
+              <>
+                {STATES.map(function stateRow({ label: stateLabel, mod }) {
+                  return (
+                    <div key={stateLabel} style={{ marginBottom: 16 }}>
+                      <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+                        textTransform: "uppercase", letterSpacing: "0.08em",
+                        color: "var(--vmc-color-text-tertiary)", margin: "0 0 10px" }}>
+                        {stateLabel}
+                      </p>
+                      <div style={{ display: "flex", gap: 12 }}>
+                        {CATS.map(function catCard({ key, label, icon }) {
+                          return (
+                            <div key={key} className={`pcatcard ${mod}`}>
+                              <div className="pcatcard-icon-wrap">{icon}</div>
+                              <span className="pcatcard-label">{label}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+
+                {/* Live demo */}
+                <div style={{ marginTop: 8, paddingTop: 16,
+                  borderTop: "1px solid var(--vmc-color-vault-utility-ghost)" }}>
+                  <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+                    textTransform: "uppercase", letterSpacing: "0.08em",
+                    color: "var(--vmc-color-text-tertiary)", margin: "0 0 12px" }}>
+                    Live — hover + click
+                  </p>
+                  <div style={{ display: "flex", gap: 12 }}>
+                    {CATS.map(function liveCard({ key, label, icon }) {
+                      return (
+                        <CategoryCardDemo key={key} label={label} icon={icon} />
+                      );
+                    })}
+                  </div>
+                </div>
+              </>
+            );
+          })()}
+
+        </div>
+
+        {/* ─────────────────────────────────────────────
+            8. PriceTag
         ───────────────────────────────────────────── */}
         <SectionLabel title="PriceTag" subtitle="vault pill · icono teal + precio · SM / MD / LG" />
 
