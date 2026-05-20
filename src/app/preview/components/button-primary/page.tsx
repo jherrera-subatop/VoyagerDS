@@ -1245,7 +1245,7 @@ const BUTTON_CSS = `
   /* ── OfferType · cinematic card ── */
   .poftype {
     width: 110px;
-    border-radius: var(--vmc-radius-lg, 16px);
+    border-radius: var(--vmc-radius-md, 8px);
     overflow: hidden;
     cursor: pointer;
     position: relative;
