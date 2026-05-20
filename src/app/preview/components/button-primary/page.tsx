@@ -1418,7 +1418,18 @@ const BUTTON_CSS = `
     width: 93px;
     height: 92px;
     border-radius: var(--vmc-radius-md, 8px);
-    background: oklch(1 0 0);
+    border: 1.5px solid transparent;
+    /* Gradient ring — mismo patrón pvbtn/plike/pprice */
+    background-image:
+      linear-gradient(160deg, oklch(1 0 0) 0%, oklch(0.97 0.006 285) 100%),
+      linear-gradient(135deg,
+        oklch(0.72 0.14 285) 0%,
+        oklch(1 0 0 / 0.65) 38%,
+        oklch(0.58 0.18 285) 70%,
+        oklch(0.72 0.14 285) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1427,28 +1438,58 @@ const BUTTON_CSS = `
     gap: 8px;
     cursor: pointer;
     position: relative;
+    overflow: hidden;
     box-shadow:
-      0 0 0 1.5px oklch(0.22 0.18 285 / 0.12),
-      0 2px 8px  oklch(0.22 0.18 285 / 0.07);
+      0 2px 10px oklch(0.22 0.18 285 / 0.08),
+      0 1px 3px  oklch(0.22 0.18 285 / 0.05);
     transition:
-      background  0.18s ease,
-      transform   0.15s cubic-bezier(0.25, 0.8, 0.25, 1),
-      box-shadow  0.18s ease;
+      transform  0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow 0.22s ease;
     transform: translateZ(0);
     outline: none;
   }
-  /* Icon wrap — vault-tinted rounded container */
+  /* Inset shine */
+  .pcatcard::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(160deg, oklch(1 0 0 / 0.55) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  /* Vault glow */
+  .pcatcard::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: inherit;
+    background: radial-gradient(ellipse at 50% 60%,
+      oklch(0.40 0.20 285 / 0.22) 0%, transparent 70%
+    );
+    filter: blur(8px);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.28s ease;
+  }
+  /* Icon wrap — gradient fill, inset shine */
   .pcatcard-icon-wrap {
     width: 36px;
     height: 36px;
     border-radius: 8px;
-    background: oklch(0.22 0.18 285 / 0.07);
+    background: linear-gradient(145deg,
+      oklch(0.93 0.04 285) 0%,
+      oklch(0.97 0.02 285) 100%
+    );
+    box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.70);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     color: var(--vmc-color-vault, oklch(0.22 0.18 285));
-    transition: background 0.18s ease;
+    position: relative;
+    z-index: 2;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
   }
   .pcatcard-label {
     font-family: var(--vmc-font-display);
@@ -1459,30 +1500,47 @@ const BUTTON_CSS = `
     color: var(--vmc-color-vault, oklch(0.22 0.18 285));
     text-align: center;
     line-height: 1.35;
+    position: relative;
+    z-index: 2;
   }
   /* Hover */
   .pcatcard:hover,
   .pcatcard--hover {
-    background: oklch(0.96 0.005 285);
-    transform: translateY(-1px);
+    transform: translateY(-2px) scale(1.02);
     box-shadow:
-      0 0 0 1.5px oklch(0.22 0.18 285 / 0.22),
-      0 5px 14px oklch(0.22 0.18 285 / 0.12);
+      0 6px 20px oklch(0.22 0.18 285 / 0.16),
+      0 2px 6px  oklch(0.22 0.18 285 / 0.08);
   }
+  .pcatcard:hover::after,
+  .pcatcard--hover::after { opacity: 1; }
   .pcatcard:hover .pcatcard-icon-wrap,
   .pcatcard--hover .pcatcard-icon-wrap {
-    background: oklch(0.22 0.18 285 / 0.11);
+    background: linear-gradient(145deg,
+      oklch(0.90 0.06 285) 0%,
+      oklch(0.95 0.03 285) 100%
+    );
+    box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.60);
   }
   /* Focus / pressed */
   .pcatcard--focus {
-    background: oklch(0.92 0.008 285) !important;
     transform: scale(0.96) !important;
+    background-image:
+      linear-gradient(160deg, oklch(0.94 0.012 285) 0%, oklch(0.90 0.018 285) 100%),
+      linear-gradient(135deg,
+        oklch(0.72 0.14 285) 0%,
+        oklch(1 0 0 / 0.65) 38%,
+        oklch(0.58 0.18 285) 70%,
+        oklch(0.72 0.14 285) 100%
+      ) !important;
     box-shadow:
-      0 0 0 1.5px oklch(0.22 0.18 285 / 0.24),
-      0 1px 4px  oklch(0.22 0.18 285 / 0.10) !important;
+      0 1px 5px oklch(0.22 0.18 285 / 0.12),
+      inset 0 1px 3px oklch(0.22 0.18 285 / 0.08) !important;
   }
   .pcatcard--focus .pcatcard-icon-wrap {
-    background: oklch(0.22 0.18 285 / 0.13);
+    background: linear-gradient(145deg,
+      oklch(0.87 0.08 285) 0%,
+      oklch(0.92 0.05 285) 100%
+    );
   }
 
   /* ── PriceTag · cinematic vault pill ── */
@@ -1748,46 +1806,57 @@ function StateCol({ label, children, dark }: StateColProps): JSX.Element {
   );
 }
 
-/* ── CategoryCard icons — modern line style ── */
+/* ── CategoryCard icons — VMC auction categories ── */
 function IconVehicular({ size }: { size: number }): JSX.Element {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M3 13h2l2-5h10l2 5h2v4H3v-4z" />
-      <circle cx="7.5" cy="17" r="1.5" />
-      <circle cx="16.5" cy="17" r="1.5" />
-      <path d="M9.5 8l.6-2h3.8l.6 2" />
+      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      {/* Body */}
+      <path d="M2 14h20v3.5a.5.5 0 01-.5.5h-19a.5.5 0 01-.5-.5V14z" />
+      {/* Roof/cabin arch */}
+      <path d="M5.5 14l2-5h9l2 5" />
+      {/* Wheels */}
+      <circle cx="7.5" cy="18" r="2" />
+      <circle cx="16.5" cy="18" r="2" />
+      {/* Wheel cutouts in body (visual separation) */}
+      <path d="M5.5 18h.5M18.5 18H19" strokeWidth="1.2" />
     </svg>
   );
 }
 function IconMaquinaria({ size }: { size: number }): JSX.Element {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="14" width="9" height="6" rx="1.5" />
-      <path d="M6.5 14V9.5" />
-      <path d="M6.5 9.5L15 4" />
-      <path d="M15 4l2.5 8.5-11 2" />
-      <circle cx="18" cy="19" r="2" />
-      <path d="M11 19h5" />
+      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      {/* Cab body */}
+      <rect x="2" y="12" width="9" height="6" rx="1.5" />
+      {/* Undercarriage track */}
+      <rect x="1" y="17" width="11" height="3" rx="1.5" />
+      {/* Boom arm */}
+      <path d="M9 12 L16 5" />
+      {/* Stick */}
+      <path d="M16 5 L21 11" />
+      {/* Bucket */}
+      <path d="M21 11 Q23 14 20 15.5 L15 14" />
     </svg>
   );
 }
 function IconEquipos({ size }: { size: number }): JSX.Element {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-      <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-      <line x1="12" y1="22.08" x2="12" y2="12" />
+      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      {/* Wrench — single clean path, universally "equipment/tools" */}
+      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
     </svg>
   );
 }
 function IconArticulos({ size }: { size: number }): JSX.Element {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      {/* Price tag — body */}
+      <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z" />
+      {/* Tag hole */}
+      <circle cx="7" cy="7" r="1.5" />
     </svg>
   );
 }

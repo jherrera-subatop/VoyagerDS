@@ -66,6 +66,7 @@ Ver `.claude/skills/voyager-session-start/SKILL.md` para el protocolo completo.
 - `token-optimizer` → técnicas de optimización de contexto y tokens
 - `ds-token-audit` → auditoría tokens + Terrazzo + CSS + DESIGN.md (procedimiento + prompts Deep Research)
 - `voyager-runtime-verify` → antes de cerrar: `pnpm verify:pages` (HTTP real tras build)
+- `voyager-preview-audit` → auditor de lenguaje cinematic: verifica cohesión visual de todos los componentes del preview page
 
 En **Cursor**: `.cursor/rules/voyager-ds-token-audit.mdc` (tokens/Terrazzo/docs) y `.cursor/rules/voyager-context7-docs-first.mdc` (Next/React/stack + verify tras cambios en app).
 
