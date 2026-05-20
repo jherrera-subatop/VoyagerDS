@@ -1060,10 +1060,12 @@ const BUTTON_CSS = `
     transition: opacity 0.3s ease;
   }
   .plike:hover {
-    transform: scale(1.10) translateY(-1px);
-    box-shadow: 0 5px 18px rgb(51.76% 37.65% 89.8% / 0.26);
+    transform: scale(1.08) translateY(-2px);
+    box-shadow:
+      0 10px 18px oklch(0.22 0.18 285 / 0.22),
+      0  3px  6px oklch(0.22 0.18 285 / 0.12);
   }
-  .plike:hover::after { opacity: 0.55; }
+  /* ::after stays opacity 0 — no radial blob */
   .plike:active { transform: scale(0.92); }
 
   /* Sizes */
@@ -1503,23 +1505,33 @@ const BUTTON_CSS = `
     position: relative;
     z-index: 2;
   }
-  /* Hover */
+  /*
+    HOVER v1 — ARCHIVADO (restaurar si se desea volver)
+    .pcatcard:hover { transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 20px vault/0.16, 0 2px 6px vault/0.08; }
+    .pcatcard:hover::after { opacity: 1; }  ← radial blob glow vault
+    plike:hover { transform: scale(1.10) translateY(-1px);
+      box-shadow: 0 5px 18px vault-rgb/0.26; }
+    .plike:hover::after { opacity: 0.55; }  ← radial blob glow vault
+  */
+
+  /* Hover v2 — physical lift, directional shadow, no diffuse glow */
   .pcatcard:hover,
   .pcatcard--hover {
-    transform: translateY(-2px) scale(1.02);
+    transform: translateY(-4px);
     box-shadow:
-      0 6px 20px oklch(0.22 0.18 285 / 0.16),
-      0 2px 6px  oklch(0.22 0.18 285 / 0.08);
+      0 12px 20px oklch(0.22 0.18 285 / 0.13),
+      0  4px  8px oklch(0.22 0.18 285 / 0.09),
+      0  1px  2px oklch(0.22 0.18 285 / 0.06);
   }
-  .pcatcard:hover::after,
-  .pcatcard--hover::after { opacity: 1; }
+  /* ::after stays opacity 0 — no radial blob */
   .pcatcard:hover .pcatcard-icon-wrap,
   .pcatcard--hover .pcatcard-icon-wrap {
     background: linear-gradient(145deg,
-      oklch(0.90 0.06 285) 0%,
-      oklch(0.95 0.03 285) 100%
+      oklch(0.89 0.07 285) 0%,
+      oklch(0.94 0.04 285) 100%
     );
-    box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.60);
+    box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.65);
   }
   /* Focus / pressed */
   .pcatcard--focus {
@@ -1810,41 +1822,41 @@ function StateCol({ label, children, dark }: StateColProps): JSX.Element {
 function IconVehicular({ size }: { size: number }): JSX.Element {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      {/* Body */}
-      <path d="M2 14h20v3.5a.5.5 0 01-.5.5h-19a.5.5 0 01-.5-.5V14z" />
-      {/* Roof/cabin arch */}
-      <path d="M5.5 14l2-5h9l2 5" />
-      {/* Wheels */}
-      <circle cx="7.5" cy="18" r="2" />
-      <circle cx="16.5" cy="18" r="2" />
-      {/* Wheel cutouts in body (visual separation) */}
-      <path d="M5.5 18h.5M18.5 18H19" strokeWidth="1.2" />
+      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      {/* Body — shifted up 2px vs v1 (was y=14, now y=12) */}
+      <path d="M2 12h20v3.5a.5.5 0 01-.5.5h-19a.5.5 0 01-.5-.5V12z" />
+      {/* Roof arch — peak at y=7 (was y=9) */}
+      <path d="M5.5 12l2-5h9l2 5" />
+      {/* Wheels — filled accent: solid circles for visual weight */}
+      <circle cx="7.5" cy="16" r="2.2" fill="currentColor" stroke="none" />
+      <circle cx="16.5" cy="16" r="2.2" fill="currentColor" stroke="none" />
+      {/* Wheel arch cutouts on body bottom */}
+      <path d="M5 16h1M17 16h1" strokeWidth="1" />
     </svg>
   );
 }
 function IconMaquinaria({ size }: { size: number }): JSX.Element {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
       {/* Cab body */}
-      <rect x="2" y="12" width="9" height="6" rx="1.5" />
+      <rect x="2" y="11" width="9" height="6" rx="1.5" />
       {/* Undercarriage track */}
-      <rect x="1" y="17" width="11" height="3" rx="1.5" />
+      <rect x="1" y="16" width="11" height="3" rx="1.5" />
       {/* Boom arm */}
-      <path d="M9 12 L16 5" />
+      <path d="M9 11 L16 4" />
       {/* Stick */}
-      <path d="M16 5 L21 11" />
-      {/* Bucket */}
-      <path d="M21 11 Q23 14 20 15.5 L15 14" />
+      <path d="M16 4 L21 10" />
+      {/* Bucket — filled accent */}
+      <path d="M21 10 Q23 13 20 14.5 L15 13z" fill="currentColor" stroke="none" />
     </svg>
   );
 }
 function IconEquipos({ size }: { size: number }): JSX.Element {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      {/* Wrench — single clean path, universally "equipment/tools" */}
+      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      {/* Wrench — bold stroke, single clean path */}
       <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
     </svg>
   );
@@ -1852,11 +1864,11 @@ function IconEquipos({ size }: { size: number }): JSX.Element {
 function IconArticulos({ size }: { size: number }): JSX.Element {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      {/* Price tag — body */}
+      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      {/* Tag body */}
       <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z" />
-      {/* Tag hole */}
-      <circle cx="7" cy="7" r="1.5" />
+      {/* Hole — filled accent */}
+      <circle cx="7" cy="7" r="1.5" fill="currentColor" stroke="none" />
     </svg>
   );
 }
@@ -2414,10 +2426,10 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
 
           {(() => {
             const CATS = [
-              { key: "vehicular",  label: "VEHICULAR",          icon: <IconVehicular size={20} /> },
-              { key: "maquinaria", label: "MAQUINARIA",         icon: <IconMaquinaria size={20} /> },
-              { key: "equipos",    label: "EQUIPOS DIVERSOS",   icon: <IconEquipos size={20} /> },
-              { key: "articulos",  label: "ARTÍCULOS DIVERSOS", icon: <IconArticulos size={20} /> },
+              { key: "vehicular",  label: "VEHICULAR",          icon: <IconVehicular size={22} /> },
+              { key: "maquinaria", label: "MAQUINARIA",         icon: <IconMaquinaria size={22} /> },
+              { key: "equipos",    label: "EQUIPOS DIVERSOS",   icon: <IconEquipos size={22} /> },
+              { key: "articulos",  label: "ARTÍCULOS DIVERSOS", icon: <IconArticulos size={22} /> },
             ] as const;
 
             const STATES = [
