@@ -235,269 +235,8 @@ const BUTTON_CSS = `
     box-shadow: inset 0 2px 4px rgb(0% 0% 0% / 0.22), 0 1px 2px rgb(0% 0% 0% / 0.10) !important;
   }
 
-  /* ══════════════════════════════════════════════════════════════
-     .pbtn — Button System (Variant × Size × State × Icon × Width)
-     ══════════════════════════════════════════════════════════════ */
 
-  /* Spin keyframe for loading spinner */
-  @keyframes pbtn-spin {
-    to { transform: rotate(360deg); }
-  }
 
-  /* ── Base ── */
-  .pbtn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    border: none;
-    border-radius: var(--vmc-radius-sm, 4px);
-    cursor: pointer;
-    font-family: var(--vmc-font-display, 'Plus Jakarta Sans', sans-serif);
-    font-weight: 600;
-    position: relative;
-    text-decoration: none;
-    transition:
-      background-color 0.15s ease,
-      color 0.15s ease,
-      border-color 0.15s ease,
-      box-shadow 0.15s ease,
-      transform 0.15s cubic-bezier(0.25, 0.8, 0.25, 1);
-    white-space: nowrap;
-    outline: none;
-  }
-  .pbtn:focus-visible {
-    outline: 2px solid oklch(0.50 0.22 285);
-    outline-offset: 3px;
-    transform: none;
-  }
-  .pbtn--focus {
-    outline: 2px solid oklch(0.50 0.22 285) !important;
-    outline-offset: 3px !important;
-    transform: none !important;
-  }
-  .pbtn:disabled,
-  .pbtn--disabled {
-    cursor: not-allowed;
-    pointer-events: none;
-    transform: none !important;
-    box-shadow: none !important;
-  }
-
-  /* ── Sizes ── */
-  .pbtn--sm {
-    height: 36px;
-    font-size: 13px;
-    padding: 0 16px;
-    gap: 6px;
-  }
-  .pbtn--md {
-    height: 44px;
-    font-size: 14px;
-    padding: 0 20px;
-    gap: 8px;
-  }
-  .pbtn--lg {
-    height: 52px;
-    font-size: 15px;
-    font-weight: 700;
-    padding: 0 28px;
-    gap: 10px;
-  }
-
-  /* ── Icon slots ── */
-  .pbtn-icon-left,
-  .pbtn-icon-right {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-  }
-
-  /* ── Icon-only modifier ── */
-  .pbtn--icon-only {
-    padding: 0;
-    border-radius: var(--vmc-radius-sm, 4px);
-  }
-  .pbtn--icon-only.pbtn--sm { width: 36px; }
-  .pbtn--icon-only.pbtn--md { width: 44px; }
-  .pbtn--icon-only.pbtn--lg { width: 52px; }
-  .pbtn--icon-only .pbtn-label { display: none; }
-
-  /* ── Full Width ── */
-  .pbtn--full { width: 100%; }
-
-  /* ── Loading state ── */
-  .pbtn--loading {
-    cursor: wait !important;
-    pointer-events: none;
-  }
-  .pbtn--loading .pbtn-label,
-  .pbtn--loading .pbtn-icon-left,
-  .pbtn--loading .pbtn-icon-right {
-    opacity: 0;
-  }
-  .pbtn--loading::after {
-    content: '';
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    border: 2px solid transparent;
-    border-radius: 50%;
-    animation: pbtn-spin 0.7s linear infinite;
-  }
-
-  /* ══ PRIMARY ══ */
-  .pbtn--primary {
-    background-color: oklch(0.22 0.18 285);
-    color: oklch(1 0 0);
-    box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.15);
-  }
-  .pbtn--primary:hover,
-  .pbtn--primary.pbtn--hover {
-    background-color: color-mix(in oklch, oklch(0.22 0.18 285) 85%, oklch(1 0 0));
-    transform: translateY(-1px);
-    box-shadow:
-      inset 0 1px 0 oklch(1 0 0 / 0.15),
-      0 4px 12px oklch(0.22 0.18 285 / 0.35);
-  }
-  .pbtn--primary:active,
-  .pbtn--primary.pbtn--active {
-    background-color: oklch(from oklch(0.22 0.18 285) calc(l - 0.08) c h);
-    transform: scale(0.97) translateY(1px);
-    box-shadow: inset 0 2px 4px oklch(0 0 0 / 0.20);
-  }
-  .pbtn--primary:disabled,
-  .pbtn--primary.pbtn--disabled {
-    background-color: oklch(0.90 0.004 285);
-    color: oklch(0.55 0.06 285);
-    box-shadow: none;
-  }
-  .pbtn--primary.pbtn--loading {
-    background-color: oklch(0.22 0.18 285);
-  }
-  .pbtn--primary.pbtn--loading::after {
-    border-top-color: oklch(1 0 0);
-    border-right-color: oklch(1 0 0 / 0.35);
-  }
-
-  /* ══ SECONDARY ══ */
-  .pbtn--secondary {
-    background-color: transparent;
-    border: 1.5px solid oklch(0.22 0.18 285);
-    color: oklch(0.22 0.18 285);
-  }
-  .pbtn--secondary:hover,
-  .pbtn--secondary.pbtn--hover {
-    background-color: oklch(0.22 0.18 285 / 0.06);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px oklch(0.22 0.18 285 / 0.18);
-  }
-  .pbtn--secondary:active,
-  .pbtn--secondary.pbtn--active {
-    background-color: oklch(0.22 0.18 285 / 0.12);
-    transform: scale(0.97) translateY(1px);
-    box-shadow: inset 0 2px 4px oklch(0.22 0.18 285 / 0.15);
-  }
-  .pbtn--secondary:disabled,
-  .pbtn--secondary.pbtn--disabled {
-    background-color: transparent;
-    border-color: oklch(0.90 0.004 285);
-    color: oklch(0.55 0.06 285);
-  }
-  .pbtn--secondary.pbtn--loading::after {
-    border-top-color: oklch(0.22 0.18 285);
-    border-right-color: oklch(0.22 0.18 285 / 0.35);
-  }
-
-  /* ══ TERTIARY ══ */
-  .pbtn--tertiary {
-    background-color: oklch(0.22 0.18 285 / 0.08);
-    color: oklch(0.22 0.18 285);
-    border: none;
-  }
-  .pbtn--tertiary:hover,
-  .pbtn--tertiary.pbtn--hover {
-    background-color: oklch(0.22 0.18 285 / 0.14);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 10px oklch(0.22 0.18 285 / 0.12);
-  }
-  .pbtn--tertiary:active,
-  .pbtn--tertiary.pbtn--active {
-    background-color: oklch(0.22 0.18 285 / 0.20);
-    transform: scale(0.97) translateY(1px);
-  }
-  .pbtn--tertiary:disabled,
-  .pbtn--tertiary.pbtn--disabled {
-    background-color: oklch(0.90 0.004 285);
-    color: oklch(0.55 0.06 285);
-  }
-  .pbtn--tertiary.pbtn--loading::after {
-    border-top-color: oklch(0.22 0.18 285);
-    border-right-color: oklch(0.22 0.18 285 / 0.35);
-  }
-
-  /* ══ GHOST ══ */
-  .pbtn--ghost {
-    background-color: transparent;
-    border: none;
-    color: oklch(0.22 0.18 285);
-  }
-  .pbtn--ghost:hover,
-  .pbtn--ghost.pbtn--hover {
-    background-color: oklch(0.22 0.18 285 / 0.06);
-    transform: translateY(-1px);
-  }
-  .pbtn--ghost:active,
-  .pbtn--ghost.pbtn--active {
-    background-color: oklch(0.22 0.18 285 / 0.12);
-    transform: scale(0.97) translateY(1px);
-  }
-  .pbtn--ghost:disabled,
-  .pbtn--ghost.pbtn--disabled {
-    color: oklch(0.55 0.06 285);
-  }
-  .pbtn--ghost.pbtn--loading::after {
-    border-top-color: oklch(0.22 0.18 285);
-    border-right-color: oklch(0.22 0.18 285 / 0.35);
-  }
-
-  /* ══ DANGER ══ */
-  .pbtn--danger {
-    background-color: oklch(0.42 0.20 20);
-    color: oklch(1 0 0);
-    box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.15);
-  }
-  .pbtn--danger:hover,
-  .pbtn--danger.pbtn--hover {
-    background-color: color-mix(in oklch, oklch(0.42 0.20 20) 85%, oklch(1 0 0));
-    transform: translateY(-1px);
-    box-shadow:
-      inset 0 1px 0 oklch(1 0 0 / 0.15),
-      0 4px 12px oklch(0.42 0.20 20 / 0.35);
-  }
-  .pbtn--danger:active,
-  .pbtn--danger.pbtn--active {
-    background-color: oklch(from oklch(0.42 0.20 20) calc(l - 0.08) c h);
-    transform: scale(0.97) translateY(1px);
-    box-shadow: inset 0 2px 4px oklch(0 0 0 / 0.20);
-  }
-  .pbtn--danger:disabled,
-  .pbtn--danger.pbtn--disabled {
-    background-color: oklch(0.90 0.004 285);
-    color: oklch(0.55 0.06 285);
-    box-shadow: none;
-  }
-  .pbtn--danger.pbtn--loading {
-    background-color: oklch(0.42 0.20 20);
-  }
-  .pbtn--danger.pbtn--loading::after {
-    border-top-color: oklch(1 0 0);
-    border-right-color: oklch(1 0 0 / 0.35);
-  }
-
-  /* ══════════════════════════════════════════════════════════════
-     END .pbtn system
-     ══════════════════════════════════════════════════════════════ */
 
   .pvbtn-icon {
     width: 32px;
@@ -1271,6 +1010,776 @@ const BUTTON_CSS = `
     color: var(--vmc-color-base-white) !important;
     transform: scale(0.97) translateY(1px) !important;
     box-shadow: inset 0 2px 5px rgb(0% 0% 0% / 0.22) !important;
+  }
+
+  /* ══════════════════════════════════════════════════
+     SIZE MODIFIERS — PRIMARY (pvbtn)
+  ══════════════════════════════════════════════════ */
+
+  /* Primary LG — 56px */
+  .pvbtn-lg {
+    --vbtn-stop-a: var(--vmc-color-orange-600);
+    --vbtn-stop-b: var(--vmc-color-vault-500);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    padding: 0 40px;
+    border-radius: var(--vmc-radius-full);
+    border: 3px solid transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--vmc-font-display);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--vmc-color-base-white);
+    text-shadow: 0 1px 3px rgb(0% 0% 0% / 0.25);
+    background-image:
+      linear-gradient(var(--vbtn-angle), var(--vbtn-stop-a) 0%, var(--vbtn-stop-a) 40%, var(--vbtn-stop-b) 100%),
+      linear-gradient(135deg,
+        var(--vmc-color-base-white) 0%,
+        var(--vmc-color-orange-400) 25%,
+        var(--vmc-color-vault-400)  75%,
+        var(--vmc-color-base-white) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip:   padding-box, border-box;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.28),
+      0 2px 8px rgb(92.94% 53.73% 21.18% / 0.30);
+    transition:
+      --vbtn-angle  0.4s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      --vbtn-stop-a 0.35s ease,
+      --vbtn-stop-b 0.35s ease,
+      transform     0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow    0.25s ease;
+    transform: translateZ(0);
+  }
+  .pvbtn-lg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.17) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .pvbtn-lg::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(135deg, var(--vmc-color-orange-600), var(--vmc-color-vault-500));
+    filter: blur(14px);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease, filter 0.3s ease;
+  }
+  .pvbtn-lg:hover {
+    --vbtn-angle:  220deg;
+    --vbtn-stop-a: var(--vmc-color-orange-400);
+    --vbtn-stop-b: var(--vmc-color-vault-400);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.22),
+      0 10px 28px rgb(51.76% 37.65% 89.8% / 0.35),
+      0 4px 12px rgb(92.94% 53.73% 21.18% / 0.40);
+  }
+  .pvbtn-lg:hover::after { opacity: 0.45; filter: blur(18px); }
+  .pvbtn-lg:active {
+    --vbtn-angle:  135deg;
+    --vbtn-stop-a: var(--vmc-color-orange-700);
+    --vbtn-stop-b: var(--vmc-color-vault-600);
+    transform: scale(0.97) translateY(1px);
+    box-shadow:
+      inset 0 2px 5px rgb(0% 0% 0% / 0.22),
+      0 1px 3px rgb(0% 0% 0% / 0.12);
+  }
+  .pvbtn-lg:active::after { opacity: 0; }
+  .pvbtn-lg:disabled {
+    background-image: none;
+    background-color: var(--vmc-color-background-disabled);
+    color: var(--vmc-color-neutral-700);
+    text-shadow: none;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+    border-color: transparent;
+  }
+  .pvbtn-lg:disabled::after { display: none; }
+  .pvbtn-lg--hover {
+    --vbtn-angle:  220deg;
+    --vbtn-stop-a: var(--vmc-color-orange-400);
+    --vbtn-stop-b: var(--vmc-color-vault-400);
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.22),
+      0 10px 28px rgb(51.76% 37.65% 89.8% / 0.35),
+      0 4px 12px rgb(92.94% 53.73% 21.18% / 0.40) !important;
+  }
+  .pvbtn-lg--pressed {
+    --vbtn-angle:  135deg;
+    --vbtn-stop-a: var(--vmc-color-orange-700);
+    --vbtn-stop-b: var(--vmc-color-vault-600);
+    transform: scale(0.97) translateY(1px) !important;
+    box-shadow:
+      inset 0 2px 5px rgb(0% 0% 0% / 0.22),
+      0 1px 3px rgb(0% 0% 0% / 0.12) !important;
+  }
+
+  /* Primary text-SM — 36px, text only, no icon slot */
+  .pvbtn-text-sm {
+    --vbtn-stop-a: var(--vmc-color-orange-600);
+    --vbtn-stop-b: var(--vmc-color-vault-500);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    padding: 0 20px;
+    border-radius: var(--vmc-radius-full);
+    border: 2px solid transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--vmc-font-display);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--vmc-color-base-white);
+    text-shadow: 0 1px 2px rgb(0% 0% 0% / 0.20);
+    background-image:
+      linear-gradient(var(--vbtn-angle), var(--vbtn-stop-a) 0%, var(--vbtn-stop-a) 40%, var(--vbtn-stop-b) 100%),
+      linear-gradient(135deg,
+        var(--vmc-color-base-white) 0%,
+        var(--vmc-color-orange-400) 25%,
+        var(--vmc-color-vault-400)  75%,
+        var(--vmc-color-base-white) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip:   padding-box, border-box;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.25),
+      0 2px 5px rgb(92.94% 53.73% 21.18% / 0.25);
+    transition:
+      --vbtn-angle  0.4s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      --vbtn-stop-a 0.35s ease,
+      --vbtn-stop-b 0.35s ease,
+      transform     0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow    0.25s ease;
+    transform: translateZ(0);
+  }
+  .pvbtn-text-sm::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.15) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .pvbtn-text-sm::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(135deg, var(--vmc-color-orange-600), var(--vmc-color-vault-500));
+    filter: blur(12px);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+  }
+  .pvbtn-text-sm:hover {
+    --vbtn-angle:  220deg;
+    --vbtn-stop-a: var(--vmc-color-orange-400);
+    --vbtn-stop-b: var(--vmc-color-vault-400);
+    transform: translateY(-1px) scale(1.02);
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.20),
+      0 6px 16px rgb(51.76% 37.65% 89.8% / 0.30),
+      0 3px 8px rgb(92.94% 53.73% 21.18% / 0.35);
+  }
+  .pvbtn-text-sm:hover::after { opacity: 0.40; }
+  .pvbtn-text-sm:active {
+    --vbtn-angle:  135deg;
+    --vbtn-stop-a: var(--vmc-color-orange-700);
+    --vbtn-stop-b: var(--vmc-color-vault-600);
+    transform: scale(0.97) translateY(1px);
+    box-shadow: inset 0 2px 4px rgb(0% 0% 0% / 0.20), 0 1px 2px rgb(0% 0% 0% / 0.10);
+  }
+  .pvbtn-text-sm:active::after { opacity: 0; }
+  .pvbtn-text-sm:disabled {
+    background-image: none;
+    background-color: var(--vmc-color-background-disabled);
+    color: var(--vmc-color-neutral-700);
+    text-shadow: none;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+    border-color: transparent;
+  }
+  .pvbtn-text-sm--hover {
+    --vbtn-angle:  220deg;
+    --vbtn-stop-a: var(--vmc-color-orange-400);
+    --vbtn-stop-b: var(--vmc-color-vault-400);
+    transform: translateY(-1px) scale(1.02) !important;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.20),
+      0 6px 16px rgb(51.76% 37.65% 89.8% / 0.30),
+      0 3px 8px rgb(92.94% 53.73% 21.18% / 0.35) !important;
+  }
+  .pvbtn-text-sm--pressed {
+    --vbtn-angle:  135deg;
+    --vbtn-stop-a: var(--vmc-color-orange-700);
+    --vbtn-stop-b: var(--vmc-color-vault-600);
+    transform: scale(0.97) translateY(1px) !important;
+    box-shadow: inset 0 2px 4px rgb(0% 0% 0% / 0.20), 0 1px 2px rgb(0% 0% 0% / 0.10) !important;
+  }
+
+  /* ══════════════════════════════════════════════════
+     SIZE MODIFIERS — SECONDARY (psec)
+  ══════════════════════════════════════════════════ */
+
+  /* Secondary LG — 56px */
+  .psec-lg {
+    --vsec-stop-a: var(--vmc-color-vault-500);
+    --vsec-stop-b: var(--vmc-color-vault-700);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    padding: 0 40px;
+    border-radius: var(--vmc-radius-full);
+    border: 3px solid transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--vmc-font-display);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--vmc-color-base-white);
+    text-shadow: 0 1px 3px rgb(0% 0% 0% / 0.30);
+    background-image:
+      linear-gradient(var(--vsec-angle), var(--vsec-stop-a) 0%, var(--vsec-stop-b) 100%),
+      linear-gradient(135deg,
+        var(--vmc-color-vault-300) 0%,
+        var(--vmc-color-base-white) 35%,
+        var(--vmc-color-vault-400) 65%,
+        var(--vmc-color-vault-300) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.22),
+      0 2px 8px rgb(51.76% 37.65% 89.8% / 0.30);
+    transition:
+      --vsec-angle  0.4s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      --vsec-stop-a 0.35s ease,
+      --vsec-stop-b 0.35s ease,
+      transform     0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow    0.25s ease;
+    transform: translateZ(0);
+  }
+  .psec-lg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.16) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .psec-lg::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(135deg, var(--vmc-color-vault-400), var(--vmc-color-vault-600));
+    filter: blur(14px);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease, filter 0.3s ease;
+  }
+  .psec-lg:hover {
+    --vsec-angle:  220deg;
+    --vsec-stop-a: var(--vmc-color-vault-400);
+    --vsec-stop-b: var(--vmc-color-vault-600);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.20),
+      0 10px 28px rgb(51.76% 37.65% 89.8% / 0.40),
+      0 4px 12px rgb(51.76% 37.65% 89.8% / 0.25);
+  }
+  .psec-lg:hover::after { opacity: 0.45; filter: blur(18px); }
+  .psec-lg:active {
+    --vsec-angle:  160deg;
+    --vsec-stop-a: var(--vmc-color-vault-700);
+    --vsec-stop-b: var(--vmc-color-vault-900);
+    transform: scale(0.97) translateY(1px);
+    box-shadow:
+      inset 0 2px 5px rgb(0% 0% 0% / 0.28),
+      0 1px 3px rgb(0% 0% 0% / 0.14);
+  }
+  .psec-lg:active::after { opacity: 0; }
+  .psec-lg:disabled {
+    background-image: none;
+    background-color: var(--vmc-color-background-disabled);
+    color: var(--vmc-color-neutral-700);
+    text-shadow: none;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+    border-color: transparent;
+  }
+  .psec-lg--hover {
+    --vsec-angle:  220deg;
+    --vsec-stop-a: var(--vmc-color-vault-400);
+    --vsec-stop-b: var(--vmc-color-vault-600);
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.20),
+      0 10px 28px rgb(51.76% 37.65% 89.8% / 0.40),
+      0 4px 12px rgb(51.76% 37.65% 89.8% / 0.25) !important;
+  }
+  .psec-lg--pressed {
+    --vsec-angle:  160deg;
+    --vsec-stop-a: var(--vmc-color-vault-700);
+    --vsec-stop-b: var(--vmc-color-vault-900);
+    transform: scale(0.97) translateY(1px) !important;
+    box-shadow:
+      inset 0 2px 5px rgb(0% 0% 0% / 0.28),
+      0 1px 3px rgb(0% 0% 0% / 0.14) !important;
+  }
+
+  /* Secondary SM — 36px */
+  .psec-sm {
+    --vsec-stop-a: var(--vmc-color-vault-500);
+    --vsec-stop-b: var(--vmc-color-vault-700);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    padding: 0 20px;
+    border-radius: var(--vmc-radius-full);
+    border: 2px solid transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--vmc-font-display);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--vmc-color-base-white);
+    text-shadow: 0 1px 2px rgb(0% 0% 0% / 0.25);
+    background-image:
+      linear-gradient(var(--vsec-angle), var(--vsec-stop-a) 0%, var(--vsec-stop-b) 100%),
+      linear-gradient(135deg,
+        var(--vmc-color-vault-300) 0%,
+        var(--vmc-color-base-white) 35%,
+        var(--vmc-color-vault-400) 65%,
+        var(--vmc-color-vault-300) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.20),
+      0 2px 6px rgb(51.76% 37.65% 89.8% / 0.22);
+    transition:
+      --vsec-angle  0.4s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      --vsec-stop-a 0.35s ease,
+      --vsec-stop-b 0.35s ease,
+      transform     0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow    0.25s ease;
+    transform: translateZ(0);
+  }
+  .psec-sm::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.14) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .psec-sm::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(135deg, var(--vmc-color-vault-400), var(--vmc-color-vault-600));
+    filter: blur(12px);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+  }
+  .psec-sm:hover {
+    --vsec-angle:  220deg;
+    --vsec-stop-a: var(--vmc-color-vault-400);
+    --vsec-stop-b: var(--vmc-color-vault-600);
+    transform: translateY(-1px) scale(1.02);
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.18),
+      0 6px 16px rgb(51.76% 37.65% 89.8% / 0.35),
+      0 3px 8px rgb(51.76% 37.65% 89.8% / 0.20);
+  }
+  .psec-sm:hover::after { opacity: 0.40; }
+  .psec-sm:active {
+    --vsec-angle:  160deg;
+    --vsec-stop-a: var(--vmc-color-vault-700);
+    --vsec-stop-b: var(--vmc-color-vault-900);
+    transform: scale(0.97) translateY(1px);
+    box-shadow: inset 0 2px 4px rgb(0% 0% 0% / 0.22), 0 1px 2px rgb(0% 0% 0% / 0.10);
+  }
+  .psec-sm:active::after { opacity: 0; }
+  .psec-sm:disabled {
+    background-image: none;
+    background-color: var(--vmc-color-background-disabled);
+    color: var(--vmc-color-neutral-700);
+    text-shadow: none;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+    border-color: transparent;
+  }
+  .psec-sm--hover {
+    --vsec-angle:  220deg;
+    --vsec-stop-a: var(--vmc-color-vault-400);
+    --vsec-stop-b: var(--vmc-color-vault-600);
+    transform: translateY(-1px) scale(1.02) !important;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.18),
+      0 6px 16px rgb(51.76% 37.65% 89.8% / 0.35),
+      0 3px 8px rgb(51.76% 37.65% 89.8% / 0.20) !important;
+  }
+  .psec-sm--pressed {
+    --vsec-angle:  160deg;
+    --vsec-stop-a: var(--vmc-color-vault-700);
+    --vsec-stop-b: var(--vmc-color-vault-900);
+    transform: scale(0.97) translateY(1px) !important;
+    box-shadow: inset 0 2px 4px rgb(0% 0% 0% / 0.22), 0 1px 2px rgb(0% 0% 0% / 0.10) !important;
+  }
+
+  /* ══════════════════════════════════════════════════
+     TERTIARY VARIANT (ptert) — vault outline + vault text
+  ══════════════════════════════════════════════════ */
+
+  /* MD — 44px */
+  .ptert {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 24px;
+    border-radius: var(--vmc-radius-full);
+    border: 2px solid oklch(0.22 0.18 285);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--vmc-font-display);
+    font-size: 15px;
+    font-weight: 600;
+    color: oklch(0.22 0.18 285);
+    background: transparent;
+    transition:
+      background    0.2s ease,
+      transform     0.2s cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow    0.2s ease;
+    transform: translateZ(0);
+  }
+  .ptert:hover,
+  .ptert--hover {
+    background: oklch(0.22 0.18 285 / 0.06);
+    transform: translateY(-1px);
+  }
+  .ptert:active,
+  .ptert--pressed {
+    background: oklch(0.22 0.18 285 / 0.12);
+    transform: scale(0.97) translateY(1px);
+  }
+  .ptert:focus-visible {
+    outline: 3px solid transparent;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 2px var(--vmc-color-base-white), 0 0 0 4px oklch(0.22 0.18 285);
+  }
+  .ptert:disabled {
+    border-color: oklch(0.22 0.18 285 / 0.30);
+    color: oklch(0.22 0.18 285 / 0.35);
+    background: transparent;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* Tertiary SM — 36px */
+  .ptert-sm {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    padding: 0 16px;
+    border-radius: var(--vmc-radius-full);
+    border: 2px solid oklch(0.22 0.18 285);
+    cursor: pointer;
+    position: relative;
+    font-family: var(--vmc-font-display);
+    font-size: 13px;
+    font-weight: 600;
+    color: oklch(0.22 0.18 285);
+    background: transparent;
+    transition:
+      background    0.2s ease,
+      transform     0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform: translateZ(0);
+  }
+  .ptert-sm:hover,
+  .ptert-sm--hover { background: oklch(0.22 0.18 285 / 0.06); transform: translateY(-1px); }
+  .ptert-sm:active,
+  .ptert-sm--pressed { background: oklch(0.22 0.18 285 / 0.12); transform: scale(0.97) translateY(1px); }
+  .ptert-sm:disabled {
+    border-color: oklch(0.22 0.18 285 / 0.30);
+    color: oklch(0.22 0.18 285 / 0.35);
+    background: transparent;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* Tertiary LG — 52px */
+  .ptert-lg {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 52px;
+    padding: 0 32px;
+    border-radius: var(--vmc-radius-full);
+    border: 2px solid oklch(0.22 0.18 285);
+    cursor: pointer;
+    position: relative;
+    font-family: var(--vmc-font-display);
+    font-size: 16px;
+    font-weight: 600;
+    color: oklch(0.22 0.18 285);
+    background: transparent;
+    transition:
+      background    0.2s ease,
+      transform     0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform: translateZ(0);
+  }
+  .ptert-lg:hover,
+  .ptert-lg--hover { background: oklch(0.22 0.18 285 / 0.06); transform: translateY(-1px); }
+  .ptert-lg:active,
+  .ptert-lg--pressed { background: oklch(0.22 0.18 285 / 0.12); transform: scale(0.97) translateY(1px); }
+  .ptert-lg:disabled {
+    border-color: oklch(0.22 0.18 285 / 0.30);
+    color: oklch(0.22 0.18 285 / 0.35);
+    background: transparent;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* ══════════════════════════════════════════════════
+     DANGER VARIANT (pdanger) — red fill, white text
+  ══════════════════════════════════════════════════ */
+
+  /* MD — 44px */
+  .pdanger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 24px;
+    border-radius: var(--vmc-radius-full);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--vmc-font-display);
+    font-size: 15px;
+    font-weight: 600;
+    color: oklch(1 0 0);
+    background: oklch(0.42 0.20 20);
+    box-shadow: 0 2px 6px oklch(0.42 0.20 20 / 0.35);
+    transition:
+      background    0.2s ease,
+      transform     0.2s cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow    0.2s ease;
+    transform: translateZ(0);
+  }
+  .pdanger:hover,
+  .pdanger--hover {
+    background: oklch(0.48 0.20 20);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px oklch(0.42 0.20 20 / 0.45);
+  }
+  .pdanger:active,
+  .pdanger--pressed {
+    background: oklch(0.36 0.20 20);
+    transform: scale(0.97) translateY(1px);
+    box-shadow: inset 0 2px 4px rgb(0% 0% 0% / 0.20);
+  }
+  .pdanger:disabled {
+    background: oklch(0.90 0.004 285);
+    color: oklch(0.55 0.06 285);
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* Danger SM — 36px */
+  .pdanger-sm {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    padding: 0 16px;
+    border-radius: var(--vmc-radius-full);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    font-family: var(--vmc-font-display);
+    font-size: 13px;
+    font-weight: 600;
+    color: oklch(1 0 0);
+    background: oklch(0.42 0.20 20);
+    box-shadow: 0 2px 5px oklch(0.42 0.20 20 / 0.30);
+    transition:
+      background    0.2s ease,
+      transform     0.2s cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow    0.2s ease;
+    transform: translateZ(0);
+  }
+  .pdanger-sm:hover,
+  .pdanger-sm--hover { background: oklch(0.48 0.20 20); transform: translateY(-1px); }
+  .pdanger-sm:active,
+  .pdanger-sm--pressed { background: oklch(0.36 0.20 20); transform: scale(0.97) translateY(1px); }
+  .pdanger-sm:disabled {
+    background: oklch(0.90 0.004 285);
+    color: oklch(0.55 0.06 285);
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* Danger LG — 52px */
+  .pdanger-lg {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 52px;
+    padding: 0 32px;
+    border-radius: var(--vmc-radius-full);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    font-family: var(--vmc-font-display);
+    font-size: 16px;
+    font-weight: 600;
+    color: oklch(1 0 0);
+    background: oklch(0.42 0.20 20);
+    box-shadow: 0 2px 8px oklch(0.42 0.20 20 / 0.40);
+    transition:
+      background    0.2s ease,
+      transform     0.2s cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow    0.2s ease;
+    transform: translateZ(0);
+  }
+  .pdanger-lg:hover,
+  .pdanger-lg--hover { background: oklch(0.48 0.20 20); transform: translateY(-1px); box-shadow: 0 8px 22px oklch(0.42 0.20 20 / 0.50); }
+  .pdanger-lg:active,
+  .pdanger-lg--pressed { background: oklch(0.36 0.20 20); transform: scale(0.97) translateY(1px); }
+  .pdanger-lg:disabled {
+    background: oklch(0.90 0.004 285);
+    color: oklch(0.55 0.06 285);
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* ══════════════════════════════════════════════════
+     ICON SLOTS — work with any variant
+  ══════════════════════════════════════════════════ */
+
+  /* Left icon slot */
+  .pbtn-slot-left {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-right: 4px;
+  }
+  /* Right icon slot */
+  .pbtn-slot-right {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: 4px;
+  }
+
+  /* Icon-only — square pills for each variant */
+  .pvbtn-icon-only   { padding: 0; width: 48px; }
+  .pvbtn-lg-icon-only { padding: 0; width: 56px; }
+  .pvbtn-text-sm-icon-only { padding: 0; width: 36px; }
+
+  /* ══════════════════════════════════════════════════
+     FULL WIDTH
+  ══════════════════════════════════════════════════ */
+  .pbtn-full {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* ══════════════════════════════════════════════════
+     LOADING STATE
+  ══════════════════════════════════════════════════ */
+  @keyframes btn-spin {
+    to { transform: rotate(360deg); }
+  }
+  .pvbtn--loading,
+  .pvbtn-lg--loading,
+  .pvbtn-text-sm--loading,
+  .psec--loading,
+  .psec-lg--loading,
+  .psec-sm--loading,
+  .ptert--loading,
+  .pdanger--loading {
+    pointer-events: none;
+    cursor: default;
+  }
+  .pvbtn--loading > *,
+  .pvbtn-lg--loading > *,
+  .pvbtn-text-sm--loading > *,
+  .psec--loading > *,
+  .psec-lg--loading > *,
+  .psec-sm--loading > *,
+  .ptert--loading > *,
+  .pdanger--loading > * {
+    opacity: 0;
+  }
+  .pvbtn--loading::before,
+  .pvbtn-lg--loading::before,
+  .pvbtn-text-sm--loading::before,
+  .psec--loading::before,
+  .psec-lg--loading::before,
+  .psec-sm--loading::before,
+  .ptert--loading::before,
+  .pdanger--loading::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid rgb(100% 100% 100% / 0.35);
+    border-top-color: rgb(100% 100% 100% / 0.90);
+    background: transparent;
+    animation: btn-spin 0.65s linear infinite;
+    z-index: 10;
+    inset: auto;
+    top: 50%;
+    left: 50%;
+    margin-top: -8px;
+    margin-left: -8px;
+    pointer-events: none;
+  }
+  .ptert--loading::before {
+    border-color: oklch(0.22 0.18 285 / 0.25);
+    border-top-color: oklch(0.22 0.18 285 / 0.85);
   }
 
   /* ── LikeButton · Cinematic upgrade ── */
@@ -2101,6 +2610,46 @@ const USER_ICON = (
   </svg>
 );
 
+const STAR_ICON_SM = (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+  </svg>
+);
+const STAR_ICON_MD = (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+  </svg>
+);
+const STAR_ICON_LG = (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+  </svg>
+);
+const ARROW_ICON_SM = (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="5" y1="12" x2="19" y2="12" />
+    <polyline points="12 5 19 12 12 19" />
+  </svg>
+);
+const ARROW_ICON_MD = (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="5" y1="12" x2="19" y2="12" />
+    <polyline points="12 5 19 12 12 19" />
+  </svg>
+);
+const ARROW_ICON_LG = (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="5" y1="12" x2="19" y2="12" />
+    <polyline points="12 5 19 12 12 19" />
+  </svg>
+);
+
 interface SectionLabelProps { title: string; subtitle?: string; dark?: boolean; }
 
 function SectionLabel({ title, subtitle, dark }: SectionLabelProps): JSX.Element {
@@ -2312,148 +2861,188 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
           </p>
         </div>
 
-        {/* ═══════════════════════════════════════════════════════════
-            0. Button System (.pbtn) — Full Figma Property Matrix
-        ═══════════════════════════════════════════════════════════ */}
-        <SectionLabel title="Button System · .pbtn" subtitle="Variant × Size × State × Icon × Width" />
+        {/* ─────────────────────────────────────────────
+            0. BUTTON — Full property matrix
+        ───────────────────────────────────────────── */}
+        <SectionLabel title="Button" subtitle="Variant × Size × State × Icon Left · Icon Right · Icon Only · Full Width" />
 
-        <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px",
-          borderBottom: "1px solid var(--vmc-color-vault-utility-ghost)" }}>
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "24px",
+          borderBottom: "1px solid var(--vmc-color-vault-utility-ghost)",
+          display: "flex", flexDirection: "column", gap: 0 }}>
 
-          {/* ── Row 1: 5 Variants × MD ── */}
-          <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
-            textTransform: "uppercase", letterSpacing: "0.08em",
-            color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
-            Variants · MD · Default
-          </p>
-          <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap", marginBottom: 24 }}>
-            <button type="button" className="pbtn pbtn--md pbtn--primary">
-              <span className="pbtn-label">Primary</span>
-            </button>
-            <button type="button" className="pbtn pbtn--md pbtn--secondary">
-              <span className="pbtn-label">Secondary</span>
-            </button>
-            <button type="button" className="pbtn pbtn--md pbtn--tertiary">
-              <span className="pbtn-label">Tertiary</span>
-            </button>
-            <button type="button" className="pbtn pbtn--md pbtn--ghost">
-              <span className="pbtn-label">Ghost</span>
-            </button>
-            <button type="button" className="pbtn pbtn--md pbtn--danger">
-              <span className="pbtn-label">Danger</span>
-            </button>
-          </div>
-
-          {/* ── Row 2: 3 Sizes × Primary ── */}
-          <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
-            textTransform: "uppercase", letterSpacing: "0.08em",
-            color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
-            Sizes · Primary
-          </p>
-          <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap", marginBottom: 24 }}>
-            <button type="button" className="pbtn pbtn--sm pbtn--primary">
-              <span className="pbtn-label">SM · 36px</span>
-            </button>
-            <button type="button" className="pbtn pbtn--md pbtn--primary">
-              <span className="pbtn-label">MD · 44px</span>
-            </button>
-            <button type="button" className="pbtn pbtn--lg pbtn--primary">
-              <span className="pbtn-label">LG · 52px</span>
-            </button>
-          </div>
-
-          {/* ── Row 3: States × Primary MD ── */}
-          <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
-            textTransform: "uppercase", letterSpacing: "0.08em",
-            color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
-            States · Primary · MD
-          </p>
-          <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap", marginBottom: 24 }}>
-            <button type="button" className="pbtn pbtn--md pbtn--primary">
-              <span className="pbtn-label">Default</span>
-            </button>
-            <button type="button" className="pbtn pbtn--md pbtn--primary pbtn--hover">
-              <span className="pbtn-label">Hover</span>
-            </button>
-            <button type="button" className="pbtn pbtn--md pbtn--primary pbtn--focus">
-              <span className="pbtn-label">Focus</span>
-            </button>
-            <button type="button" className="pbtn pbtn--md pbtn--primary pbtn--active">
-              <span className="pbtn-label">Active</span>
-            </button>
-            <button type="button" className="pbtn pbtn--md pbtn--primary pbtn--disabled" aria-disabled="true">
-              <span className="pbtn-label">Disabled</span>
-            </button>
-            <button type="button" className="pbtn pbtn--md pbtn--primary pbtn--loading" aria-label="Cargando">
-              <span className="pbtn-label">Loading</span>
-            </button>
-          </div>
-
-          {/* ── Row 4: Icon variants × Primary MD ── */}
-          <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
-            textTransform: "uppercase", letterSpacing: "0.08em",
-            color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
-            Icons · Primary · MD
-          </p>
-          <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap", marginBottom: 24 }}>
-            {/* Icon Left */}
-            <button type="button" className="pbtn pbtn--md pbtn--primary">
-              <span className="pbtn-icon-left">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                </svg>
-              </span>
-              <span className="pbtn-label">Icon Left</span>
-            </button>
-            {/* Icon Right */}
-            <button type="button" className="pbtn pbtn--md pbtn--primary">
-              <span className="pbtn-label">Icon Right</span>
-              <span className="pbtn-icon-right">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"/>
-                  <polyline points="12 5 19 12 12 19"/>
-                </svg>
-              </span>
-            </button>
-            {/* Icon Only */}
-            <button type="button" className="pbtn pbtn--md pbtn--primary pbtn--icon-only" aria-label="Continuar">
-              <span className="pbtn-icon-left">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"/>
-                  <polyline points="12 5 19 12 12 19"/>
-                </svg>
-              </span>
-            </button>
-            {/* Full Width — own container */}
-            <div style={{ flex: 1, minWidth: 180 }}>
-              <button type="button" className="pbtn pbtn--md pbtn--primary pbtn--full">
-                <span className="pbtn-label">Full Width</span>
-              </button>
+          {/* Row: VARIANTS — MD */}
+          <div style={{ marginBottom: 24 }}>
+            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase" as const, letterSpacing: "0.08em",
+              color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
+              Variants — MD
+            </p>
+            <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" as const }}>
+              <button className="pvbtn" type="button">Primary</button>
+              <button className="psec" type="button">Secondary</button>
+              <button className="ptert" type="button">Tertiary</button>
+              <div style={{ background: "oklch(0.72 0.16 55)", borderRadius: 8, padding: "10px 14px", display: "inline-flex" }}>
+                <button className="pghost" type="button">Ghost</button>
+              </div>
+              <button className="pdanger" type="button">Danger</button>
             </div>
           </div>
 
-          {/* ── Row 5: Danger variant states ── */}
-          <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
-            textTransform: "uppercase", letterSpacing: "0.08em",
-            color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
-            Danger · States · MD
-          </p>
-          <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap", marginBottom: 0 }}>
-            <button type="button" className="pbtn pbtn--md pbtn--danger">
-              <span className="pbtn-label">Default</span>
-            </button>
-            <button type="button" className="pbtn pbtn--md pbtn--danger pbtn--hover">
-              <span className="pbtn-label">Hover</span>
-            </button>
-            <button type="button" className="pbtn pbtn--md pbtn--danger pbtn--active">
-              <span className="pbtn-label">Active</span>
-            </button>
-            <button type="button" className="pbtn pbtn--md pbtn--danger pbtn--disabled" aria-disabled="true">
-              <span className="pbtn-label">Disabled</span>
-            </button>
+          {/* Row: SIZES — PRIMARY */}
+          <div style={{ marginBottom: 24 }}>
+            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase" as const, letterSpacing: "0.08em",
+              color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
+              Sizes — Primary
+            </p>
+            <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" as const }}>
+              <StateCol label="SM · 36px">
+                <button className="pvbtn-text-sm" type="button">Participa</button>
+              </StateCol>
+              <StateCol label="MD · 48px">
+                <button className="pvbtn" type="button">Participa</button>
+              </StateCol>
+              <StateCol label="LG · 56px">
+                <button className="pvbtn-lg" type="button">Participa</button>
+              </StateCol>
+            </div>
+          </div>
+
+          {/* Row: STATES — PRIMARY MD */}
+          <div style={{ marginBottom: 24 }}>
+            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase" as const, letterSpacing: "0.08em",
+              color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
+              States — Primary MD
+            </p>
+            <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" as const }}>
+              <StateCol label="Default">
+                <button className="pvbtn" type="button">Participa</button>
+              </StateCol>
+              <StateCol label="Hover">
+                <button className="pvbtn pvbtn--hover" type="button">Participa</button>
+              </StateCol>
+              <StateCol label="Focus">
+                <button className="pvbtn" type="button"
+                  style={{ outline: "3px solid transparent", outlineOffset: 4,
+                    boxShadow: "0 0 0 2px var(--vmc-color-base-white), 0 0 0 5px var(--vmc-color-vault-500)" }}>
+                  Participa
+                </button>
+              </StateCol>
+              <StateCol label="Disabled">
+                <button className="pvbtn" type="button" disabled>Participa</button>
+              </StateCol>
+              <StateCol label="Loading">
+                <button className="pvbtn pvbtn--loading" type="button" aria-label="Cargando">
+                  <span>Participa</span>
+                </button>
+              </StateCol>
+            </div>
+          </div>
+
+          {/* Row: ICON LEFT */}
+          <div style={{ marginBottom: 24 }}>
+            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase" as const, letterSpacing: "0.08em",
+              color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
+              Icon Left
+            </p>
+            <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" as const }}>
+              <StateCol label="SM · 36px">
+                <button className="pvbtn-text-sm" type="button"
+                  style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                  <span className="pbtn-slot-left">{STAR_ICON_SM}</span>
+                  Participa
+                </button>
+              </StateCol>
+              <StateCol label="MD · 48px">
+                <button className="pvbtn" type="button"
+                  style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+                  <span className="pbtn-slot-left">{STAR_ICON_MD}</span>
+                  Participa
+                </button>
+              </StateCol>
+              <StateCol label="LG · 56px">
+                <button className="pvbtn-lg" type="button"
+                  style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+                  <span className="pbtn-slot-left">{STAR_ICON_LG}</span>
+                  Participa
+                </button>
+              </StateCol>
+            </div>
+          </div>
+
+          {/* Row: ICON RIGHT */}
+          <div style={{ marginBottom: 24 }}>
+            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase" as const, letterSpacing: "0.08em",
+              color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
+              Icon Right
+            </p>
+            <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" as const }}>
+              <StateCol label="SM · 36px">
+                <button className="pvbtn-text-sm" type="button"
+                  style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                  Continuar
+                  <span className="pbtn-slot-right">{ARROW_ICON_SM}</span>
+                </button>
+              </StateCol>
+              <StateCol label="MD · 48px">
+                <button className="pvbtn" type="button"
+                  style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+                  Continuar
+                  <span className="pbtn-slot-right">{ARROW_ICON_MD}</span>
+                </button>
+              </StateCol>
+              <StateCol label="LG · 56px">
+                <button className="pvbtn-lg" type="button"
+                  style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+                  Continuar
+                  <span className="pbtn-slot-right">{ARROW_ICON_LG}</span>
+                </button>
+              </StateCol>
+            </div>
+          </div>
+
+          {/* Row: ICON ONLY */}
+          <div style={{ marginBottom: 24 }}>
+            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase" as const, letterSpacing: "0.08em",
+              color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
+              Icon Only
+            </p>
+            <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" as const }}>
+              <StateCol label="SM · 36px">
+                <button className="pvbtn-text-sm pvbtn-text-sm-icon-only" type="button"
+                  aria-label="Favorito">
+                  {STAR_ICON_SM}
+                </button>
+              </StateCol>
+              <StateCol label="MD · 48px">
+                <button className="pvbtn pvbtn-icon-only" type="button"
+                  aria-label="Favorito">
+                  {STAR_ICON_MD}
+                </button>
+              </StateCol>
+              <StateCol label="LG · 56px">
+                <button className="pvbtn-lg pvbtn-lg-icon-only" type="button"
+                  aria-label="Favorito">
+                  {STAR_ICON_LG}
+                </button>
+              </StateCol>
+            </div>
+          </div>
+
+          {/* Row: FULL WIDTH */}
+          <div style={{ marginBottom: 8 }}>
+            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase" as const, letterSpacing: "0.08em",
+              color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
+              Full Width
+            </p>
+            <div style={{ width: "100%" }}>
+              <button className="pvbtn pbtn-full" type="button">Participa ahora</button>
+            </div>
           </div>
 
         </div>
