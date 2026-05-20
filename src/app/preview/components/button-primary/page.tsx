@@ -1299,7 +1299,7 @@ const BUTTON_CSS = `
     text-transform: uppercase;
     letter-spacing: 0.04em;
     color: oklch(1 0 0);
-    text-shadow: 0 1px 3px oklch(0 0 0 / 0.12);
+    text-shadow: 0 1px 3px oklch(0 0 0 / 0.25);
     position: relative;
     z-index: 2;
   }
@@ -1378,22 +1378,10 @@ const BUTTON_CSS = `
   /* ── Shared hover lift ── */
   .poftype:hover,
   .poftype--hover {
-    transform: translateY(-3px) scale(1.01);
+    transform: translateY(-2px);
     box-shadow:
-      0 10px 28px oklch(0 0 0 / 0.16),
-      0 2px 8px   oklch(0 0 0 / 0.08);
-  }
-  .poftype--negotiable:hover,
-  .poftype--negotiable.poftype--hover {
-    box-shadow:
-      0 10px 28px oklch(0.78 0.14 195 / 0.30),
-      0 2px 8px   oklch(0.78 0.14 195 / 0.15);
-  }
-  .poftype--live:hover,
-  .poftype--live.poftype--hover {
-    box-shadow:
-      0 10px 28px oklch(0.72 0.16 55 / 0.32),
-      0 2px 8px   oklch(0.72 0.16 55 / 0.16);
+      0 6px 16px oklch(0 0 0 / 0.14),
+      0 2px 6px  oklch(0 0 0 / 0.08);
   }
 
   /* ── Focus / pressed ── */
