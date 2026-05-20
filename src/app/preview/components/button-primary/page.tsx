@@ -1013,26 +1013,74 @@ const BUTTON_CSS = `
   }
 
   /* ══════════════════════════════════════════════════
-     SIZE MODIFIERS — PRIMARY (pvbtn)
+     .pbtn — UNIFIED BUTTON SYSTEM
+     Primary · Secondary · Ghost × SM / MD / LG
   ══════════════════════════════════════════════════ */
 
-  /* Primary LG — 56px */
-  .pvbtn-lg {
-    --vbtn-stop-a: var(--vmc-color-orange-600);
-    --vbtn-stop-b: var(--vmc-color-vault-500);
+  /* ── Base ── */
+  .pbtn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 56px;
-    padding: 0 40px;
     border-radius: var(--vmc-radius-full);
-    border: 3px solid transparent;
     cursor: pointer;
     position: relative;
     overflow: hidden;
     font-family: var(--vmc-font-display);
+    line-height: 1;
+    white-space: nowrap;
+    transform: translateZ(0);
+    transition:
+      transform    0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow   0.25s ease;
+  }
+
+  /* ── Sizes ── */
+  .pbtn--sm {
+    height: 36px;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 0 14px;
+    min-width: 64px;
+  }
+  .pbtn--md {
+    height: 48px;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
+    padding: 0 20px;
+    min-width: 80px;
+  }
+  .pbtn--lg {
+    height: 56px;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 0 24px;
+    min-width: 96px;
+  }
+
+  /* ── With icon — padding + gap override ── */
+  .pbtn--has-icon.pbtn--sm { padding: 0 12px; gap: 6px; }
+  .pbtn--has-icon.pbtn--md { padding: 0 16px; gap: 8px; }
+  .pbtn--has-icon.pbtn--lg { padding: 0 20px; gap: 10px; }
+
+  /* ── Icon frame wrapper ── */
+  .pbtn--sm .pbtn-icon { width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .pbtn--md .pbtn-icon { width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .pbtn--lg .pbtn-icon { width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+  /* ── Icon only ── */
+  .pbtn--icon-only.pbtn--sm { width: 36px; padding: 0; min-width: unset; }
+  .pbtn--icon-only.pbtn--md { width: 48px; padding: 0; min-width: unset; }
+  .pbtn--icon-only.pbtn--lg { width: 56px; padding: 0; min-width: unset; }
+
+  /* ── Full width ── */
+  .pbtn--full { width: 100%; }
+
+  /* ══ PRIMARY variant ══ */
+  .pbtn--primary {
+    --vbtn-stop-a: var(--vmc-color-orange-600);
+    --vbtn-stop-b: var(--vmc-color-vault-500);
+    border: 2.5px solid transparent;
     color: var(--vmc-color-base-white);
     text-shadow: 0 1px 3px rgb(0% 0% 0% / 0.25);
     background-image:
@@ -1047,16 +1095,15 @@ const BUTTON_CSS = `
     background-clip:   padding-box, border-box;
     box-shadow:
       inset 0 1px 0 rgb(100% 100% 100% / 0.28),
-      0 2px 8px rgb(92.94% 53.73% 21.18% / 0.30);
+      0 2px 6px rgb(92.94% 53.73% 21.18% / 0.30);
     transition:
       --vbtn-angle  0.4s  cubic-bezier(0.25, 0.8, 0.25, 1),
       --vbtn-stop-a 0.35s ease,
       --vbtn-stop-b 0.35s ease,
       transform     0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
       box-shadow    0.25s ease;
-    transform: translateZ(0);
   }
-  .pvbtn-lg::before {
+  .pbtn--primary::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -1065,7 +1112,7 @@ const BUTTON_CSS = `
     pointer-events: none;
     z-index: 1;
   }
-  .pvbtn-lg::after {
+  .pbtn--primary::after {
     content: '';
     position: absolute;
     inset: -4px;
@@ -1076,18 +1123,18 @@ const BUTTON_CSS = `
     z-index: -1;
     transition: opacity 0.3s ease, filter 0.3s ease;
   }
-  .pvbtn-lg:hover {
+  .pbtn--primary:hover {
     --vbtn-angle:  220deg;
     --vbtn-stop-a: var(--vmc-color-orange-400);
     --vbtn-stop-b: var(--vmc-color-vault-400);
     transform: translateY(-2px) scale(1.02);
     box-shadow:
       inset 0 1px 0 rgb(100% 100% 100% / 0.22),
-      0 10px 28px rgb(51.76% 37.65% 89.8% / 0.35),
-      0 4px 12px rgb(92.94% 53.73% 21.18% / 0.40);
+      0 8px 24px rgb(51.76% 37.65% 89.8% / 0.35),
+      0 4px 10px rgb(92.94% 53.73% 21.18% / 0.40);
   }
-  .pvbtn-lg:hover::after { opacity: 0.45; filter: blur(18px); }
-  .pvbtn-lg:active {
+  .pbtn--primary:hover::after { opacity: 0.45; filter: blur(18px); }
+  .pbtn--primary:active {
     --vbtn-angle:  135deg;
     --vbtn-stop-a: var(--vmc-color-orange-700);
     --vbtn-stop-b: var(--vmc-color-vault-600);
@@ -1096,8 +1143,18 @@ const BUTTON_CSS = `
       inset 0 2px 5px rgb(0% 0% 0% / 0.22),
       0 1px 3px rgb(0% 0% 0% / 0.12);
   }
-  .pvbtn-lg:active::after { opacity: 0; }
-  .pvbtn-lg:disabled {
+  .pbtn--primary:active::after { opacity: 0; }
+  .pbtn--primary:focus-visible {
+    outline: 3px solid transparent;
+    outline-offset: 4px;
+    transform: scale(0.98);
+    box-shadow:
+      0 0 0 2px var(--vmc-color-base-white),
+      0 0 0 5px var(--vmc-color-vault-500),
+      0 8px 16px -4px rgb(51.76% 37.65% 89.8% / 0.30);
+  }
+  .pbtn--primary:focus-visible::after { opacity: 0.2; }
+  .pbtn--primary:disabled {
     background-image: none;
     background-color: var(--vmc-color-background-disabled);
     color: var(--vmc-color-neutral-700);
@@ -1107,18 +1164,20 @@ const BUTTON_CSS = `
     transform: none;
     border-color: transparent;
   }
-  .pvbtn-lg:disabled::after { display: none; }
-  .pvbtn-lg--hover {
+  .pbtn--primary:disabled::after { display: none; }
+
+  /* Primary frozen states */
+  .pbtn--primary.pbtn--hover {
     --vbtn-angle:  220deg;
     --vbtn-stop-a: var(--vmc-color-orange-400);
     --vbtn-stop-b: var(--vmc-color-vault-400);
     transform: translateY(-2px) scale(1.02) !important;
     box-shadow:
       inset 0 1px 0 rgb(100% 100% 100% / 0.22),
-      0 10px 28px rgb(51.76% 37.65% 89.8% / 0.35),
-      0 4px 12px rgb(92.94% 53.73% 21.18% / 0.40) !important;
+      0 8px 24px rgb(51.76% 37.65% 89.8% / 0.35),
+      0 4px 10px rgb(92.94% 53.73% 21.18% / 0.40) !important;
   }
-  .pvbtn-lg--pressed {
+  .pbtn--primary.pbtn--pressed {
     --vbtn-angle:  135deg;
     --vbtn-stop-a: var(--vmc-color-orange-700);
     --vbtn-stop-b: var(--vmc-color-vault-600);
@@ -1127,135 +1186,32 @@ const BUTTON_CSS = `
       inset 0 2px 5px rgb(0% 0% 0% / 0.22),
       0 1px 3px rgb(0% 0% 0% / 0.12) !important;
   }
-
-  /* Primary text-SM — 36px, text only, no icon slot */
-  .pvbtn-text-sm {
-    --vbtn-stop-a: var(--vmc-color-orange-600);
-    --vbtn-stop-b: var(--vmc-color-vault-500);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 36px;
-    padding: 0 20px;
-    border-radius: var(--vmc-radius-full);
-    border: 2px solid transparent;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    font-family: var(--vmc-font-display);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--vmc-color-base-white);
-    text-shadow: 0 1px 2px rgb(0% 0% 0% / 0.20);
-    background-image:
-      linear-gradient(var(--vbtn-angle), var(--vbtn-stop-a) 0%, var(--vbtn-stop-a) 40%, var(--vbtn-stop-b) 100%),
-      linear-gradient(135deg,
-        var(--vmc-color-base-white) 0%,
-        var(--vmc-color-orange-400) 25%,
-        var(--vmc-color-vault-400)  75%,
-        var(--vmc-color-base-white) 100%
-      );
-    background-origin: padding-box, border-box;
-    background-clip:   padding-box, border-box;
+  .pbtn--primary.pbtn--pressed::after { opacity: 0 !important; }
+  .pbtn--primary.pbtn--focus {
+    outline: 3px solid transparent;
+    outline-offset: 4px;
+    transform: scale(0.98) !important;
     box-shadow:
-      inset 0 1px 0 rgb(100% 100% 100% / 0.25),
-      0 2px 5px rgb(92.94% 53.73% 21.18% / 0.25);
-    transition:
-      --vbtn-angle  0.4s  cubic-bezier(0.25, 0.8, 0.25, 1),
-      --vbtn-stop-a 0.35s ease,
-      --vbtn-stop-b 0.35s ease,
-      transform     0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
-      box-shadow    0.25s ease;
-    transform: translateZ(0);
+      0 0 0 2px var(--vmc-color-base-white),
+      0 0 0 5px var(--vmc-color-vault-500),
+      0 8px 16px -4px rgb(51.76% 37.65% 89.8% / 0.30) !important;
   }
-  .pvbtn-text-sm::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: var(--vmc-radius-full);
-    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.15) 0%, transparent 55%);
-    pointer-events: none;
-    z-index: 1;
-  }
-  .pvbtn-text-sm::after {
-    content: '';
-    position: absolute;
-    inset: -4px;
-    border-radius: var(--vmc-radius-full);
-    background: linear-gradient(135deg, var(--vmc-color-orange-600), var(--vmc-color-vault-500));
-    filter: blur(12px);
-    opacity: 0;
-    z-index: -1;
-    transition: opacity 0.3s ease;
-  }
-  .pvbtn-text-sm:hover {
-    --vbtn-angle:  220deg;
-    --vbtn-stop-a: var(--vmc-color-orange-400);
-    --vbtn-stop-b: var(--vmc-color-vault-400);
-    transform: translateY(-1px) scale(1.02);
-    box-shadow:
-      inset 0 1px 0 rgb(100% 100% 100% / 0.20),
-      0 6px 16px rgb(51.76% 37.65% 89.8% / 0.30),
-      0 3px 8px rgb(92.94% 53.73% 21.18% / 0.35);
-  }
-  .pvbtn-text-sm:hover::after { opacity: 0.40; }
-  .pvbtn-text-sm:active {
-    --vbtn-angle:  135deg;
-    --vbtn-stop-a: var(--vmc-color-orange-700);
-    --vbtn-stop-b: var(--vmc-color-vault-600);
-    transform: scale(0.97) translateY(1px);
-    box-shadow: inset 0 2px 4px rgb(0% 0% 0% / 0.20), 0 1px 2px rgb(0% 0% 0% / 0.10);
-  }
-  .pvbtn-text-sm:active::after { opacity: 0; }
-  .pvbtn-text-sm:disabled {
-    background-image: none;
-    background-color: var(--vmc-color-background-disabled);
-    color: var(--vmc-color-neutral-700);
-    text-shadow: none;
-    box-shadow: none;
-    cursor: not-allowed;
-    transform: none;
-    border-color: transparent;
-  }
-  .pvbtn-text-sm--hover {
-    --vbtn-angle:  220deg;
-    --vbtn-stop-a: var(--vmc-color-orange-400);
-    --vbtn-stop-b: var(--vmc-color-vault-400);
-    transform: translateY(-1px) scale(1.02) !important;
-    box-shadow:
-      inset 0 1px 0 rgb(100% 100% 100% / 0.20),
-      0 6px 16px rgb(51.76% 37.65% 89.8% / 0.30),
-      0 3px 8px rgb(92.94% 53.73% 21.18% / 0.35) !important;
-  }
-  .pvbtn-text-sm--pressed {
-    --vbtn-angle:  135deg;
-    --vbtn-stop-a: var(--vmc-color-orange-700);
-    --vbtn-stop-b: var(--vmc-color-vault-600);
-    transform: scale(0.97) translateY(1px) !important;
-    box-shadow: inset 0 2px 4px rgb(0% 0% 0% / 0.20), 0 1px 2px rgb(0% 0% 0% / 0.10) !important;
+  .pbtn--primary.pbtn--disabled {
+    background-image: none !important;
+    background-color: var(--vmc-color-background-disabled) !important;
+    color: var(--vmc-color-neutral-700) !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    border-color: transparent !important;
   }
 
-  /* ══════════════════════════════════════════════════
-     SIZE MODIFIERS — SECONDARY (psec)
-  ══════════════════════════════════════════════════ */
-
-  /* Secondary LG — 56px */
-  .psec-lg {
+  /* ══ SECONDARY variant ══ */
+  .pbtn--secondary {
     --vsec-stop-a: var(--vmc-color-vault-500);
     --vsec-stop-b: var(--vmc-color-vault-700);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 56px;
-    padding: 0 40px;
-    border-radius: var(--vmc-radius-full);
-    border: 3px solid transparent;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    font-family: var(--vmc-font-display);
-    font-size: 16px;
-    font-weight: 600;
+    border: 2.5px solid transparent;
     color: var(--vmc-color-base-white);
     text-shadow: 0 1px 3px rgb(0% 0% 0% / 0.30);
     background-image:
@@ -1277,9 +1233,8 @@ const BUTTON_CSS = `
       --vsec-stop-b 0.35s ease,
       transform     0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
       box-shadow    0.25s ease;
-    transform: translateZ(0);
   }
-  .psec-lg::before {
+  .pbtn--secondary::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -1288,7 +1243,7 @@ const BUTTON_CSS = `
     pointer-events: none;
     z-index: 1;
   }
-  .psec-lg::after {
+  .pbtn--secondary::after {
     content: '';
     position: absolute;
     inset: -4px;
@@ -1299,18 +1254,18 @@ const BUTTON_CSS = `
     z-index: -1;
     transition: opacity 0.3s ease, filter 0.3s ease;
   }
-  .psec-lg:hover {
+  .pbtn--secondary:hover {
     --vsec-angle:  220deg;
     --vsec-stop-a: var(--vmc-color-vault-400);
     --vsec-stop-b: var(--vmc-color-vault-600);
     transform: translateY(-2px) scale(1.02);
     box-shadow:
       inset 0 1px 0 rgb(100% 100% 100% / 0.20),
-      0 10px 28px rgb(51.76% 37.65% 89.8% / 0.40),
-      0 4px 12px rgb(51.76% 37.65% 89.8% / 0.25);
+      0 8px 24px rgb(51.76% 37.65% 89.8% / 0.40),
+      0 4px 10px rgb(51.76% 37.65% 89.8% / 0.25);
   }
-  .psec-lg:hover::after { opacity: 0.45; filter: blur(18px); }
-  .psec-lg:active {
+  .pbtn--secondary:hover::after { opacity: 0.45; filter: blur(18px); }
+  .pbtn--secondary:active {
     --vsec-angle:  160deg;
     --vsec-stop-a: var(--vmc-color-vault-700);
     --vsec-stop-b: var(--vmc-color-vault-900);
@@ -1319,8 +1274,18 @@ const BUTTON_CSS = `
       inset 0 2px 5px rgb(0% 0% 0% / 0.28),
       0 1px 3px rgb(0% 0% 0% / 0.14);
   }
-  .psec-lg:active::after { opacity: 0; }
-  .psec-lg:disabled {
+  .pbtn--secondary:active::after { opacity: 0; }
+  .pbtn--secondary:focus-visible {
+    outline: 3px solid transparent;
+    outline-offset: 4px;
+    transform: scale(0.98);
+    box-shadow:
+      0 0 0 2px var(--vmc-color-base-white),
+      0 0 0 5px var(--vmc-color-vault-400),
+      0 8px 16px -4px rgb(51.76% 37.65% 89.8% / 0.35);
+  }
+  .pbtn--secondary:focus-visible::after { opacity: 0.2; }
+  .pbtn--secondary:disabled {
     background-image: none;
     background-color: var(--vmc-color-background-disabled);
     color: var(--vmc-color-neutral-700);
@@ -1330,17 +1295,20 @@ const BUTTON_CSS = `
     transform: none;
     border-color: transparent;
   }
-  .psec-lg--hover {
+  .pbtn--secondary:disabled::after { display: none; }
+
+  /* Secondary frozen states */
+  .pbtn--secondary.pbtn--hover {
     --vsec-angle:  220deg;
     --vsec-stop-a: var(--vmc-color-vault-400);
     --vsec-stop-b: var(--vmc-color-vault-600);
     transform: translateY(-2px) scale(1.02) !important;
     box-shadow:
       inset 0 1px 0 rgb(100% 100% 100% / 0.20),
-      0 10px 28px rgb(51.76% 37.65% 89.8% / 0.40),
-      0 4px 12px rgb(51.76% 37.65% 89.8% / 0.25) !important;
+      0 8px 24px rgb(51.76% 37.65% 89.8% / 0.40),
+      0 4px 10px rgb(51.76% 37.65% 89.8% / 0.25) !important;
   }
-  .psec-lg--pressed {
+  .pbtn--secondary.pbtn--pressed {
     --vsec-angle:  160deg;
     --vsec-stop-a: var(--vmc-color-vault-700);
     --vsec-stop-b: var(--vmc-color-vault-900);
@@ -1349,437 +1317,150 @@ const BUTTON_CSS = `
       inset 0 2px 5px rgb(0% 0% 0% / 0.28),
       0 1px 3px rgb(0% 0% 0% / 0.14) !important;
   }
+  .pbtn--secondary.pbtn--pressed::after { opacity: 0 !important; }
+  .pbtn--secondary.pbtn--focus {
+    outline: 3px solid transparent;
+    outline-offset: 4px;
+    transform: scale(0.98) !important;
+    box-shadow:
+      0 0 0 2px var(--vmc-color-base-white),
+      0 0 0 5px var(--vmc-color-vault-400),
+      0 8px 16px -4px rgb(51.76% 37.65% 89.8% / 0.35) !important;
+  }
+  .pbtn--secondary.pbtn--disabled {
+    background-image: none !important;
+    background-color: var(--vmc-color-background-disabled) !important;
+    color: var(--vmc-color-neutral-700) !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    border-color: transparent !important;
+  }
 
-  /* Secondary SM — 36px */
-  .psec-sm {
-    --vsec-stop-a: var(--vmc-color-vault-500);
-    --vsec-stop-b: var(--vmc-color-vault-700);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 36px;
-    padding: 0 20px;
-    border-radius: var(--vmc-radius-full);
-    border: 2px solid transparent;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    font-family: var(--vmc-font-display);
-    font-size: 13px;
-    font-weight: 600;
+  /* ══ GHOST variant ══ */
+  .pbtn--ghost {
+    border: 2px solid rgb(100% 100% 100% / 0.75);
     color: var(--vmc-color-base-white);
-    text-shadow: 0 1px 2px rgb(0% 0% 0% / 0.25);
-    background-image:
-      linear-gradient(var(--vsec-angle), var(--vsec-stop-a) 0%, var(--vsec-stop-b) 100%),
-      linear-gradient(135deg,
-        var(--vmc-color-vault-300) 0%,
-        var(--vmc-color-base-white) 35%,
-        var(--vmc-color-vault-400) 65%,
-        var(--vmc-color-vault-300) 100%
-      );
-    background-origin: padding-box, border-box;
-    background-clip: padding-box, border-box;
+    background: transparent;
+    text-shadow: 0 1px 3px rgb(0% 0% 0% / 0.18);
     box-shadow:
       inset 0 1px 0 rgb(100% 100% 100% / 0.20),
-      0 2px 6px rgb(51.76% 37.65% 89.8% / 0.22);
+      0 0 0 1px rgb(100% 100% 100% / 0.15);
     transition:
-      --vsec-angle  0.4s  cubic-bezier(0.25, 0.8, 0.25, 1),
-      --vsec-stop-a 0.35s ease,
-      --vsec-stop-b 0.35s ease,
+      background    0.25s ease,
+      border-color  0.25s ease,
+      color         0.25s ease,
       transform     0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
       box-shadow    0.25s ease;
-    transform: translateZ(0);
   }
-  .psec-sm::before {
+  .pbtn--ghost::before {
     content: '';
     position: absolute;
     inset: 0;
     border-radius: var(--vmc-radius-full);
-    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.14) 0%, transparent 55%);
+    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.10) 0%, transparent 55%);
     pointer-events: none;
     z-index: 1;
   }
-  .psec-sm::after {
+  .pbtn--ghost::after {
     content: '';
     position: absolute;
     inset: -4px;
     border-radius: var(--vmc-radius-full);
-    background: linear-gradient(135deg, var(--vmc-color-vault-400), var(--vmc-color-vault-600));
-    filter: blur(12px);
+    background: rgb(100% 100% 100% / 0.60);
+    filter: blur(14px);
     opacity: 0;
     z-index: -1;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, filter 0.3s ease;
   }
-  .psec-sm:hover {
-    --vsec-angle:  220deg;
-    --vsec-stop-a: var(--vmc-color-vault-400);
-    --vsec-stop-b: var(--vmc-color-vault-600);
-    transform: translateY(-1px) scale(1.02);
-    box-shadow:
-      inset 0 1px 0 rgb(100% 100% 100% / 0.18),
-      0 6px 16px rgb(51.76% 37.65% 89.8% / 0.35),
-      0 3px 8px rgb(51.76% 37.65% 89.8% / 0.20);
-  }
-  .psec-sm:hover::after { opacity: 0.40; }
-  .psec-sm:active {
-    --vsec-angle:  160deg;
-    --vsec-stop-a: var(--vmc-color-vault-700);
-    --vsec-stop-b: var(--vmc-color-vault-900);
-    transform: scale(0.97) translateY(1px);
-    box-shadow: inset 0 2px 4px rgb(0% 0% 0% / 0.22), 0 1px 2px rgb(0% 0% 0% / 0.10);
-  }
-  .psec-sm:active::after { opacity: 0; }
-  .psec-sm:disabled {
-    background-image: none;
-    background-color: var(--vmc-color-background-disabled);
-    color: var(--vmc-color-neutral-700);
+  .pbtn--ghost:hover {
+    background: linear-gradient(135deg, rgb(100% 100% 100% / 1) 0%, oklch(0.97 0.03 55) 100%);
+    border-color: rgb(100% 100% 100% / 1);
+    color: var(--vmc-color-orange-600);
     text-shadow: none;
-    box-shadow: none;
-    cursor: not-allowed;
-    transform: none;
-    border-color: transparent;
-  }
-  .psec-sm--hover {
-    --vsec-angle:  220deg;
-    --vsec-stop-a: var(--vmc-color-vault-400);
-    --vsec-stop-b: var(--vmc-color-vault-600);
-    transform: translateY(-1px) scale(1.02) !important;
+    transform: translateY(-2px) scale(1.02);
     box-shadow:
-      inset 0 1px 0 rgb(100% 100% 100% / 0.18),
-      0 6px 16px rgb(51.76% 37.65% 89.8% / 0.35),
-      0 3px 8px rgb(51.76% 37.65% 89.8% / 0.20) !important;
+      inset 0 1px 0 rgb(100% 100% 100% / 0.50),
+      0 6px 20px rgb(0% 0% 0% / 0.20);
   }
-  .psec-sm--pressed {
-    --vsec-angle:  160deg;
-    --vsec-stop-a: var(--vmc-color-vault-700);
-    --vsec-stop-b: var(--vmc-color-vault-900);
+  .pbtn--ghost:hover::after { opacity: 0.40; filter: blur(18px); }
+  .pbtn--ghost:active {
+    background: linear-gradient(135deg, var(--vmc-color-orange-700) 0%, oklch(0.52 0.18 45) 100%);
+    border-color: var(--vmc-color-orange-700);
+    color: var(--vmc-color-base-white);
+    text-shadow: 0 1px 3px rgb(0% 0% 0% / 0.25);
+    transform: scale(0.97) translateY(1px);
+    box-shadow: inset 0 2px 5px rgb(0% 0% 0% / 0.22);
+  }
+  .pbtn--ghost:active::after { opacity: 0; }
+  .pbtn--ghost:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px var(--vmc-color-orange-600),
+      0 0 0 4px rgb(100% 100% 100% / 0.80);
+  }
+  .pbtn--ghost:disabled {
+    background: transparent;
+    border-color: rgb(100% 100% 100% / 0.30);
+    color: rgb(100% 100% 100% / 0.35);
+    text-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+  .pbtn--ghost:disabled::after { display: none; }
+
+  /* Ghost frozen states */
+  .pbtn--ghost.pbtn--hover {
+    background: linear-gradient(135deg, rgb(100% 100% 100% / 1) 0%, oklch(0.97 0.03 55) 100%) !important;
+    border-color: rgb(100% 100% 100% / 1) !important;
+    color: var(--vmc-color-orange-600) !important;
+    text-shadow: none !important;
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.50),
+      0 6px 20px rgb(0% 0% 0% / 0.20) !important;
+  }
+  .pbtn--ghost.pbtn--pressed {
+    background: linear-gradient(135deg, var(--vmc-color-orange-700) 0%, oklch(0.52 0.18 45) 100%) !important;
+    border-color: var(--vmc-color-orange-700) !important;
+    color: var(--vmc-color-base-white) !important;
     transform: scale(0.97) translateY(1px) !important;
-    box-shadow: inset 0 2px 4px rgb(0% 0% 0% / 0.22), 0 1px 2px rgb(0% 0% 0% / 0.10) !important;
+    box-shadow: inset 0 2px 5px rgb(0% 0% 0% / 0.22) !important;
+  }
+  .pbtn--ghost.pbtn--focus {
+    outline: none !important;
+    box-shadow:
+      0 0 0 2px var(--vmc-color-orange-600),
+      0 0 0 4px rgb(100% 100% 100% / 0.80) !important;
+  }
+  .pbtn--ghost.pbtn--disabled {
+    background: transparent !important;
+    border-color: rgb(100% 100% 100% / 0.30) !important;
+    color: rgb(100% 100% 100% / 0.35) !important;
+    text-shadow: none !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
   }
 
-  /* ══════════════════════════════════════════════════
-     TERTIARY VARIANT (ptert) — vault outline + vault text
-  ══════════════════════════════════════════════════ */
-
-  /* MD — 44px */
-  .ptert {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 44px;
-    padding: 0 24px;
-    border-radius: var(--vmc-radius-full);
-    border: 2px solid oklch(0.22 0.18 285);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    font-family: var(--vmc-font-display);
-    font-size: 15px;
-    font-weight: 600;
-    color: oklch(0.22 0.18 285);
-    background: transparent;
-    transition:
-      background    0.2s ease,
-      transform     0.2s cubic-bezier(0.25, 0.8, 0.25, 1),
-      box-shadow    0.2s ease;
-    transform: translateZ(0);
-  }
-  .ptert:hover,
-  .ptert--hover {
-    background: oklch(0.22 0.18 285 / 0.06);
-    transform: translateY(-1px);
-  }
-  .ptert:active,
-  .ptert--pressed {
-    background: oklch(0.22 0.18 285 / 0.12);
-    transform: scale(0.97) translateY(1px);
-  }
-  .ptert:focus-visible {
-    outline: 3px solid transparent;
-    outline-offset: 3px;
-    box-shadow: 0 0 0 2px var(--vmc-color-base-white), 0 0 0 4px oklch(0.22 0.18 285);
-  }
-  .ptert:disabled {
-    border-color: oklch(0.22 0.18 285 / 0.30);
-    color: oklch(0.22 0.18 285 / 0.35);
-    background: transparent;
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  /* Tertiary SM — 36px */
-  .ptert-sm {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 36px;
-    padding: 0 16px;
-    border-radius: var(--vmc-radius-full);
-    border: 2px solid oklch(0.22 0.18 285);
-    cursor: pointer;
-    position: relative;
-    font-family: var(--vmc-font-display);
-    font-size: 13px;
-    font-weight: 600;
-    color: oklch(0.22 0.18 285);
-    background: transparent;
-    transition:
-      background    0.2s ease,
-      transform     0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
-    transform: translateZ(0);
-  }
-  .ptert-sm:hover,
-  .ptert-sm--hover { background: oklch(0.22 0.18 285 / 0.06); transform: translateY(-1px); }
-  .ptert-sm:active,
-  .ptert-sm--pressed { background: oklch(0.22 0.18 285 / 0.12); transform: scale(0.97) translateY(1px); }
-  .ptert-sm:disabled {
-    border-color: oklch(0.22 0.18 285 / 0.30);
-    color: oklch(0.22 0.18 285 / 0.35);
-    background: transparent;
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  /* Tertiary LG — 52px */
-  .ptert-lg {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 52px;
-    padding: 0 32px;
-    border-radius: var(--vmc-radius-full);
-    border: 2px solid oklch(0.22 0.18 285);
-    cursor: pointer;
-    position: relative;
-    font-family: var(--vmc-font-display);
-    font-size: 16px;
-    font-weight: 600;
-    color: oklch(0.22 0.18 285);
-    background: transparent;
-    transition:
-      background    0.2s ease,
-      transform     0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
-    transform: translateZ(0);
-  }
-  .ptert-lg:hover,
-  .ptert-lg--hover { background: oklch(0.22 0.18 285 / 0.06); transform: translateY(-1px); }
-  .ptert-lg:active,
-  .ptert-lg--pressed { background: oklch(0.22 0.18 285 / 0.12); transform: scale(0.97) translateY(1px); }
-  .ptert-lg:disabled {
-    border-color: oklch(0.22 0.18 285 / 0.30);
-    color: oklch(0.22 0.18 285 / 0.35);
-    background: transparent;
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  /* ══════════════════════════════════════════════════
-     DANGER VARIANT (pdanger) — red fill, white text
-  ══════════════════════════════════════════════════ */
-
-  /* MD — 44px */
-  .pdanger {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 44px;
-    padding: 0 24px;
-    border-radius: var(--vmc-radius-full);
-    border: none;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    font-family: var(--vmc-font-display);
-    font-size: 15px;
-    font-weight: 600;
-    color: oklch(1 0 0);
-    background: oklch(0.42 0.20 20);
-    box-shadow: 0 2px 6px oklch(0.42 0.20 20 / 0.35);
-    transition:
-      background    0.2s ease,
-      transform     0.2s cubic-bezier(0.25, 0.8, 0.25, 1),
-      box-shadow    0.2s ease;
-    transform: translateZ(0);
-  }
-  .pdanger:hover,
-  .pdanger--hover {
-    background: oklch(0.48 0.20 20);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 18px oklch(0.42 0.20 20 / 0.45);
-  }
-  .pdanger:active,
-  .pdanger--pressed {
-    background: oklch(0.36 0.20 20);
-    transform: scale(0.97) translateY(1px);
-    box-shadow: inset 0 2px 4px rgb(0% 0% 0% / 0.20);
-  }
-  .pdanger:disabled {
-    background: oklch(0.90 0.004 285);
-    color: oklch(0.55 0.06 285);
-    box-shadow: none;
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  /* Danger SM — 36px */
-  .pdanger-sm {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 36px;
-    padding: 0 16px;
-    border-radius: var(--vmc-radius-full);
-    border: none;
-    cursor: pointer;
-    position: relative;
-    font-family: var(--vmc-font-display);
-    font-size: 13px;
-    font-weight: 600;
-    color: oklch(1 0 0);
-    background: oklch(0.42 0.20 20);
-    box-shadow: 0 2px 5px oklch(0.42 0.20 20 / 0.30);
-    transition:
-      background    0.2s ease,
-      transform     0.2s cubic-bezier(0.25, 0.8, 0.25, 1),
-      box-shadow    0.2s ease;
-    transform: translateZ(0);
-  }
-  .pdanger-sm:hover,
-  .pdanger-sm--hover { background: oklch(0.48 0.20 20); transform: translateY(-1px); }
-  .pdanger-sm:active,
-  .pdanger-sm--pressed { background: oklch(0.36 0.20 20); transform: scale(0.97) translateY(1px); }
-  .pdanger-sm:disabled {
-    background: oklch(0.90 0.004 285);
-    color: oklch(0.55 0.06 285);
-    box-shadow: none;
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  /* Danger LG — 52px */
-  .pdanger-lg {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 52px;
-    padding: 0 32px;
-    border-radius: var(--vmc-radius-full);
-    border: none;
-    cursor: pointer;
-    position: relative;
-    font-family: var(--vmc-font-display);
-    font-size: 16px;
-    font-weight: 600;
-    color: oklch(1 0 0);
-    background: oklch(0.42 0.20 20);
-    box-shadow: 0 2px 8px oklch(0.42 0.20 20 / 0.40);
-    transition:
-      background    0.2s ease,
-      transform     0.2s cubic-bezier(0.25, 0.8, 0.25, 1),
-      box-shadow    0.2s ease;
-    transform: translateZ(0);
-  }
-  .pdanger-lg:hover,
-  .pdanger-lg--hover { background: oklch(0.48 0.20 20); transform: translateY(-1px); box-shadow: 0 8px 22px oklch(0.42 0.20 20 / 0.50); }
-  .pdanger-lg:active,
-  .pdanger-lg--pressed { background: oklch(0.36 0.20 20); transform: scale(0.97) translateY(1px); }
-  .pdanger-lg:disabled {
-    background: oklch(0.90 0.004 285);
-    color: oklch(0.55 0.06 285);
-    box-shadow: none;
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  /* ══════════════════════════════════════════════════
-     ICON SLOTS — work with any variant
-  ══════════════════════════════════════════════════ */
-
-  /* Left icon slot */
-  .pbtn-slot-left {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-right: 4px;
-  }
-  /* Right icon slot */
-  .pbtn-slot-right {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-left: 4px;
-  }
-
-  /* Icon-only — square pills for each variant */
-  .pvbtn-icon-only   { padding: 0; width: 48px; }
-  .pvbtn-lg-icon-only { padding: 0; width: 56px; }
-  .pvbtn-text-sm-icon-only { padding: 0; width: 36px; }
-
-  /* ══════════════════════════════════════════════════
-     FULL WIDTH
-  ══════════════════════════════════════════════════ */
-  .pbtn-full {
-    width: 100%;
-    justify-content: center;
-  }
-
-  /* ══════════════════════════════════════════════════
-     LOADING STATE
-  ══════════════════════════════════════════════════ */
-  @keyframes btn-spin {
-    to { transform: rotate(360deg); }
-  }
-  .pvbtn--loading,
-  .pvbtn-lg--loading,
-  .pvbtn-text-sm--loading,
-  .psec--loading,
-  .psec-lg--loading,
-  .psec-sm--loading,
-  .ptert--loading,
-  .pdanger--loading {
-    pointer-events: none;
-    cursor: default;
-  }
-  .pvbtn--loading > *,
-  .pvbtn-lg--loading > *,
-  .pvbtn-text-sm--loading > *,
-  .psec--loading > *,
-  .psec-lg--loading > *,
-  .psec-sm--loading > *,
-  .ptert--loading > *,
-  .pdanger--loading > * {
-    opacity: 0;
-  }
-  .pvbtn--loading::before,
-  .pvbtn-lg--loading::before,
-  .pvbtn-text-sm--loading::before,
-  .psec--loading::before,
-  .psec-lg--loading::before,
-  .psec-sm--loading::before,
-  .ptert--loading::before,
-  .pdanger--loading::before {
+  /* ══ LOADING state ══ */
+  @keyframes pbtn-spin { to { transform: rotate(360deg); } }
+  .pbtn--loading { cursor: wait; }
+  .pbtn--loading > * { opacity: 0; }
+  .pbtn--loading::before {
     content: '';
     position: absolute;
+    inset: 0;
+    margin: auto;
     width: 16px;
     height: 16px;
-    border-radius: 50%;
-    border: 2px solid rgb(100% 100% 100% / 0.35);
+    border: 2px solid rgb(100% 100% 100% / 0.30);
     border-top-color: rgb(100% 100% 100% / 0.90);
-    background: transparent;
-    animation: btn-spin 0.65s linear infinite;
-    z-index: 10;
-    inset: auto;
-    top: 50%;
-    left: 50%;
-    margin-top: -8px;
-    margin-left: -8px;
-    pointer-events: none;
-  }
-  .ptert--loading::before {
-    border-color: oklch(0.22 0.18 285 / 0.25);
-    border-top-color: oklch(0.22 0.18 285 / 0.85);
+    border-radius: 50%;
+    animation: pbtn-spin 0.7s linear infinite;
+    z-index: 3;
   }
 
   /* ── LikeButton · Cinematic upgrade ── */
@@ -2862,29 +2543,27 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
         </div>
 
         {/* ─────────────────────────────────────────────
-            0. BUTTON — Full property matrix
+            0. BUTTON — Unified system (pbtn)
         ───────────────────────────────────────────── */}
-        <SectionLabel title="Button" subtitle="Variant × Size × State × Icon Left · Icon Right · Icon Only · Full Width" />
+        <SectionLabel title="Button" subtitle="Primary · Secondary · Ghost · SM / MD / LG · Default / Hover / Focus / Pressed / Disabled / Loading · Icon Left · Right · Only · Full Width" />
 
-        <div style={{ background: "var(--vmc-color-background-card)", padding: "24px",
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px",
           borderBottom: "1px solid var(--vmc-color-vault-utility-ghost)",
           display: "flex", flexDirection: "column", gap: 0 }}>
 
-          {/* Row: VARIANTS — MD */}
+          {/* Row: VARIANTS — MD DEFAULT */}
           <div style={{ marginBottom: 24 }}>
             <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
               textTransform: "uppercase" as const, letterSpacing: "0.08em",
               color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
               Variants — MD
             </p>
-            <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" as const }}>
-              <button className="pvbtn" type="button">Primary</button>
-              <button className="psec" type="button">Secondary</button>
-              <button className="ptert" type="button">Tertiary</button>
-              <div style={{ background: "oklch(0.72 0.16 55)", borderRadius: 8, padding: "10px 14px", display: "inline-flex" }}>
-                <button className="pghost" type="button">Ghost</button>
+            <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+              <button className="pbtn pbtn--primary pbtn--md" type="button">Primary</button>
+              <button className="pbtn pbtn--secondary pbtn--md" type="button">Secondary</button>
+              <div style={{ background: "oklch(0.72 0.16 55)", padding: "8px", borderRadius: "var(--vmc-radius-full)", display: "inline-flex" }}>
+                <button className="pbtn pbtn--ghost pbtn--md" type="button">Ghost</button>
               </div>
-              <button className="pdanger" type="button">Danger</button>
             </div>
           </div>
 
@@ -2895,16 +2574,10 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
               color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
               Sizes — Primary
             </p>
-            <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" as const }}>
-              <StateCol label="SM · 36px">
-                <button className="pvbtn-text-sm" type="button">Participa</button>
-              </StateCol>
-              <StateCol label="MD · 48px">
-                <button className="pvbtn" type="button">Participa</button>
-              </StateCol>
-              <StateCol label="LG · 56px">
-                <button className="pvbtn-lg" type="button">Participa</button>
-              </StateCol>
+            <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+              <button className="pbtn pbtn--primary pbtn--sm" type="button">Label</button>
+              <button className="pbtn pbtn--primary pbtn--md" type="button">Label</button>
+              <button className="pbtn pbtn--primary pbtn--lg" type="button">Label</button>
             </div>
           </div>
 
@@ -2916,120 +2589,113 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
               States — Primary MD
             </p>
             <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" as const }}>
-              <StateCol label="Default">
-                <button className="pvbtn" type="button">Participa</button>
-              </StateCol>
-              <StateCol label="Hover">
-                <button className="pvbtn pvbtn--hover" type="button">Participa</button>
-              </StateCol>
-              <StateCol label="Focus">
-                <button className="pvbtn" type="button"
-                  style={{ outline: "3px solid transparent", outlineOffset: 4,
-                    boxShadow: "0 0 0 2px var(--vmc-color-base-white), 0 0 0 5px var(--vmc-color-vault-500)" }}>
-                  Participa
-                </button>
-              </StateCol>
-              <StateCol label="Disabled">
-                <button className="pvbtn" type="button" disabled>Participa</button>
-              </StateCol>
-              <StateCol label="Loading">
-                <button className="pvbtn pvbtn--loading" type="button" aria-label="Cargando">
-                  <span>Participa</span>
-                </button>
-              </StateCol>
+              <button className="pbtn pbtn--primary pbtn--md" type="button">Default</button>
+              <button className="pbtn pbtn--primary pbtn--md pbtn--hover" type="button">Hover</button>
+              <button className="pbtn pbtn--primary pbtn--md pbtn--focus" type="button">Focus</button>
+              <button className="pbtn pbtn--primary pbtn--md pbtn--pressed" type="button">Pressed</button>
+              <button className="pbtn pbtn--primary pbtn--md pbtn--disabled" type="button" aria-disabled="true">Disabled</button>
+              <button className="pbtn pbtn--primary pbtn--md pbtn--loading" type="button" aria-label="Cargando"></button>
             </div>
           </div>
 
-          {/* Row: ICON LEFT */}
+          {/* Row: STATES — SECONDARY MD */}
           <div style={{ marginBottom: 24 }}>
             <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
               textTransform: "uppercase" as const, letterSpacing: "0.08em",
               color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
-              Icon Left
+              States — Secondary MD
             </p>
             <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" as const }}>
-              <StateCol label="SM · 36px">
-                <button className="pvbtn-text-sm" type="button"
-                  style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-                  <span className="pbtn-slot-left">{STAR_ICON_SM}</span>
-                  Participa
-                </button>
-              </StateCol>
-              <StateCol label="MD · 48px">
-                <button className="pvbtn" type="button"
-                  style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
-                  <span className="pbtn-slot-left">{STAR_ICON_MD}</span>
-                  Participa
-                </button>
-              </StateCol>
-              <StateCol label="LG · 56px">
-                <button className="pvbtn-lg" type="button"
-                  style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
-                  <span className="pbtn-slot-left">{STAR_ICON_LG}</span>
-                  Participa
-                </button>
-              </StateCol>
+              <button className="pbtn pbtn--secondary pbtn--md" type="button">Default</button>
+              <button className="pbtn pbtn--secondary pbtn--md pbtn--hover" type="button">Hover</button>
+              <button className="pbtn pbtn--secondary pbtn--md pbtn--focus" type="button">Focus</button>
+              <button className="pbtn pbtn--secondary pbtn--md pbtn--pressed" type="button">Pressed</button>
+              <button className="pbtn pbtn--secondary pbtn--md pbtn--disabled" type="button" aria-disabled="true">Disabled</button>
+              <button className="pbtn pbtn--secondary pbtn--md pbtn--loading" type="button" aria-label="Cargando"></button>
             </div>
           </div>
 
-          {/* Row: ICON RIGHT */}
+          {/* Row: STATES — GHOST MD (on orange bg) */}
           <div style={{ marginBottom: 24 }}>
             <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
               textTransform: "uppercase" as const, letterSpacing: "0.08em",
               color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
-              Icon Right
+              States — Ghost MD
             </p>
-            <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" as const }}>
-              <StateCol label="SM · 36px">
-                <button className="pvbtn-text-sm" type="button"
-                  style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-                  Continuar
-                  <span className="pbtn-slot-right">{ARROW_ICON_SM}</span>
-                </button>
-              </StateCol>
-              <StateCol label="MD · 48px">
-                <button className="pvbtn" type="button"
-                  style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
-                  Continuar
-                  <span className="pbtn-slot-right">{ARROW_ICON_MD}</span>
-                </button>
-              </StateCol>
-              <StateCol label="LG · 56px">
-                <button className="pvbtn-lg" type="button"
-                  style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
-                  Continuar
-                  <span className="pbtn-slot-right">{ARROW_ICON_LG}</span>
-                </button>
-              </StateCol>
+            <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" as const,
+              background: "oklch(0.72 0.16 55)", padding: "12px 16px", borderRadius: 8 }}>
+              <button className="pbtn pbtn--ghost pbtn--md" type="button">Default</button>
+              <button className="pbtn pbtn--ghost pbtn--md pbtn--hover" type="button">Hover</button>
+              <button className="pbtn pbtn--ghost pbtn--md pbtn--focus" type="button">Focus</button>
+              <button className="pbtn pbtn--ghost pbtn--md pbtn--pressed" type="button">Pressed</button>
+              <button className="pbtn pbtn--ghost pbtn--md pbtn--disabled" type="button" aria-disabled="true">Disabled</button>
+              <button className="pbtn pbtn--ghost pbtn--md pbtn--loading" type="button" aria-label="Cargando"></button>
             </div>
           </div>
 
-          {/* Row: ICON ONLY */}
+          {/* Row: ICON LEFT — all 3 sizes (Primary) */}
           <div style={{ marginBottom: 24 }}>
             <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
               textTransform: "uppercase" as const, letterSpacing: "0.08em",
               color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
-              Icon Only
+              Icon Left — Primary
             </p>
-            <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" as const }}>
-              <StateCol label="SM · 36px">
-                <button className="pvbtn-text-sm pvbtn-text-sm-icon-only" type="button"
-                  aria-label="Favorito">
-                  {STAR_ICON_SM}
-                </button>
-              </StateCol>
-              <StateCol label="MD · 48px">
-                <button className="pvbtn pvbtn-icon-only" type="button"
-                  aria-label="Favorito">
-                  {STAR_ICON_MD}
-                </button>
-              </StateCol>
-              <StateCol label="LG · 56px">
-                <button className="pvbtn-lg pvbtn-lg-icon-only" type="button"
-                  aria-label="Favorito">
-                  {STAR_ICON_LG}
-                </button>
-              </StateCol>
+            <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+              <button className="pbtn pbtn--primary pbtn--sm pbtn--has-icon" type="button">
+                <span className="pbtn-icon">{STAR_ICON_SM}</span>
+                Label
+              </button>
+              <button className="pbtn pbtn--primary pbtn--md pbtn--has-icon" type="button">
+                <span className="pbtn-icon">{STAR_ICON_MD}</span>
+                Label
+              </button>
+              <button className="pbtn pbtn--primary pbtn--lg pbtn--has-icon" type="button">
+                <span className="pbtn-icon">{STAR_ICON_LG}</span>
+                Label
+              </button>
+            </div>
+          </div>
+
+          {/* Row: ICON RIGHT — all 3 sizes (Primary) */}
+          <div style={{ marginBottom: 24 }}>
+            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase" as const, letterSpacing: "0.08em",
+              color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
+              Icon Right — Primary
+            </p>
+            <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+              <button className="pbtn pbtn--primary pbtn--sm pbtn--has-icon" type="button">
+                Label
+                <span className="pbtn-icon">{ARROW_ICON_SM}</span>
+              </button>
+              <button className="pbtn pbtn--primary pbtn--md pbtn--has-icon" type="button">
+                Label
+                <span className="pbtn-icon">{ARROW_ICON_MD}</span>
+              </button>
+              <button className="pbtn pbtn--primary pbtn--lg pbtn--has-icon" type="button">
+                Label
+                <span className="pbtn-icon">{ARROW_ICON_LG}</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Row: ICON ONLY — all 3 sizes (Primary) */}
+          <div style={{ marginBottom: 24 }}>
+            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase" as const, letterSpacing: "0.08em",
+              color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
+              Icon Only — Primary
+            </p>
+            <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+              <button className="pbtn pbtn--primary pbtn--sm pbtn--icon-only" type="button" aria-label="Acción">
+                {STAR_ICON_SM}
+              </button>
+              <button className="pbtn pbtn--primary pbtn--md pbtn--icon-only" type="button" aria-label="Acción">
+                {STAR_ICON_MD}
+              </button>
+              <button className="pbtn pbtn--primary pbtn--lg pbtn--icon-only" type="button" aria-label="Acción">
+                {STAR_ICON_LG}
+              </button>
             </div>
           </div>
 
@@ -3040,8 +2706,8 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
               color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
               Full Width
             </p>
-            <div style={{ width: "100%" }}>
-              <button className="pvbtn pbtn-full" type="button">Participa ahora</button>
+            <div style={{ width: "100%", maxWidth: 320 }}>
+              <button className="pbtn pbtn--primary pbtn--md pbtn--full" type="button">Full Width</button>
             </div>
           </div>
 
