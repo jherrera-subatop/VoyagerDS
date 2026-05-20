@@ -1536,6 +1536,7 @@ const BUTTON_CSS = `
   /* Focus / pressed */
   .pcatcard--focus {
     transform: scale(0.96) !important;
+    opacity: 0.58;
     background-image:
       linear-gradient(160deg, oklch(0.94 0.012 285) 0%, oklch(0.90 0.018 285) 100%),
       linear-gradient(135deg,
@@ -1818,57 +1819,67 @@ function StateCol({ label, children, dark }: StateColProps): JSX.Element {
   );
 }
 
-/* ── CategoryCard icons — VMC auction categories ── */
+/* ── CategoryCard icons — v3 · geometric modern · strokeWidth 1.8 ── */
 function IconVehicular({ size }: { size: number }): JSX.Element {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-      {/* Body — shifted up 2px vs v1 (was y=14, now y=12) */}
-      <path d="M2 12h20v3.5a.5.5 0 01-.5.5h-19a.5.5 0 01-.5-.5V12z" />
-      {/* Roof arch — peak at y=7 (was y=9) */}
-      <path d="M5.5 12l2-5h9l2 5" />
-      {/* Wheels — filled accent: solid circles for visual weight */}
-      <circle cx="7.5" cy="16" r="2.2" fill="currentColor" stroke="none" />
-      <circle cx="16.5" cy="16" r="2.2" fill="currentColor" stroke="none" />
-      {/* Wheel arch cutouts on body bottom */}
-      <path d="M5 16h1M17 16h1" strokeWidth="1" />
+      stroke="var(--vmc-color-vault, oklch(0.22 0.18 285))"
+      strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      {/* Cabin — sharp geometric trapezoid */}
+      <path d="M5 10l2.5-4h9L19 10" />
+      {/* Body — rounded rect flush with cabin base */}
+      <rect x="2.5" y="10" width="19" height="4.5" rx="2" />
+      {/* Wheels — solid filled circles, sit below body */}
+      <circle cx="8" cy="17" r="2.2"
+        fill="var(--vmc-color-vault, oklch(0.22 0.18 285))" stroke="none" />
+      <circle cx="16" cy="17" r="2.2"
+        fill="var(--vmc-color-vault, oklch(0.22 0.18 285))" stroke="none" />
     </svg>
   );
 }
 function IconMaquinaria({ size }: { size: number }): JSX.Element {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-      {/* Cab body */}
-      <rect x="2" y="11" width="9" height="6" rx="1.5" />
-      {/* Undercarriage track */}
-      <rect x="1" y="16" width="11" height="3" rx="1.5" />
-      {/* Boom arm */}
-      <path d="M9 11 L16 4" />
-      {/* Stick */}
-      <path d="M16 4 L21 10" />
-      {/* Bucket — filled accent */}
-      <path d="M21 10 Q23 13 20 14.5 L15 13z" fill="currentColor" stroke="none" />
+      stroke="var(--vmc-color-vault, oklch(0.22 0.18 285))"
+      strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      {/* Tower crane — ultra-geometric, instantly architectural */}
+      {/* Vertical mast */}
+      <line x1="8" y1="21" x2="8" y2="4" />
+      {/* Horizontal jib (main + counter combined) */}
+      <path d="M4 7L8 4L21 4" />
+      {/* Hoist rope */}
+      <line x1="18" y1="4" x2="18" y2="14" />
+      {/* Load — filled circle, same duotone accent as wheels */}
+      <circle cx="18" cy="15.5" r="2"
+        fill="var(--vmc-color-vault, oklch(0.22 0.18 285))" stroke="none" />
     </svg>
   );
 }
 function IconEquipos({ size }: { size: number }): JSX.Element {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-      {/* Wrench — bold stroke, single clean path */}
-      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+      stroke="var(--vmc-color-vault, oklch(0.22 0.18 285))"
+      strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      {/* Toolbox — clean 3-element design, universally "equipment" */}
+      {/* Box body */}
+      <rect x="3" y="9" width="18" height="11" rx="2" />
+      {/* Handle arch */}
+      <path d="M9 9V6.5a1 1 0 011-1h4a1 1 0 011 1V9" />
+      {/* Tray divider */}
+      <line x1="3" y1="13.5" x2="21" y2="13.5" />
     </svg>
   );
 }
 function IconArticulos({ size }: { size: number }): JSX.Element {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-      {/* Tag body */}
+      stroke="var(--vmc-color-vault, oklch(0.22 0.18 285))"
+      strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      {/* Price tag — single-path elegance, perfect for artículos en subasta */}
       <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z" />
-      {/* Hole — filled accent */}
-      <circle cx="7" cy="7" r="1.5" fill="currentColor" stroke="none" />
+      {/* Tag hole — filled accent */}
+      <circle cx="7" cy="7" r="1.5"
+        fill="var(--vmc-color-vault, oklch(0.22 0.18 285))" stroke="none" />
     </svg>
   );
 }
