@@ -1608,12 +1608,6 @@ const BUTTON_CSS = `
       0 1px 5px oklch(0.22 0.18 285 / 0.12),
       inset 0 1px 3px oklch(0.22 0.18 285 / 0.08) !important;
   }
-  .pcatcard--focus .pcatcard-icon-wrap {
-    background: linear-gradient(145deg,
-      oklch(0.87 0.08 285) 0%,
-      oklch(0.92 0.05 285) 100%
-    );
-  }
 
   /* ── PriceTag · cinematic vault pill ── */
   .ptag {
