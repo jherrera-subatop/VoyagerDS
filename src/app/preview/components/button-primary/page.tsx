@@ -1242,6 +1242,168 @@ const BUTTON_CSS = `
   /* Disabled: shelf invisible pero mantiene posición */
   .pprice-wrap--disabled .pprice-shelf { visibility: hidden; }
 
+  /* ── OfferType · cinematic card ── */
+  .poftype {
+    width: 160px;
+    border-radius: var(--vmc-radius-lg, 16px);
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    box-shadow:
+      0 4px 16px oklch(0 0 0 / 0.12),
+      0 1px 4px  oklch(0 0 0 / 0.06);
+    transition:
+      transform  0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow 0.25s ease;
+    transform: translateZ(0);
+    outline: none;
+  }
+
+  /* Top colored section */
+  .poftype-top {
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.22s ease;
+  }
+  /* Inset shine */
+  .poftype-top::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      oklch(1 0 0 / 0.18) 0%,
+      transparent 55%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+  /* Bottom edge shadow separator */
+  .poftype-top::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(180deg, transparent 0%, oklch(0 0 0 / 0.10) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .poftype-label {
+    font-family: var(--vmc-font-display);
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: oklch(1 0 0);
+    text-shadow: 0 1px 4px oklch(0 0 0 / 0.18);
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Bottom white section */
+  .poftype-bottom {
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: oklch(1 0 0);
+  }
+  .poftype-cta {
+    font-family: var(--vmc-font-display);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.10em;
+    transition: color 0.22s ease;
+  }
+
+  /* ── Variant: NEGOCIABLE ── */
+  .poftype--negotiable .poftype-top {
+    background: linear-gradient(180deg,
+      oklch(0.84 0.13 195) 0%,
+      var(--vmc-color-negotiable, oklch(0.78 0.14 195)) 100%
+    );
+  }
+  .poftype--negotiable .poftype-cta {
+    color: oklch(0.62 0.16 195);
+  }
+
+  /* Hover */
+  .poftype--negotiable:hover .poftype-top,
+  .poftype--negotiable.poftype--hover .poftype-top {
+    background: linear-gradient(180deg,
+      oklch(0.90 0.11 195) 0%,
+      oklch(0.82 0.14 195) 100%
+    );
+  }
+  /* Focus / pressed */
+  .poftype--negotiable.poftype--focus .poftype-top {
+    background: linear-gradient(180deg,
+      oklch(0.65 0.17 195) 0%,
+      oklch(0.55 0.16 195) 100%
+    );
+  }
+
+  /* ── Variant: EN VIVO ── */
+  .poftype--live .poftype-top {
+    background: linear-gradient(180deg,
+      oklch(0.78 0.17 55) 0%,
+      var(--vmc-color-live, oklch(0.72 0.16 55)) 100%
+    );
+  }
+  .poftype--live .poftype-cta {
+    color: oklch(0.58 0.18 45);
+  }
+
+  /* Hover */
+  .poftype--live:hover .poftype-top,
+  .poftype--live.poftype--hover .poftype-top {
+    background: linear-gradient(180deg,
+      oklch(0.84 0.16 58) 0%,
+      oklch(0.76 0.17 55) 100%
+    );
+  }
+  /* Focus / pressed */
+  .poftype--live.poftype--focus .poftype-top {
+    background: linear-gradient(180deg,
+      oklch(0.58 0.19 48) 0%,
+      oklch(0.50 0.17 44) 100%
+    );
+  }
+
+  /* ── Shared hover lift ── */
+  .poftype:hover,
+  .poftype--hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow:
+      0 10px 28px oklch(0 0 0 / 0.16),
+      0 2px 8px   oklch(0 0 0 / 0.08);
+  }
+  .poftype--negotiable:hover,
+  .poftype--negotiable.poftype--hover {
+    box-shadow:
+      0 10px 28px oklch(0.78 0.14 195 / 0.30),
+      0 2px 8px   oklch(0.78 0.14 195 / 0.15);
+  }
+  .poftype--live:hover,
+  .poftype--live.poftype--hover {
+    box-shadow:
+      0 10px 28px oklch(0.72 0.16 55 / 0.32),
+      0 2px 8px   oklch(0.72 0.16 55 / 0.16);
+  }
+
+  /* ── Focus / pressed ── */
+  .poftype--focus {
+    transform: scale(0.97) !important;
+    box-shadow:
+      0 2px 8px oklch(0 0 0 / 0.10),
+      inset 0 2px 6px oklch(0 0 0 / 0.12) !important;
+  }
+
   /* ── PriceTag · cinematic vault pill ── */
   .ptag {
     display: inline-flex;
@@ -1895,9 +2057,97 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
         </div>
 
         {/* ─────────────────────────────────────────────
-            6. PriceTag
+            6. OfferType
         ───────────────────────────────────────────── */}
-        <SectionLabel title="PriceTag" subtitle="vault pill · icono teal + precio · 26 / 32 / 40px" />
+        <SectionLabel title="OfferType" subtitle="NEGOCIABLE · EN VIVO — Default / Hover / Focus" />
+
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px" }}>
+
+          {/* Column headers */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16,
+            marginBottom: 20 }}>
+            {(["Default", "Hover", "Focus"] as const).map(function stateHeader(s) {
+              return (
+                <p key={s} style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+                  textTransform: "uppercase", letterSpacing: "0.08em",
+                  color: "var(--vmc-color-text-tertiary)", margin: 0,
+                  textAlign: "center" }}>
+                  {s}
+                </p>
+              );
+            })}
+          </div>
+
+          {/* NEGOCIABLE row */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16,
+            justifyItems: "center", marginBottom: 24 }}>
+            {/* Default */}
+            <div className="poftype poftype--negotiable">
+              <div className="poftype-top">
+                <span className="poftype-label">NEGOCIABLE</span>
+              </div>
+              <div className="poftype-bottom">
+                <span className="poftype-cta">VER TODAS</span>
+              </div>
+            </div>
+            {/* Hover */}
+            <div className="poftype poftype--negotiable poftype--hover">
+              <div className="poftype-top">
+                <span className="poftype-label">NEGOCIABLE</span>
+              </div>
+              <div className="poftype-bottom">
+                <span className="poftype-cta">VER TODAS</span>
+              </div>
+            </div>
+            {/* Focus */}
+            <div className="poftype poftype--negotiable poftype--focus">
+              <div className="poftype-top">
+                <span className="poftype-label">NEGOCIABLE</span>
+              </div>
+              <div className="poftype-bottom">
+                <span className="poftype-cta">VER TODAS</span>
+              </div>
+            </div>
+          </div>
+
+          {/* EN VIVO row */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16,
+            justifyItems: "center" }}>
+            {/* Default */}
+            <div className="poftype poftype--live">
+              <div className="poftype-top">
+                <span className="poftype-label">EN VIVO</span>
+              </div>
+              <div className="poftype-bottom">
+                <span className="poftype-cta">VER TODAS</span>
+              </div>
+            </div>
+            {/* Hover */}
+            <div className="poftype poftype--live poftype--hover">
+              <div className="poftype-top">
+                <span className="poftype-label">EN VIVO</span>
+              </div>
+              <div className="poftype-bottom">
+                <span className="poftype-cta">VER TODAS</span>
+              </div>
+            </div>
+            {/* Focus */}
+            <div className="poftype poftype--live poftype--focus">
+              <div className="poftype-top">
+                <span className="poftype-label">EN VIVO</span>
+              </div>
+              <div className="poftype-bottom">
+                <span className="poftype-cta">VER TODAS</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* ─────────────────────────────────────────────
+            7. PriceTag
+        ───────────────────────────────────────────── */}
+        <SectionLabel title="PriceTag" subtitle="vault pill · icono teal + precio · SM / MD / LG" />
 
         <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px" }}>
 
