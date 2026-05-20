@@ -1403,10 +1403,16 @@ const BUTTON_CSS = `
     );
   }
 
-  /* ── Shared hover lift — alineado con pcatcard (-4px + 3-layer shadow) ── */
+  /* ── Shared hover — lift + micro-scale, sensación premium ── */
   .poftype:hover,
   .poftype--hover {
-    transform: translateY(-4px);
+    transform: translateY(-4px) scale(1.015);
+  }
+
+  /* Shine amplificado en hover (ambas variantes) */
+  .poftype:hover .poftype-top::before,
+  .poftype--hover .poftype-top::before {
+    background: linear-gradient(180deg, oklch(1 0 0 / 0.26) 0%, transparent 50%);
   }
 
   /* ── Focus / pressed — opacity total igual que pcatcard ── */
@@ -1530,16 +1536,15 @@ const BUTTON_CSS = `
     z-index: -1;
     transition: opacity 0.28s ease;
   }
-  /* Icon wrap — gradient fill, inset shine */
+  /* Icon wrap — blanco puro + sombra sutil */
   .pcatcard-icon-wrap {
     width: 36px;
     height: 36px;
     border-radius: 8px;
-    background: linear-gradient(145deg,
-      oklch(0.93 0.04 285) 0%,
-      oklch(0.97 0.02 285) 100%
-    );
-    box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.70);
+    background: oklch(1 0 0);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0),
+      0 1px 4px oklch(0.22 0.18 285 / 0.10);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1547,7 +1552,7 @@ const BUTTON_CSS = `
     color: var(--vmc-color-vault, oklch(0.22 0.18 285));
     position: relative;
     z-index: 2;
-    transition: background 0.2s ease, box-shadow 0.2s ease;
+    transition: box-shadow 0.2s ease;
   }
   .pcatcard-label {
     font-family: var(--vmc-font-display);
@@ -1571,23 +1576,33 @@ const BUTTON_CSS = `
     .plike:hover::after { opacity: 0.55; }  ← radial blob glow vault
   */
 
-  /* Hover v2 — physical lift, directional shadow, no diffuse glow */
+  /* Hover v2 — lift + ring intensificado + glow suave */
   .pcatcard:hover,
   .pcatcard--hover {
     transform: translateY(-4px);
     box-shadow:
-      0 12px 20px oklch(0.22 0.18 285 / 0.13),
-      0  4px  8px oklch(0.22 0.18 285 / 0.09),
+      0 12px 20px oklch(0.22 0.18 285 / 0.14),
+      0  4px  8px oklch(0.22 0.18 285 / 0.10),
       0  1px  2px oklch(0.22 0.18 285 / 0.06);
+    background-image:
+      linear-gradient(160deg, oklch(0.97 0.010 285) 0%, oklch(0.99 0.004 285) 100%),
+      linear-gradient(135deg,
+        oklch(0.52 0.22 285) 0%,
+        oklch(1 0 0 / 0.80) 38%,
+        oklch(0.40 0.24 285) 72%,
+        oklch(0.52 0.22 285) 100%
+      );
   }
-  /* ::after stays opacity 0 — no radial blob */
+  .pcatcard:hover::after,
+  .pcatcard--hover::after {
+    opacity: 0.30;
+  }
+  /* Icon wrap — permanece blanco en hover */
   .pcatcard:hover .pcatcard-icon-wrap,
   .pcatcard--hover .pcatcard-icon-wrap {
-    background: linear-gradient(145deg,
-      oklch(0.89 0.07 285) 0%,
-      oklch(0.94 0.04 285) 100%
-    );
-    box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.65);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0),
+      0 2px 6px oklch(0.22 0.18 285 / 0.14);
   }
   /* Focus / pressed */
   .pcatcard--focus {
