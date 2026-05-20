@@ -1351,8 +1351,9 @@ const BUTTON_CSS = `
   .poftype--negotiable.poftype--hover {
     box-shadow:
       0 0 0 1.5px oklch(0.78 0.14 195 / 0.55),
-      0 8px 20px oklch(0.78 0.14 195 / 0.22),
-      0 2px 6px  oklch(0 0 0 / 0.08);
+      0 10px 18px oklch(0.22 0.18 285 / 0.11),
+      0  3px  7px oklch(0.22 0.18 285 / 0.08),
+      0  1px  2px oklch(0.22 0.18 285 / 0.05);
   }
   /* Focus / pressed */
   .poftype--negotiable.poftype--focus .poftype-top {
@@ -1390,8 +1391,9 @@ const BUTTON_CSS = `
   .poftype--live.poftype--hover {
     box-shadow:
       0 0 0 1.5px oklch(0.72 0.16 55 / 0.55),
-      0 8px 20px oklch(0.72 0.16 55 / 0.22),
-      0 2px 6px  oklch(0 0 0 / 0.08);
+      0 10px 18px oklch(0.22 0.18 285 / 0.11),
+      0  3px  7px oklch(0.22 0.18 285 / 0.08),
+      0  1px  2px oklch(0.22 0.18 285 / 0.05);
   }
   /* Focus / pressed */
   .poftype--live.poftype--focus .poftype-top {
@@ -1401,18 +1403,72 @@ const BUTTON_CSS = `
     );
   }
 
-  /* ── Shared hover lift ── */
+  /* ── Shared hover lift — alineado con pcatcard (-4px + 3-layer shadow) ── */
   .poftype:hover,
   .poftype--hover {
-    transform: translateY(-2px);
+    transform: translateY(-4px);
   }
 
-  /* ── Focus / pressed ── */
+  /* ── Focus / pressed — opacity total igual que pcatcard ── */
   .poftype--focus {
     transform: scale(0.97) !important;
+    opacity: 0.58;
     box-shadow:
       0 2px 8px oklch(0 0 0 / 0.10),
       inset 0 2px 6px oklch(0 0 0 / 0.12) !important;
+  }
+
+  /* ── QuickFilter ── */
+  .pqf {
+    width: 100%;
+    height: 180px;
+    background: oklch(1 0 0);
+    border-radius: var(--vmc-radius-md, 8px);
+    border: 1px solid oklch(0.22 0.18 285 / 0.07);
+    box-shadow: 0 2px 10px oklch(0.22 0.18 285 / 0.06);
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+  }
+  .pqf-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+    padding: 0 24px;
+  }
+  .pqf-section--offer {
+    flex: 0 0 auto;
+    border-right: 1px solid oklch(0.22 0.18 285 / 0.07);
+  }
+  .pqf-section--cats {
+    flex: 1;
+  }
+  .pqf-heading {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .pqf-heading::before {
+    content: '';
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid var(--vmc-color-vault, oklch(0.22 0.18 285));
+    border-left: 2px solid var(--vmc-color-vault, oklch(0.22 0.18 285));
+  }
+  .pqf-heading-text {
+    font-family: var(--vmc-font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: oklch(0.22 0.18 285 / 0.45);
+  }
+  .pqf-items {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
   }
 
   /* ── CategoryCard · cinematic upgrade ── */
@@ -1937,6 +1993,13 @@ function OfferTypeDemoCard({ variant, label }: OfferTypeDemoCardProps): JSX.Elem
   );
 }
 
+const CATEGORY_ITEMS = [
+  { key: "vehicular",  label: "VEHICULAR",          icon: (s: number) => <IconVehicular size={s} /> },
+  { key: "maquinaria", label: "MAQUINARIA",         icon: (s: number) => <IconMaquinaria size={s} /> },
+  { key: "equipos",    label: "EQUIPOS DIVERSOS",   icon: (s: number) => <IconEquipos size={s} /> },
+  { key: "articulos",  label: "ARTÍCULOS DIVERSOS", icon: (s: number) => <IconArticulos size={s} /> },
+] as const;
+
 export default function ButtonPrimaryPreviewPage(): JSX.Element {
   return (
     <main style={{
@@ -1949,7 +2012,7 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
       <style dangerouslySetInnerHTML={{ __html: BUTTON_CSS }} />
 
       <div style={{
-        width: 720,
+        width: 820,
         display: "flex",
         flexDirection: "column",
         borderRadius: 4,
@@ -2436,12 +2499,9 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
         <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px" }}>
 
           {(() => {
-            const CATS = [
-              { key: "vehicular",  label: "VEHICULAR",          icon: <IconVehicular size={22} /> },
-              { key: "maquinaria", label: "MAQUINARIA",         icon: <IconMaquinaria size={22} /> },
-              { key: "equipos",    label: "EQUIPOS DIVERSOS",   icon: <IconEquipos size={22} /> },
-              { key: "articulos",  label: "ARTÍCULOS DIVERSOS", icon: <IconArticulos size={22} /> },
-            ] as const;
+            const CATS = CATEGORY_ITEMS.map(function mapCat(c) {
+              return { key: c.key, label: c.label, icon: c.icon(22) };
+            });
 
             const STATES = [
               { label: "Default", mod: ""                },
@@ -2570,6 +2630,100 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
               </div>
             );
           })}
+        </div>
+
+        {/* ─────────────────────────────────────────────
+            9. QuickFilter
+        ───────────────────────────────────────────── */}
+        <SectionLabel
+          title="QuickFilter"
+          subtitle="766×180px · OfferType + CategoryCard · composición real"
+        />
+
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px" }}>
+
+          {/* Static — default state */}
+          <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+            textTransform: "uppercase", letterSpacing: "0.08em",
+            color: "var(--vmc-color-text-tertiary)", margin: "0 0 12px" }}>
+            Default
+          </p>
+          <div className="pqf">
+            <div className="pqf-section pqf-section--offer">
+              <div className="pqf-heading">
+                <span className="pqf-heading-text">Tipo de Oferta</span>
+              </div>
+              <div className="pqf-items">
+                <div className="poftype poftype--live">
+                  <div className="poftype-top">
+                    <span className="poftype-label">EN VIVO</span>
+                  </div>
+                  <div className="poftype-bottom">
+                    <span className="poftype-cta">VER TODAS</span>
+                  </div>
+                </div>
+                <div className="poftype poftype--negotiable">
+                  <div className="poftype-top">
+                    <span className="poftype-label">NEGOCIABLE</span>
+                  </div>
+                  <div className="poftype-bottom">
+                    <span className="poftype-cta">VER TODAS</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="pqf-section pqf-section--cats">
+              <div className="pqf-heading">
+                <span className="pqf-heading-text">Categorías</span>
+              </div>
+              <div className="pqf-items">
+                {CATEGORY_ITEMS.map(function qfCatCard(c) {
+                  return (
+                    <div key={c.key} className="pcatcard">
+                      <div className="pcatcard-icon-wrap">{c.icon(20)}</div>
+                      <span className="pcatcard-label">{c.label}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Live — interactive */}
+          <div style={{ marginTop: 24, paddingTop: 20,
+            borderTop: "1px solid var(--vmc-color-vault-utility-ghost)" }}>
+            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase", letterSpacing: "0.08em",
+              color: "var(--vmc-color-text-tertiary)", margin: "0 0 12px" }}>
+              Live — hover + click en cada componente
+            </p>
+            <div className="pqf">
+              <div className="pqf-section pqf-section--offer">
+                <div className="pqf-heading">
+                  <span className="pqf-heading-text">Tipo de Oferta</span>
+                </div>
+                <div className="pqf-items">
+                  <OfferTypeDemoCard variant="live" label="EN VIVO" />
+                  <OfferTypeDemoCard variant="negotiable" label="NEGOCIABLE" />
+                </div>
+              </div>
+
+              <div className="pqf-section pqf-section--cats">
+                <div className="pqf-heading">
+                  <span className="pqf-heading-text">Categorías</span>
+                </div>
+                <div className="pqf-items">
+                  {CATEGORY_ITEMS.map(function qfCatLive(c) {
+                    return (
+                      <CategoryCardDemo key={c.key} label={c.label} icon={c.icon(20)} />
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
 
       </div>
