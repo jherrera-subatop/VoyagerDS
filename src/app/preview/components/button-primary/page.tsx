@@ -2551,86 +2551,91 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
           borderBottom: "1px solid var(--vmc-color-vault-utility-ghost)",
           display: "flex", flexDirection: "column", gap: 0 }}>
 
-          {/* Row: VARIANTS — MD DEFAULT */}
-          <div style={{ marginBottom: 24 }}>
-            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
-              textTransform: "uppercase" as const, letterSpacing: "0.08em",
-              color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
-              Variants — MD
+          {/* ── Shared row-label style ── */}
+
+          {/* ── PRIMARY — SM / MD / LG × all states ── */}
+          <div style={{ marginBottom: 32 }}>
+            <p style={{ fontFamily: F, fontSize: 11, fontWeight: 700, color: "oklch(0.22 0.18 285)",
+              textTransform: "uppercase" as const, letterSpacing: "0.10em", margin: "0 0 16px" }}>
+              Primary
             </p>
-            <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-              <button className="pbtn pbtn--primary pbtn--md" type="button">Primary</button>
-              <button className="pbtn pbtn--secondary pbtn--md" type="button">Secondary</button>
-              <div style={{ background: "oklch(0.72 0.16 55)", padding: "8px", borderRadius: "var(--vmc-radius-full)", display: "inline-flex" }}>
-                <button className="pbtn pbtn--ghost pbtn--md" type="button">Ghost</button>
-              </div>
-            </div>
+
+            {(["sm","md","lg"] as const).map(function renderPrimarySize(sz) {
+              const w = sz === "sm" ? 128 : sz === "md" ? 186 : 218;
+              const label = sz === "sm" ? "SM — 36px" : sz === "md" ? "MD — 186×48" : "LG — 56px";
+              return (
+                <div key={sz} style={{ marginBottom: 16 }}>
+                  <p style={{ fontFamily: F, fontSize: 9, fontWeight: 600,
+                    textTransform: "uppercase" as const, letterSpacing: "0.08em",
+                    color: "oklch(0.38 0.04 280 / 0.45)", margin: "0 0 8px" }}>{label}</p>
+                  <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" as const }}>
+                    <button className={`pbtn pbtn--primary pbtn--${sz}`} type="button" style={{ minWidth: w }}>Default</button>
+                    <button className={`pbtn pbtn--primary pbtn--${sz} pbtn--hover`} type="button" style={{ minWidth: w }}>Hover</button>
+                    <button className={`pbtn pbtn--primary pbtn--${sz} pbtn--focus`} type="button" style={{ minWidth: w }}>Focus</button>
+                    <button className={`pbtn pbtn--primary pbtn--${sz} pbtn--pressed`} type="button" style={{ minWidth: w }}>Pressed</button>
+                    <button className={`pbtn pbtn--primary pbtn--${sz} pbtn--disabled`} type="button" aria-disabled="true" style={{ minWidth: w }}>Disabled</button>
+                    <button className={`pbtn pbtn--primary pbtn--${sz} pbtn--loading`} type="button" aria-label="Cargando" style={{ minWidth: w }}></button>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
-          {/* Row: SIZES — PRIMARY */}
-          <div style={{ marginBottom: 24 }}>
-            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
-              textTransform: "uppercase" as const, letterSpacing: "0.08em",
-              color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
-              Sizes — Primary
+          {/* ── SECONDARY — SM / MD / LG × all states ── */}
+          <div style={{ marginBottom: 32 }}>
+            <p style={{ fontFamily: F, fontSize: 11, fontWeight: 700, color: "oklch(0.22 0.18 285)",
+              textTransform: "uppercase" as const, letterSpacing: "0.10em", margin: "0 0 16px" }}>
+              Secondary
             </p>
-            <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-              <button className="pbtn pbtn--primary pbtn--sm" type="button">Label</button>
-              <button className="pbtn pbtn--primary pbtn--md" type="button">Label</button>
-              <button className="pbtn pbtn--primary pbtn--lg" type="button">Label</button>
-            </div>
+
+            {(["sm","md","lg"] as const).map(function renderSecondarySize(sz) {
+              const w = sz === "sm" ? 128 : sz === "md" ? 186 : 218;
+              const label = sz === "sm" ? "SM — 36px" : sz === "md" ? "MD — 186×48" : "LG — 56px";
+              return (
+                <div key={sz} style={{ marginBottom: 16 }}>
+                  <p style={{ fontFamily: F, fontSize: 9, fontWeight: 600,
+                    textTransform: "uppercase" as const, letterSpacing: "0.08em",
+                    color: "oklch(0.38 0.04 280 / 0.45)", margin: "0 0 8px" }}>{label}</p>
+                  <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" as const }}>
+                    <button className={`pbtn pbtn--secondary pbtn--${sz}`} type="button" style={{ minWidth: w }}>Default</button>
+                    <button className={`pbtn pbtn--secondary pbtn--${sz} pbtn--hover`} type="button" style={{ minWidth: w }}>Hover</button>
+                    <button className={`pbtn pbtn--secondary pbtn--${sz} pbtn--focus`} type="button" style={{ minWidth: w }}>Focus</button>
+                    <button className={`pbtn pbtn--secondary pbtn--${sz} pbtn--pressed`} type="button" style={{ minWidth: w }}>Pressed</button>
+                    <button className={`pbtn pbtn--secondary pbtn--${sz} pbtn--disabled`} type="button" aria-disabled="true" style={{ minWidth: w }}>Disabled</button>
+                    <button className={`pbtn pbtn--secondary pbtn--${sz} pbtn--loading`} type="button" aria-label="Cargando" style={{ minWidth: w }}></button>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
-          {/* Row: STATES — PRIMARY MD */}
-          <div style={{ marginBottom: 24 }}>
-            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
-              textTransform: "uppercase" as const, letterSpacing: "0.08em",
-              color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
-              States — Primary MD
+          {/* ── GHOST — SM / MD / LG × all states — on live bg ── */}
+          <div style={{ marginBottom: 32 }}>
+            <p style={{ fontFamily: F, fontSize: 11, fontWeight: 700, color: "oklch(0.22 0.18 285)",
+              textTransform: "uppercase" as const, letterSpacing: "0.10em", margin: "0 0 16px" }}>
+              Ghost <span style={{ fontWeight: 400, fontSize: 9, opacity: 0.6 }}>· sobre fondo live</span>
             </p>
-            <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" as const }}>
-              <button className="pbtn pbtn--primary pbtn--md" type="button">Default</button>
-              <button className="pbtn pbtn--primary pbtn--md pbtn--hover" type="button">Hover</button>
-              <button className="pbtn pbtn--primary pbtn--md pbtn--focus" type="button">Focus</button>
-              <button className="pbtn pbtn--primary pbtn--md pbtn--pressed" type="button">Pressed</button>
-              <button className="pbtn pbtn--primary pbtn--md pbtn--disabled" type="button" aria-disabled="true">Disabled</button>
-              <button className="pbtn pbtn--primary pbtn--md pbtn--loading" type="button" aria-label="Cargando"></button>
-            </div>
-          </div>
 
-          {/* Row: STATES — SECONDARY MD */}
-          <div style={{ marginBottom: 24 }}>
-            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
-              textTransform: "uppercase" as const, letterSpacing: "0.08em",
-              color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
-              States — Secondary MD
-            </p>
-            <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" as const }}>
-              <button className="pbtn pbtn--secondary pbtn--md" type="button">Default</button>
-              <button className="pbtn pbtn--secondary pbtn--md pbtn--hover" type="button">Hover</button>
-              <button className="pbtn pbtn--secondary pbtn--md pbtn--focus" type="button">Focus</button>
-              <button className="pbtn pbtn--secondary pbtn--md pbtn--pressed" type="button">Pressed</button>
-              <button className="pbtn pbtn--secondary pbtn--md pbtn--disabled" type="button" aria-disabled="true">Disabled</button>
-              <button className="pbtn pbtn--secondary pbtn--md pbtn--loading" type="button" aria-label="Cargando"></button>
-            </div>
-          </div>
-
-          {/* Row: STATES — GHOST MD (on orange bg) */}
-          <div style={{ marginBottom: 24 }}>
-            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
-              textTransform: "uppercase" as const, letterSpacing: "0.08em",
-              color: "oklch(0.38 0.04 280 / 0.5)", marginBottom: 8, marginTop: 0 }}>
-              States — Ghost MD
-            </p>
-            <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" as const,
-              background: "oklch(0.72 0.16 55)", padding: "12px 16px", borderRadius: 8 }}>
-              <button className="pbtn pbtn--ghost pbtn--md" type="button">Default</button>
-              <button className="pbtn pbtn--ghost pbtn--md pbtn--hover" type="button">Hover</button>
-              <button className="pbtn pbtn--ghost pbtn--md pbtn--focus" type="button">Focus</button>
-              <button className="pbtn pbtn--ghost pbtn--md pbtn--pressed" type="button">Pressed</button>
-              <button className="pbtn pbtn--ghost pbtn--md pbtn--disabled" type="button" aria-disabled="true">Disabled</button>
-              <button className="pbtn pbtn--ghost pbtn--md pbtn--loading" type="button" aria-label="Cargando"></button>
-            </div>
+            {(["sm","md","lg"] as const).map(function renderGhostSize(sz) {
+              const w = sz === "sm" ? 128 : sz === "md" ? 186 : 218;
+              const label = sz === "sm" ? "SM — 36px" : sz === "md" ? "MD — 186×48" : "LG — 56px";
+              return (
+                <div key={sz} style={{ marginBottom: 12 }}>
+                  <p style={{ fontFamily: F, fontSize: 9, fontWeight: 600,
+                    textTransform: "uppercase" as const, letterSpacing: "0.08em",
+                    color: "oklch(0.38 0.04 280 / 0.45)", margin: "0 0 8px" }}>{label}</p>
+                  <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" as const,
+                    background: "oklch(0.72 0.16 55)", padding: "12px 16px", borderRadius: 8 }}>
+                    <button className={`pbtn pbtn--ghost pbtn--${sz}`} type="button" style={{ minWidth: w }}>Default</button>
+                    <button className={`pbtn pbtn--ghost pbtn--${sz} pbtn--hover`} type="button" style={{ minWidth: w }}>Hover</button>
+                    <button className={`pbtn pbtn--ghost pbtn--${sz} pbtn--focus`} type="button" style={{ minWidth: w }}>Focus</button>
+                    <button className={`pbtn pbtn--ghost pbtn--${sz} pbtn--pressed`} type="button" style={{ minWidth: w }}>Pressed</button>
+                    <button className={`pbtn pbtn--ghost pbtn--${sz} pbtn--disabled`} type="button" aria-disabled="true" style={{ minWidth: w }}>Disabled</button>
+                    <button className={`pbtn pbtn--ghost pbtn--${sz} pbtn--loading`} type="button" aria-label="Cargando" style={{ minWidth: w }}></button>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
           {/* Row: ICON LEFT — all 3 sizes (Primary) */}
