@@ -30,9 +30,31 @@ const V = {
   negotiable:  "var(--voyager-color-negotiable, #00CACE)",
   surfaceCard: "var(--voyager-surface-card,     #FFFFFF)",
   textPrimary: "var(--voyager-text-primary,     #191C1C)",
-  shadowSm:    "0 8px 16px rgba(34,0,92,0.06)",
-  shadowLg:    "0 16px 24px rgba(0,0,0,0.14)",
+  shadowSm:    "0 4px 12px oklch(0.22 0.18 285 / 0.14)",
+  shadowLg:    "0 8px 16px oklch(0.22 0.18 285 / 0.10)",
 } as const;
+
+const CARD_STYLES = `
+  .vmc-like-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px; border-radius: 9999px;
+    border: none; cursor: pointer;
+    background: oklch(1 0 0);
+    color: oklch(0.30 0.20 285);
+    box-shadow: 0 4px 12px oklch(0.22 0.18 285 / 0.14);
+    transition: background 120ms cubic-bezier(0.3,0,0,1),
+                transform  120ms cubic-bezier(0.3,0,0,1),
+                box-shadow 120ms cubic-bezier(0.3,0,0,1);
+  }
+  .vmc-like-btn:hover {
+    background: color-mix(in oklch, oklch(1 0 0) 88%, oklch(0.30 0.20 285));
+    box-shadow: 0 6px 18px oklch(0.22 0.18 285 / 0.22);
+    transform: scale(1.06);
+  }
+  .vmc-like-btn:active  { transform: scale(0.92); }
+  .vmc-like-btn:focus-visible { outline: 2px solid oklch(0.30 0.20 285); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { .vmc-like-btn { transition: none; } }
+`;
 
 const fontDisplay = "var(--font-display, 'Plus Jakarta Sans', sans-serif)";
 const fontMono    = "var(--font-mono,    'Roboto Mono', monospace)";
@@ -97,6 +119,8 @@ export default function OfferCard({ variant = "en-vivo" }: OfferCardProps): JSX.
   const srLabel      = isLive ? "Kia Soluto 2022" : "Honda HR-V 2016";
 
   return (
+    <>
+    <style dangerouslySetInnerHTML={{ __html: CARD_STYLES }} />
     <div style={{
       width:        "100%",
       maxWidth:     176,
@@ -205,31 +229,17 @@ export default function OfferCard({ variant = "en-vivo" }: OfferCardProps): JSX.
           right:        0,
           marginBottom: 12,
           marginRight:  12,
-          borderRadius: 9999,
-          boxShadow:    V.shadowLg,
         }}>
           <button
             aria-label="me interesa"
             type="button"
-            style={{
-              display:         "flex",
-              alignItems:      "center",
-              justifyContent:  "center",
-              width:           32,
-              height:          32,
-              background:      V.surfaceCard,
-              borderRadius:    9999,
-              boxShadow:       V.shadowSm,
-              border:          "none",
-              cursor:          "pointer",
-              color:           V.vaultMid,
-              outline:         "none",
-            }}
+            className="vmc-like-btn"
           >
             <HeartIcon />
           </button>
         </div>
       </div>
     </div>
+    </>
   );
 }

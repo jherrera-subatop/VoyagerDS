@@ -559,20 +559,66 @@ const BUTTON_CSS = `
     --vbtn-angle:  220deg;
     --vbtn-stop-a: var(--vmc-color-orange-400);
     --vbtn-stop-b: var(--vmc-color-vault-400);
-    transform: translateY(-1px) scale(1.02);
+    transform: translateY(-2px) scale(1.02);
     box-shadow:
       inset 0 1px 0 rgb(100% 100% 100% / 0.22),
-      0 8px 20px rgb(51.76% 37.65% 89.8% / 0.35),
+      0 8px 24px rgb(51.76% 37.65% 89.8% / 0.35),
       0 4px 10px rgb(92.94% 53.73% 21.18% / 0.40);
   }
-  .pvbtn-auth-d:hover::after { opacity: 0.40; filter: blur(16px); }
+  .pvbtn-auth-d:hover::after { opacity: 0.45; filter: blur(18px); }
   .pvbtn-auth-d:active {
     --vbtn-angle:  135deg;
     --vbtn-stop-a: var(--vmc-color-orange-700);
     --vbtn-stop-b: var(--vmc-color-vault-600);
     transform: scale(0.97) translateY(1px);
-    box-shadow: inset 0 2px 5px rgb(0% 0% 0% / 0.22), 0 1px 2px rgb(0% 0% 0% / 0.10);
+    box-shadow:
+      inset 0 2px 5px rgb(0% 0% 0% / 0.22),
+      0 1px 3px rgb(0% 0% 0% / 0.12);
   }
+  .pvbtn-auth-d:active::after { opacity: 0; }
+  .pvbtn-auth-d:focus-visible {
+    outline: 3px solid transparent;
+    outline-offset: 4px;
+    transform: scale(0.98);
+    box-shadow:
+      0 0 0 2px var(--vmc-color-base-white),
+      0 0 0 5px var(--vmc-color-vault-500),
+      0 8px 16px -4px rgb(51.76% 37.65% 89.8% / 0.30);
+  }
+  .pvbtn-auth-d:focus-visible::after { opacity: 0.2; }
+  /* Frozen states */
+  .pvbtn-auth-d--hover {
+    --vbtn-angle:  220deg;
+    --vbtn-stop-a: var(--vmc-color-orange-400);
+    --vbtn-stop-b: var(--vmc-color-vault-400);
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.22),
+      0 8px 24px rgb(51.76% 37.65% 89.8% / 0.35),
+      0 4px 10px rgb(92.94% 53.73% 21.18% / 0.40) !important;
+  }
+  .pvbtn-auth-d--hover::after { opacity: 0.45 !important; filter: blur(18px) !important; }
+  .pvbtn-auth-d--pressed {
+    --vbtn-angle:  135deg;
+    --vbtn-stop-a: var(--vmc-color-orange-700);
+    --vbtn-stop-b: var(--vmc-color-vault-600);
+    transform: scale(0.97) translateY(1px) !important;
+    box-shadow:
+      inset 0 2px 5px rgb(0% 0% 0% / 0.22),
+      0 1px 3px rgb(0% 0% 0% / 0.12) !important;
+  }
+  .pvbtn-auth-d--pressed::after { opacity: 0 !important; }
+  .pvbtn-auth-d--focus {
+    outline: 3px solid transparent;
+    outline-offset: 4px;
+    transform: scale(0.98) !important;
+    box-shadow:
+      0 0 0 2px var(--vmc-color-base-white),
+      0 0 0 5px var(--vmc-color-vault-500),
+      0 8px 16px -4px rgb(51.76% 37.65% 89.8% / 0.30) !important;
+  }
+  .pvbtn-auth-d--focus::after { opacity: 0.2 !important; }
+
   .pvbtn-auth-d-icon {
     width: 32px;
     height: 32px;
@@ -1568,10 +1614,12 @@ const BUTTON_CSS = `
   .plike--disabled {
     cursor: not-allowed;
     box-shadow: none;
-    opacity: 0.40;
+    background: oklch(0.88 0.004 220);
+    opacity: 0.70;
     pointer-events: none;
   }
   .plike--disabled::after { display: none; }
+  .plike--disabled svg { stroke: oklch(0.72 0.02 220); }
 
   /* Skeleton */
   .plike--skeleton {
@@ -2206,6 +2254,375 @@ const BUTTON_CSS = `
   }
   .ptag--skeleton .ptag-icon,
   .ptag--skeleton .ptag-text { visibility: hidden; }
+
+  /* ── OfferCard (pcard) — 170×232px · medium size ── */
+  .pcard {
+    width: 170px;
+    background: oklch(1 0 0);
+    border-radius: 8px;
+    box-shadow: 0 8px 16px oklch(0.22 0.18 285 / 0.10);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  /* image area */
+  .pcard__img {
+    width: 100%;
+    height: 112px;
+    background: oklch(0.93 0.006 220);
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pcard__img-placeholder { opacity: 0.20; }
+  /* badge top-right of image (live dot, clock icon) */
+  .pcard__img-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 2;
+  }
+  /* ptag overlay bottom-left of image */
+  .pcard__img-ptag {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    z-index: 2;
+  }
+  /* body */
+  .pcard__body {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    flex: 1;
+  }
+  .pcard__meta { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+  .pcard__name {
+    font-family: var(--vmc-font-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 16px; font-weight: 700; line-height: 20px;
+    color: oklch(0.15 0.008 200);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    margin: 0;
+  }
+  .pcard__year {
+    font-family: var(--vmc-font-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 11px; font-weight: 500; line-height: 16px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: oklch(0.30 0.20 285);
+    margin: 0;
+  }
+  /* price row */
+  .pcard__price-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 10px; flex-shrink: 0;
+  }
+  .pcard__price-left { display: flex; align-items: center; gap: 6px; }
+  .pcard__price-text {
+    font-family: var(--vmc-font-mono, 'Roboto Mono', monospace);
+    font-size: 13px; font-weight: 700; line-height: 20px;
+    font-variant-numeric: tabular-nums;
+    color: oklch(0.42 0.22 285); white-space: nowrap;
+  }
+  /* right-only like row (no price) */
+  .pcard__like-row {
+    display: flex; align-items: center; justify-content: flex-end;
+    margin-top: 10px; flex-shrink: 0;
+  }
+  /* status borders */
+  .pcard--live       { border-bottom: 6px solid oklch(0.72 0.16 55); }
+  .pcard--negotiable { border-bottom: 6px solid oklch(0.78 0.14 195); }
+  .pcard--proxima    { border-bottom: 6px solid oklch(0.42 0.22 285); }
+  .pcard--expired    { border-bottom: 6px solid oklch(0.72 0.02 220); }
+  /* expired muted */
+  .pcard--expired .pcard__name { color: oklch(0.55 0.02 220); }
+  .pcard--expired .pcard__year { color: oklch(0.65 0.01 220); }
+  .pcard--expired .pcard__img  { filter: grayscale(0.6) brightness(0.95); }
+  /* skeleton — border siempre gris, sin color de estado */
+  .pcard--skeleton {
+    border-bottom-color: oklch(0.85 0.008 220) !important;
+  }
+  .pcard--skeleton .pcard__img {
+    background: oklch(0.87 0.006 220);
+    animation: ptag-pulse 1.6s ease-in-out infinite;
+  }
+  .pcard--skeleton .pcard__name,
+  .pcard--skeleton .pcard__year { color: transparent; position: relative; }
+  .pcard--skeleton .pcard__name::after {
+    content: ""; position: absolute; top: 3px; left: 0;
+    height: 13px; width: 80%;
+    background: oklch(0.82 0.02 220); border-radius: 4px;
+    animation: ptag-pulse 1.6s ease-in-out infinite;
+  }
+  .pcard--skeleton .pcard__year::after {
+    content: ""; position: absolute; top: 2px; left: 0;
+    height: 9px; width: 44px;
+    background: oklch(0.82 0.02 220); border-radius: 4px;
+    animation: ptag-pulse 1.6s ease-in-out infinite;
+  }
+  .pcard--skeleton .pcard__price-text { color: transparent; }
+  .pcard--skeleton .pprice {
+    background-image: none;
+    background-color: oklch(0.85 0.008 220);
+    box-shadow: none;
+    animation: ptag-pulse 1.6s ease-in-out infinite;
+  }
+  .pcard--skeleton .pprice::before,
+  .pcard--skeleton .pprice::after { display: none; }
+  .pcard--skeleton .plike {
+    background: oklch(0.88 0.004 220);
+    box-shadow: none;
+    animation: ptag-pulse 1.6s ease-in-out infinite;
+  }
+  .pcard--skeleton .plike svg {
+    stroke: oklch(0.72 0.02 220);
+  }
+  /* live pulse dot — small status indicator */
+  .pcard-live-dot {
+    position: relative;
+    width: 10px; height: 10px; border-radius: 9999px;
+    background: oklch(0.72 0.16 55);
+  }
+  .pcard-live-dot::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: 9999px;
+    background: oklch(0.72 0.16 55 / 0.35);
+    animation: pcard-live-ring 1.4s ease-out infinite;
+  }
+  .pcard-live-dot::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 9999px;
+    background: oklch(0.72 0.16 55 / 0.15);
+    animation: pcard-live-ring 1.4s ease-out 0.3s infinite;
+  }
+  @keyframes pcard-live-ring {
+    0%   { opacity: 1; transform: scale(0.8); }
+    100% { opacity: 0; transform: scale(1.9); }
+  }
+  /* proxima base (opción C — dot igual al live) */
+  .pcard-clock-badge {
+    position: relative;
+    width: 10px; height: 10px; border-radius: 9999px;
+    background: oklch(0.72 0.16 55);
+  }
+  .pcard-clock-badge::before {
+    content: "";
+    position: absolute;
+    inset: -3px; border-radius: 9999px;
+    background: oklch(0.72 0.16 55 / 0.35);
+    animation: pcard-live-ring 1.4s ease-out infinite;
+  }
+  .pcard-clock-badge::after {
+    content: "";
+    position: absolute;
+    inset: -6px; border-radius: 9999px;
+    background: oklch(0.72 0.16 55 / 0.15);
+    animation: pcard-live-ring 1.4s ease-out 0.3s infinite;
+  }
+  /* opción A — 20px + clock icon */
+  .pcard-clock-badge--a {
+    width: 20px; height: 20px;
+    background: oklch(0.72 0.16 55);
+    border-radius: 9999px;
+    display: flex; align-items: center; justify-content: center;
+    animation: pcard-live-ring-a 1.4s ease-out infinite;
+    box-shadow: 0 0 0 0 oklch(0.72 0.16 55 / 0.45);
+  }
+  .pcard-clock-badge--a::before,
+  .pcard-clock-badge--a::after { display: none; }
+  @keyframes pcard-live-ring-a {
+    0%   { box-shadow: 0 0 0 0   oklch(0.72 0.16 55 / 0.45); }
+    70%  { box-shadow: 0 0 0 7px oklch(0.72 0.16 55 / 0); }
+    100% { box-shadow: 0 0 0 0   oklch(0.72 0.16 55 / 0); }
+  }
+  /* opción B — dot + label */
+  .pcard-clock-badge--b {
+    display: flex; align-items: center; gap: 4px;
+    background: none;
+    width: auto; height: auto;
+    border-radius: 0;
+    animation: none;
+  }
+  .pcard-clock-badge--b::before,
+  .pcard-clock-badge--b::after { display: none; }
+  /* card hover lift */
+  .pcard {
+    transition: transform 150ms cubic-bezier(0.3,0,0,1),
+                box-shadow 150ms cubic-bezier(0.3,0,0,1);
+    cursor: pointer;
+  }
+  .pcard:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px oklch(0.22 0.18 285 / 0.12);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pcard { transition: none; }
+    .pcard-clock-badge { animation: none; }
+  }
+
+  /* ── Opción A — pill badge sobre imagen ── */
+  .pcard-pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 3px 8px 3px 6px;
+    border-radius: 9999px;
+    font-family: var(--vmc-font-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 9px; font-weight: 700; letter-spacing: 0.07em;
+    text-transform: uppercase; white-space: nowrap;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  /* EN VIVO pill — orange gradient (mismo patrón pvbtn/ptag) */
+  .pcard-pill--live {
+    border: 1.5px solid transparent;
+    background-image:
+      linear-gradient(135deg,
+        oklch(0.78 0.17 55) 0%,
+        oklch(0.72 0.16 55) 40%,
+        oklch(0.54 0.18 44) 100%
+      ),
+      linear-gradient(135deg,
+        oklch(0.86 0.12 55) 0%,
+        oklch(1 0 0 / 0.45) 40%,
+        oklch(0.65 0.16 50) 75%,
+        oklch(0.86 0.12 55) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: 0 2px 10px oklch(0.72 0.16 55 / 0.45), inset 0 1px 0 oklch(1 0 0 / 0.14);
+    color: oklch(1 0 0);
+  }
+  /* PRÓXIMA pill — vault gradient (mismo patrón ptag) */
+  .pcard-pill--proxima {
+    border: 1.5px solid transparent;
+    background-image:
+      linear-gradient(135deg,
+        oklch(0.48 0.24 285) 0%,
+        oklch(0.48 0.24 285) 30%,
+        oklch(0.20 0.17 285) 100%
+      ),
+      linear-gradient(135deg,
+        oklch(0.65 0.20 285) 0%,
+        oklch(1 0 0 / 0.40) 38%,
+        oklch(0.45 0.22 285) 68%,
+        oklch(0.65 0.20 285) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: 0 2px 10px oklch(0.22 0.18 285 / 0.50), inset 0 1px 0 oklch(1 0 0 / 0.10);
+    color: oklch(1 0 0);
+  }
+  .pcard-pill-dot {
+    width: 6px; height: 6px; border-radius: 9999px;
+    background: oklch(1 0 0 / 0.92);
+    flex-shrink: 0;
+    animation: pcard-live-ring 1.4s ease-out infinite;
+    position: relative;
+  }
+  .pcard-pill-clock {
+    flex-shrink: 0;
+    animation: pcard-clock-blink 1.4s ease-in-out infinite;
+  }
+  @keyframes pcard-clock-blink {
+    0%, 100% { opacity: 1;   transform: scale(1); }
+    50%       { opacity: 0.35; transform: scale(0.85); }
+  }
+
+  /* ── Opción B — image tint for proxima ── */
+  .pcard__img-tint {
+    position: absolute; inset: 0;
+    background: oklch(0.22 0.18 285 / 0.28);
+    border-radius: 8px 8px 0 0;
+    pointer-events: none;
+  }
+
+  /* ── Opción C — context line ── */
+  .pcard__context {
+    font-family: var(--vmc-font-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 10px; font-weight: 500; line-height: 14px;
+    margin: 2px 0 0; display: flex; align-items: center; gap: 4px;
+  }
+  .pcard__context--live  { color: oklch(0.72 0.16 55); }
+  .pcard__context--proxima { color: oklch(0.55 0.04 220); }
+  .pcard__context-dot {
+    width: 5px; height: 5px; border-radius: 9999px;
+    background: oklch(0.72 0.16 55); flex-shrink: 0;
+    animation: pcard-live-ring 1.4s ease-out infinite;
+    position: relative;
+  }
+
+  /* ── ListingArea ── */
+  .plisting {
+    background: oklch(0.97 0.004 270);
+    border-radius: 12px;
+    padding: 20px 20px 24px;
+    box-shadow: 0 4px 24px oklch(0.22 0.18 285 / 0.10);
+    position: relative;
+  }
+  /* Vault bracket — top-left corner accent */
+  .plisting::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 16px; height: 16px;
+    border-top: 2.5px solid oklch(0.22 0.18 285 / 0.40);
+    border-left: 2.5px solid oklch(0.22 0.18 285 / 0.40);
+    border-radius: 12px 0 0 0;
+    pointer-events: none;
+  }
+  /* Orange bracket — bottom-right corner accent */
+  .plisting::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 16px; height: 16px;
+    border-bottom: 2.5px solid oklch(0.72 0.16 55 / 0.55);
+    border-right:  2.5px solid oklch(0.72 0.16 55 / 0.55);
+    border-radius: 0 0 12px 0;
+    pointer-events: none;
+  }
+  .plisting__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 16px;
+  }
+  .plisting__header-left { display: flex; flex-direction: column; gap: 2px; }
+  .plisting__name {
+    font-family: var(--vmc-font-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 16px; font-weight: 700; line-height: 22px;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    color: oklch(0.15 0.008 200);
+    margin: 0;
+  }
+  .plisting__count {
+    font-family: var(--vmc-font-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 12px; font-weight: 400; line-height: 16px;
+    color: oklch(0.38 0.04 280 / 0.65);
+    margin: 0;
+  }
+  .plisting__link {
+    font-family: var(--vmc-font-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 12px; font-weight: 600;
+    color: oklch(0.22 0.18 285);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 3px;
+    transition: opacity 0.15s ease;
+    cursor: pointer;
+  }
+  .plisting__link:hover { opacity: 0.65; }
+  .plisting__cards {
+    display: flex;
+    gap: 12px;
+  }
 `;
 
 const F = "var(--vmc-font-display, 'Plus Jakarta Sans', sans-serif)";
@@ -2424,8 +2841,122 @@ function IconEquipos({ size }: { size: number }): JSX.Element {
         </linearGradient>
       </defs>
       <g stroke="url(#vg-equipos)">
-        {/* Rayo — equipos eléctricos / energía */}
         <path d="M13 2L4.5 13.5H11L10 22L20 10H13.5L13 2Z" />
+      </g>
+    </svg>
+  );
+}
+
+/* ── Equipos Diversos — candidatos de ícono ── */
+function IconEquiposA({ size }: { size: number }): JSX.Element {
+  // Excavadora — brazo + cuchara
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+      strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+      <defs>
+        <linearGradient id="vg-equipos-a" x1="0%" y1="0%" x2="100%" y2="100%">
+          {VGRAD_STOPS}
+        </linearGradient>
+      </defs>
+      <g stroke="url(#vg-equipos-a)">
+        {/* Cuerpo / cabina */}
+        <rect x="2" y="13" width="7" height="5" rx="0.5" />
+        {/* Brazo principal (boom) */}
+        <line x1="9" y1="14" x2="18" y2="7" />
+        {/* Stick */}
+        <line x1="18" y1="7" x2="17" y2="3" />
+        {/* Cuchara (bucket) */}
+        <path d="M17 3 L14 5 L16 8 L19 6 Z" />
+        {/* Oruga inferior */}
+        <line x1="1" y1="19" x2="10" y2="19" />
+        <circle cx="2.5" cy="19" r="1" fill="none" />
+        <circle cx="8.5" cy="19" r="1" fill="none" />
+      </g>
+    </svg>
+  );
+}
+
+function IconEquiposB({ size }: { size: number }): JSX.Element {
+  // Montacargas / Forklift
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+      strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+      <defs>
+        <linearGradient id="vg-equipos-b" x1="0%" y1="0%" x2="100%" y2="100%">
+          {VGRAD_STOPS}
+        </linearGradient>
+      </defs>
+      <g stroke="url(#vg-equipos-b)">
+        {/* Cuerpo */}
+        <rect x="4" y="9" width="10" height="9" rx="0.5" />
+        {/* Cabina */}
+        <rect x="4" y="5" width="6" height="4" rx="0.5" />
+        {/* Mástil vertical */}
+        <line x1="14" y1="18" x2="14" y2="4" />
+        {/* Horquillas (forks) */}
+        <line x1="14" y1="8"  x2="21" y2="8"  />
+        <line x1="14" y1="11" x2="21" y2="11" />
+        {/* Ruedas */}
+        <circle cx="7"  cy="18" r="1.8" fill="none" />
+        <circle cx="12" cy="18" r="1.8" fill="none" />
+      </g>
+    </svg>
+  );
+}
+
+function IconEquiposC({ size }: { size: number }): JSX.Element {
+  // Grúa torre
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+      strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+      <defs>
+        <linearGradient id="vg-equipos-c" x1="0%" y1="0%" x2="100%" y2="100%">
+          {VGRAD_STOPS}
+        </linearGradient>
+      </defs>
+      <g stroke="url(#vg-equipos-c)">
+        {/* Torre vertical */}
+        <line x1="9" y1="22" x2="9" y2="4" />
+        {/* Pluma principal */}
+        <line x1="9" y1="5" x2="22" y2="5" />
+        {/* Contra-pluma */}
+        <line x1="9" y1="5" x2="4"  y2="5" />
+        {/* Tirante pluma */}
+        <line x1="22" y1="5" x2="9" y2="10" />
+        {/* Línea de carga */}
+        <line x1="17" y1="5" x2="17" y2="15" />
+        {/* Gancho */}
+        <path d="M15 15 Q17 18 19 15" />
+        {/* Base */}
+        <line x1="6" y1="22" x2="12" y2="22" />
+      </g>
+    </svg>
+  );
+}
+
+function IconEquiposD({ size }: { size: number }): JSX.Element {
+  // Bulldozer / Topadora
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+      strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+      <defs>
+        <linearGradient id="vg-equipos-d" x1="0%" y1="0%" x2="100%" y2="100%">
+          {VGRAD_STOPS}
+        </linearGradient>
+      </defs>
+      <g stroke="url(#vg-equipos-d)">
+        {/* Cuerpo */}
+        <rect x="5" y="8" width="14" height="8" rx="0.5" />
+        {/* Cabina */}
+        <rect x="12" y="5" width="6" height="3" rx="0.5" />
+        {/* Hoja delantera (blade) */}
+        <path d="M5 7 L2 8 L2 17 L5 17" />
+        {/* Oruga inferior */}
+        <rect x="4" y="16" width="16" height="3" rx="1.5" />
+        {/* Ruedas de oruga */}
+        <circle cx="7"  cy="17.5" r="1" fill="none" />
+        <circle cx="12" cy="17.5" r="1" fill="none" />
+        <circle cx="17" cy="17.5" r="1" fill="none" />
       </g>
     </svg>
   );
@@ -2529,16 +3060,39 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
         boxShadow: "0 8px 32px rgb(0% 0% 0% / 0.10)",
       }}>
 
+        {/* ── Page nav ── */}
+        <div style={{ background: "oklch(0.22 0.18 285)", padding: "0 24px",
+          display: "flex", alignItems: "center", gap: 0 }}>
+          <a href="/preview/components/button-primary"
+            style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase", letterSpacing: "0.09em",
+              color: "oklch(1 0 0)", textDecoration: "none",
+              padding: "10px 16px 10px 0",
+              borderBottom: "2px solid oklch(1 0 0)",
+              opacity: 1 }}>
+            BORRADOR
+          </a>
+          <span style={{ color: "oklch(1 0 0 / 0.25)", padding: "0 8px", fontSize: 11 }}>·</span>
+          <a href="/preview/components/pase1"
+            style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase", letterSpacing: "0.09em",
+              color: "oklch(1 0 0 / 0.55)", textDecoration: "none",
+              padding: "10px 0",
+              borderBottom: "2px solid transparent" }}>
+            PASE 1 →
+          </a>
+        </div>
+
         {/* ── Page header ── */}
         <div style={{ background: "var(--vmc-color-background-card)", padding: "16px 24px",
           borderBottom: "1px solid var(--vmc-color-vault-utility-ghost)" }}>
           <p style={{ fontFamily: F, fontSize: 11, fontWeight: 700,
             textTransform: "uppercase", letterSpacing: "0.10em",
             color: "var(--vmc-color-text-primary)", margin: "0 0 2px" }}>
-            Button Primary
+            BORRADOR — Componentes Voyager DS
           </p>
           <p style={{ fontFamily: F, fontSize: 11, color: "var(--vmc-color-text-tertiary)", margin: 0 }}>
-            Mix Cinematic + Tactile · v2.0 upgrade
+            Mix Cinematic + Tactile · v2.0 · trabajo en progreso
           </p>
         </div>
 
@@ -2859,77 +3413,71 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
         {/* ─────────────────────────────────────────────
             3. SM — Logged In (sobre vault)
         ───────────────────────────────────────────── */}
-        <SectionLabel title="SM · Logged In — sobre header vault" dark />
+        <SectionLabel title="SM · Logged In — sobre header vault" subtitle="40px · Primary Clone · Default / Hover / Pressed / Focus" dark />
 
         <div style={{ background: "var(--vmc-color-vault-900)", padding: "20px 24px",
           borderBottom: "1px solid rgb(100% 100% 100% / 0.08)" }}>
 
-          {/* A / B / C — variantes oscuras */}
-          <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
-            textTransform: "uppercase", letterSpacing: "0.08em",
-            color: "rgb(100% 100% 100% / 0.30)", margin: "0 0 10px" }}>
-            Oscuras / glass
-          </p>
-          <div style={{ display: "flex", gap: 20, flexWrap: "wrap", marginBottom: 20 }}>
+          {/* State grid */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16,
+            marginBottom: 24 }}>
+            {(["Default", "Hover", "Pressed", "Focus"] as const).map(function colHeader(s) {
+              return (
+                <p key={s} style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+                  textTransform: "uppercase", letterSpacing: "0.08em",
+                  color: "rgb(100% 100% 100% / 0.35)", margin: 0, textAlign: "center" }}>
+                  {s}
+                </p>
+              );
+            })}
 
-            <StateCol label="A — Cinematic Dark" dark>
-              <button className="pvbtn-auth" type="button">
-                <span className="pvbtn-auth-icon">{USER_ICON}</span>
-                Bienvenido,{" "}
-                <span className="pvbtn-auth-username">ZAEX5G</span>
-              </button>
-            </StateCol>
-
-            <StateCol label="B — Glass" dark>
-              <button className="pvbtn-auth-b" type="button">
-                <span className="pvbtn-auth-b-icon">{USER_ICON}</span>
-                Bienvenido,{" "}
-                <span className="pvbtn-auth-b-username">ZAEX5G</span>
-              </button>
-            </StateCol>
-
-            <StateCol label="C — Warm Dark" dark>
-              <button className="pvbtn-auth-c" type="button">
-                <span className="pvbtn-auth-c-icon">{USER_ICON}</span>
-                Bienvenido,{" "}
-                <span className="pvbtn-auth-c-username">ZAEX5G</span>
-              </button>
-            </StateCol>
-
-          </div>
-
-          {/* D / E / F — estilo primary (fill sólido) */}
-          <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
-            textTransform: "uppercase", letterSpacing: "0.08em",
-            color: "rgb(100% 100% 100% / 0.30)", margin: "0 0 10px" }}>
-            Estilo primary (fill sólido)
-          </p>
-          <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
-
-            <StateCol label="D — Primary Clone" dark>
+            <div style={{ display: "flex", justifyContent: "center" }}>
               <button className="pvbtn-auth-d" type="button">
                 <span className="pvbtn-auth-d-icon">{USER_ICON}</span>
                 Bienvenido,{" "}
                 <span className="pvbtn-auth-d-username">ZAEX5G</span>
               </button>
-            </StateCol>
+            </div>
 
-            <StateCol label="E — Vault→Orange" dark>
-              <button className="pvbtn-auth-e" type="button">
-                <span className="pvbtn-auth-e-icon">{USER_ICON}</span>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <button className="pvbtn-auth-d pvbtn-auth-d--hover" type="button">
+                <span className="pvbtn-auth-d-icon">{USER_ICON}</span>
                 Bienvenido,{" "}
-                <span className="pvbtn-auth-e-username">ZAEX5G</span>
+                <span className="pvbtn-auth-d-username">ZAEX5G</span>
               </button>
-            </StateCol>
+            </div>
 
-            <StateCol label="F — Split Bicolor" dark>
-              <button className="pvbtn-auth-f" type="button">
-                <span className="pvbtn-auth-f-icon">{USER_ICON}</span>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <button className="pvbtn-auth-d pvbtn-auth-d--pressed" type="button">
+                <span className="pvbtn-auth-d-icon">{USER_ICON}</span>
                 Bienvenido,{" "}
-                <span className="pvbtn-auth-f-username">ZAEX5G</span>
+                <span className="pvbtn-auth-d-username">ZAEX5G</span>
               </button>
-            </StateCol>
+            </div>
 
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <button className="pvbtn-auth-d pvbtn-auth-d--focus" type="button">
+                <span className="pvbtn-auth-d-icon">{USER_ICON}</span>
+                Bienvenido,{" "}
+                <span className="pvbtn-auth-d-username">ZAEX5G</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Demo interactivo */}
+          <div style={{ borderTop: "1px solid rgb(100% 100% 100% / 0.08)", paddingTop: 16 }}>
+            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase", letterSpacing: "0.08em",
+              color: "rgb(100% 100% 100% / 0.30)", margin: "0 0 14px" }}>
+              Demo interactivo
+            </p>
+            <div style={{ display: "flex", justifyContent: "center", padding: "8px 0 4px" }}>
+              <button className="pvbtn-auth-d" type="button">
+                <span className="pvbtn-auth-d-icon">{USER_ICON}</span>
+                Bienvenido,{" "}
+                <span className="pvbtn-auth-d-username">ZAEX5G</span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -3233,6 +3781,35 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
                     })}
                   </div>
                 </div>
+                {/* ── Equipos Diversos — candidatos de ícono ── */}
+                <div style={{ marginTop: 8, paddingTop: 16,
+                  borderTop: "1px solid var(--vmc-color-vault-utility-ghost)" }}>
+                  <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+                    textTransform: "uppercase", letterSpacing: "0.08em",
+                    color: "var(--vmc-color-text-tertiary)", margin: "0 0 14px" }}>
+                    Equipos Diversos — candidatos de ícono
+                  </p>
+                  <div style={{ display: "flex", gap: 20, alignItems: "flex-end" }}>
+                    {([
+                      { key: "a", label: "A · Excavadora",  icon: <IconEquiposA size={22} /> },
+                      { key: "b", label: "B · Montacargas", icon: <IconEquiposB size={22} /> },
+                      { key: "c", label: "C · Grúa Torre",  icon: <IconEquiposC size={22} /> },
+                      { key: "d", label: "D · Bulldozer",   icon: <IconEquiposD size={22} /> },
+                    ] as const).map(function equipoOpt({ key, label, icon }) {
+                      return (
+                        <div key={key} style={{ display: "flex", flexDirection: "column",
+                          alignItems: "center", gap: 8 }}>
+                          <CategoryCardDemo label="EQUIPOS DIVERSOS" icon={icon} />
+                          <p style={{ fontFamily: F, fontSize: 10, fontWeight: 600,
+                            color: "var(--vmc-color-text-secondary)", margin: 0,
+                            textAlign: "center" }}>
+                            {label}
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               </>
             );
           })()}
@@ -3409,6 +3986,268 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
             </div>
           </div>
 
+        </div>
+
+        {/* ─────────────────────────────────────────────
+            10. OfferCard
+        ───────────────────────────────────────────── */}
+        <SectionLabel title="OfferCard" subtitle="170×232px · medium · Col 1: En Vivo (5 estados) · Col 2: Negociable (3 estados)" />
+
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "28px 32px" }}>
+          {(function offerCards() {
+
+            /* ── Pill badges ── */
+            const PILL_LIVE = (
+              <div className="pcard-pill pcard-pill--live">
+                <div className="pcard-pill-dot" />
+                EN VIVO
+              </div>
+            );
+            const PILL_PROXIMA = (
+              <div className="pcard-pill pcard-pill--proxima">
+                <svg className="pcard-pill-clock" width="9" height="9" viewBox="0 0 24 24" fill="none"
+                  stroke="oklch(1 0 0 / 0.90)" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 15.5 14"/>
+                </svg>
+                PRÓXIMA
+              </div>
+            );
+
+            /* ── Card with photo ── */
+            function Card({ statusMod, pill, showPrice, disabled }: {
+              statusMod: string; pill?: JSX.Element;
+              showPrice: boolean; disabled?: boolean;
+            }): JSX.Element {
+              return (
+                <div className={`pcard ${statusMod}${disabled ? " pcard--disabled" : ""}`}>
+                  <div className="pcard__img">
+                    <img src="/demo/bronco.jpg" alt="Ford Bronco Sport" width={170} height={112}
+                      style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+                    {pill && <div className="pcard__img-badge">{pill}</div>}
+                  </div>
+                  <div className="pcard__body">
+                    <div className="pcard__meta">
+                      <p className="pcard__name">Ford Bronco Sport</p>
+                      <p className="pcard__year">2024</p>
+                    </div>
+                    {showPrice
+                      ? (
+                        <div className="pcard__price-row">
+                          <div className="pcard__price-left">
+                            <button className="pprice pprice--sm" type="button" aria-label="precio"><DollarIcon size={14} /></button>
+                            <span className="pcard__price-text">US$ 9,999</span>
+                          </div>
+                          <LikeDemo cls="plike--sm" icon={14} />
+                        </div>
+                      ) : (
+                        <div className="pcard__like-row">
+                          <LikeDemo cls="plike--sm" icon={14} />
+                        </div>
+                      )
+                    }
+                  </div>
+                </div>
+              );
+            }
+
+            /* ── Skeleton card ── */
+            function CardSkeleton({ statusMod }: { statusMod: string }): JSX.Element {
+              return (
+                <div className={`pcard ${statusMod} pcard--skeleton`}>
+                  <div className="pcard__img" />
+                  <div className="pcard__body">
+                    <div className="pcard__meta">
+                      <p className="pcard__name">&nbsp;</p>
+                      <p className="pcard__year">&nbsp;</p>
+                    </div>
+                    <div className="pcard__price-row">
+                      <div className="pcard__price-left">
+                        <button className="pprice pprice--sm" type="button" aria-label="cargando" disabled><DollarIcon size={14} /></button>
+                        <span className="pcard__price-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                      </div>
+                      <button className="plike plike--sm" type="button" disabled aria-label="cargando"><HeartOutline size={14} /></button>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+
+            /* ── Label chip ── */
+            function Chip({ text }: { text: string }): JSX.Element {
+              return (
+                <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+                  textTransform: "uppercase", letterSpacing: "0.08em",
+                  color: "var(--vmc-color-text-tertiary)", margin: "0 0 10px" }}>
+                  {text}
+                </p>
+              );
+            }
+
+            return (
+              <div style={{ display: "flex", gap: 40, alignItems: "flex-start" }}>
+
+                {/* ── Columna 1: EN VIVO ── */}
+                <div>
+                  <p style={{ fontFamily: F, fontSize: 11, fontWeight: 700,
+                    textTransform: "uppercase", letterSpacing: "0.10em",
+                    color: "oklch(0.72 0.16 55)", margin: "0 0 20px",
+                    borderBottom: "2px solid oklch(0.72 0.16 55 / 0.20)", paddingBottom: 8 }}>
+                    EN VIVO
+                  </p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+                    <div><Chip text="Publicada" /><Card statusMod="pcard--live" showPrice /></div>
+                    <div><Chip text="Live" /><Card statusMod="pcard--live" pill={PILL_LIVE} showPrice /></div>
+                    <div><Chip text="Próxima" /><Card statusMod="pcard--live" pill={PILL_PROXIMA} showPrice /></div>
+                    <div><Chip text="Disabled" /><Card statusMod="pcard--live" showPrice disabled /></div>
+                    <div><Chip text="Skeleton" /><CardSkeleton statusMod="pcard--live" /></div>
+                  </div>
+                </div>
+
+                {/* ── Columna 2: NEGOCIABLE ── */}
+                <div>
+                  <p style={{ fontFamily: F, fontSize: 11, fontWeight: 700,
+                    textTransform: "uppercase", letterSpacing: "0.10em",
+                    color: "oklch(0.78 0.14 195)", margin: "0 0 20px",
+                    borderBottom: "2px solid oklch(0.78 0.14 195 / 0.30)", paddingBottom: 8 }}>
+                    NEGOCIABLE
+                  </p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+                    <div><Chip text="Publicada" /><Card statusMod="pcard--negotiable" showPrice={false} /></div>
+                    <div><Chip text="Disabled" /><Card statusMod="pcard--negotiable" showPrice={false} disabled /></div>
+                    <div><Chip text="Skeleton" /><CardSkeleton statusMod="pcard--negotiable" /></div>
+                  </div>
+                </div>
+
+              </div>
+            );
+          })()}
+
+        </div>
+
+        {/* ─────────────────────────────────────────────
+            11. ListingArea
+        ───────────────────────────────────────────── */}
+        <SectionLabel title="ListingArea" subtitle="Homepage · strip del subastador · 4 cards · live + negociable" />
+
+        <div style={{ background: "oklch(0.92 0.006 270)", padding: "32px 28px" }}>
+          <div className="plisting">
+
+            {/* Header */}
+            <div className="plisting__header">
+              <div className="plisting__header-left">
+                <p className="plisting__name">Santander Consumer</p>
+                <p className="plisting__count">10 Ofertas</p>
+              </div>
+              <span className="plisting__link">
+                Ir al perfil
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="9 18 15 12 9 6"/>
+                </svg>
+              </span>
+            </div>
+
+            {/* Cards row */}
+            <div className="plisting__cards">
+
+              {/* Card 1 — Live publicada (sin badge) */}
+              <div className="pcard pcard--live">
+                <div className="pcard__img">
+                  <img src="/demo/bronco.jpg" alt="Audi Q3" width={170} height={112}
+                    style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+                </div>
+                <div className="pcard__body">
+                  <div className="pcard__meta">
+                    <p className="pcard__name">Audi Q3</p>
+                    <p className="pcard__year">2026</p>
+                  </div>
+                  <div className="pcard__price-row">
+                    <div className="pcard__price-left">
+                      <button className="pprice pprice--sm" type="button" aria-label="precio"><DollarIcon size={14} /></button>
+                      <span className="pcard__price-text">US$ 9,999</span>
+                    </div>
+                    <LikeDemo cls="plike--sm" icon={14} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 2 — Live activa (badge EN VIVO) */}
+              <div className="pcard pcard--live">
+                <div className="pcard__img">
+                  <img src="/demo/bronco.jpg" alt="Audi Q3" width={170} height={112}
+                    style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+                  <div className="pcard__img-badge">
+                    <div className="pcard-pill pcard-pill--live">
+                      <div className="pcard-pill-dot" />
+                      EN VIVO
+                    </div>
+                  </div>
+                </div>
+                <div className="pcard__body">
+                  <div className="pcard__meta">
+                    <p className="pcard__name">Audi Q3</p>
+                    <p className="pcard__year">2026</p>
+                  </div>
+                  <div className="pcard__price-row">
+                    <div className="pcard__price-left">
+                      <button className="pprice pprice--sm" type="button" aria-label="precio"><DollarIcon size={14} /></button>
+                      <span className="pcard__price-text">US$ 9,999</span>
+                    </div>
+                    <LikeDemo cls="plike--sm" icon={14} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 3 — Negociable (sin precio, solo like) */}
+              <div className="pcard pcard--negotiable">
+                <div className="pcard__img">
+                  <img src="/demo/bronco.jpg" alt="Audi Q3" width={170} height={112}
+                    style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+                </div>
+                <div className="pcard__body">
+                  <div className="pcard__meta">
+                    <p className="pcard__name">Audi Q3</p>
+                    <p className="pcard__year">2026</p>
+                  </div>
+                  <div className="pcard__like-row">
+                    <LikeDemo cls="plike--sm" icon={14} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 4 — Live próxima (badge clock animado) */}
+              <div className="pcard pcard--live">
+                <div className="pcard__img">
+                  <img src="/demo/bronco.jpg" alt="Audi Q3" width={170} height={112}
+                    style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+                  <div className="pcard__img-badge">
+                    <div className="pcard-clock-badge--a">
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                        stroke="oklch(1 0 0 / 0.92)" strokeWidth="2.4"
+                        strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 15.5 14"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div className="pcard__body">
+                  <div className="pcard__meta">
+                    <p className="pcard__name">Audi Q3</p>
+                    <p className="pcard__year">2026</p>
+                  </div>
+                  <div className="pcard__price-row">
+                    <div className="pcard__price-left">
+                      <button className="pprice pprice--sm" type="button" aria-label="precio"><DollarIcon size={14} /></button>
+                      <span className="pcard__price-text">US$ 9,999</span>
+                    </div>
+                    <LikeDemo cls="plike--sm" icon={14} />
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
 
       </div>

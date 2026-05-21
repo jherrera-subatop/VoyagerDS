@@ -13,26 +13,31 @@ function AvatarIcon(): JSX.Element {
 }
 
 const STYLES = `
-  /* ── Botón INGRESA (guest) — mismo estilo que pill logged-in ── */
+  /* ── Botón INGRESA — cinematic orange→vault gradient pill ── */
   .vmc-header-btn {
-    display:        inline-flex;
-    align-items:    center;
-    gap:            10px;
-    height:         38px;
-    padding:        0 16px 0 4px;
-    border:         1.5px solid var(--voyager-color-live, #ED8936);
-    border-radius:  9999px;
-    background:     linear-gradient(135deg,
-                      rgba(237,137,54,0.14) 0%,
-                      rgba(237,137,54,0.05) 100%);
-    color:          #FFFFFF;
-    font-family:    var(--font-display, 'Plus Jakarta Sans', sans-serif);
-    font-size:      13px;
-    font-weight:    700;
-    letter-spacing: 0.02em;
-    cursor:         pointer;
-    transition:     background 150ms cubic-bezier(0.3,0,0,1),
-                    transform  150ms cubic-bezier(0.3,0,0,1);
+    display:          inline-flex;
+    align-items:      center;
+    gap:              8px;
+    height:           38px;
+    padding:          0 14px 0 4px;
+    border:           2px solid transparent;
+    border-radius:    9999px;
+    cursor:           pointer;
+    font-family:      var(--font-display, 'Plus Jakarta Sans', sans-serif);
+    font-size:        13px;
+    font-weight:      700;
+    letter-spacing:   0.02em;
+    color:            oklch(1 0 0);
+    text-shadow:      0 1px 3px rgb(0 0 0 / 0.25);
+    background-image:
+      linear-gradient(135deg, oklch(0.72 0.16 55) 0%, oklch(0.72 0.16 55) 40%, oklch(0.42 0.22 285) 100%),
+      linear-gradient(135deg, oklch(1 0 0) 0%, oklch(0.65 0.20 55) 25%, oklch(0.42 0.22 285) 75%, oklch(1 0 0) 100%);
+    background-origin: padding-box, border-box;
+    background-clip:   padding-box, border-box;
+    box-shadow:        0 4px 16px oklch(0.72 0.16 55 / 0.45);
+    transform:         translateZ(0);
+    transition:        box-shadow 0.25s ease,
+                       transform  0.2s  cubic-bezier(0.25,0.8,0.25,1);
   }
   .vmc-header-btn__icon {
     display:         flex;
@@ -41,21 +46,18 @@ const STYLES = `
     width:           30px;
     height:          30px;
     border-radius:   9999px;
-    border:          1.5px solid rgba(237,137,54,0.50);
-    background:      rgba(237,137,54,0.15);
+    background:      oklch(1 0 0 / 0.18);
     flex-shrink:     0;
   }
   .vmc-header-btn:hover {
-    background: linear-gradient(135deg, rgba(237,137,54,0.42) 0%, rgba(237,137,54,0.22) 100%);
+    box-shadow: 0 8px 28px oklch(0.72 0.16 55 / 0.60);
+    transform:  translateY(-1px) translateZ(0);
   }
   .vmc-header-btn:active {
-    background: linear-gradient(135deg,
-      color-mix(in oklch, var(--voyager-color-live, #ED8936) 55%, oklch(0 0 0)) 0%,
-      color-mix(in oklch, var(--voyager-color-live, #ED8936) 35%, oklch(0 0 0)) 100%);
-    border-color: color-mix(in oklch, var(--voyager-color-live, #ED8936) 70%, oklch(0 0 0));
-    transform: scale(0.97);
+    transform:  scale(0.97) translateZ(0);
+    box-shadow: 0 2px 8px oklch(0.72 0.16 55 / 0.35);
   }
-  .vmc-header-btn:focus-visible { outline: 2px solid rgba(255,255,255,0.6); outline-offset: 2px; }
+  .vmc-header-btn:focus-visible { outline: 2px solid oklch(1 0 0 / 0.70); outline-offset: 2px; }
 
   /* ── Pill usuario logueado ── */
   .vmc-header-user {

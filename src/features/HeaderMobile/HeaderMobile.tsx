@@ -9,8 +9,9 @@ const F = "var(--font-display, 'Plus Jakarta Sans', sans-serif)";
 
 const V = {
   bg:         "var(--vmc-color-background-brand)",
-  gradBtn:    "linear-gradient(132deg, var(--vmc-color-orange-500) 0%, var(--vmc-color-orange-600) 50%, var(--vmc-color-orange-700) 100%)",
-  iconOverlay:"color-mix(in oklch, var(--vmc-color-background-brand) 10%, transparent)",
+  gradBtn:    "linear-gradient(135deg, oklch(0.72 0.16 55) 0%, oklch(0.72 0.16 55) 40%, oklch(0.42 0.22 285) 100%)",
+  glowBtn:    "0 4px 16px oklch(0.72 0.16 55 / 0.45)",
+  iconOverlay:"oklch(1 0 0 / 0.18)",
   textInv:    "var(--vmc-color-text-inverse)",
 } as const;
 
@@ -30,11 +31,12 @@ function LoginButton(): JSX.Element {
       style={{ display: "flex", alignItems: "center", gap: 8,
         height: 38, borderRadius: 9999, border: "none", cursor: "pointer",
         background: V.gradBtn, padding: "0 14px 0 4px",
+        boxShadow: V.glowBtn,
         flexShrink: 0 }}>
 
       {/* Icon circle */}
       <div style={{ width: 30, height: 30, borderRadius: 9999, flexShrink: 0,
-        background: V.iconOverlay,
+        background: V.iconOverlay, border: "1px solid oklch(1 0 0 / 0.20)",
         display: "flex", alignItems: "center", justifyContent: "center" }}>
         <UserIcon />
       </div>
