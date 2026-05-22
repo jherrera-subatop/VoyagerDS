@@ -1565,8 +1565,14 @@ const BUTTON_CSS = `
       0 10px 18px oklch(0.22 0.18 285 / 0.22),
       0  3px  6px oklch(0.22 0.18 285 / 0.12);
   }
-  /* ::after stays opacity 0 — no radial blob */
   .plike:active { transform: scale(0.92); }
+  /* Frozen hover state */
+  .plike--hover {
+    transform: scale(1.08) translateY(-2px) !important;
+    box-shadow:
+      0 10px 18px oklch(0.22 0.18 285 / 0.22),
+      0  3px  6px oklch(0.22 0.18 285 / 0.12) !important;
+  }
 
   /* Sizes */
   .plike--sm { width: 32px; height: 32px; }
@@ -1731,20 +1737,50 @@ const BUTTON_CSS = `
   }
   .pprice-wrap--skeleton .pprice::before { display: none; }
   .pprice-wrap--skeleton .pprice::after  { display: none; }
-  .pprice-wrap--skeleton .pprice-shelf   { display: none; }
+  .pprice-wrap--skeleton .pprice-base    { background: oklch(0.82 0.02 220); box-shadow: none; }
 
-  /* ── PriceIcon shelf — Contact shadow ── */
-  .pprice-shelf {
+  /* ── PriceIcon base — ellipse pedestal, same cinematic material as coin ── */
+  .pprice-base {
     border-radius: 50%;
-    background: oklch(0.62 0.15 195 / 0.50);
-    filter: blur(5px);
+    border: 1.5px solid transparent;
+    background-image:
+      linear-gradient(160deg, oklch(0.58 0.15 195) 0%, oklch(0.44 0.13 195) 100%),
+      linear-gradient(90deg,
+        oklch(0.80 0.12 195 / 0.75) 0%,
+        oklch(1 0 0 / 0.55)         40%,
+        oklch(0.72 0.14 195 / 0.45) 75%,
+        oklch(0.80 0.12 195 / 0.75) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip:   padding-box, border-box;
+    box-shadow:
+      0 3px 10px oklch(0.78 0.14 195 / 0.30),
+      0 1px  4px oklch(0.78 0.14 195 / 0.18);
+    margin-top: -3px;
+    flex-shrink: 0;
+    position: relative;
   }
-  .pprice-wrap--sm .pprice-shelf { width: 26px; height: 6px;  margin-top: 4px; }
-  .pprice-wrap--md .pprice-shelf { width: 36px; height: 8px;  margin-top: 5px; }
-  .pprice-wrap--lg .pprice-shelf { width: 50px; height: 10px; margin-top: 6px; }
+  /* Top-face shine — matches coin ::before */
+  .pprice-base::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(180deg, oklch(1 0 0 / 0.32) 0%, transparent 55%);
+    pointer-events: none;
+  }
 
-  /* Disabled: shelf invisible pero mantiene posición */
-  .pprice-wrap--disabled .pprice-shelf { visibility: hidden; }
+  /* Wider than coin → pedestal effect */
+  .pprice-wrap--sm .pprice-base { width: 40px;  height: 9px;  }
+  .pprice-wrap--md .pprice-base { width: 54px;  height: 12px; }
+  .pprice-wrap--lg .pprice-base { width: 74px;  height: 17px; }
+
+  .pprice-wrap--disabled .pprice-base {
+    background-image:
+      linear-gradient(160deg, oklch(0.72 0.02 220) 0%, oklch(0.65 0.02 220) 100%),
+      linear-gradient(90deg, oklch(0.78 0.01 220 / 0.60) 0%, oklch(0.78 0.01 220 / 0.60) 100%);
+    box-shadow: none;
+  }
 
   /* ── OfferType · cinematic card ── */
   .poftype {
@@ -2680,7 +2716,7 @@ function PriceDemo({ sizeCls, wrapCls, icon }: PriceDemoProps): JSX.Element {
       <button className={`pprice ${sizeCls}`} type="button" aria-label="Ver precio">
         <DollarIcon size={icon} />
       </button>
-      <div className="pprice-shelf" />
+      <div className="pprice-base" />
     </div>
   );
 }
@@ -3484,15 +3520,15 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
         {/* ─────────────────────────────────────────────
             4. LikeButton
         ───────────────────────────────────────────── */}
-        <SectionLabel title="LikeButton" subtitle="3 tamaños · Default / Active / Disabled / Skeleton" />
+        <SectionLabel title="LikeButton" subtitle="3 tamaños · Default / Hover / Active / Disabled / Skeleton" />
 
         <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px" }}>
 
           {/* Column headers */}
-          <div style={{ display: "grid", gridTemplateColumns: "72px 1fr 1fr 1fr 1fr",
+          <div style={{ display: "grid", gridTemplateColumns: "72px 1fr 1fr 1fr 1fr 1fr",
             marginBottom: 16, alignItems: "center" }}>
             <span />
-            {(["Default", "Active", "Disabled", "Skeleton"] as const).map(function col(s) {
+            {(["Default", "Hover", "Active", "Disabled", "Skeleton"] as const).map(function col(s) {
               return (
                 <p key={s} style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
                   textTransform: "uppercase", letterSpacing: "0.08em",
@@ -3511,7 +3547,7 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
           ] as const).map(function sizeRow({ label, cls, icon }) {
             return (
               <div key={label} style={{ display: "grid",
-                gridTemplateColumns: "72px 1fr 1fr 1fr 1fr",
+                gridTemplateColumns: "72px 1fr 1fr 1fr 1fr 1fr",
                 marginBottom: 20, alignItems: "center" }}>
                 <p style={{ fontFamily: F, fontSize: 11, fontWeight: 600,
                   color: "var(--vmc-color-text-secondary)", margin: 0 }}>
@@ -3519,6 +3555,11 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
                 </p>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   <button className={`plike ${cls}`} type="button" aria-label="Me gusta">
+                    <HeartOutline size={icon} />
+                  </button>
+                </div>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <button className={`plike ${cls} plike--hover`} type="button" aria-label="Me gusta">
                     <HeartOutline size={icon} />
                   </button>
                 </div>
@@ -3598,7 +3639,7 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
                     <button className={`pprice ${sizeCls}`} type="button">
                       <DollarIcon size={icon} />
                     </button>
-                    <div className="pprice-shelf" />
+                    <div className="pprice-base" />
                   </div>
                 </div>
                 {/* Disabled — shelf invisible, mantiene posición en Y */}
@@ -3607,7 +3648,7 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
                     <button className={`pprice ${sizeCls}`} type="button" disabled>
                       <DollarIcon size={icon} />
                     </button>
-                    <div className="pprice-shelf" />
+                    <div className="pprice-base" />
                   </div>
                 </div>
                 {/* Skeleton — bola gris simple, sin shelf */}
