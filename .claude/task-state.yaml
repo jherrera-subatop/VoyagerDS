@@ -1,0 +1,44 @@
+# TASK STATE — fuente de verdad para sesiones reanudadas
+# Claude lee este archivo PRIMERO al retomar trabajo.
+# Anula el summary compactado para ubicación exacta de secciones.
+# Llenar antes de cada tarea. Resetear a IDLE al terminar.
+
+task_id: "IDLE"
+status: "IDLE"
+# status values: IDLE | IN_PROGRESS | BLOCKED | DONE
+
+# ─── ANCHORS ────────────────────────────────────────────────────────────────
+# Especificar archivo + función EXACTOS. Sin ambigüedad de nombre.
+target_anchors: []
+
+# Ejemplo de uso:
+# target_anchors:
+#   - file: "src/app/preview/components/borrador-mobile/page.tsx"
+#     function: "IcnMaquinariaA"
+#     line_approx: 1165
+#     action: "REPLACE"
+#     note: "Solo esta función — no tocar IcnMaquinaria legacy"
+#
+#   - file: "src/app/preview/components/borrador-mobile/page.tsx"
+#     function: "QFMMachineryIcon"
+#     action: "EXCLUDED"
+#     note: "NUNCA TOCAR — sección diferente, nombre similar"
+
+# ─── SCOPE ───────────────────────────────────────────────────────────────────
+constraints:
+  deny_files: []
+  # Archivos bloqueados para esta tarea (scope guard los intercepta):
+  # deny_files:
+  #   - "src/styles/globals.css"
+  #   - "tokens.json"
+  #   - "src/app/layout.tsx"
+
+# ─── PRÓXIMO PASO ────────────────────────────────────────────────────────────
+next_step: ""
+# Instrucción específica: qué hacer al retomar. Una línea, imperativa.
+# Ejemplo: "Continuar en IcnEquiposB — falta el disc hole path"
+
+# ─── CONTEXTO MÍNIMO ─────────────────────────────────────────────────────────
+context: ""
+# Lo que NO se puede inferir leyendo el código.
+# Ejemplo: "El user quiere 3 variantes, A=amoladora B=sierra C=taladro"

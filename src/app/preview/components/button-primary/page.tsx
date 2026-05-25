@@ -233,6 +233,10 @@ const BUTTON_CSS = `
     --vbtn-stop-b: var(--vmc-color-vault-600);
     transform: scale(0.97) translateY(1px) !important;
     box-shadow: inset 0 2px 4px rgb(0% 0% 0% / 0.22), 0 1px 2px rgb(0% 0% 0% / 0.10) !important;
+    color: oklch(1 0 0 / 0.72);
+  }
+  .pvbtn-sm--pressed .pvbtn-icon {
+    opacity: 0.72;
   }
 
 
@@ -1710,6 +1714,91 @@ const BUTTON_CSS = `
   .pprice--md { width: 44px; height: 44px; }
   .pprice--lg { width: 60px; height: 60px; }
 
+  /* ── Shimmer Lavanda — teal→lavanda→vault · Figma 1287-4615 ── */
+  .pprice--shimmer {
+    /* Gradiente shimmer lavanda aprobado (G-A3) — NO modificar */
+    background-image:
+      linear-gradient(145deg,
+        oklch(0.65 0.16 195)  0%,
+        oklch(0.72 0.10 265) 40%,
+        oklch(0.42 0.22 285) 75%,
+        oklch(0.30 0.20 285) 100%
+      ),
+      linear-gradient(145deg,
+        oklch(0.80 0.12 195)  0%,
+        oklch(0.95 0.04 270 / 0.50) 32%,
+        oklch(0.60 0.14 265) 55%,
+        oklch(0.36 0.20 285) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip:   padding-box, border-box;
+    /* Drop shadow sutil + glow vault */
+    box-shadow:
+      0 2px 4px oklch(0 0 0 / 0.04),
+      0 1px 8px oklch(0.38 0.20 270 / 0.22),
+      inset 0 1px 0 oklch(1 0 0 / 0.52),
+      inset 0 -1px 0 oklch(0 0 0 / 0.10);
+  }
+  /* Glass overlay — igual que Figma (from-white/45 → transparent en 50%) */
+  .pprice--shimmer::before {
+    background: linear-gradient(180deg, oklch(1 0 0 / 0.45) 0%, transparent 50%);
+  }
+  /* Glow vault para hover */
+  .pprice--shimmer::after {
+    background: radial-gradient(circle, oklch(0.52 0.20 270) 0%, transparent 70%);
+  }
+  .pprice--shimmer:hover {
+    box-shadow:
+      0 3px 8px oklch(0 0 0 / 0.07),
+      0 2px 12px oklch(0.38 0.20 270 / 0.32),
+      inset 0 1px 0 oklch(1 0 0 / 0.48),
+      inset 0 -1px 0 oklch(0 0 0 / 0.12);
+    transform: translateY(-1px) scale(1.06);
+  }
+  .pprice--shimmer:hover::after { opacity: 0.55; }
+
+  /* Pedestal shimmer — reflejo del coin en lavanda/vault */
+  .pprice-base--shimmer {
+    background-image:
+      linear-gradient(160deg,
+        oklch(0.50 0.18 260) 0%,
+        oklch(0.36 0.20 280) 100%
+      ),
+      linear-gradient(160deg,
+        oklch(0.68 0.12 250) 0%,
+        oklch(0.42 0.18 280) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip:   padding-box, border-box;
+    box-shadow:
+      0 3px 10px oklch(0.30 0.18 280 / 0.35),
+      0 1px  4px oklch(0.30 0.18 280 / 0.20);
+  }
+
+  /* ── Diamond base — map-pin shape · coin z:2, diamond z:1 ── */
+  .pprice { position: relative; z-index: 2; }
+
+  .pprice-diamond {
+    transform: rotate(45deg);
+    background-image:
+      linear-gradient(145deg,
+        oklch(0.58 0.16 220) 0%,
+        oklch(0.48 0.20 260) 45%,
+        oklch(0.34 0.22 280) 100%
+      );
+    border: 1.5px solid oklch(0.65 0.12 235 / 0.45);
+    box-shadow:
+      0 4px 12px oklch(0.30 0.18 270 / 0.40),
+      inset 0 1px 0 oklch(1 0 0 / 0.25);
+    border-radius: 4px;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+  }
+  .pprice-wrap--sm .pprice-diamond { width: 16px; height: 16px; margin-top: -10px; border-radius: 3px; }
+  .pprice-wrap--md .pprice-diamond { width: 22px; height: 22px; margin-top: -14px; border-radius: 4px; }
+  .pprice-wrap--lg .pprice-diamond { width: 30px; height: 30px; margin-top: -19px; border-radius: 5px; }
+
   /* Disabled */
   .pprice-wrap--disabled .pprice {
     background-image:
@@ -1989,17 +2078,38 @@ const BUTTON_CSS = `
     flex: 1;
   }
   .pqf-heading {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 7px;
+    position: relative;
+    padding: 4px 4px;
   }
-  .pqf-heading::before {
-    content: '';
-    flex-shrink: 0;
-    width: 8px;
-    height: 8px;
-    border-top: 2px solid var(--vmc-color-vault, oklch(0.22 0.18 285));
-    border-left: 2px solid var(--vmc-color-vault, oklch(0.22 0.18 285));
+
+  /* brackets injected as SVG children — see BktTL / BktBR components */
+
+  /* standalone demo wrapper */
+  .pqf-hd-demo {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    padding: 20px 24px;
+    background: oklch(1 0 0);
+    border-radius: 8px;
+    border: 1px solid oklch(0.22 0.18 285 / 0.07);
+    box-shadow: 0 2px 10px oklch(0.22 0.18 285 / 0.06);
+  }
+  .pqf-hd-demo-col {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+  }
+  .pqf-hd-demo-tag {
+    font-family: var(--vmc-font-display);
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 0.10em; text-transform: uppercase;
+    color: oklch(0.72 0.16 55);
+    margin: 0;
   }
   .pqf-heading-text {
     font-family: var(--vmc-font-display);
@@ -2007,13 +2117,14 @@ const BUTTON_CSS = `
     font-weight: 700;
     letter-spacing: 0.09em;
     text-transform: uppercase;
-    color: oklch(0.22 0.18 285 / 0.45);
+    color: oklch(0.22 0.18 285 / 0.70);
   }
   .pqf-items {
     display: flex;
     gap: 8px;
     align-items: flex-start;
   }
+
 
   /* ── CategoryCard · cinematic upgrade ── */
   .pcatcard {
@@ -2371,8 +2482,32 @@ const BUTTON_CSS = `
     margin-top: 10px; flex-shrink: 0;
   }
   /* status borders */
-  .pcard--live       { border-bottom: 6px solid oklch(0.72 0.16 55); }
-  .pcard--negotiable { border-bottom: 6px solid oklch(0.78 0.14 195); }
+  .pcard--live       { border-bottom: none; position: relative; }
+  .pcard--live::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg,
+      oklch(0.78 0.17 55)  0%,
+      oklch(0.72 0.16 55) 50%,
+      oklch(0.54 0.18 44) 100%
+    );
+    border-radius: 0 0 var(--vmc-radius-sm, 4px) var(--vmc-radius-sm, 4px);
+  }
+  .pcard--negotiable { border-bottom: none; position: relative; }
+  .pcard--negotiable::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg,
+      oklch(0.85 0.16 195)  0%,
+      oklch(0.78 0.14 195) 50%,
+      oklch(0.58 0.16 195) 100%
+    );
+    border-radius: 0 0 var(--vmc-radius-sm, 4px) var(--vmc-radius-sm, 4px);
+  }
   .pcard--proxima    { border-bottom: 6px solid oklch(0.42 0.22 285); }
   .pcard--expired    { border-bottom: 6px solid oklch(0.72 0.02 220); }
   /* expired muted */
@@ -2597,34 +2732,14 @@ const BUTTON_CSS = `
 
   /* ── ListingArea ── */
   .plisting {
-    background: oklch(0.97 0.004 270);
+    background: oklch(1 0 0);
     border-radius: 12px;
+    border: 1px solid oklch(0.22 0.18 285 / 0.07);
     padding: 20px 20px 24px;
-    box-shadow: 0 4px 24px oklch(0.22 0.18 285 / 0.10);
+    box-shadow: 0 2px 12px oklch(0.22 0.18 285 / 0.06);
     position: relative;
   }
-  /* Vault bracket — top-left corner accent */
-  .plisting::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 16px; height: 16px;
-    border-top: 2.5px solid oklch(0.22 0.18 285 / 0.40);
-    border-left: 2.5px solid oklch(0.22 0.18 285 / 0.40);
-    border-radius: 12px 0 0 0;
-    pointer-events: none;
-  }
-  /* Orange bracket — bottom-right corner accent */
-  .plisting::after {
-    content: '';
-    position: absolute;
-    bottom: 0; right: 0;
-    width: 16px; height: 16px;
-    border-bottom: 2.5px solid oklch(0.72 0.16 55 / 0.55);
-    border-right:  2.5px solid oklch(0.72 0.16 55 / 0.55);
-    border-radius: 0 0 12px 0;
-    pointer-events: none;
-  }
+  /* brackets injected as SVG children — BktTL size=20 / BktBR size=20 */
   .plisting__header {
     display: flex;
     justify-content: space-between;
@@ -2647,21 +2762,130 @@ const BUTTON_CSS = `
   }
   .plisting__link {
     font-family: var(--vmc-font-display, 'Plus Jakarta Sans', sans-serif);
-    font-size: 12px; font-weight: 600;
+    font-size: 14px; font-weight: 600;
     color: oklch(0.22 0.18 285);
     text-decoration: none;
-    display: flex; align-items: center; gap: 3px;
-    transition: opacity 0.15s ease;
+    display: inline-flex; align-items: center; gap: 6px;
+    height: 36px;
+    padding: 0 4px 0 8px;
     cursor: pointer;
+    outline: none;
+    transition: color 0.14s ease;
   }
-  .plisting__link:hover { opacity: 0.65; }
+  /* icon — 24×24, sin border (no layout shift) */
+  .plisting__link-icon {
+    position: relative;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: transparent;
+    color: oklch(0.72 0.16 55);
+    transition: background 0.14s ease, color 0.14s ease;
+  }
+  /* gradient ring via ::before — absolute, cero impacto en layout */
+  .plisting__link-icon::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    padding: 2px;
+    background: linear-gradient(135deg,
+      oklch(0.82 0.26 55) 0%,
+      oklch(0.62 0.22 45) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+                  linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    transition: opacity 0.14s ease;
+  }
+  /* hover — solid orange, ring desaparece */
+  .plisting__link:hover .plisting__link-icon {
+    background: oklch(0.72 0.16 55);
+    color: oklch(1 0 0);
+  }
+  .plisting__link:hover .plisting__link-icon::before { opacity: 0; }
+  /* pressed — dark amber, text muted gray */
+  .plisting__link:active {
+    color: oklch(0.65 0.025 260);
+  }
+  .plisting__link:active .plisting__link-icon {
+    background: color-mix(in oklch, oklch(0.72 0.16 55) 62%, oklch(0 0 0));
+    color: oklch(1 0 0);
+  }
+  .plisting__link:active .plisting__link-icon::before { opacity: 0; }
+  /* focus-visible */
+  .plisting__link:focus-visible {
+    outline: 2px solid oklch(0.22 0.18 285 / 0.60);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
   .plisting__cards {
     display: flex;
     gap: 12px;
   }
+
 `;
 
 const F = "var(--vmc-font-display, 'Plus Jakarta Sans', sans-serif)";
+
+/* ── Bracket SVG components — stroke-based, rounded corners + caps ── */
+type BktGrad = 'g1' | 'g2' | 'g3';
+interface BktProps { size?: number; sw?: number; grad?: BktGrad; }
+const BKT_STOPS: Record<BktGrad, [string, string]> = {
+  g1: ['#FF8B00', '#3E1F9A'],
+  g2: ['#FFA500', '#E05000'],
+  g3: ['#FFD000', '#E88000'],
+};
+
+function BktTL({ size = 8, sw = 1.5, grad = 'g1' }: BktProps): JSX.Element {
+  const h = sw / 2;
+  const r = sw * 2;
+  const [ca, cb] = BKT_STOPS[grad];
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} fill="none"
+         style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }}
+         aria-hidden="true">
+      <defs>
+        <linearGradient id={`btl${grad}`} x1="1" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+          <stop offset="0%" stopColor={ca}/>
+          <stop offset="100%" stopColor={cb}/>
+        </linearGradient>
+      </defs>
+      <path
+        d={`M${size - h} ${h} L${r + h} ${h} Q${h} ${h} ${h} ${r + h} L${h} ${size - h}`}
+        stroke={`url(#btl${grad})`} strokeWidth={sw}
+        strokeLinecap="round" strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function BktBR({ size = 8, sw = 1.5, grad = 'g1' }: BktProps): JSX.Element {
+  const h = sw / 2;
+  const r = sw * 2;
+  const [ca, cb] = BKT_STOPS[grad];
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} fill="none"
+         style={{ position: 'absolute', bottom: 0, right: 0, pointerEvents: 'none' }}
+         aria-hidden="true">
+      <defs>
+        <linearGradient id={`bbr${grad}`} x1="0" y1="1" x2="1" y2="0" gradientUnits="objectBoundingBox">
+          <stop offset="0%" stopColor={ca}/>
+          <stop offset="100%" stopColor={cb}/>
+        </linearGradient>
+      </defs>
+      <path
+        d={`M${h} ${size - h} L${size - r - h} ${size - h} Q${size - h} ${size - h} ${size - h} ${size - r - h} L${size - h} ${h}`}
+        stroke={`url(#bbr${grad})`} strokeWidth={sw}
+        strokeLinecap="round" strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 function HeartOutline({ size }: { size: number }): JSX.Element {
   return (
@@ -3068,6 +3292,87 @@ function OfferTypeDemoCard({ variant, label }: OfferTypeDemoCardProps): JSX.Elem
   );
 }
 
+function MdPrimaryDemo(): JSX.Element {
+  const [pressed, setPressed] = useState(false);
+  function handlePress(): void { setPressed(true); }
+  function handleRelease(): void { setPressed(false); }
+  const cls = pressed ? "pvbtn pvbtn--pressed" : "pvbtn";
+  return (
+    <button
+      className={cls}
+      type="button"
+      onMouseDown={handlePress}
+      onMouseUp={handleRelease}
+      onMouseLeave={handleRelease}
+      onTouchStart={handlePress}
+      onTouchEnd={handleRelease}
+    >
+      Participa
+    </button>
+  );
+}
+
+function MdSecondaryDemo(): JSX.Element {
+  const [pressed, setPressed] = useState(false);
+  function handlePress(): void { setPressed(true); }
+  function handleRelease(): void { setPressed(false); }
+  const cls = pressed ? "psec psec--pressed" : "psec";
+  return (
+    <button
+      className={cls}
+      type="button"
+      onMouseDown={handlePress}
+      onMouseUp={handleRelease}
+      onMouseLeave={handleRelease}
+      onTouchStart={handlePress}
+      onTouchEnd={handleRelease}
+    >
+      Ingresa
+    </button>
+  );
+}
+
+function MdGhostDemo(): JSX.Element {
+  const [pressed, setPressed] = useState(false);
+  function handlePress(): void { setPressed(true); }
+  function handleRelease(): void { setPressed(false); }
+  const cls = pressed ? "pghost pghost--pressed" : "pghost";
+  return (
+    <button
+      className={cls}
+      type="button"
+      onMouseDown={handlePress}
+      onMouseUp={handleRelease}
+      onMouseLeave={handleRelease}
+      onTouchStart={handlePress}
+      onTouchEnd={handleRelease}
+    >
+      Ver ofertas relacionadas
+    </button>
+  );
+}
+
+function SmIngresaDemo(): JSX.Element {
+  const [pressed, setPressed] = useState(false);
+  function handlePress(): void { setPressed(true); }
+  function handleRelease(): void { setPressed(false); }
+  const cls = pressed ? "pvbtn-sm pvbtn-sm--pressed" : "pvbtn-sm";
+  return (
+    <button
+      className={cls}
+      type="button"
+      onMouseDown={handlePress}
+      onMouseUp={handleRelease}
+      onMouseLeave={handleRelease}
+      onTouchStart={handlePress}
+      onTouchEnd={handleRelease}
+    >
+      <span className="pvbtn-icon">{USER_ICON}</span>
+      Ingresa
+    </button>
+  );
+}
+
 const CATEGORY_ITEMS = [
   { key: "vehicular",  label: "VEHICULAR",          icon: (s: number) => <IconVehicular size={s} /> },
   { key: "maquinaria", label: "MAQUINARIA",         icon: (s: number) => <IconMaquinaria size={s} /> },
@@ -3389,14 +3694,14 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
           </p>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, padding: "16px 0" }}>
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <button className="pvbtn" type="button">Participa</button>
+              <MdPrimaryDemo />
             </div>
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <button className="psec" type="button">Ingresa</button>
+              <MdSecondaryDemo />
             </div>
             <div style={{ display: "flex", justifyContent: "center",
               background: "var(--vmc-color-orange-500)", borderRadius: 8, padding: "12px" }}>
-              <button className="pghost" type="button">Ver ofertas relacionadas</button>
+              <MdGhostDemo />
             </div>
           </div>
         </div>
@@ -3439,10 +3744,7 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
             Demo interactivo
           </p>
           <div style={{ display: "flex", justifyContent: "center", padding: "24px 0" }}>
-            <button className="pvbtn-sm" type="button">
-              <span className="pvbtn-icon">{USER_ICON}</span>
-              Ingresa
-            </button>
+            <SmIngresaDemo />
           </div>
         </div>
 
@@ -3858,6 +4160,96 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
         </div>
 
         {/* ─────────────────────────────────────────────
+            PriceIcon 2 — Shimmer Lavanda
+        ───────────────────────────────────────────── */}
+        <SectionLabel title="PriceIcon 2" subtitle="Shimmer Lavanda · teal→lavanda→vault · SM / MD / LG" />
+
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "28px 32px" }}>
+          {(function priceIcon2() {
+
+            const SHIMMER = "linear-gradient(145deg, oklch(0.65 0.16 195) 0%, oklch(0.72 0.10 265) 40%, oklch(0.42 0.22 285) 75%, oklch(0.30 0.20 285) 100%)";
+
+            /* ── Base diamante plano — SVG · proporción Figma · stroke = borde moneda ── */
+            function DiamondBase({ coinPx }: { coinPx: number }): JSX.Element {
+              const w  = Math.round(coinPx * 1.10);  /* más ancho que la moneda */
+              const h  = Math.round(coinPx * 0.55);  /* altura ~55% del coin */
+              const overlap = Math.round(h * 0.32);
+              const sw = 2;   /* igual grosor que el borde del coin */
+              const p  = sw / 2;
+              const hw = w / 2;
+              const hh = h / 2;
+              const id = `dg${coinPx}`;
+              return (
+                <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`}
+                  style={{ marginTop: -overlap, display: "block", overflow: "visible" }}>
+                  <defs>
+                    {/* Fill — mismo gradiente shimmer lavanda que la moneda */}
+                    <linearGradient id={`${id}f`} x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%"   stopColor="oklch(0.65 0.16 195)" />
+                      <stop offset="40%"  stopColor="oklch(0.72 0.10 265)" />
+                      <stop offset="75%"  stopColor="oklch(0.42 0.22 285)" />
+                      <stop offset="100%" stopColor="oklch(0.30 0.20 285)" />
+                    </linearGradient>
+                    {/* Stroke — highlight ring idéntico al borde del coin */}
+                    <linearGradient id={`${id}s`} x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%"   stopColor="oklch(0.96 0.06 195)" />
+                      <stop offset="25%"  stopColor="oklch(1.00 0.00 0)"   stopOpacity="0.90" />
+                      <stop offset="50%"  stopColor="oklch(0.72 0.12 265)" />
+                      <stop offset="75%"  stopColor="oklch(0.50 0.18 280)" />
+                      <stop offset="100%" stopColor="oklch(0.96 0.06 195)" stopOpacity="0.60" />
+                    </linearGradient>
+                  </defs>
+                  <polygon
+                    points={`${hw},${p} ${w-p},${hh} ${hw},${h-p} ${p},${hh}`}
+                    fill={`url(#${id}f)`}
+                    stroke={`url(#${id}s)`}
+                    strokeWidth={sw}
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              );
+            }
+
+            /* SM=16px → 24×24 · MD=26px → 36×36 · LG=40px → ~56×56 */
+            const sizes: { label: string; coinPx: number; icon: number; frame: string }[] = [
+              { label: "Small",  coinPx: 24, icon: 10, frame: "28×28px" },
+              { label: "Medium", coinPx: 32, icon: 14, frame: "36×36px" },
+              { label: "Large",  coinPx: 52, icon: 22, frame: "~56×56px" },
+            ];
+
+            return (
+              <div style={{ display: "flex", gap: 56, alignItems: "flex-end" }}>
+                {sizes.map(function renderSize({ label, coinPx, icon, frame }) {
+                  return (
+                    <div key={label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
+                      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
+                        <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+                          textTransform: "uppercase" as const, letterSpacing: "0.08em",
+                          color: "var(--vmc-color-text-tertiary)", margin: 0 }}>
+                          {label}
+                        </p>
+                        <p style={{ fontFamily: F, fontSize: 9,
+                          color: "oklch(0.65 0.02 220)", margin: 0 }}>
+                          {frame}
+                        </p>
+                      </div>
+                      <div style={{ display: "flex", flexDirection: "column", alignItems: "center",
+                        filter: "drop-shadow(0px 1px 2px oklch(0 0 0 / 0.02))" }}>
+                        <button className="pprice pprice--shimmer" type="button" aria-label="precio"
+                          style={{ width: coinPx, height: coinPx, position: "relative", zIndex: 2 }}>
+                          <DollarIcon size={icon} />
+                        </button>
+                        <DiamondBase coinPx={coinPx} />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })()}
+        </div>
+
+        {/* ─────────────────────────────────────────────
             8. PriceTag
         ───────────────────────────────────────────── */}
         <SectionLabel title="PriceTag" subtitle="vault pill · icono teal + precio · SM / MD / LG" />
@@ -3936,6 +4328,36 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
 
 
         {/* ─────────────────────────────────────────────
+            9. QuickFilter heading bracket — gradient options
+        ───────────────────────────────────────────── */}
+        <SectionLabel
+          title="Section Heading — Bracket Gradient Options"
+          subtitle="G1 vault→orange · G2 pure orange · G3 warm gold"
+        />
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px" }}>
+          <div className="pqf-hd-demo">
+            <div className="pqf-hd-demo-col">
+              <p className="pqf-hd-demo-tag">G1 — vault → orange</p>
+              <div className="pqf-heading"><BktTL /><BktBR />
+                <span className="pqf-heading-text">Tipo de Oferta</span>
+              </div>
+            </div>
+            <div className="pqf-hd-demo-col">
+              <p className="pqf-hd-demo-tag">G2 — pure orange</p>
+              <div className="pqf-heading pqf-heading--g2"><BktTL grad="g2" /><BktBR grad="g2" />
+                <span className="pqf-heading-text">Tipo de Oferta</span>
+              </div>
+            </div>
+            <div className="pqf-hd-demo-col">
+              <p className="pqf-hd-demo-tag">G3 — warm gold</p>
+              <div className="pqf-heading pqf-heading--g3"><BktTL grad="g3" /><BktBR grad="g3" />
+                <span className="pqf-heading-text">Tipo de Oferta</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ─────────────────────────────────────────────
             9. QuickFilter
         ───────────────────────────────────────────── */}
         <SectionLabel
@@ -3953,7 +4375,7 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
           </p>
           <div className="pqf">
             <div className="pqf-section pqf-section--offer">
-              <div className="pqf-heading">
+              <div className="pqf-heading"><BktTL /><BktBR />
                 <span className="pqf-heading-text">Tipo de Oferta</span>
               </div>
               <div className="pqf-items">
@@ -3977,7 +4399,7 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
             </div>
 
             <div className="pqf-section pqf-section--cats">
-              <div className="pqf-heading">
+              <div className="pqf-heading"><BktTL /><BktBR />
                 <span className="pqf-heading-text">Categorías</span>
               </div>
               <div className="pqf-items">
@@ -4003,7 +4425,7 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
             </p>
             <div className="pqf">
               <div className="pqf-section pqf-section--offer">
-                <div className="pqf-heading">
+                <div className="pqf-heading"><BktTL /><BktBR />
                   <span className="pqf-heading-text">Tipo de Oferta</span>
                 </div>
                 <div className="pqf-items">
@@ -4013,7 +4435,7 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
               </div>
 
               <div className="pqf-section pqf-section--cats">
-                <div className="pqf-heading">
+                <div className="pqf-heading"><BktTL /><BktBR />
                   <span className="pqf-heading-text">Categorías</span>
                 </div>
                 <div className="pqf-items">
@@ -4027,6 +4449,7 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
             </div>
           </div>
 
+
         </div>
 
         {/* ─────────────────────────────────────────────
@@ -4036,6 +4459,47 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
 
         <div style={{ background: "var(--vmc-color-background-card)", padding: "28px 32px" }}>
           {(function offerCards() {
+
+            /* ── PriceIcon 2 SM — coin 24px + diamond base SVG ── */
+            function OfferPriceIcon(): JSX.Element {
+              const coin = 24;
+              const w = Math.round(coin * 1.10);
+              const h = Math.round(coin * 0.55);
+              const overlap = Math.round(h * 0.32);
+              const sw = 2;
+              const p = sw / 2;
+              return (
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center",
+                  filter: "drop-shadow(0px 1px 1px oklch(0 0 0 / 0.02))" }}>
+                  <button className="pprice pprice--shimmer" type="button" aria-label="precio"
+                    style={{ width: coin, height: coin, position: "relative", zIndex: 2 }}>
+                    <DollarIcon size={10} />
+                  </button>
+                  <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`}
+                    style={{ marginTop: -overlap, display: "block", overflow: "visible" }}>
+                    <defs>
+                      <linearGradient id="opi-f" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%"   stopColor="oklch(0.65 0.16 195)" />
+                        <stop offset="40%"  stopColor="oklch(0.72 0.10 265)" />
+                        <stop offset="75%"  stopColor="oklch(0.42 0.22 285)" />
+                        <stop offset="100%" stopColor="oklch(0.30 0.20 285)" />
+                      </linearGradient>
+                      <linearGradient id="opi-s" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%"   stopColor="oklch(0.84 0.10 195)" />
+                        <stop offset="25%"  stopColor="oklch(1.00 0.00 0)"   stopOpacity="0.90" />
+                        <stop offset="55%"  stopColor="oklch(0.62 0.14 265)" />
+                        <stop offset="100%" stopColor="oklch(0.40 0.18 285)" stopOpacity="0.60" />
+                      </linearGradient>
+                    </defs>
+                    <polygon
+                      points={`${w/2},${p} ${w-p},${h/2} ${w/2},${h-p} ${p},${h/2}`}
+                      fill="url(#opi-f)" stroke="url(#opi-s)"
+                      strokeWidth={sw} strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+              );
+            }
 
             /* ── Pill badges ── */
             const PILL_LIVE = (
@@ -4075,7 +4539,7 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
                       ? (
                         <div className="pcard__price-row">
                           <div className="pcard__price-left">
-                            <button className="pprice pprice--sm" type="button" aria-label="precio"><DollarIcon size={14} /></button>
+                            <OfferPriceIcon />
                             <span className="pcard__price-text">US$ 9,999</span>
                           </div>
                           <LikeDemo cls="plike--sm" icon={14} />
@@ -4103,7 +4567,7 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
                     </div>
                     <div className="pcard__price-row">
                       <div className="pcard__price-left">
-                        <button className="pprice pprice--sm" type="button" aria-label="cargando" disabled><DollarIcon size={14} /></button>
+                        <OfferPriceIcon />
                         <span className="pcard__price-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                       </div>
                       <button className="plike plike--sm" type="button" disabled aria-label="cargando"><HeartOutline size={14} /></button>
@@ -4166,12 +4630,815 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
         </div>
 
         {/* ─────────────────────────────────────────────
+            PROPUESTAS OFFERCARD
+        ───────────────────────────────────────────── */}
+        <SectionLabel
+          title="Propuestas OfferCard"
+          subtitle="En Vivo · Publicada — upgrades aplicados · comparativa A/B"
+        />
+
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "28px 32px" }}>
+          {(function propuestasOfferCard() {
+
+            const PILL_LIVE = (
+              <div className="pcard-pill pcard-pill--live">
+                <div className="pcard-pill-dot" />
+                EN VIVO
+              </div>
+            );
+
+            return (
+              <div style={{ display: "flex", gap: 40, alignItems: "flex-start" }}>
+
+                {/* ── A: Original ── */}
+                <div>
+                  <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+                    textTransform: "uppercase" as const, letterSpacing: "0.08em",
+                    color: "var(--vmc-color-text-tertiary)", margin: "0 0 12px" }}>
+                    A · Original
+                  </p>
+                  <div className="pcard pcard--live" style={{ height: 232 }}>
+                    <div className="pcard__img">
+                      <img src="/demo/bronco.jpg" alt="Ford Bronco Sport" width={170} height={112}
+                        style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+                      <div className="pcard__img-badge">{PILL_LIVE}</div>
+                    </div>
+                    <div className="pcard__body">
+                      <div className="pcard__meta">
+                        <p className="pcard__name">Ford Bronco Sport</p>
+                        <p className="pcard__year">2024</p>
+                      </div>
+                      <div className="pcard__price-row">
+                        <div className="pcard__price-left">
+                          <button className="pprice pprice--sm" type="button" aria-label="precio">
+                            <DollarIcon size={14} />
+                          </button>
+                          <span className="pcard__price-text">US$ 9,999</span>
+                        </div>
+                        <LikeDemo cls="plike--sm" icon={14} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── B: Propuesta — scrim + brackets + uppercase + hover ── */}
+                <div>
+                  <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+                    textTransform: "uppercase" as const, letterSpacing: "0.08em",
+                    color: "oklch(0.72 0.16 55)", margin: "0 0 12px" }}>
+                    B · Propuesta
+                  </p>
+                  <div className="pcard pprop-card" style={{ borderBottom: "none", height: 232 }}>
+                    <div className="pcard__img">
+                      <img src="/demo/bronco.jpg" alt="Ford Bronco Sport" width={170} height={112}
+                        style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+                      <div style={{
+                        position: "absolute", inset: 0,
+                        background: "linear-gradient(to top, oklch(0 0 0 / 0.50) 0%, transparent 55%)",
+                        borderRadius: "8px 8px 0 0", pointerEvents: "none",
+                      }} />
+                      <div className="pcard__img-badge">{PILL_LIVE}</div>
+                    </div>
+                    <div className="pcard__body">
+                      <div className="pcard__meta">
+                        <p className="pcard__name">Ford Bronco Sport</p>
+                        <p className="pcard__year">2024</p>
+                      </div>
+                      <div className="pcard__price-row">
+                        <div className="pcard__price-left">
+                          <button className="pprice pprice--sm" type="button" aria-label="precio">
+                            <DollarIcon size={14} />
+                          </button>
+                          <span className="pcard__price-text" style={{ color: "oklch(0.78 0.14 195)" }}>US$ 9,999</span>
+                        </div>
+                        <LikeDemo cls="plike--sm" icon={14} />
+                      </div>
+                    </div>
+                    {/* gradiente vault→naranja como firma */}
+                    <div style={{
+                      position: "absolute", bottom: 0, left: 0, right: 0, height: 6,
+                      background: "linear-gradient(90deg, oklch(0.78 0.17 55) 0%, oklch(0.72 0.16 55) 50%, oklch(0.54 0.18 44) 100%)",
+                      borderRadius: "0 0 8px 8px",
+                    }} />
+                  </div>
+                </div>
+
+                {/* ── C: Propuesta — todo + badge reposicionado bottom-left ── */}
+                <div>
+                  <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+                    textTransform: "uppercase" as const, letterSpacing: "0.08em",
+                    color: "oklch(0.72 0.16 55)", margin: "0 0 12px" }}>
+                    C · Badge bottom-left
+                  </p>
+                  <div className="pcard pprop-card" style={{ borderBottom: "none", height: 232 }}>
+                    <div className="pcard__img">
+                      <img src="/demo/bronco.jpg" alt="Ford Bronco Sport" width={170} height={112}
+                        style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+                      <div style={{
+                        position: "absolute", inset: 0,
+                        background: "linear-gradient(to top, oklch(0 0 0 / 0.50) 0%, transparent 55%)",
+                        borderRadius: "8px 8px 0 0", pointerEvents: "none",
+                      }} />
+                      <div style={{ position: "absolute", bottom: 8, left: 8, zIndex: 2 }}>
+                        {PILL_LIVE}
+                      </div>
+                    </div>
+                    <div className="pcard__body">
+                      <div className="pcard__meta">
+                        <p className="pcard__name">Ford Bronco Sport</p>
+                        <p className="pcard__year">2024</p>
+                      </div>
+                      <div className="pcard__price-row">
+                        <div className="pcard__price-left">
+                          <button className="pprice pprice--sm" type="button" aria-label="precio">
+                            <DollarIcon size={14} />
+                          </button>
+                          <span className="pcard__price-text" style={{ color: "oklch(0.78 0.14 195)" }}>US$ 9,999</span>
+                        </div>
+                        <LikeDemo cls="plike--sm" icon={14} />
+                      </div>
+                    </div>
+                    <div style={{
+                      position: "absolute", bottom: 0, left: 0, right: 0, height: 6,
+                      background: "linear-gradient(90deg, oklch(0.78 0.17 55) 0%, oklch(0.72 0.16 55) 50%, oklch(0.54 0.18 44) 100%)",
+                      borderRadius: "0 0 8px 8px",
+                    }} />
+                  </div>
+                </div>
+
+              </div>
+            );
+          })()}
+
+          <style dangerouslySetInnerHTML={{ __html: `
+            .pprop-card {
+              transition: transform 0.18s ease, box-shadow 0.18s ease;
+              cursor: pointer;
+            }
+            .pprop-card:hover {
+              transform: translateY(-3px);
+              box-shadow: 0 14px 28px oklch(0.22 0.18 285 / 0.18);
+            }
+            .pprop-card:focus-visible {
+              outline: 2px solid oklch(0.30 0.20 285);
+              outline-offset: 2px;
+            }
+            .pprice-ora {
+              width: 26px; height: 26px; border-radius: 9999px;
+              border: none; cursor: pointer; flex-shrink: 0;
+              display: flex; align-items: center; justify-content: center;
+              border: 1.5px solid transparent;
+              background-image:
+                linear-gradient(135deg, oklch(0.78 0.17 55) 0%, oklch(0.72 0.16 55) 40%, oklch(0.54 0.18 44) 100%),
+                linear-gradient(135deg, oklch(0.86 0.12 55) 0%, oklch(1 0 0 / 0.45) 40%, oklch(0.65 0.16 50) 75%, oklch(0.86 0.12 55) 100%);
+              background-origin: padding-box, border-box;
+              background-clip: padding-box, border-box;
+              box-shadow: 0 2px 8px oklch(0.72 0.16 55 / 0.35), inset 0 1px 0 oklch(1 0 0 / 0.18);
+            }
+            .pprice-vault {
+              width: 26px; height: 26px; border-radius: 9999px;
+              border: none; cursor: pointer; flex-shrink: 0;
+              display: flex; align-items: center; justify-content: center;
+              border: 1.5px solid transparent;
+              background-image:
+                linear-gradient(135deg, oklch(0.36 0.22 285) 0%, oklch(0.22 0.18 285) 50%, oklch(0.14 0.14 285) 100%),
+                linear-gradient(135deg, oklch(0.50 0.22 285) 0%, oklch(1 0 0 / 0.30) 40%, oklch(0.28 0.18 285) 75%, oklch(0.50 0.22 285) 100%);
+              background-origin: padding-box, border-box;
+              background-clip: padding-box, border-box;
+              box-shadow: 0 2px 8px oklch(0.22 0.18 285 / 0.45), inset 0 1px 0 oklch(1 0 0 / 0.14);
+            }
+            .pprice-ghost {
+              width: 26px; height: 26px; border-radius: 9999px;
+              border: 1.5px solid oklch(0.78 0.14 195); cursor: pointer; flex-shrink: 0;
+              display: flex; align-items: center; justify-content: center;
+              background: transparent;
+            }
+          `}} />
+
+          {/* ── Propuestas teal family — PriceIcon mismo color que US$... ── */}
+          <div style={{ marginTop: 32, borderTop: "1px solid var(--vmc-color-vault-utility-ghost)", paddingTop: 24 }}>
+            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase" as const, letterSpacing: "0.10em",
+              color: "var(--vmc-color-text-primary)", margin: "0 0 4px" }}>
+              PriceIcon — familia teal · mismo color que US$ ···
+            </p>
+            <p style={{ fontFamily: F, fontSize: 9, color: "var(--vmc-color-text-tertiary)", margin: "0 0 20px" }}>
+              bg del botón = teal más opaco · $ inside = teal · texto = teal · 3 niveles de intensidad
+            </p>
+
+            {(function priceProps() {
+              const SCRIM = (
+                <div style={{
+                  position: "absolute", inset: 0,
+                  background: "linear-gradient(to top, oklch(0 0 0 / 0.50) 0%, transparent 55%)",
+                  borderRadius: "8px 8px 0 0", pointerEvents: "none",
+                }} />
+              );
+              const GRAD_BORDER = (
+                <div style={{
+                  position: "absolute", bottom: 0, left: 0, right: 0, height: 6,
+                  background: "linear-gradient(90deg, oklch(0.78 0.17 55) 0%, oklch(0.72 0.16 55) 50%, oklch(0.54 0.18 44) 100%)",
+                  borderRadius: "0 0 8px 8px",
+                }} />
+              );
+              const BADGE = (
+                <div className="pcard__img-badge">
+                  <div className="pcard-pill pcard-pill--live"><div className="pcard-pill-dot" />EN VIVO</div>
+                </div>
+              );
+              const IMG = (
+                <div className="pcard__img">
+                  <img src="/demo/bronco.jpg" alt="Ford Bronco Sport" width={170} height={112}
+                    style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+                  {SCRIM}{BADGE}
+                </div>
+              );
+              const META = (
+                <div className="pcard__meta">
+                  <p className="pcard__name">Ford Bronco Sport</p>
+                  <p className="pcard__year">2024</p>
+                </div>
+              );
+
+              /* ── Dollar icon helpers ── */
+              function DollarDarkTeal({ size }: { size: number }): JSX.Element {
+                return (
+                  <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+                    stroke="oklch(0.45 0.16 195)" strokeWidth="2.6"
+                    strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="12" y1="1" x2="12" y2="23"/>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                  </svg>
+                );
+              }
+              function DollarMidTeal({ size }: { size: number }): JSX.Element {
+                return (
+                  <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+                    stroke="oklch(0.55 0.17 195)" strokeWidth="2.6"
+                    strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="12" y1="1" x2="12" y2="23"/>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                  </svg>
+                );
+              }
+              function DollarWhite({ size }: { size: number }): JSX.Element {
+                return (
+                  <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+                    stroke="oklch(0.96 0.02 195)" strokeWidth="2.6"
+                    strokeLinecap="round" strokeLinejoin="round"
+                    style={{ filter: "drop-shadow(0px 1px 2px oklch(0 0 0 / 0.35))" }}>
+                    <line x1="12" y1="1" x2="12" y2="23"/>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                  </svg>
+                );
+              }
+
+              interface PropCardProps {
+                label: string;
+                note: string;
+                priceIcon: JSX.Element;
+                priceText: JSX.Element;
+                likeBtn: JSX.Element;
+              }
+              function PropCard({ label, note, priceIcon, priceText, likeBtn }: PropCardProps): JSX.Element {
+                return (
+                  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                      <p style={{ fontFamily: F, fontSize: 9, fontWeight: 700,
+                        textTransform: "uppercase" as const, letterSpacing: "0.08em",
+                        color: "var(--vmc-color-text-tertiary)", margin: 0 }}>
+                        {label}
+                      </p>
+                      <p style={{ fontFamily: F, fontSize: 8.5, color: "oklch(0.65 0.02 220)", margin: 0, lineHeight: 1.3 }}>
+                        {note}
+                      </p>
+                    </div>
+                    <div className="pcard pprop-card" style={{ borderBottom: "none", height: 232 }}>
+                      {IMG}
+                      <div className="pcard__body">
+                        {META}
+                        <div className="pcard__price-row">
+                          <div className="pcard__price-left">
+                            {priceIcon}
+                            {priceText}
+                          </div>
+                          {likeBtn}
+                        </div>
+                      </div>
+                      {GRAD_BORDER}
+                    </div>
+                  </div>
+                );
+              }
+
+              /* ── T-A: gradiente teal claro→medio — contraste amplio ── */
+              const iconA = (
+                <button type="button" aria-label="precio" style={{
+                  width: 26, height: 26, borderRadius: 9999,
+                  border: "1.5px solid transparent",
+                  backgroundImage: [
+                    "linear-gradient(145deg, oklch(0.82 0.10 195) 0%, oklch(0.60 0.13 195) 60%, oklch(0.48 0.14 195) 100%)",
+                    "linear-gradient(145deg, oklch(0.88 0.08 195) 0%, oklch(1 0 0 / 0.40) 35%, oklch(0.52 0.13 195) 100%)",
+                  ].join(", "),
+                  backgroundOrigin: "padding-box, border-box",
+                  backgroundClip: "padding-box, border-box",
+                  boxShadow: "0 2px 8px oklch(0.52 0.13 195 / 0.32), inset 0 1px 0 oklch(1 0 0 / 0.40)",
+                  cursor: "pointer", flexShrink: 0,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                }}>
+                  <DollarWhite size={13} />
+                </button>
+              );
+
+              /* ── T-B: gradiente teal medio→profundo — más presencia ── */
+              const iconB = (
+                <button type="button" aria-label="precio" style={{
+                  width: 26, height: 26, borderRadius: 9999,
+                  border: "1.5px solid transparent",
+                  backgroundImage: [
+                    "linear-gradient(145deg, oklch(0.70 0.12 195) 0%, oklch(0.50 0.15 195) 55%, oklch(0.36 0.14 195) 100%)",
+                    "linear-gradient(145deg, oklch(0.78 0.10 195) 0%, oklch(1 0 0 / 0.28) 38%, oklch(0.40 0.14 195) 100%)",
+                  ].join(", "),
+                  backgroundOrigin: "padding-box, border-box",
+                  backgroundClip: "padding-box, border-box",
+                  boxShadow: "0 2px 10px oklch(0.42 0.14 195 / 0.40), inset 0 1px 0 oklch(1 0 0 / 0.24)",
+                  cursor: "pointer", flexShrink: 0,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                }}>
+                  <DollarWhite size={13} />
+                </button>
+              );
+
+              /* ── T-C: gradiente teal intenso — máximo rango L ── */
+              const iconC = (
+                <button type="button" aria-label="precio" style={{
+                  width: 26, height: 26, borderRadius: 9999,
+                  border: "1.5px solid transparent",
+                  backgroundImage: [
+                    "linear-gradient(145deg, oklch(0.62 0.15 195) 0%, oklch(0.44 0.16 195) 50%, oklch(0.28 0.14 195) 100%)",
+                    "linear-gradient(145deg, oklch(0.72 0.13 195) 0%, oklch(1 0 0 / 0.20) 38%, oklch(0.32 0.14 195) 100%)",
+                  ].join(", "),
+                  backgroundOrigin: "padding-box, border-box",
+                  backgroundClip: "padding-box, border-box",
+                  boxShadow: "0 2px 12px oklch(0.34 0.14 195 / 0.50), inset 0 1px 0 oklch(1 0 0 / 0.16)",
+                  cursor: "pointer", flexShrink: 0,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                }}>
+                  <DollarWhite size={13} />
+                </button>
+              );
+
+              const proposals: PropCardProps[] = [
+                {
+                  label: "TX-1 · Texto teal",
+                  note: "icono T-A · precio teal — familia unificada",
+                  priceIcon: iconA,
+                  priceText: <span className="pcard__price-text" style={{ color: "oklch(0.62 0.14 195)" }}>US$ 9,999</span>,
+                  likeBtn: <LikeDemo cls="plike--sm" icon={14} />,
+                },
+                {
+                  label: "TX-2 · Texto vault dark",
+                  note: "icono T-B · precio vault — contraste máximo",
+                  priceIcon: iconB,
+                  priceText: <span className="pcard__price-text" style={{ color: "oklch(0.22 0.18 285)" }}>US$ 9,999</span>,
+                  likeBtn: <LikeDemo cls="plike--sm" icon={14} />,
+                },
+                {
+                  label: "TX-3 · Texto negro neutro",
+                  note: "icono T-C · precio near-black — limpio, legible",
+                  priceIcon: iconC,
+                  priceText: <span className="pcard__price-text" style={{ color: "oklch(0.20 0.02 270)" }}>US$ 9,999</span>,
+                  likeBtn: <LikeDemo cls="plike--sm" icon={14} />,
+                },
+              ];
+
+              return (
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 170px)", gap: 24 }}>
+                  {proposals.map(function renderProp(p) {
+                    return <PropCard key={p.label} {...p} />;
+                  })}
+                </div>
+              );
+            })()}
+          </div>
+
+        </div>
+
+        {/* ─────────────────────────────────────────────
+            APLICACIÓN TEAL ICON — grid 4 cards
+        ───────────────────────────────────────────── */}
+        <SectionLabel title="Teal Icon — Aplicación" subtitle="Icono gradiente teal · 4 estados de card · cómo se ve en grid real" />
+
+        <div style={{ padding: "32px 28px", background: "oklch(0.96 0.004 270)" }}>
+          {(function tealIconGrid() {
+
+            /* ── Teal icon reutilizable ── */
+            function TealIcon(): JSX.Element {
+              return (
+                <button className="pprice pprice--sm" type="button" aria-label="precio">
+                  <DollarIcon size={14} />
+                </button>
+              );
+            }
+
+            function GradBorder(): JSX.Element {
+              return (
+                <div style={{
+                  position: "absolute", bottom: 0, left: 0, right: 0, height: 6,
+                  background: "linear-gradient(90deg, oklch(0.78 0.17 55) 0%, oklch(0.72 0.16 55) 50%, oklch(0.54 0.18 44) 100%)",
+                  borderRadius: "0 0 8px 8px",
+                }} />
+              );
+            }
+
+            function Scrim(): JSX.Element {
+              return (
+                <div style={{
+                  position: "absolute", inset: 0,
+                  background: "linear-gradient(to top, oklch(0 0 0 / 0.50) 0%, transparent 55%)",
+                  borderRadius: "8px 8px 0 0", pointerEvents: "none",
+                }} />
+              );
+            }
+
+            interface GridCardProps {
+              badge: JSX.Element | null;
+              gradBorder: boolean;
+              priceColor: string;
+              label: string;
+              name: string;
+              year: string;
+              likeBtn: JSX.Element;
+            }
+
+            function GridCard({ badge, gradBorder, priceColor, label, name, year, likeBtn }: GridCardProps): JSX.Element {
+              return (
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  <p style={{ fontFamily: F, fontSize: 9, fontWeight: 700,
+                    textTransform: "uppercase" as const, letterSpacing: "0.08em",
+                    color: "var(--vmc-color-text-tertiary)", margin: 0 }}>
+                    {label}
+                  </p>
+                  <div className="pcard pprop-card" style={{ borderBottom: "none", height: 232, width: 170 }}>
+                    <div className="pcard__img">
+                      <img src="/demo/bronco.jpg" alt={name} width={170} height={112}
+                        style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+                      <Scrim />
+                      {badge && <div className="pcard__img-badge">{badge}</div>}
+                    </div>
+                    <div className="pcard__body">
+                      <div className="pcard__meta">
+                        <p className="pcard__name">{name}</p>
+                        <p className="pcard__year">{year}</p>
+                      </div>
+                      <div className="pcard__price-row">
+                        <div className="pcard__price-left">
+                          <TealIcon />
+                          <span className="pcard__price-text" style={{ color: priceColor }}>US$ 9,999</span>
+                        </div>
+                        {likeBtn}
+                      </div>
+                    </div>
+                    {gradBorder && <GradBorder />}
+                  </div>
+                </div>
+              );
+            }
+
+            return (
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 170px)", gap: 24 }}>
+                <GridCard
+                  label="EN VIVO · Publicada"
+                  badge={<div className="pcard-pill pcard-pill--live"><div className="pcard-pill-dot" />EN VIVO</div>}
+                  gradBorder={true}
+                  priceColor="oklch(0.62 0.14 195)"
+                  name="Ford Bronco Sport"
+                  year="2024"
+                  likeBtn={<LikeDemo cls="plike--sm" icon={14} />}
+                />
+                <GridCard
+                  label="PRÓXIMA · Publicada"
+                  badge={<div className="pcard-pill pcard-pill--proxima"><span className="pcard-pill-clock"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>PRÓXIMA</div>}
+                  gradBorder={false}
+                  priceColor="oklch(0.62 0.14 195)"
+                  name="Land Rover Def."
+                  year="2023"
+                  likeBtn={<LikeDemo cls="plike--sm" icon={14} />}
+                />
+                <GridCard
+                  label="NEGOCIABLE"
+                  badge={null}
+                  gradBorder={false}
+                  priceColor="oklch(0.62 0.14 195)"
+                  name="Toyota Hilux"
+                  year="2022"
+                  likeBtn={<LikeDemo cls="plike--sm" icon={14} />}
+                />
+                <GridCard
+                  label="PUBLICADA · sin badge"
+                  badge={null}
+                  gradBorder={false}
+                  priceColor="oklch(0.62 0.14 195)"
+                  name="Audi Q3"
+                  year="2021"
+                  likeBtn={<LikeDemo cls="plike--sm" icon={14} />}
+                />
+              </div>
+            );
+          })()}
+        </div>
+
+        {/* ─────────────────────────────────────────────
+            APLICACIÓN TEAL ICON 2 — precio negro
+        ───────────────────────────────────────────── */}
+        <SectionLabel title="Teal Icon — Aplicación 2" subtitle="Icono gradiente teal · precio negro · 4 estados de card" />
+
+        <div style={{ padding: "32px 28px", background: "oklch(0.96 0.004 270)" }}>
+          {(function tealIconGrid2() {
+
+            function TealIcon2(): JSX.Element {
+              return (
+                <button className="pprice pprice--sm" type="button" aria-label="precio">
+                  <DollarIcon size={14} />
+                </button>
+              );
+            }
+
+            function GradBorder2(): JSX.Element {
+              return (
+                <div style={{
+                  position: "absolute", bottom: 0, left: 0, right: 0, height: 6,
+                  background: "linear-gradient(90deg, oklch(0.78 0.17 55) 0%, oklch(0.72 0.16 55) 50%, oklch(0.54 0.18 44) 100%)",
+                  borderRadius: "0 0 8px 8px",
+                }} />
+              );
+            }
+
+            function Scrim2(): JSX.Element {
+              return (
+                <div style={{
+                  position: "absolute", inset: 0,
+                  background: "linear-gradient(to top, oklch(0 0 0 / 0.50) 0%, transparent 55%)",
+                  borderRadius: "8px 8px 0 0", pointerEvents: "none",
+                }} />
+              );
+            }
+
+            interface GridCard2Props {
+              badge: JSX.Element | null;
+              gradBorder: boolean;
+              label: string;
+              name: string;
+              year: string;
+            }
+
+            function GridCard2({ badge, gradBorder, label, name, year }: GridCard2Props): JSX.Element {
+              return (
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  <p style={{ fontFamily: F, fontSize: 9, fontWeight: 700,
+                    textTransform: "uppercase" as const, letterSpacing: "0.08em",
+                    color: "var(--vmc-color-text-tertiary)", margin: 0 }}>
+                    {label}
+                  </p>
+                  <div className="pcard pprop-card" style={{ borderBottom: "none", height: 232, width: 170 }}>
+                    <div className="pcard__img">
+                      <img src="/demo/bronco.jpg" alt={name} width={170} height={112}
+                        style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+                      <Scrim2 />
+                      {badge && <div className="pcard__img-badge">{badge}</div>}
+                    </div>
+                    <div className="pcard__body">
+                      <div className="pcard__meta">
+                        <p className="pcard__name" style={{ color: "oklch(0.35 0.20 285)" }}>{name}</p>
+                        <p className="pcard__year">{year}</p>
+                      </div>
+                      <div className="pcard__price-row">
+                        <div className="pcard__price-left">
+                          <TealIcon2 />
+                          <span className="pcard__price-text" style={{ color: "oklch(0.20 0.02 270)" }}>US$ 9,999</span>
+                        </div>
+                        <LikeDemo cls="plike--sm" icon={14} />
+                      </div>
+                    </div>
+                    {gradBorder && <GradBorder2 />}
+                  </div>
+                </div>
+              );
+            }
+
+            return (
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 170px)", gap: 24 }}>
+                <GridCard2
+                  label="EN VIVO · Publicada"
+                  badge={<div className="pcard-pill pcard-pill--live"><div className="pcard-pill-dot" />EN VIVO</div>}
+                  gradBorder={true}
+                  name="Ford Bronco Sport"
+                  year="2024"
+                />
+                <GridCard2
+                  label="PRÓXIMA · Publicada"
+                  badge={<div className="pcard-pill pcard-pill--proxima"><span className="pcard-pill-clock"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>PRÓXIMA</div>}
+                  gradBorder={true}
+                  name="Land Rover Def."
+                  year="2023"
+                />
+                <GridCard2
+                  label="NEGOCIABLE"
+                  badge={null}
+                  gradBorder={true}
+                  name="Toyota Hilux"
+                  year="2022"
+                />
+                <GridCard2
+                  label="PUBLICADA · sin badge"
+                  badge={null}
+                  gradBorder={true}
+                  name="Audi Q3"
+                  year="2021"
+                />
+              </div>
+            );
+          })()}
+        </div>
+
+        {/* ─────────────────────────────────────────────
+            APLICACIÓN TEAL ICON 3 — glass vault
+        ───────────────────────────────────────────── */}
+        <SectionLabel title="Teal Icon — Aplicación 3" subtitle="PriceIcon glass · tirando a morado vault · 3 variantes de intensidad" />
+
+        <div style={{ padding: "32px 28px", background: "oklch(0.96 0.004 270)" }}>
+          {(function tealIconGrid3() {
+
+            const GRAD_BORDER = (
+              <div style={{
+                position: "absolute", bottom: 0, left: 0, right: 0, height: 6,
+                background: "linear-gradient(90deg, oklch(0.78 0.17 55) 0%, oklch(0.72 0.16 55) 50%, oklch(0.54 0.18 44) 100%)",
+                borderRadius: "0 0 8px 8px",
+              }} />
+            );
+            const SCRIM = (
+              <div style={{
+                position: "absolute", inset: 0,
+                background: "linear-gradient(to top, oklch(0 0 0 / 0.50) 0%, transparent 55%)",
+                borderRadius: "8px 8px 0 0", pointerEvents: "none",
+              }} />
+            );
+            const BADGE = (
+              <div className="pcard__img-badge">
+                <div className="pcard-pill pcard-pill--live"><div className="pcard-pill-dot" />EN VIVO</div>
+              </div>
+            );
+            const IMG = (
+              <div className="pcard__img">
+                <img src="/demo/bronco.jpg" alt="Ford Bronco Sport" width={170} height={112}
+                  style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+                {SCRIM}{BADGE}
+              </div>
+            );
+
+            function DollarGlass({ size }: { size: number }): JSX.Element {
+              return (
+                <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+                  stroke="oklch(0.96 0.04 285)" strokeWidth="2.6"
+                  strokeLinecap="round" strokeLinejoin="round"
+                  style={{ filter: "drop-shadow(0px 1px 2px oklch(0 0 0 / 0.40))" }}>
+                  <line x1="12" y1="1" x2="12" y2="23"/>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+              );
+            }
+
+            /* ── G-A1: teal→índigo→vault — 3 stops, recorrido completo ── */
+            const iconGA = (
+              <button type="button" aria-label="precio" style={{
+                width: 26, height: 26, borderRadius: 9999,
+                border: "1.5px solid transparent",
+                backgroundImage: [
+                  "linear-gradient(145deg, oklch(0.68 0.16 195) 0%, oklch(0.54 0.19 250) 45%, oklch(0.38 0.22 285) 100%)",
+                  "linear-gradient(145deg, oklch(0.82 0.10 195) 0%, oklch(1 0 0 / 0.35) 30%, oklch(0.55 0.16 255) 60%, oklch(0.42 0.20 285) 100%)",
+                ].join(", "),
+                backgroundOrigin: "padding-box, border-box",
+                backgroundClip: "padding-box, border-box",
+                backdropFilter: "blur(8px)",
+                boxShadow: "0 2px 12px oklch(0.40 0.18 265 / 0.45), inset 0 1px 0 oklch(1 0 0 / 0.45), inset 0 -1px 0 oklch(0 0 0 / 0.14)",
+                cursor: "pointer", flexShrink: 0,
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>
+                <DollarGlass size={13} />
+              </button>
+            );
+
+            /* ── G-A2: teal brillante→vault profundo — contraste máximo ── */
+            const iconGB = (
+              <button type="button" aria-label="precio" style={{
+                width: 26, height: 26, borderRadius: 9999,
+                border: "1.5px solid transparent",
+                backgroundImage: [
+                  "linear-gradient(145deg, oklch(0.72 0.17 195) 0%, oklch(0.44 0.21 275) 55%, oklch(0.28 0.20 285) 100%)",
+                  "linear-gradient(145deg, oklch(0.86 0.12 195) 0%, oklch(1 0 0 / 0.30) 28%, oklch(0.38 0.18 280) 65%, oklch(0.30 0.20 285) 100%)",
+                ].join(", "),
+                backgroundOrigin: "padding-box, border-box",
+                backgroundClip: "padding-box, border-box",
+                backdropFilter: "blur(8px)",
+                boxShadow: "0 2px 14px oklch(0.32 0.19 280 / 0.50), inset 0 1px 0 oklch(1 0 0 / 0.40), inset 0 -1px 0 oklch(0 0 0 / 0.18)",
+                cursor: "pointer", flexShrink: 0,
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>
+                <DollarGlass size={13} />
+              </button>
+            );
+
+            /* ── G-A3: shimmer — teal→lavanda→vault, destello en el medio ── */
+            const iconGC = (
+              <button type="button" aria-label="precio" style={{
+                width: 26, height: 26, borderRadius: 9999,
+                border: "1.5px solid transparent",
+                backgroundImage: [
+                  "linear-gradient(145deg, oklch(0.65 0.16 195) 0%, oklch(0.72 0.10 265) 40%, oklch(0.42 0.22 285) 75%, oklch(0.30 0.20 285) 100%)",
+                  "linear-gradient(145deg, oklch(0.80 0.12 195) 0%, oklch(0.95 0.04 270 / 0.50) 32%, oklch(0.60 0.14 265) 55%, oklch(0.36 0.20 285) 100%)",
+                ].join(", "),
+                backgroundOrigin: "padding-box, border-box",
+                backgroundClip: "padding-box, border-box",
+                backdropFilter: "blur(10px)",
+                boxShadow: "0 2px 14px oklch(0.38 0.18 270 / 0.48), inset 0 1px 0 oklch(1 0 0 / 0.50), inset 0 -1px 0 oklch(0 0 0 / 0.12)",
+                cursor: "pointer", flexShrink: 0,
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>
+                <DollarGlass size={13} />
+              </button>
+            );
+
+            interface Glass3CardProps {
+              label: string;
+              note: string;
+              icon: JSX.Element;
+            }
+
+            function Glass3Card({ label, note, icon }: Glass3CardProps): JSX.Element {
+              return (
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                    <p style={{ fontFamily: F, fontSize: 9, fontWeight: 700,
+                      textTransform: "uppercase" as const, letterSpacing: "0.08em",
+                      color: "var(--vmc-color-text-tertiary)", margin: 0 }}>
+                      {label}
+                    </p>
+                    <p style={{ fontFamily: F, fontSize: 8.5, color: "oklch(0.65 0.02 220)", margin: 0, lineHeight: 1.3 }}>
+                      {note}
+                    </p>
+                  </div>
+                  <div className="pcard pprop-card" style={{ borderBottom: "none", height: 232, width: 170 }}>
+                    {IMG}
+                    <div className="pcard__body">
+                      <div className="pcard__meta">
+                        <p className="pcard__name" style={{ color: "oklch(0.35 0.20 285)" }}>Ford Bronco Sport</p>
+                        <p className="pcard__year">2024</p>
+                      </div>
+                      <div className="pcard__price-row">
+                        <div className="pcard__price-left">
+                          {icon}
+                          <span className="pcard__price-text" style={{ color: "oklch(0.20 0.02 270)" }}>US$ 9,999</span>
+                        </div>
+                        <LikeDemo cls="plike--sm" icon={14} />
+                      </div>
+                    </div>
+                    {GRAD_BORDER}
+                  </div>
+                </div>
+              );
+            }
+
+            return (
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 170px)", gap: 24 }}>
+                <Glass3Card
+                  label="G-A1 · Teal→índigo→vault"
+                  note="3 stops · recorrido espectro completo"
+                  icon={iconGA}
+                />
+                <Glass3Card
+                  label="G-A2 · Teal→vault · contraste"
+                  note="teal brillante a vault profundo · directo"
+                  icon={iconGB}
+                />
+                <Glass3Card
+                  label="G-A3 · Shimmer lavanda"
+                  note="destello blanco-lila en el medio · más vivo"
+                  icon={iconGC}
+                />
+              </div>
+            );
+          })()}
+        </div>
+
+        {/* ─────────────────────────────────────────────
             11. ListingArea
         ───────────────────────────────────────────── */}
         <SectionLabel title="ListingArea" subtitle="Homepage · strip del subastador · 4 cards · live + negociable" />
 
         <div style={{ background: "oklch(0.92 0.006 270)", padding: "32px 28px" }}>
           <div className="plisting">
+            <BktTL size={20} sw={2} />
+            <BktBR size={20} sw={2} />
 
             {/* Header */}
             <div className="plisting__header">
@@ -4179,12 +5446,14 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
                 <p className="plisting__name">Santander Consumer</p>
                 <p className="plisting__count">10 Ofertas</p>
               </div>
-              <span className="plisting__link">
+              <span className="plisting__link" role="button" tabIndex={0}>
                 Ir al perfil
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="9 18 15 12 9 6"/>
-                </svg>
+                <span className="plisting__link-icon" aria-hidden="true">
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="9 18 15 12 9 6"/>
+                  </svg>
+                </span>
               </span>
             </div>
 
@@ -4289,6 +5558,284 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
 
             </div>
           </div>
+
+
+        </div>
+
+        {/* ─────────────────────────────────────────────
+            BadgeStatus — EN VIVO · PRÓXIMA
+            Frames para Smart Animate en Figma
+        ───────────────────────────────────────────── */}
+        <SectionLabel
+          title="BadgeStatus"
+          subtitle="EN VIVO · PRÓXIMA — 2 frames cada una para Smart Animate"
+        />
+
+        {/* ── NOTA FIGMA ──────────────────────────────────────────
+            Componente: BadgeStatus
+            Property:  variant → "en-vivo" | "proxima"
+
+            Cada variante tiene 2 frames estáticos para Smart Animate:
+              en-vivo  → Frame A: dot scale 1 · op 1
+                         Frame B: dot scale 0.65 · op 0.28
+              proxima  → Frame A: clock scale 1 · op 1
+                         Frame B: clock scale 0.75 · op 0.28
+
+            En ambos: el PILL no cambia — solo el ícono interno decae.
+            Smart Animate: A → B → A · 1400ms · ease-in-out · loop
+            Total frames en Figma: 4 (2 por variante)
+        ─────────────────────────────────────────────────────────── */}
+
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px",
+          display: "flex", flexDirection: "column", gap: 24 }}>
+
+          {/* ── EN VIVO ── */}
+          <div>
+            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase" as const, letterSpacing: "0.10em",
+              color: "var(--vmc-color-text-primary)", margin: "0 0 4px" }}>
+              EN VIVO
+            </p>
+            <p style={{ fontFamily: F, fontSize: 10, color: "var(--vmc-color-text-tertiary)",
+              margin: "0 0 16px" }}>
+              Dot pulsa: escala 1→0.65 · opacidad 1→0.28 · duración 1.4s ease-in-out
+            </p>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+
+              {/* Frame A */}
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 10,
+                padding: "16px", background: "oklch(0.14 0.12 285)", borderRadius: 8 }}>
+                <p style={{ fontFamily: F, fontSize: 9, fontWeight: 700,
+                  textTransform: "uppercase" as const, letterSpacing: "0.08em",
+                  color: "oklch(1 0 0 / 0.45)", margin: 0 }}>
+                  Frame A · dot ON
+                </p>
+                <div className="pcard-pill pcard-pill--live">
+                  <span style={{
+                    width: 6, height: 6, borderRadius: 9999,
+                    background: "oklch(1 0 0 / 0.92)", flexShrink: 0,
+                    display: "inline-block",
+                    opacity: 1, transform: "scale(1)",
+                  }} />
+                  EN VIVO
+                </div>
+                <p style={{ fontFamily: F, fontSize: 9, color: "oklch(1 0 0 / 0.35)", margin: 0 }}>
+                  dot: scale 1.0 · opacity 1
+                </p>
+              </div>
+
+              {/* Frame B */}
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 10,
+                padding: "16px", background: "oklch(0.14 0.12 285)", borderRadius: 8 }}>
+                <p style={{ fontFamily: F, fontSize: 9, fontWeight: 700,
+                  textTransform: "uppercase" as const, letterSpacing: "0.08em",
+                  color: "oklch(1 0 0 / 0.45)", margin: 0 }}>
+                  Frame B · dot OFF
+                </p>
+                <div className="pcard-pill pcard-pill--live">
+                  <span style={{
+                    width: 6, height: 6, borderRadius: 9999,
+                    background: "oklch(1 0 0 / 0.92)", flexShrink: 0,
+                    display: "inline-block",
+                    opacity: 0.28, transform: "scale(0.65)",
+                  }} />
+                  EN VIVO
+                </div>
+                <p style={{ fontFamily: F, fontSize: 9, color: "oklch(1 0 0 / 0.35)", margin: 0 }}>
+                  dot: scale 0.65 · opacity 0.28
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+          {/* divider */}
+          <div style={{ height: 1, background: "var(--vmc-color-vault-utility-ghost)" }} />
+
+          {/* ── PRÓXIMA ── */}
+          <div>
+            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase" as const, letterSpacing: "0.10em",
+              color: "var(--vmc-color-text-primary)", margin: "0 0 4px" }}>
+              PRÓXIMA
+            </p>
+            <p style={{ fontFamily: F, fontSize: 10, color: "var(--vmc-color-text-tertiary)",
+              margin: "0 0 16px" }}>
+              Badge completo parpadea: opacidad 1→0.35 · duración 1.4s ease-in-out
+            </p>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+
+              {/* Frame A */}
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 10,
+                padding: "16px", background: "oklch(0.14 0.12 285)", borderRadius: 8 }}>
+                <p style={{ fontFamily: F, fontSize: 9, fontWeight: 700,
+                  textTransform: "uppercase" as const, letterSpacing: "0.08em",
+                  color: "oklch(1 0 0 / 0.45)", margin: 0 }}>
+                  Frame A · clock ON
+                </p>
+                <div className="pcard-pill pcard-pill--proxima">
+                  <span style={{ display: "inline-flex", opacity: 1, transform: "scale(1)" }}>
+                    <svg width="9" height="9" viewBox="0 0 24 24" fill="none"
+                      stroke="oklch(1 0 0 / 0.90)" strokeWidth="2.4"
+                      strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10"/>
+                      <polyline points="12 6 12 12 15.5 14"/>
+                    </svg>
+                  </span>
+                  PRÓXIMA
+                </div>
+                <p style={{ fontFamily: F, fontSize: 9, color: "oklch(1 0 0 / 0.35)", margin: 0 }}>
+                  clock: scale 1 · opacity 1
+                </p>
+              </div>
+
+              {/* Frame B */}
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 10,
+                padding: "16px", background: "oklch(0.14 0.12 285)", borderRadius: 8 }}>
+                <p style={{ fontFamily: F, fontSize: 9, fontWeight: 700,
+                  textTransform: "uppercase" as const, letterSpacing: "0.08em",
+                  color: "oklch(1 0 0 / 0.45)", margin: 0 }}>
+                  Frame B · clock OFF
+                </p>
+                <div className="pcard-pill pcard-pill--proxima">
+                  <span style={{ opacity: 0.28, transform: "scale(0.75)", display: "inline-flex" }}>
+                    <svg width="9" height="9" viewBox="0 0 24 24" fill="none"
+                      stroke="oklch(1 0 0 / 0.90)" strokeWidth="2.4"
+                      strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10"/>
+                      <polyline points="12 6 12 12 15.5 14"/>
+                    </svg>
+                  </span>
+                  PRÓXIMA
+                </div>
+                <p style={{ fontFamily: F, fontSize: 9, color: "oklch(1 0 0 / 0.35)", margin: 0 }}>
+                  clock: scale 0.75 · opacity 0.28
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+          {/* ── Nota Figma ── */}
+          <div style={{
+            background: "oklch(0.97 0.006 285)",
+            border: "1px solid oklch(0.22 0.18 285 / 0.10)",
+            borderRadius: 8, padding: "14px 16px",
+            display: "flex", flexDirection: "column", gap: 10,
+          }}>
+            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase" as const, letterSpacing: "0.10em",
+              color: "oklch(0.22 0.18 285)", margin: 0 }}>
+              Spec Figma
+            </p>
+
+            {/* Fila: nombre componente */}
+            <div style={{ display: "flex", gap: 8, alignItems: "baseline" }}>
+              <p style={{ fontFamily: F, fontSize: 9, fontWeight: 700,
+                textTransform: "uppercase" as const, letterSpacing: "0.08em",
+                color: "oklch(0.22 0.18 285 / 0.45)", margin: 0, minWidth: 100 }}>
+                Componente
+              </p>
+              <p style={{ fontFamily: "monospace", fontSize: 11, fontWeight: 700,
+                color: "oklch(0.22 0.18 285)", margin: 0 }}>
+                Badge Status
+              </p>
+            </div>
+
+            {/* Fila: properties */}
+            <div style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
+              <p style={{ fontFamily: F, fontSize: 9, fontWeight: 700,
+                textTransform: "uppercase" as const, letterSpacing: "0.08em",
+                color: "oklch(0.22 0.18 285 / 0.45)", margin: 0, minWidth: 100 }}>
+                Properties
+              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                <p style={{ fontFamily: "monospace", fontSize: 10,
+                  color: "oklch(0.22 0.18 285)", margin: 0 }}>
+                  Type → <strong>En Vivo</strong> | <strong>Próxima</strong>
+                </p>
+                <p style={{ fontFamily: "monospace", fontSize: 10,
+                  color: "oklch(0.22 0.18 285)", margin: 0 }}>
+                  State → <strong>On</strong> | <strong>Off</strong>
+                </p>
+              </div>
+            </div>
+
+            {/* Fila: 4 variantes */}
+            <div style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
+              <p style={{ fontFamily: F, fontSize: 9, fontWeight: 700,
+                textTransform: "uppercase" as const, letterSpacing: "0.08em",
+                color: "oklch(0.22 0.18 285 / 0.45)", margin: 0, minWidth: 100 }}>
+                4 Variantes
+              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                {[
+                  "Type=En Vivo · State=On   → dot scale 1 · op 1",
+                  "Type=En Vivo · State=Off  → dot scale 0.65 · op 0.28",
+                  "Type=Próxima · State=On   → clock scale 1 · op 1",
+                  "Type=Próxima · State=Off  → clock scale 0.75 · op 0.28",
+                ].map(function renderVariant(v) {
+                  return (
+                    <p key={v} style={{ fontFamily: "monospace", fontSize: 10,
+                      color: "oklch(0.22 0.18 285 / 0.75)", margin: 0 }}>
+                      {v}
+                    </p>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Fila: Smart Animate */}
+            <div style={{ display: "flex", gap: 8, alignItems: "baseline" }}>
+              <p style={{ fontFamily: F, fontSize: 9, fontWeight: 700,
+                textTransform: "uppercase" as const, letterSpacing: "0.08em",
+                color: "oklch(0.22 0.18 285 / 0.45)", margin: 0, minWidth: 100 }}>
+                Prototype
+              </p>
+              <p style={{ fontFamily: "monospace", fontSize: 10,
+                color: "oklch(0.22 0.18 285 / 0.75)", margin: 0 }}>
+                Smart Animate · On ↔ Off · 1400ms · ease-in-out · loop
+              </p>
+            </div>
+
+          </div>
+
+          {/* divider */}
+          <div style={{ height: 1, background: "var(--vmc-color-vault-utility-ghost)" }} />
+
+          {/* ── Contexto sobre imagen ── */}
+          <div>
+            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase" as const, letterSpacing: "0.10em",
+              color: "var(--vmc-color-text-primary)", margin: "0 0 12px" }}>
+              Contexto — sobre imagen de tarjeta
+            </p>
+            <div style={{
+              width: "100%", height: 80, borderRadius: 8,
+              background: "linear-gradient(135deg, oklch(0.22 0.18 285) 0%, oklch(0.30 0.14 240) 50%, oklch(0.18 0.10 210) 100%)",
+              display: "flex", alignItems: "flex-start", padding: "10px 12px", gap: 8,
+            }}>
+              <div className="pcard-pill pcard-pill--live">
+                <span style={{
+                  width: 6, height: 6, borderRadius: 9999,
+                  background: "oklch(1 0 0 / 0.92)", flexShrink: 0, display: "inline-block",
+                }} />
+                EN VIVO
+              </div>
+              <div className="pcard-pill pcard-pill--proxima">
+                <span>
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none"
+                    stroke="oklch(1 0 0 / 0.90)" strokeWidth="2.4"
+                    strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 15.5 14"/>
+                  </svg>
+                </span>
+                PRÓXIMA
+              </div>
+            </div>
+          </div>
+
         </div>
 
       </div>

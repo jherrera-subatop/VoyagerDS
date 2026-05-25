@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.tsx"
+  - "**/*.ts"
+  - "**/*.css"
+  - "**/*.json"
+---
+
 # VOYAGER — MANIFIESTO PARA AGENTES AUTÓNOMOS
 **VMC Subastas · Design System AI-Readable**
 

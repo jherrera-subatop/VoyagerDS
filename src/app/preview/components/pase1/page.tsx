@@ -1254,6 +1254,7 @@ export default function Pase1Page(): JSX.Element {
         {/* ─────────────────────────────────────────────
             1. Button — MD Primary + Secondary + Ghost
         ───────────────────────────────────────────── */}
+        <section id="button-md" data-concorde-component="Button" data-concorde-variant="md">
         <SectionLabel title="MD · Primary & Secondary" subtitle="48px · Participa / Ingresa" />
 
         <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px",
@@ -1282,7 +1283,7 @@ export default function Pase1Page(): JSX.Element {
             const isPressed  = state === "Pressed";
             const isDisabled = state === "Disabled";
             return (
-              <div key={state} style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
+              <div key={state} data-concorde-state={state.toLowerCase()} style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
                 gap: 12, marginBottom: 12, alignItems: "flex-end" }}>
                 <StateCol label={state}>
                   <button
@@ -1320,7 +1321,7 @@ export default function Pase1Page(): JSX.Element {
         </div>
 
         {/* Demo interactivo MD */}
-        <div style={{ background: "var(--vmc-color-background-card)", padding: "24px",
+        <div data-concorde-demo="interactive" style={{ background: "var(--vmc-color-background-card)", padding: "24px",
           display: "flex", flexDirection: "column", gap: 10,
           borderBottom: "1px solid var(--vmc-color-vault-utility-ghost)" }}>
           <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
@@ -1342,36 +1343,45 @@ export default function Pase1Page(): JSX.Element {
           </div>
         </div>
 
+        </section>
+
         {/* ─────────────────────────────────────────────
             2. Button — SM Ingresa (Guest)
         ───────────────────────────────────────────── */}
+        <section id="button-sm-guest" data-concorde-component="Button" data-concorde-variant="sm-guest">
         <SectionLabel title="SM · Ingresa — Guest" subtitle="40px · icono usuario · header nav" />
 
         <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px",
           display: "flex", gap: 20, flexWrap: "wrap",
           borderBottom: "1px solid var(--vmc-color-vault-utility-ghost)" }}>
-          <StateCol label="Default">
-            <button className="pvbtn-sm" type="button">
-              <span className="pvbtn-icon">{USER_ICON}</span>
-              Ingresa
-            </button>
-          </StateCol>
-          <StateCol label="Hover">
-            <button className="pvbtn-sm pvbtn-sm--hover" type="button">
-              <span className="pvbtn-icon">{USER_ICON}</span>
-              Ingresa
-            </button>
-          </StateCol>
-          <StateCol label="Pressed">
-            <button className="pvbtn-sm pvbtn-sm--pressed" type="button">
-              <span className="pvbtn-icon">{USER_ICON}</span>
-              Ingresa
-            </button>
-          </StateCol>
+          <div data-concorde-state="default">
+            <StateCol label="Default">
+              <button className="pvbtn-sm" type="button">
+                <span className="pvbtn-icon">{USER_ICON}</span>
+                Ingresa
+              </button>
+            </StateCol>
+          </div>
+          <div data-concorde-state="hover">
+            <StateCol label="Hover">
+              <button className="pvbtn-sm pvbtn-sm--hover" type="button">
+                <span className="pvbtn-icon">{USER_ICON}</span>
+                Ingresa
+              </button>
+            </StateCol>
+          </div>
+          <div data-concorde-state="pressed">
+            <StateCol label="Pressed">
+              <button className="pvbtn-sm pvbtn-sm--pressed" type="button">
+                <span className="pvbtn-icon">{USER_ICON}</span>
+                Ingresa
+              </button>
+            </StateCol>
+          </div>
         </div>
 
         {/* Demo interactivo SM */}
-        <div style={{ background: "var(--vmc-color-background-card)", padding: "24px",
+        <div data-concorde-demo="interactive" style={{ background: "var(--vmc-color-background-card)", padding: "24px",
           display: "flex", flexDirection: "column", gap: 10,
           borderBottom: "1px solid var(--vmc-color-vault-utility-ghost)" }}>
           <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
@@ -1387,9 +1397,12 @@ export default function Pase1Page(): JSX.Element {
           </div>
         </div>
 
+        </section>
+
         {/* ─────────────────────────────────────────────
             3. SM — Logged In (sobre vault)
         ───────────────────────────────────────────── */}
+        <section id="button-sm-logged-in" data-concorde-component="Button" data-concorde-variant="sm-logged-in">
         <SectionLabel title="SM · Logged In — sobre header vault" subtitle="40px · Primary Clone · Default / Hover / Pressed" dark />
 
         <div style={{ background: "var(--vmc-color-vault-900)", padding: "20px 24px",
@@ -1408,7 +1421,7 @@ export default function Pase1Page(): JSX.Element {
               );
             })}
 
-            <div style={{ display: "flex", justifyContent: "center" }}>
+            <div data-concorde-state="default" style={{ display: "flex", justifyContent: "center" }}>
               <button className="pvbtn-auth-d" type="button">
                 <span className="pvbtn-auth-d-icon">{USER_ICON}</span>
                 Bienvenido,{" "}
@@ -1416,7 +1429,7 @@ export default function Pase1Page(): JSX.Element {
               </button>
             </div>
 
-            <div style={{ display: "flex", justifyContent: "center" }}>
+            <div data-concorde-state="hover" style={{ display: "flex", justifyContent: "center" }}>
               <button className="pvbtn-auth-d pvbtn-auth-d--hover" type="button">
                 <span className="pvbtn-auth-d-icon">{USER_ICON}</span>
                 Bienvenido,{" "}
@@ -1424,7 +1437,7 @@ export default function Pase1Page(): JSX.Element {
               </button>
             </div>
 
-            <div style={{ display: "flex", justifyContent: "center" }}>
+            <div data-concorde-state="pressed" style={{ display: "flex", justifyContent: "center" }}>
               <button className="pvbtn-auth-d pvbtn-auth-d--pressed" type="button">
                 <span className="pvbtn-auth-d-icon">{USER_ICON}</span>
                 Bienvenido,{" "}
@@ -1434,7 +1447,7 @@ export default function Pase1Page(): JSX.Element {
           </div>
 
           {/* Demo interactivo */}
-          <div style={{ borderTop: "1px solid rgb(100% 100% 100% / 0.08)", paddingTop: 16 }}>
+          <div data-concorde-demo="interactive" style={{ borderTop: "1px solid rgb(100% 100% 100% / 0.08)", paddingTop: 16 }}>
             <p style={{ fontFamily: "var(--vmc-font-display)", fontSize: 10, fontWeight: 700,
               textTransform: "uppercase", letterSpacing: "0.08em",
               color: "rgb(100% 100% 100% / 0.30)", margin: "0 0 14px" }}>
@@ -1450,9 +1463,12 @@ export default function Pase1Page(): JSX.Element {
           </div>
         </div>
 
+        </section>
+
         {/* ─────────────────────────────────────────────
             4. LikeButton
         ───────────────────────────────────────────── */}
+        <section id="like-button" data-concorde-component="LikeButton" data-concorde-variant="default">
         <SectionLabel title="LikeButton" subtitle="3 tamaños · Default / Hover / Active / Disabled / Skeleton" />
 
         <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px" }}>
@@ -1477,41 +1493,41 @@ export default function Pase1Page(): JSX.Element {
             { label: "Large",  cls: "plike--lg", icon: 27 },
           ] as const).map(function sizeRow({ label, cls, icon }) {
             return (
-              <div key={label} style={{ display: "grid",
+              <div key={label} data-concorde-variant={label.toLowerCase()} style={{ display: "grid",
                 gridTemplateColumns: "72px 1fr 1fr 1fr 1fr 1fr",
                 marginBottom: 20, alignItems: "center" }}>
                 <p style={{ fontFamily: F, fontSize: 11, fontWeight: 600,
                   color: "var(--vmc-color-text-secondary)", margin: 0 }}>
                   {label}
                 </p>
-                <div style={{ display: "flex", justifyContent: "center" }}>
+                <div data-concorde-state="default" style={{ display: "flex", justifyContent: "center" }}>
                   <button className={`plike ${cls}`} type="button" aria-label="Me gusta">
                     <HeartOutline size={icon} />
                   </button>
                 </div>
-                <div style={{ display: "flex", justifyContent: "center" }}>
+                <div data-concorde-state="hover" style={{ display: "flex", justifyContent: "center" }}>
                   <button className={`plike ${cls} plike--hover`} type="button" aria-label="Me gusta">
                     <HeartOutline size={icon} />
                   </button>
                 </div>
-                <div style={{ display: "flex", justifyContent: "center" }}>
+                <div data-concorde-state="active" style={{ display: "flex", justifyContent: "center" }}>
                   <button className={`plike ${cls} plike--active`} type="button" aria-label="Me gusta">
                     <HeartFilledWhite size={icon} />
                   </button>
                 </div>
-                <div style={{ display: "flex", justifyContent: "center" }}>
+                <div data-concorde-state="disabled" style={{ display: "flex", justifyContent: "center" }}>
                   <button className={`plike ${cls} plike--disabled`} type="button" aria-label="Me gusta" disabled>
                     <HeartOutline size={icon} />
                   </button>
                 </div>
-                <div style={{ display: "flex", justifyContent: "center" }}>
+                <div data-concorde-state="skeleton" style={{ display: "flex", justifyContent: "center" }}>
                   <button className={`plike ${cls} plike--skeleton`} type="button" aria-label="Me gusta" />
                 </div>
               </div>
             );
           })}
 
-          <div style={{ borderTop: "1px solid var(--vmc-color-vault-utility-ghost)",
+          <div data-concorde-demo="interactive" style={{ borderTop: "1px solid var(--vmc-color-vault-utility-ghost)",
             paddingTop: 16, marginTop: 4 }}>
             <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
               textTransform: "uppercase", letterSpacing: "0.08em",
@@ -1526,6 +1542,7 @@ export default function Pase1Page(): JSX.Element {
             </div>
           </div>
         </div>
+        </section>
 
 
       </div>

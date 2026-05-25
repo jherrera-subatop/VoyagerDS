@@ -1,0 +1,23 @@
+{
+  "version": "1",
+  "project": "voyager-vmc",
+  "stack": {
+    "framework": "nextjs",
+    "typescript": true,
+    "styling": "tailwind-v4",
+    "animation": "css-native",
+    "component_library": null
+  },
+  "code_rules": {
+    "no_any": true,
+    "no_ternaries": true,
+    "no_anonymous_functions": true,
+    "no_hardcoded_hex": false,
+    "spacing_grid": 8,
+    "use_container_queries": true
+  },
+  "output_dir": "src/features",
+  "token_system": false,
+  "allowed_dependencies": ["react", "next", "clsx", "tailwind-merge"],
+  "typescript_strict": true
+}

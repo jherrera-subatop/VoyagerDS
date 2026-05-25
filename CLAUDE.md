@@ -46,6 +46,9 @@ pnpm verify:pages # build + next start + GET rutas críticas (no dejar páginas 
 
 ## 🚀 Protocolo de arranque de sesión (SIEMPRE ACTIVO — primer acto de cada sesión)
 Antes de cualquier otra cosa al iniciar o retomar trabajo:
+0. **Leer `.claude/task-state.yaml`** — si `status != IDLE`, ese archivo es la fuente de verdad
+   para ubicación exacta de sección/función. El summary compactado es orientativo; task-state es ley.
+   Si `status == IDLE` → continuar con paso 1.
 1. Ejecutar `python3 scripts/voyager-jira-sync.py --status` — leer el board
 2. Identificar el ticket en **En curso** — ese es el trabajo activo
 3. Leer la descripción del ticket — contiene exactamente qué se necesita para avanzar

@@ -1,0 +1,39 @@
+{
+  "task": "IDLE",
+  "active": false,
+  "description": "Llenar antes de cada tarea. Poner active=true para activar validación.",
+
+  "deny_modifications": [],
+
+  "quantitative_assertions": [],
+
+  "_example": {
+    "task": "ICON_VARIANTS_MAQ_EQ_ART",
+    "active": true,
+    "deny_modifications": [
+      "src/styles/globals.css",
+      "tokens.json",
+      "src/app/layout.tsx"
+    ],
+    "quantitative_assertions": [
+      {
+        "what": "IcnMaquinaria variants",
+        "file": "src/app/preview/components/borrador-mobile/page.tsx",
+        "exact": 3,
+        "names": ["IcnMaquinariaA", "IcnMaquinariaB", "IcnMaquinariaC"]
+      },
+      {
+        "what": "IcnEquipos variants",
+        "file": "src/app/preview/components/borrador-mobile/page.tsx",
+        "exact": 3,
+        "names": ["IcnEquiposA", "IcnEquiposB", "IcnEquiposC"]
+      },
+      {
+        "what": "IcnArticulos variants",
+        "file": "src/app/preview/components/borrador-mobile/page.tsx",
+        "exact": 3,
+        "names": ["IcnArticulosA", "IcnArticulosB", "IcnArticulosC"]
+      }
+    ]
+  }
+}

@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.tsx"
+  - "**/*.ts"
+  - "**/*.css"
+  - "**/tokens.json"
+---
+
 # Design System — Arquitectura de Tokens y Gobernanza
 **Fuente:** Gemini Deep Research (MD3, Apple HIG, Atlassian, IBM Carbon, Shopify Polaris, Radix, Bloomberg, Refinitiv Halo)
 **Aplica a:** Toda decisión de tokens, nomenclatura, spacing, tipografía, color y gobernanza de Voyager

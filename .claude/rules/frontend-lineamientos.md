@@ -1,3 +1,9 @@
+---
+paths:
+  - "**/*.tsx"
+  - "**/*.ts"
+---
+
 # Frontend Lineamientos — VOYAGER
 **Fuente:** Frontend - Lineamientos.docx
 **Aplica a:** Todas las fases de construcción (ib-componentes en adelante)

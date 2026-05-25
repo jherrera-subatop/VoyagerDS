@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "preview_base_url": "",
+  "generated_at": "2026-05-25",
+  "components": {
+    "Button": {
+      "variants": ["md", "sm-guest", "sm-logged-in"],
+      "states": {
+        "md": ["default", "hover", "pressed", "disabled"],
+        "sm-guest": ["default", "hover", "pressed"],
+        "sm-logged-in": ["default", "hover", "pressed"]
+      },
+      "has_interactive_demo": true,
+      "preview_url": "/preview/components/pase1",
+      "anchors": {
+        "md": "#button-md",
+        "sm-guest": "#button-sm-guest",
+        "sm-logged-in": "#button-sm-logged-in"
+      },
+      "figma_node_id": "",
+      "notes": "MD includes Primary, Secondary, and Ghost variants in same section"
+    },
+    "LikeButton": {
+      "variants": ["small", "medium", "large"],
+      "states": ["default", "hover", "active", "disabled", "skeleton"],
+      "has_interactive_demo": true,
+      "preview_url": "/preview/components/pase1",
+      "preview_anchor": "#like-button",
+      "figma_node_id": "",
+      "notes": "3 sizes. Interactive demo supports toggle (active state)."
+    }
+  }
+}

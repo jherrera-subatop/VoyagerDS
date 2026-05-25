@@ -1,3 +1,10 @@
+---
+paths:
+  - "**/*.tsx"
+  - "**/*.ts"
+  - "**/*.css"
+---
+
 # VOYAGER — VMC Subastas Design System
 **Version 2.0.0 · AI-Readable · W3C DTCG 2025.10**
 
