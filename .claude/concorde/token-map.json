@@ -1,8 +1,101 @@
 {
   "version": "1",
   "generated_by": "concorde",
-  "last_updated": "",
-  "tokens": {},
-  "typography": {},
-  "spacing": {}
+  "last_updated": "2026-05-25",
+  "tokens": {
+    "var(--vmc-color-orange-600)": {
+      "fallback": "#ED8936",
+      "suggested_name": "--color-brand-orange-default",
+      "first_seen": "Button/primary/default/stop-a",
+      "components": ["Button"]
+    },
+    "var(--vmc-color-orange-400)": {
+      "fallback": "#FBC47D",
+      "suggested_name": "--color-brand-orange-light",
+      "first_seen": "Button/primary/hover/stop-a",
+      "components": ["Button"]
+    },
+    "var(--vmc-color-orange-700)": {
+      "fallback": "#D46E20",
+      "suggested_name": "--color-brand-orange-dark",
+      "first_seen": "Button/primary/pressed/stop-a",
+      "components": ["Button"]
+    },
+    "var(--vmc-color-vault-500)": {
+      "fallback": "#8460E5",
+      "suggested_name": "--color-brand-purple-default",
+      "first_seen": "Button/primary/default/stop-b",
+      "components": ["Button"]
+    },
+    "var(--vmc-color-vault-400)": {
+      "fallback": "#AE8EFF",
+      "suggested_name": "--color-brand-purple-light",
+      "first_seen": "Button/primary/hover/stop-b",
+      "components": ["Button"]
+    },
+    "var(--vmc-color-vault-600)": {
+      "fallback": "#5A35C2",
+      "suggested_name": "--color-brand-purple-dark",
+      "first_seen": "Button/primary/pressed/stop-b",
+      "components": ["Button"]
+    },
+    "var(--vmc-color-vault-700)": {
+      "fallback": "#3B178A",
+      "suggested_name": "--color-brand-purple-deeper",
+      "first_seen": "Button/secondary/default/stop-b",
+      "components": ["Button"]
+    },
+    "var(--vmc-color-background-disabled)": {
+      "fallback": "#E1E3E2",
+      "suggested_name": "--color-state-disabled-bg",
+      "first_seen": "Button/primary/disabled/background",
+      "components": ["Button"]
+    },
+    "var(--vmc-color-neutral-700)": {
+      "fallback": "#99A1AF",
+      "suggested_name": "--color-state-disabled-text",
+      "first_seen": "Button/primary/disabled/color",
+      "components": ["Button"]
+    },
+    "var(--vmc-color-base-white)": {
+      "fallback": "#ffffff",
+      "suggested_name": "--color-base-white",
+      "first_seen": "Button/all/color",
+      "components": ["Button"]
+    }
+  },
+  "typography": {
+    "Plus Jakarta Sans / 15px / 600": {
+      "suggested_name": "--text-label-lg",
+      "first_seen": "Button/md",
+      "components": ["Button"]
+    },
+    "Plus Jakarta Sans / 14px / 600": {
+      "suggested_name": "--text-label-md",
+      "first_seen": "Button/sm",
+      "components": ["Button"]
+    }
+  },
+  "spacing": {
+    "56px (padding-x md)": {
+      "suggested_name": "--space-14",
+      "first_seen": "Button/md/paddingX",
+      "components": ["Button"]
+    },
+    "48px (height md)": {
+      "suggested_name": "--size-btn-md",
+      "first_seen": "Button/md/height",
+      "components": ["Button"]
+    },
+    "40px (height sm)": {
+      "suggested_name": "--size-btn-sm",
+      "first_seen": "Button/sm/height",
+      "components": ["Button"]
+    },
+    "32px (icon slot)": {
+      "suggested_name": "--size-icon-slot",
+      "first_seen": "Button/sm/icon-slot",
+      "components": ["Button"]
+    }
+  }
 }

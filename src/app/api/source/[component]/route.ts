@@ -13,6 +13,7 @@ import { NextResponse } from "next/server";
 
 // Mapa component-id → ruta relativa desde process.cwd()
 const COMPONENT_MAP: Record<string, string> = {
+  "button":   "src/features/Button/ButtonDone.tsx",
   "footer":   "src/features/Footer/FooterDone.tsx",
   "sidebar":  "src/features/Sidebar/SidebarDone.tsx",
   // Agregar aquí cada componente DONE nuevo:

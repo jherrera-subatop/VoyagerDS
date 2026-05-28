@@ -21,6 +21,7 @@ import { GalleryMainStitchShowcaseSection } from "../components/GalleryMainStitc
 import { AuctionConditionsStitchShowcaseSection } from "../components/AuctionConditionsStitchShowcaseSection";
 import { InfoGeneralStitchShowcaseSection } from "../components/InfoGeneralStitchShowcaseSection";
 import { SignInStitchShowcaseSection } from "../components/SignInStitchShowcaseSection";
+import { ButtonDoneShowcaseSection } from "../components/ButtonDoneShowcaseSection";
 import { useComponentMode } from "../components/ComponentModeContext";
 
 const HR = (
@@ -178,6 +179,10 @@ export function ComponentesPreviewSection() {
           {"import { ButtonGhost } from \"@/components/ui/ButtonGhost\";"}
         </p>
       </div>
+
+      {/* ── ButtonDone (Concorde) — siempre visible ──────────────────── */}
+      {HR0}
+      <ButtonDoneShowcaseSection />
 
       {/* ── Stitch / pending — solo en modo normal ───────────────────── */}
       {!isDone && (

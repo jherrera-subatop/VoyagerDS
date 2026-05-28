@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "preview_base_url": "",
+  "preview_base_url": "https://voyager-ds.vercel.app",
   "generated_at": "2026-05-25",
   "components": {
     "Button": {

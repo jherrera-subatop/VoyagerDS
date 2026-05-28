@@ -962,6 +962,313 @@ const CSS = `
       inset 0 1px 3px oklch(0.22 0.18 285 / 0.08) !important;
   }
 
+
+`;
+
+/* ── OfferCard CSS ── */
+const OFFERCARD_CSS = `
+  /* ── pprice (coin icon button) ── */
+  .pprice {
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 50%; border: 2px solid transparent;
+    cursor: pointer; position: relative; overflow: hidden;
+    background-image:
+      linear-gradient(135deg, var(--vmc-color-negotiable, oklch(0.78 0.14 195)) 0%, oklch(0.65 0.16 195) 100%),
+      linear-gradient(135deg, oklch(0.88 0.08 195) 0%, rgb(100% 100% 100%) 40%, oklch(0.72 0.14 195) 75%, oklch(0.88 0.08 195) 100%);
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: 0 2px 8px oklch(0.78 0.14 195 / 0.25);
+    transition: transform 0.2s cubic-bezier(0.25,0.8,0.25,1), box-shadow 0.25s ease;
+    transform: translateZ(0);
+  }
+  .pprice::before {
+    content: ''; position: absolute; inset: 0; border-radius: 50%;
+    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.45) 0%, transparent 50%);
+    pointer-events: none; z-index: 1;
+  }
+  .pprice::after {
+    content: ''; position: absolute; inset: -5px; border-radius: 50%;
+    background: radial-gradient(circle, var(--vmc-color-negotiable, oklch(0.78 0.14 195)) 0%, transparent 70%);
+    filter: blur(10px); opacity: 0; z-index: -1; transition: opacity 0.3s ease;
+  }
+  .pprice--sm  { width: 32px; height: 32px; }
+  .pprice--shimmer {
+    background-image:
+      linear-gradient(145deg, oklch(0.65 0.16 195) 0%, oklch(0.72 0.10 265) 40%, oklch(0.42 0.22 285) 75%, oklch(0.30 0.20 285) 100%),
+      linear-gradient(145deg, oklch(0.80 0.12 195) 0%, oklch(0.95 0.04 270 / 0.50) 32%, oklch(0.60 0.14 265) 55%, oklch(0.36 0.20 285) 100%);
+    background-origin: padding-box, border-box; background-clip: padding-box, border-box;
+    box-shadow: 0 2px 4px oklch(0 0 0 / 0.04), 0 1px 8px oklch(0.38 0.20 270 / 0.22),
+      inset 0 1px 0 oklch(1 0 0 / 0.52), inset 0 -1px 0 oklch(0 0 0 / 0.10);
+  }
+  .pprice--shimmer::before { background: linear-gradient(180deg, oklch(1 0 0 / 0.45) 0%, transparent 50%); }
+  .pprice--shimmer::after  { background: radial-gradient(circle, oklch(0.52 0.20 270) 0%, transparent 70%); }
+  .pprice--shimmer:hover {
+    box-shadow: 0 3px 8px oklch(0 0 0 / 0.07), 0 2px 12px oklch(0.38 0.20 270 / 0.32),
+      inset 0 1px 0 oklch(1 0 0 / 0.48), inset 0 -1px 0 oklch(0 0 0 / 0.12);
+    transform: translateY(-1px) scale(1.06);
+  }
+  .pprice--shimmer:hover::after { opacity: 0.55; }
+
+  /* ── pcard ── */
+  .pcard {
+    width: 170px; background: oklch(1 0 0); border-radius: 8px;
+    box-shadow: 0 8px 16px oklch(0.22 0.18 285 / 0.10);
+    display: flex; flex-direction: column; flex-shrink: 0;
+    position: relative; overflow: hidden;
+    transition: transform 150ms cubic-bezier(0.3,0,0,1), box-shadow 150ms cubic-bezier(0.3,0,0,1);
+    cursor: pointer;
+  }
+  .pcard:hover { transform: translateY(-3px); box-shadow: 0 12px 20px oklch(0.22 0.18 285 / 0.12); }
+  .pcard__img {
+    width: 100%; height: 112px; background: oklch(0.93 0.006 220);
+    flex-shrink: 0; overflow: hidden; border-radius: 8px 8px 0 0;
+    position: relative; display: flex; align-items: center; justify-content: center;
+  }
+  .pcard__img-badge { position: absolute; top: 8px; right: 8px; z-index: 2; }
+  .pcard__body { display: flex; flex-direction: column; padding: 12px; flex: 1; }
+  .pcard__meta { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+  .pcard__name {
+    font-family: var(--vmc-font-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 16px; font-weight: 700; line-height: 20px; color: oklch(0.15 0.008 200);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 0;
+  }
+  .pcard__year {
+    font-family: var(--vmc-font-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 11px; font-weight: 500; line-height: 16px;
+    letter-spacing: 0.06em; text-transform: uppercase; color: oklch(0.30 0.20 285); margin: 0;
+  }
+  .pcard__price-row { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; flex-shrink: 0; }
+  .pcard__price-left { display: flex; align-items: center; gap: 6px; }
+  .pcard__price-text {
+    font-family: var(--vmc-font-mono, 'Roboto Mono', monospace);
+    font-size: 13px; font-weight: 700; line-height: 20px;
+    font-variant-numeric: tabular-nums; color: oklch(0.42 0.22 285); white-space: nowrap;
+  }
+  /* status borders */
+  .pcard--live { border-bottom: none; }
+  .pcard--live::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 6px;
+    background: linear-gradient(90deg, oklch(0.78 0.17 55) 0%, oklch(0.72 0.16 55) 50%, oklch(0.54 0.18 44) 100%);
+    border-radius: 0 0 4px 4px;
+  }
+  .pcard--proxima { border-bottom: 6px solid oklch(0.42 0.22 285); }
+  /* pill badges */
+  .pcard-pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 3px 8px 3px 6px; border-radius: 9999px;
+    font-family: var(--vmc-font-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 9px; font-weight: 700; letter-spacing: 0.07em;
+    text-transform: uppercase; white-space: nowrap;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  }
+  .pcard-pill--live {
+    border: 1.5px solid transparent;
+    background-image:
+      linear-gradient(135deg, oklch(0.78 0.17 55) 0%, oklch(0.72 0.16 55) 40%, oklch(0.54 0.18 44) 100%),
+      linear-gradient(135deg, oklch(0.86 0.12 55) 0%, oklch(1 0 0 / 0.45) 40%, oklch(0.65 0.16 50) 75%, oklch(0.86 0.12 55) 100%);
+    background-origin: padding-box, border-box; background-clip: padding-box, border-box;
+    box-shadow: 0 2px 10px oklch(0.72 0.16 55 / 0.45), inset 0 1px 0 oklch(1 0 0 / 0.14);
+    color: oklch(1 0 0);
+  }
+  .pcard-pill--proxima {
+    border: 1.5px solid transparent;
+    background-image:
+      linear-gradient(135deg, oklch(0.48 0.24 285) 0%, oklch(0.48 0.24 285) 30%, oklch(0.20 0.17 285) 100%),
+      linear-gradient(135deg, oklch(0.65 0.20 285) 0%, oklch(1 0 0 / 0.40) 38%, oklch(0.45 0.22 285) 68%, oklch(0.65 0.20 285) 100%);
+    background-origin: padding-box, border-box; background-clip: padding-box, border-box;
+    box-shadow: 0 2px 10px oklch(0.22 0.18 285 / 0.50), inset 0 1px 0 oklch(1 0 0 / 0.10);
+    color: oklch(1 0 0);
+  }
+  .pcard-pill-dot {
+    width: 6px; height: 6px; border-radius: 9999px;
+    background: oklch(1 0 0 / 0.92); flex-shrink: 0;
+    animation: pcard-live-ring 1.4s ease-out infinite; position: relative;
+  }
+  .pcard-pill-clock { flex-shrink: 0; animation: pcard-clock-blink 1.4s ease-in-out infinite; }
+  @keyframes pcard-live-ring {
+    0%   { opacity: 1; transform: scale(0.8); }
+    100% { opacity: 0; transform: scale(1.9); }
+  }
+  @keyframes pcard-clock-blink {
+    0%, 100% { opacity: 1;    transform: scale(1);    }
+    50%       { opacity: 0.35; transform: scale(0.85); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pcard { transition: none; }
+    .pcard-pill-dot  { animation: none; }
+    .pcard-pill-clock { animation: none; }
+  }
+
+  /* ── OfferCard layout sheet ── */
+  .ocard-sheet {
+    padding: 24px;
+    background: oklch(0.97 0.004 270);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .ocard-sheet-title {
+    font-family: var(--vmc-font-display, 'Plus Jakarta Sans', sans-serif);
+    font-size: 8px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: oklch(0.38 0.12 285 / 0.55);
+    margin: 0 0 16px;
+  }
+  .ocard-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+`;
+
+/* ── OfferType CSS ── */
+const OTYPE_CSS = `
+  /* ── OfferType · cinematic card ── */
+  .poftype {
+    width: 110px;
+    border-radius: var(--vmc-radius-md, 8px);
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    box-shadow:
+      0 4px 16px oklch(0 0 0 / 0.12),
+      0 1px 4px  oklch(0 0 0 / 0.06);
+    transition:
+      transform  0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow 0.25s ease;
+    transform: translateZ(0);
+    outline: none;
+  }
+  .poftype-top {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.22s ease;
+  }
+  .poftype-top::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, oklch(1 0 0 / 0.07) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .poftype-top::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(180deg, transparent 0%, oklch(0 0 0 / 0.08) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .poftype-label {
+    font-family: var(--vmc-font-display);
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: oklch(1 0 0);
+    text-shadow: 0 1px 3px oklch(0 0 0 / 0.25);
+    position: relative;
+    z-index: 2;
+  }
+  .poftype-bottom {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: oklch(1 0 0);
+  }
+  .poftype-cta {
+    font-family: var(--vmc-font-display);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.10em;
+    transition: color 0.22s ease;
+  }
+  /* ── Variant: NEGOCIABLE ── */
+  .poftype--negotiable {
+    box-shadow:
+      0 0 0 1.5px oklch(0.78 0.14 195 / 0.40),
+      0 4px 14px oklch(0 0 0 / 0.10),
+      0 1px 4px  oklch(0 0 0 / 0.06);
+  }
+  .poftype--negotiable .poftype-top {
+    background: linear-gradient(180deg,
+      oklch(0.84 0.13 195) 0%,
+      var(--vmc-color-negotiable, oklch(0.78 0.14 195)) 100%
+    );
+  }
+  .poftype--negotiable .poftype-bottom {
+    background: color-mix(in oklch, oklch(1 0 0) 95%, var(--vmc-color-negotiable, oklch(0.78 0.14 195)));
+  }
+  .poftype--negotiable .poftype-cta { color: oklch(0.58 0.17 195); }
+  .poftype--negotiable:hover,
+  .poftype--negotiable.poftype--hover {
+    box-shadow:
+      0 0 0 1.5px oklch(0.78 0.14 195 / 0.55),
+      0 10px 18px oklch(0.22 0.18 285 / 0.11),
+      0  3px  7px oklch(0.22 0.18 285 / 0.08),
+      0  1px  2px oklch(0.22 0.18 285 / 0.05);
+  }
+  .poftype--negotiable.poftype--focus .poftype-top {
+    background: linear-gradient(180deg, oklch(0.65 0.17 195) 0%, oklch(0.55 0.16 195) 100%);
+  }
+  /* ── Variant: EN VIVO ── */
+  .poftype--live {
+    box-shadow:
+      0 0 0 1.5px oklch(0.72 0.16 55 / 0.40),
+      0 4px 14px oklch(0 0 0 / 0.10),
+      0 1px 4px  oklch(0 0 0 / 0.06);
+  }
+  .poftype--live .poftype-top {
+    background: linear-gradient(180deg,
+      oklch(0.78 0.17 55) 0%,
+      var(--vmc-color-live, oklch(0.72 0.16 55)) 100%
+    );
+  }
+  .poftype--live .poftype-bottom {
+    background: color-mix(in oklch, oklch(1 0 0) 95%, var(--vmc-color-live, oklch(0.72 0.16 55)));
+  }
+  .poftype--live .poftype-cta { color: oklch(0.54 0.18 45); }
+  .poftype--live:hover,
+  .poftype--live.poftype--hover {
+    box-shadow:
+      0 0 0 1.5px oklch(0.72 0.16 55 / 0.55),
+      0 10px 18px oklch(0.22 0.18 285 / 0.11),
+      0  3px  7px oklch(0.22 0.18 285 / 0.08),
+      0  1px  2px oklch(0.22 0.18 285 / 0.05);
+  }
+  .poftype--live.poftype--focus .poftype-top {
+    background: linear-gradient(180deg, oklch(0.58 0.19 48) 0%, oklch(0.50 0.17 44) 100%);
+  }
+  /* ── Shared hover ── */
+  .poftype:hover,
+  .poftype--hover {
+    transform: translateY(-4px) scale(1.015);
+  }
+  .poftype:hover .poftype-top::before,
+  .poftype--hover .poftype-top::before {
+    background: linear-gradient(180deg, oklch(1 0 0 / 0.26) 0%, transparent 50%);
+  }
+  /* ── Focus / pressed ── */
+  .poftype--focus {
+    transform: scale(0.97) !important;
+    opacity: 0.58;
+    box-shadow:
+      0 2px 8px oklch(0 0 0 / 0.10),
+      inset 0 2px 6px oklch(0 0 0 / 0.12) !important;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .poftype { transition: none; }
+    .poftype-top { transition: none; }
+    .poftype-cta { transition: none; }
+  }
 `;
 
 const F = "var(--vmc-font-display, 'Plus Jakarta Sans', sans-serif)";
@@ -1033,6 +1340,228 @@ function SectionLabel({ title, subtitle, dark }: SectionLabelProps): JSX.Element
           {subtitle}
         </p>
       )}
+    </div>
+  );
+}
+
+/* ─── OfferCard helpers ─── */
+
+function CardClockIcon(): JSX.Element {
+  return (
+    <svg width={10} height={10} viewBox="0 0 24 24" fill="none"
+      stroke="rgb(100% 100% 100% / 0.92)" strokeWidth="2.2"
+      strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <polyline points="12 6 12 12 16 14"/>
+    </svg>
+  );
+}
+
+interface OfferCardProps {
+  statusMod: string;
+  pill: JSX.Element | null;
+  showPrice: boolean;
+  liked: boolean;
+  onLike: () => void;
+}
+
+function OfferCard({ statusMod, pill, showPrice, liked, onLike }: OfferCardProps): JSX.Element {
+  return (
+    <div className={`pcard ${statusMod}`}>
+      <div className="pcard__img">
+        <img
+          src="/demo/bronco.jpg"
+          alt="Ford Bronco Sport 2024"
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+        />
+        {pill && <div className="pcard__img-badge">{pill}</div>}
+      </div>
+      <div className="pcard__body">
+        <div className="pcard__meta">
+          <p className="pcard__name">Ford Bronco Sport</p>
+          <p className="pcard__year">2024</p>
+        </div>
+        {showPrice
+          ? (
+            <div className="pcard__price-row">
+              <div className="pcard__price-left">
+                <button className="pprice pprice--sm pprice--shimmer" type="button" aria-label="Ver precio">
+                  <DollarIcon size={14} />
+                </button>
+                <span className="pcard__price-text">US$ 28,500</span>
+              </div>
+              <button
+                className={`plike plike--sm${liked ? " plike--active" : ""}`}
+                type="button"
+                aria-label={liked ? "Quitar like" : "Me gusta"}
+                onClick={onLike}
+              >
+                {liked ? <HeartFilledWhite size={14} /> : <HeartOutline size={14} />}
+              </button>
+            </div>
+          )
+          : (
+            <div className="pcard__price-row" style={{ justifyContent: "flex-end" }}>
+              <button
+                className={`plike plike--sm${liked ? " plike--active" : ""}`}
+                type="button"
+                aria-label={liked ? "Quitar like" : "Me gusta"}
+                onClick={onLike}
+              >
+                {liked ? <HeartFilledWhite size={14} /> : <HeartOutline size={14} />}
+              </button>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  );
+}
+
+function OfferCardSection(): JSX.Element {
+  const [likedLive, setLikedLive] = useState(false);
+  const [likedProxima, setLikedProxima] = useState(false);
+
+  function handleToggleLive(): void { setLikedLive(!likedLive); }
+  function handleToggleProxima(): void { setLikedProxima(!likedProxima); }
+
+  const pillLive = (
+    <div className="pcard-pill pcard-pill--live">
+      <div className="pcard-pill-dot" />
+      EN VIVO
+    </div>
+  );
+
+  const pillProxima = (
+    <div className="pcard-pill pcard-pill--proxima">
+      <span className="pcard-pill-clock"><CardClockIcon /></span>
+      PRÓXIMA
+    </div>
+  );
+
+  return (
+    <div className="ocard-sheet">
+      <div>
+        <p className="ocard-sheet-title">2 estados · EN VIVO (naranja · dot pulse) y PRÓXIMA (vault · clock blink) · colores mandan desde Figma</p>
+        <div className="ocard-row">
+          <OfferCard
+            statusMod="pcard--live"
+            pill={pillLive}
+            showPrice={true}
+            liked={likedLive}
+            onLike={handleToggleLive}
+          />
+          <OfferCard
+            statusMod="pcard--proxima"
+            pill={pillProxima}
+            showPrice={false}
+            liked={likedProxima}
+            onLike={handleToggleProxima}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── OfferType ─── */
+
+interface OfferTypeDemoCardProps {
+  variant: "negotiable" | "live";
+  label: string;
+}
+
+function OfferTypeDemoCard({ variant, label }: OfferTypeDemoCardProps): JSX.Element {
+  const [pressed, setPressed] = useState(false);
+  function handlePress(): void { setPressed(true); }
+  function handleRelease(): void { setPressed(false); }
+  const focusCls = pressed ? "poftype--focus" : "";
+  return (
+    <div
+      className={`poftype poftype--${variant} ${focusCls}`}
+      onMouseDown={handlePress}
+      onMouseUp={handleRelease}
+      onMouseLeave={handleRelease}
+      role="button"
+      tabIndex={0}
+      aria-label={label}
+    >
+      <div className="poftype-top">
+        <span className="poftype-label">{label}</span>
+      </div>
+      <div className="poftype-bottom">
+        <span className="poftype-cta">VER TODAS</span>
+      </div>
+    </div>
+  );
+}
+
+function OfferTypeSection(): JSX.Element {
+  return (
+    <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px" }}>
+
+      {/* Column headers */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16, marginBottom: 20 }}>
+        {(["Default", "Hover", "Focus"] as const).map(function stateHeader(s) {
+          return (
+            <p key={s} style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+              textTransform: "uppercase", letterSpacing: "0.08em",
+              color: "var(--vmc-color-text-tertiary)", margin: 0, textAlign: "center" }}>
+              {s}
+            </p>
+          );
+        })}
+      </div>
+
+      {/* NEGOCIABLE row */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16,
+        justifyItems: "center", marginBottom: 24 }}>
+        <div className="poftype poftype--negotiable">
+          <div className="poftype-top"><span className="poftype-label">NEGOCIABLE</span></div>
+          <div className="poftype-bottom"><span className="poftype-cta">VER TODAS</span></div>
+        </div>
+        <div className="poftype poftype--negotiable poftype--hover">
+          <div className="poftype-top"><span className="poftype-label">NEGOCIABLE</span></div>
+          <div className="poftype-bottom"><span className="poftype-cta">VER TODAS</span></div>
+        </div>
+        <div className="poftype poftype--negotiable poftype--focus">
+          <div className="poftype-top"><span className="poftype-label">NEGOCIABLE</span></div>
+          <div className="poftype-bottom"><span className="poftype-cta">VER TODAS</span></div>
+        </div>
+      </div>
+
+      {/* EN VIVO row */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16,
+        justifyItems: "center" }}>
+        <div className="poftype poftype--live">
+          <div className="poftype-top"><span className="poftype-label">EN VIVO</span></div>
+          <div className="poftype-bottom"><span className="poftype-cta">VER TODAS</span></div>
+        </div>
+        <div className="poftype poftype--live poftype--hover">
+          <div className="poftype-top"><span className="poftype-label">EN VIVO</span></div>
+          <div className="poftype-bottom"><span className="poftype-cta">VER TODAS</span></div>
+        </div>
+        <div className="poftype poftype--live poftype--focus">
+          <div className="poftype-top"><span className="poftype-label">EN VIVO</span></div>
+          <div className="poftype-bottom"><span className="poftype-cta">VER TODAS</span></div>
+        </div>
+      </div>
+
+      {/* Live demo */}
+      <div style={{ marginTop: 24, padding: "16px 0 4px",
+        borderTop: "1px solid var(--vmc-color-vault-utility-ghost)" }}>
+        <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+          textTransform: "uppercase", letterSpacing: "0.08em",
+          color: "var(--vmc-color-text-tertiary)", margin: "0 0 16px" }}>
+          Live — hover + click
+        </p>
+        <div style={{ display: "flex", gap: 16 }}>
+          <OfferTypeDemoCard variant="negotiable" label="NEGOCIABLE" />
+          <OfferTypeDemoCard variant="live" label="EN VIVO" />
+        </div>
+      </div>
+
     </div>
   );
 }
@@ -1134,33 +1663,6 @@ function CategoryCardDemo({ icon, label }: CategoryCardDemoProps): JSX.Element {
     >
       <div className="pcatcard-icon-wrap">{icon}</div>
       <span className="pcatcard-label">{label}</span>
-    </div>
-  );
-}
-
-interface OfferTypeDemoCardProps { variant: "negotiable" | "live"; label: string; }
-
-function OfferTypeDemoCard({ variant, label }: OfferTypeDemoCardProps): JSX.Element {
-  const [pressed, setPressed] = useState(false);
-  function handlePress(): void { setPressed(true); }
-  function handleRelease(): void { setPressed(false); }
-  const focusCls = pressed ? "poftype--focus" : "";
-  return (
-    <div
-      className={`poftype poftype--${variant} ${focusCls}`}
-      onMouseDown={handlePress}
-      onMouseUp={handleRelease}
-      onMouseLeave={handleRelease}
-      role="button"
-      tabIndex={0}
-      aria-label={label}
-    >
-      <div className="poftype-top">
-        <span className="poftype-label">{label}</span>
-      </div>
-      <div className="poftype-bottom">
-        <span className="poftype-cta">VER TODAS</span>
-      </div>
     </div>
   );
 }
@@ -1542,6 +2044,30 @@ export default function Pase1Page(): JSX.Element {
             </div>
           </div>
         </div>
+        </section>
+
+        {/* ─────────────────────────────────────────────
+            5. OfferCard — EN VIVO · PRÓXIMA
+        ───────────────────────────────────────────── */}
+        <section id="offer-card" data-concorde-component="OfferCard" data-concorde-variant="live-proxima">
+          <SectionLabel
+            title="Offer Card"
+            subtitle="EN VIVO · dot pulse naranja · PRÓXIMA · clock blink vault · hover lift · like toggle"
+          />
+          <style>{OFFERCARD_CSS}</style>
+          <OfferCardSection />
+        </section>
+
+        {/* ─────────────────────────────────────────────
+            6. OfferType — NEGOCIABLE · EN VIVO
+        ───────────────────────────────────────────── */}
+        <section id="offer-type" data-concorde-component="OfferType" data-concorde-variant="default">
+          <SectionLabel
+            title="Offer Type"
+            subtitle="NEGOCIABLE · EN VIVO — Default / Hover / Focus · colores mandan desde Figma"
+          />
+          <style>{OTYPE_CSS}</style>
+          <OfferTypeSection />
         </section>
 
 

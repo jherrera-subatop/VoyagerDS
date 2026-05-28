@@ -1481,6 +1481,192 @@ function IcnArticulosF({ size = 32, gradId }: IcnProps): JSX.Element {
   );
 }
 
+/* ── UI Icons — Participants & View ── */
+interface UiIcnProps { size?: number; color?: string; }
+
+function IcnParticipants({ size = 24, color = "white" }: UiIcnProps): JSX.Element {
+  /* 3 personas en fila — igual tamaño, sin jerarquía
+     evenodd crea gap automático en solapado de cuerpos
+     cx: 4.5 · 12 · 19.5  r=2.8                                      */
+  const PATH =
+    "M7.3,7.5 a2.8,2.8 0 1,0 -5.6,0 a2.8,2.8 0 1,0 5.6,0 " +
+    "M0.5,22 C0.5,15 2.5,10.5 4.5,10.5 C6.5,10.5 8.5,15 8.5,22 Z " +
+    "M14.8,7.5 a2.8,2.8 0 1,0 -5.6,0 a2.8,2.8 0 1,0 5.6,0 " +
+    "M8,22 C8,15 10,10.5 12,10.5 C14,10.5 16,15 16,22 Z " +
+    "M22.3,7.5 a2.8,2.8 0 1,0 -5.6,0 a2.8,2.8 0 1,0 5.6,0 " +
+    "M15.5,22 C15.5,15 17.5,10.5 19.5,10.5 C21.5,10.5 23.5,15 23.5,22 Z";
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={color} aria-hidden="true">
+      <path fillRule="evenodd" d={PATH} />
+    </svg>
+  );
+}
+
+function IcnView({ size = 24, color = "white" }: UiIcnProps): JSX.Element {
+  /* Eye icon moderno — evenodd: outer lens → iris hole → pupil refill
+     Outer: almond C6,6–18,6 · Iris r=4 · Pupil r=1.8                     */
+  const PATH =
+    "M2,12 C6,6 18,6 22,12 C18,18 6,18 2,12 Z " +
+    "M16,12 a4,4 0 1,0 -8,0 a4,4 0 1,0 8,0 " +
+    "M13.8,12 a1.8,1.8 0 1,0 -3.6,0 a1.8,1.8 0 1,0 3.6,0";
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={color} fillRule="evenodd" aria-hidden="true">
+      <path fillRule="evenodd" d={PATH} />
+    </svg>
+  );
+}
+
+function IcnCalendarA({ size = 24, color = "white" }: UiIcnProps): JSX.Element {
+  /* Classic calendar — body + 2 binding tabs + header sep + 3×2 grid holes
+     fillRule evenodd: every rect inside body subtracts (transparent punch)        */
+  const PATH =
+    "M2,7 L22,7 L22,22 L2,22 Z " +
+    "M5.5,2 L9.5,2 L9.5,7 L5.5,7 Z " +
+    "M14.5,2 L18.5,2 L18.5,7 L14.5,7 Z " +
+    "M2,10 L22,10 L22,10.5 L2,10.5 Z " +
+    "M3.5,11.5 L7,11.5 L7,13.5 L3.5,13.5 Z " +
+    "M10,11.5 L14,11.5 L14,13.5 L10,13.5 Z " +
+    "M17,11.5 L20.5,11.5 L20.5,13.5 L17,13.5 Z " +
+    "M3.5,15.5 L7,15.5 L7,17.5 L3.5,17.5 Z " +
+    "M10,15.5 L14,15.5 L14,17.5 L10,17.5 Z " +
+    "M17,15.5 L20.5,15.5 L20.5,17.5 L17,17.5 Z";
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={color} aria-hidden="true">
+      <path fillRule="evenodd" d={PATH} />
+    </svg>
+  );
+}
+
+function IcnCalendarB({ size = 24, color = "white" }: UiIcnProps): JSX.Element {
+  /* Minimal calendar — body + binding tabs + single "today" center dot
+     No grid, no separator — modern date-focused silhouette                        */
+  const PATH =
+    "M2,7 L22,7 L22,22 L2,22 Z " +
+    "M5.5,2 L9.5,2 L9.5,7 L5.5,7 Z " +
+    "M14.5,2 L18.5,2 L18.5,7 L14.5,7 Z " +
+    "M14.5,14.5 a2.5,2.5 0 1,0 -5,0 a2.5,2.5 0 1,0 5,0";
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={color} aria-hidden="true">
+      <path fillRule="evenodd" d={PATH} />
+    </svg>
+  );
+}
+
+function IcnCalendarC({ size = 24, color = "white" }: UiIcnProps): JSX.Element {
+  /* Calendar + checkmark — body + binding tabs + header sep + thick check hole
+     Communicates "confirmed appointment" / "checked date"                         */
+  const PATH =
+    "M2,7 L22,7 L22,22 L2,22 Z " +
+    "M5.5,2 L9.5,2 L9.5,7 L5.5,7 Z " +
+    "M14.5,2 L18.5,2 L18.5,7 L14.5,7 Z " +
+    "M2,10 L22,10 L22,10.5 L2,10.5 Z " +
+    "M5,16 L10.5,21.5 L21,13 L19,11 L10.5,18 L7,13.5 Z";
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={color} aria-hidden="true">
+      <path fillRule="evenodd" d={PATH} />
+    </svg>
+  );
+}
+
+/* ── UI Icons preview section ── */
+function UIIconsSection(): JSX.Element {
+  const SIZES: number[] = [16, 20, 24];
+  const BG = "oklch(0.22 0.18 285)";
+  const calVariants: Array<{ label: string; Icn: typeof IcnCalendarA }> = [
+    { label: "A · Clásico + grid", Icn: IcnCalendarA },
+    { label: "B · Minimal + dot",  Icn: IcnCalendarB },
+    { label: "C · Check",          Icn: IcnCalendarC },
+  ];
+  return (
+    <div style={{ padding: "16px", display: "flex", flexDirection: "column", gap: "16px" }}>
+
+      {/* Participants */}
+      <div>
+        <p style={{ fontFamily: F, fontSize: 9, fontWeight: 600, textTransform: "uppercase",
+          letterSpacing: "0.08em", color: "oklch(0.22 0.18 285 / 0.45)", margin: "0 0 8px" }}>
+          ParticipantsIcon — 3 tamaños
+        </p>
+        <div style={{ display: "flex", gap: "16px", alignItems: "flex-end" }}>
+          {SIZES.map(function renderParticipant(s) {
+            return (
+              <div key={s} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                <div style={{ background: BG, borderRadius: 6, padding: "10px",
+                  display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <IcnParticipants size={s} />
+                </div>
+                <span style={{ fontFamily: F, fontSize: 9, color: "oklch(0.22 0.18 285 / 0.40)" }}>
+                  {s}px
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* View */}
+      <div>
+        <p style={{ fontFamily: F, fontSize: 9, fontWeight: 600, textTransform: "uppercase",
+          letterSpacing: "0.08em", color: "oklch(0.22 0.18 285 / 0.45)", margin: "0 0 8px" }}>
+          ViewIcon — 3 tamaños
+        </p>
+        <div style={{ display: "flex", gap: "16px", alignItems: "flex-end" }}>
+          {SIZES.map(function renderView(s) {
+            return (
+              <div key={s} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                <div style={{ background: BG, borderRadius: 6, padding: "10px",
+                  display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <IcnView size={s} />
+                </div>
+                <span style={{ fontFamily: F, fontSize: 9, color: "oklch(0.22 0.18 285 / 0.40)" }}>
+                  {s}px
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Calendar Icons — 3 variants */}
+      <div>
+        <p style={{ fontFamily: F, fontSize: 9, fontWeight: 600, textTransform: "uppercase",
+          letterSpacing: "0.08em", color: "oklch(0.22 0.18 285 / 0.45)", margin: "0 0 8px" }}>
+          CalendarIcon — 3 variantes
+        </p>
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+          {calVariants.map(function renderCalRow({ label, Icn }) {
+            return (
+              <div key={label}>
+                <p style={{ fontFamily: F, fontSize: 8, color: "oklch(0.22 0.18 285 / 0.35)",
+                  margin: "0 0 6px", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+                  {label}
+                </p>
+                <div style={{ display: "flex", gap: "16px", alignItems: "flex-end" }}>
+                  {SIZES.map(function renderCalCell(s) {
+                    return (
+                      <div key={s} style={{ display: "flex", flexDirection: "column",
+                        alignItems: "center", gap: "6px" }}>
+                        <div style={{ background: BG, borderRadius: 6, padding: "10px",
+                          display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          <Icn size={s} />
+                        </div>
+                        <span style={{ fontFamily: F, fontSize: 9,
+                          color: "oklch(0.22 0.18 285 / 0.40)" }}>
+                          {s}px
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+    </div>
+  );
+}
+
 /* ── Category Icons section ── */
 function CategoryIconsSection(): JSX.Element {
   return (
@@ -1948,7 +2134,15 @@ export default function BorradorMobilePage(): JSX.Element {
           </div>
 
           <SectionLabel
-            title="3. Iconografía de Categorías"
+            title="3. UI Icons — Participants & View"
+            subtitle="fill white · 16 / 20 / 24px · solo variante default"
+          />
+          <div style={{ background: "oklch(1 0 0)" }}>
+            <UIIconsSection />
+          </div>
+
+          <SectionLabel
+            title="4. Iconografía de Categorías"
             subtitle="fill-rule evenodd — in between fill/stroke · vault gradient"
           />
           <div style={{ background: "oklch(1 0 0)" }}>
