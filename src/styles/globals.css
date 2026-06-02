@@ -224,6 +224,21 @@
 
 /* ── 3. Base layer ───────────────────────────────────────────────────────── */
 @layer base {
+  /* ── Design System Gradient Tokens ────────────────────────────────────────
+     W3C DTCG no soporta gradient natively → se definen aquí como CSS custom
+     properties y se referencian con var() en todos los componentes.
+  ─────────────────────────────────────────────────────────────────────────── */
+  :root {
+    /* VYgradientdef-negotiable — Figma token · 3 stops del sistema cyan
+       Uso: OfferType negociable, AuctionStatusBanner negotiable, CategoryCard negotiable */
+    --vmc-gradient-negotiable: linear-gradient(
+      to right,
+      var(--vmc-color-cyan-400) 0%,
+      var(--vmc-color-cyan-600) 50%,
+      var(--vmc-color-cyan-800) 100%
+    );
+  }
+
   *,
   *::before,
   *::after {

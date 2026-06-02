@@ -255,6 +255,220 @@ const BUTTON_CSS = `
     z-index: 2;
   }
 
+  /* ── Secondary Agenda — 160×40px · icono calendario · psec base ── */
+  .psec-agenda {
+    --vsec-stop-a: var(--vmc-color-vault-500);
+    --vsec-stop-b: var(--vmc-color-vault-700);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: 160px;
+    height: 40px;
+    padding: 4px 12px 4px 4px;
+    border-radius: var(--vmc-radius-full);
+    border: 2px solid transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--vmc-font-display);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--vmc-color-base-white);
+    text-shadow: 0 1px 2px rgb(0% 0% 0% / 0.28);
+    background-image:
+      linear-gradient(135deg, var(--vsec-stop-a) 0%, var(--vsec-stop-b) 100%),
+      linear-gradient(135deg,
+        var(--vmc-color-vault-300) 0%,
+        var(--vmc-color-base-white) 35%,
+        var(--vmc-color-vault-400) 65%,
+        var(--vmc-color-vault-300) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.20),
+      0 2px 8px rgb(51.76% 37.65% 89.8% / 0.28);
+    transition:
+      transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow 0.25s ease;
+    transform: translateZ(0);
+  }
+  .psec-agenda::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.14) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .psec-agenda:hover {
+    --vsec-stop-a: var(--vmc-color-vault-400);
+    --vsec-stop-b: var(--vmc-color-vault-600);
+    transform: translateY(-1px) scale(1.02);
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.18),
+      0 6px 18px rgb(51.76% 37.65% 89.8% / 0.35);
+  }
+  .psec-agenda:active {
+    --vsec-stop-a: var(--vmc-color-vault-700);
+    --vsec-stop-b: var(--vmc-color-vault-800);
+    transform: scale(0.97) translateY(1px);
+    box-shadow: inset 0 2px 4px rgb(0% 0% 0% / 0.22);
+  }
+  .psec-agenda:disabled {
+    background-image: none;
+    background-color: var(--vmc-color-background-disabled);
+    color: var(--vmc-color-neutral-700);
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+  }
+  /* Círculo icono — mismo sistema pvbtn-icon */
+  .psec-agenda-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgb(100% 100% 100% / 0.20);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--vmc-color-base-white);
+    position: relative;
+    z-index: 2;
+  }
+  .psec-agenda-label {
+    position: relative;
+    z-index: 2;
+    white-space: nowrap;
+    line-height: 1.2;
+  }
+
+  /* ── MD Negociar — cyan→vault, mismo patrón que Primary ── */
+  .pvbtn-neg {
+    --vbtn-stop-a: oklch(0.65 0.18 195);
+    --vbtn-stop-b: var(--vmc-color-vault-500);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 56px;
+    border-radius: var(--vmc-radius-full);
+    border: 2.5px solid transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--vmc-font-display);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--vmc-color-base-white);
+    text-shadow: 0 1px 3px rgb(0% 0% 0% / 0.25);
+    background-image:
+      linear-gradient(var(--vbtn-angle), var(--vbtn-stop-a) 0%, var(--vbtn-stop-a) 40%, var(--vbtn-stop-b) 100%),
+      linear-gradient(135deg,
+        oklch(1 0 0)         0%,
+        oklch(0.82 0.12 195) 25%,
+        oklch(0.52 0.22 285) 75%,
+        oklch(1 0 0)         100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip:   padding-box, border-box;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.28),
+      0 2px 6px oklch(0.65 0.18 195 / 0.35);
+    transition:
+      --vbtn-angle  0.4s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      --vbtn-stop-a 0.35s ease,
+      --vbtn-stop-b 0.35s ease,
+      transform     0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow    0.25s ease;
+    transform: translateZ(0);
+  }
+  .pvbtn-neg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(180deg, rgb(100% 100% 100% / 0.17) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .pvbtn-neg::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: var(--vmc-radius-full);
+    background: linear-gradient(135deg, oklch(0.65 0.18 195), var(--vmc-color-vault-500));
+    filter: blur(14px);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease, filter 0.3s ease;
+  }
+  .pvbtn-neg:hover {
+    --vbtn-angle:  220deg;
+    --vbtn-stop-a: oklch(0.76 0.14 195);
+    --vbtn-stop-b: var(--vmc-color-vault-400);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.22),
+      0 8px 24px oklch(0.52 0.22 285 / 0.35),
+      0 4px 10px oklch(0.65 0.18 195 / 0.40);
+  }
+  .pvbtn-neg:hover::after { opacity: 0.45; filter: blur(18px); }
+  .pvbtn-neg:active {
+    --vbtn-angle:  135deg;
+    --vbtn-stop-a: oklch(0.55 0.20 195);
+    --vbtn-stop-b: var(--vmc-color-vault-600);
+    transform: scale(0.97) translateY(1px);
+    box-shadow:
+      inset 0 2px 5px rgb(0% 0% 0% / 0.22),
+      0 1px 3px rgb(0% 0% 0% / 0.12);
+  }
+  .pvbtn-neg:active::after { opacity: 0; }
+  .pvbtn-neg:focus-visible {
+    outline: 3px solid transparent;
+    outline-offset: 4px;
+    transform: scale(0.98);
+    box-shadow:
+      0 0 0 2px var(--vmc-color-base-white),
+      0 0 0 5px oklch(0.65 0.18 195),
+      0 8px 16px -4px oklch(0.65 0.18 195 / 0.30);
+  }
+  .pvbtn-neg:focus-visible::after { opacity: 0.2; }
+  .pvbtn-neg:disabled {
+    background-image: none;
+    background-color: var(--vmc-color-background-disabled);
+    color: var(--vmc-color-neutral-700);
+    text-shadow: none;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+    border-color: transparent;
+  }
+  .pvbtn-neg:disabled::after { display: none; }
+
+  /* Frozen states */
+  .pvbtn-neg--hover {
+    --vbtn-angle:  220deg;
+    --vbtn-stop-a: oklch(0.76 0.14 195);
+    --vbtn-stop-b: var(--vmc-color-vault-400);
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow:
+      inset 0 1px 0 rgb(100% 100% 100% / 0.22),
+      0 8px 24px oklch(0.52 0.22 285 / 0.35),
+      0 4px 10px oklch(0.65 0.18 195 / 0.40) !important;
+  }
+  .pvbtn-neg--pressed {
+    --vbtn-angle:  135deg;
+    --vbtn-stop-a: oklch(0.55 0.20 195);
+    --vbtn-stop-b: var(--vmc-color-vault-600);
+    transform: scale(0.97) translateY(1px) !important;
+    box-shadow:
+      inset 0 2px 5px rgb(0% 0% 0% / 0.22),
+      0 1px 3px rgb(0% 0% 0% / 0.12) !important;
+  }
+
   /* ── SM Auth / Logged-in — cinematic dark variant ── */
   .pvbtn-auth {
     display: inline-flex;
@@ -1666,12 +1880,9 @@ const BUTTON_CSS = `
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    /* Teal fill + shimmer ring */
+    /* VYgradientdef-negotiable fill + shimmer ring */
     background-image:
-      linear-gradient(135deg,
-        var(--vmc-color-negotiable, oklch(0.78 0.14 195)) 0%,
-        oklch(0.65 0.16 195) 100%
-      ),
+      var(--vmc-gradient-negotiable),
       linear-gradient(135deg,
         oklch(0.88 0.08 195) 0%,
         rgb(100% 100% 100%) 40%,
@@ -1680,7 +1891,7 @@ const BUTTON_CSS = `
       );
     background-origin: padding-box, border-box;
     background-clip: padding-box, border-box;
-    box-shadow: 0 2px 8px oklch(0.78 0.14 195 / 0.25);
+    box-shadow: 0 2px 8px var(--vmc-color-cyan-600, oklch(0.78 0.14 195) / 0.25);
     transition:
       transform   0.2s  cubic-bezier(0.25, 0.8, 0.25, 1),
       box-shadow  0.25s ease;
@@ -3292,6 +3503,70 @@ function OfferTypeDemoCard({ variant, label }: OfferTypeDemoCardProps): JSX.Elem
   );
 }
 
+/* ── Calendar icon — 16×16 ── */
+function CalendarIcon(): JSX.Element {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+      stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="3" width="12" height="11" rx="2" />
+      <line x1="2" y1="7" x2="14" y2="7" />
+      <line x1="5" y1="1.5" x2="5" y2="4.5" />
+      <line x1="11" y1="1.5" x2="11" y2="4.5" />
+    </svg>
+  );
+}
+
+function AgendaVisitaBtn(): JSX.Element {
+  return (
+    <button className="psec-agenda" type="button">
+      <span className="psec-agenda-icon"><CalendarIcon /></span>
+      <span className="psec-agenda-label">Agenda tu visita</span>
+    </button>
+  );
+}
+
+/* ── AuctionStatusBanner — negotiable ── */
+const BACK_ICON = (
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+    stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="10,3 5,8 10,13" />
+  </svg>
+);
+
+function AuctionStatusNegotiable(): JSX.Element {
+  return (
+    <div className="pastatus" role="banner" aria-label="Estado de subasta: Negociable">
+      <button className="pastatus-back" type="button" aria-label="Volver">
+        {BACK_ICON}
+      </button>
+      <div className="pastatus-text">
+        <span className="pastatus-title">Aire acondicionado Uniflair</span>
+        <span className="pastatus-sub">Vendedor: Institución Financiera</span>
+      </div>
+    </div>
+  );
+}
+
+function MdNegociarDemo(): JSX.Element {
+  const [pressed, setPressed] = useState(false);
+  function handlePress(): void { setPressed(true); }
+  function handleRelease(): void { setPressed(false); }
+  const cls = pressed ? "pvbtn-neg pvbtn-neg--pressed" : "pvbtn-neg";
+  return (
+    <button
+      className={cls}
+      type="button"
+      onMouseDown={handlePress}
+      onMouseUp={handleRelease}
+      onMouseLeave={handleRelease}
+      onTouchStart={handlePress}
+      onTouchEnd={handleRelease}
+    >
+      Negociar
+    </button>
+  );
+}
+
 function MdPrimaryDemo(): JSX.Element {
   const [pressed, setPressed] = useState(false);
   function handlePress(): void { setPressed(true); }
@@ -3379,6 +3654,828 @@ const CATEGORY_ITEMS = [
   { key: "equipos",    label: "EQUIPOS DIVERSOS",   icon: (s: number) => <IconEquipos size={s} /> },
   { key: "articulos",  label: "ARTÍCULOS DIVERSOS", icon: (s: number) => <IconArticulos size={s} /> },
 ] as const;
+
+/* ─── DataQualityBadge ─── */
+
+const PDQB_CSS = `
+  /* ── Glow pulse — "respira" con stagger por dot ── */
+  @keyframes pdq-breathe {
+    0%, 100% { opacity: 1; filter: brightness(1); }
+    50%       { opacity: 0.75; filter: brightness(1.25); }
+  }
+  /* ── Color wave — stroke animado DIRECTAMENTE en el path (no filter)
+     Filter rasteriza bitmap estático → color se congela.
+     stroke CSS en el path = GPU interpola en OKLCH polar L constante.
+     Verde H=145 → Naranja H=55 → regresa. L=70% C=0.20 fijos.
+  ── */
+  @keyframes pdq-wave-direct {
+    0%, 100% { stroke: oklch(70% 0.20 145); }
+    50%       { stroke: oklch(70% 0.20 55);  }
+  }
+  .pdq-wave-path {
+    fill: none;
+    stroke-width: 2.8px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: oklch(70% 0.20 145);
+    will-change: stroke;
+    animation: pdq-wave-direct 2.4s ease-in-out infinite;
+  }
+  .pdq-wave-path-ghost {
+    fill: none;
+    stroke-width: 2.8px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: oklch(0.85 0.01 220);
+  }
+  /* Stagger ola + anula breathe para cycle */
+  .pdq-cycle .pdq-iso.on { animation: none; }
+  .pdq-cycle .pdq-iso:nth-child(1) .pdq-wave-path { animation-delay: 0s;    }
+  .pdq-cycle .pdq-iso:nth-child(2) .pdq-wave-path { animation-delay: 0.30s; }
+  .pdq-cycle .pdq-iso:nth-child(3) .pdq-wave-path { animation-delay: 0.60s; }
+  @media (prefers-reduced-motion: reduce) {
+    .pdq-wave-path { animation-duration: 8s; }
+  }
+
+  /* ── Verde ── */
+  .pdq-green .pdq-unit.on {
+    background: var(--vmc-color-status-success, oklch(0.70 0.20 145));
+    box-shadow: 0 0 8px var(--vmc-color-status-success, oklch(0.70 0.20 145) / 0.65);
+    animation: pdq-breathe 2.0s ease-in-out infinite;
+  }
+  .pdq-green.pdq-e .pdq-unit.on { border-color: transparent; }
+  .pdq-green.pdq-f { color: var(--vmc-color-status-success, oklch(0.70 0.20 145)); }
+
+  /* ── Morado (vault) ── */
+  .pdq-purple .pdq-unit.on {
+    background: var(--vmc-color-vault-500, oklch(0.45 0.22 285));
+    box-shadow: 0 0 8px var(--vmc-color-vault-500, oklch(0.45 0.22 285) / 0.60);
+    animation: pdq-breathe 2.0s ease-in-out infinite;
+  }
+  .pdq-purple.pdq-f { color: var(--vmc-color-vault-500, oklch(0.45 0.22 285)); }
+  /* Stagger — cada dot desfasado 200ms */
+  .pdq-unit:nth-child(1).on { animation-delay: 0s;    }
+  .pdq-unit:nth-child(2).on { animation-delay: 0.2s;  }
+  .pdq-unit:nth-child(3).on { animation-delay: 0.4s;  }
+
+  /* ══ ARC GAUGE — todo verde · indicador + oscilación motor ══ */
+  /* baja / media — avanza y regresa sin llegar al tope */
+  @keyframes needle-rev {
+    0%   { transform: rotate(-7deg); }
+    35%  { transform: rotate(8deg);  }
+    65%  { transform: rotate(-3deg); }
+    100% { transform: rotate(-7deg); }
+  }
+  /* alta — arranca en tope (0°), pisa, retrocede, regresa al tope */
+  @keyframes needle-rev-alta {
+    0%   { transform: rotate(0deg);   }
+    30%  { transform: rotate(-12deg); }
+    60%  { transform: rotate(-4deg);  }
+    100% { transform: rotate(0deg);   }
+  }
+  .dq-needle-alta {
+    transform-box: view-box;
+    transform-origin: 15px 17px;
+    animation: needle-rev-alta 1.1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+  @keyframes arc-glow {
+    0%, 100% { filter: drop-shadow(0 0 2px oklch(70% 0.20 145 / 0.45)); }
+    50%       { filter: drop-shadow(0 0 5px oklch(70% 0.20 145 / 0.85)); }
+  }
+  .dq-gauge-fill-green  { stroke: var(--vmc-color-status-success, oklch(0.70 0.20 145)); animation: arc-glow 2.0s ease-in-out infinite; }
+  .dq-gauge-needle-green { stroke: var(--vmc-color-status-success, oklch(0.70 0.20 145)); }
+  .dq-gauge-pivot-green  { fill: var(--vmc-color-status-success, oklch(0.70 0.20 145)); }
+  .dq-needle-group {
+    transform-box: view-box;
+    transform-origin: 15px 17px;
+    animation: needle-rev 1.1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+  /* Aliases orange → green (same component, only green now) */
+  .dq-gauge-fill-orange  { stroke: var(--vmc-color-status-success, oklch(0.70 0.20 145)); animation: arc-glow 2.0s ease-in-out infinite; }
+  .dq-gauge-needle-orange { stroke: var(--vmc-color-status-success, oklch(0.70 0.20 145)); }
+  .dq-gauge-pivot-orange  { fill: var(--vmc-color-status-success, oklch(0.70 0.20 145)); }
+
+  /* ══ SLANTED SLABS — Patrón recomendado por Gemini DS Research ══
+     3 paralelogramos oblicuos 30° · evoca telemetría premium
+     Baja: slab 1 naranja · Moderada: slabs 1+2 naranja · Excelente: 3 verde
+     Animación: glow-breathe en último slab activo
+  ═══════════════════════════════════════════════════════════════ */
+  @keyframes slab-breathe {
+    0%, 100% { filter: drop-shadow(0 0 2px var(--vmc-color-status-success, oklch(70% 0.20 145) / 0.55)); }
+    50%       { filter: drop-shadow(0 0 5px var(--vmc-color-status-success, oklch(70% 0.20 145) / 0.90)); }
+  }
+  @keyframes slab-breathe-orange {
+    0%, 100% { filter: drop-shadow(0 0 2px var(--vmc-color-orange-500, oklch(72% 0.16 55) / 0.45)); }
+    50%       { filter: drop-shadow(0 0 4px var(--vmc-color-orange-500, oklch(72% 0.16 55) / 0.80)); }
+  }
+  .pdq-slab-inactive {
+    fill: var(--vmc-color-vault, oklch(0.22 0.18 285));
+    opacity: 0.28;
+    transition: fill 0.25s ease, opacity 0.25s ease;
+  }
+  .pdq-slab-orange {
+    fill: var(--vmc-color-orange-500, oklch(0.72 0.16 55));
+    opacity: 1;
+  }
+  .pdq-slab-orange.last {
+    animation: slab-breathe-orange 2.6s ease-in-out infinite;
+  }
+  .pdq-slab-green {
+    fill: var(--vmc-color-status-success, oklch(0.70 0.20 145));
+    opacity: 1;
+  }
+  .pdq-slab-green.last {
+    animation: slab-breathe 2.6s ease-in-out infinite;
+  }
+
+  /* ── Variante C: RINGS — 3 círculos concéntricos ── */
+  .pdq-rings {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; flex-shrink: 0;
+  }
+  @keyframes pdq-ring-pulse {
+    0%, 100% { stroke: oklch(70% 0.20 145); opacity: 1; }
+    50%       { stroke: oklch(70% 0.20 55);  opacity: 0.85; }
+  }
+  .pdq-ring {
+    fill: none;
+    stroke: oklch(0.86 0.01 220);
+    stroke-width: 1.5;
+    transition: stroke 0.2s ease;
+  }
+  .pdq-ring.on {
+    stroke: oklch(70% 0.20 145);
+    stroke-width: 2;
+    will-change: stroke;
+    animation: pdq-ring-pulse 2.4s ease-in-out infinite;
+  }
+  .pdq-ring-1.on { animation-delay: 0s;    }
+  .pdq-ring-2.on { animation-delay: 0.30s; }
+  .pdq-ring-3.on { animation-delay: 0.60s; }
+
+  /* ── Variante G: ISOTIPO — 3 isotipos VMC, inactivo = ghost ── */
+  .pdq-g { display: inline-flex; align-items: center; gap: 5px; }
+  .pdq-g .pdq-iso {
+    width: 14px; height: 14px; flex-shrink: 0;
+    opacity: 0.15;
+    transition: opacity 0.25s ease, filter 0.25s ease;
+  }
+  .pdq-g .pdq-iso.on {
+    opacity: 1;
+    animation: pdq-breathe 2.0s ease-in-out infinite;
+  }
+  .pdq-g .pdq-iso:nth-child(1).on { animation-delay: 0s;   }
+  .pdq-g .pdq-iso:nth-child(2).on { animation-delay: 0.22s; }
+  .pdq-g .pdq-iso:nth-child(3).on { animation-delay: 0.44s; }
+`;
+
+const PDQB_CSS_OLD = `  /* UNUSED */
+  ._placeholder {
+    box-sizing: border-box;
+    position: relative; overflow: hidden;
+    user-select: none; cursor: default;
+  }
+  .pdqb::before {
+    content: ''; position: absolute; inset: 0; border-radius: inherit;
+    background: linear-gradient(180deg, oklch(1 0 0 / 0.16) 0%, transparent 55%);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── MALO: orange · ! advertencia · datos básicos ── */
+  .pdqb--malo {
+    background-image:
+      linear-gradient(var(--vmc-color-orange-500, oklch(0.72 0.16 55) / 0.07),
+                      var(--vmc-color-orange-500, oklch(0.72 0.16 55) / 0.07)),
+      linear-gradient(135deg,
+        var(--vmc-color-orange-300, oklch(0.82 0.12 55)) 0%,
+        oklch(1 0 0) 40%,
+        var(--vmc-color-orange-500, oklch(0.72 0.16 55)) 70%,
+        var(--vmc-color-orange-300, oklch(0.82 0.12 55)) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip:   padding-box, border-box;
+    box-shadow: 0 1px 6px var(--vmc-color-orange-500, oklch(0.72 0.16 55) / 0.22);
+  }
+  .pdqb--malo .pdqb-icon  { color: var(--vmc-color-orange-600, oklch(0.65 0.18 55)); position: relative; z-index: 1; }
+  .pdqb--malo .pdqb-label { color: var(--vmc-color-orange-700, oklch(0.55 0.18 52)); }
+
+  /* ── MEDIO: vault/purple · ½ circle · datos parciales ── */
+  .pdqb--medio {
+    background-image:
+      linear-gradient(var(--vmc-color-vault-500, oklch(0.45 0.22 285) / 0.07),
+                      var(--vmc-color-vault-500, oklch(0.45 0.22 285) / 0.07)),
+      linear-gradient(135deg,
+        var(--vmc-color-vault-300, oklch(0.62 0.18 285)) 0%,
+        oklch(1 0 0) 40%,
+        var(--vmc-color-vault-500, oklch(0.45 0.22 285)) 70%,
+        var(--vmc-color-vault-300, oklch(0.62 0.18 285)) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip:   padding-box, border-box;
+    box-shadow: 0 1px 8px var(--vmc-color-vault-500, oklch(0.45 0.22 285) / 0.22);
+  }
+  .pdqb--medio .pdqb-icon  { color: var(--vmc-color-vault-500, oklch(0.45 0.22 285)); position: relative; z-index: 1; }
+  .pdqb--medio .pdqb-label { color: var(--vmc-color-vault-600, oklch(0.38 0.22 285)); }
+
+  /* ── EXCELENTE: green → vault · escudo ✔ · datos verificados ── */
+  .pdqb--excelente {
+    background-image:
+      linear-gradient(var(--vmc-color-status-success, oklch(0.70 0.20 145) / 0.08),
+                      var(--vmc-color-status-success, oklch(0.70 0.20 145) / 0.08)),
+      linear-gradient(135deg,
+        var(--vmc-color-status-success, oklch(0.70 0.20 145)) 0%,
+        oklch(1 0 0) 38%,
+        var(--vmc-color-status-success, oklch(0.70 0.20 145)) 62%,
+        var(--vmc-color-vault-400, oklch(0.52 0.22 285)) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip:   padding-box, border-box;
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 0.20),
+      0 2px 10px var(--vmc-color-status-success, oklch(0.70 0.20 145) / 0.28);
+  }
+  .pdqb--excelente .pdqb-icon {
+    color: var(--vmc-color-status-success, oklch(0.70 0.20 145));
+    filter: drop-shadow(0 0 3px var(--vmc-color-status-success, oklch(0.70 0.20 145) / 0.50));
+    position: relative; z-index: 1;
+  }
+  .pdqb--excelente .pdqb-label {
+    color: oklch(0.38 0.20 145);
+  }
+
+  /* ── Icon 13px ── */
+  .pdqb-icon { width: 13px; height: 13px; flex-shrink: 0; }
+
+  /* ── Label: 10px/600/UPPERCASE/0.05em — research spec ── */
+  .pdqb-label {
+    font-family: var(--vmc-font-display);
+    font-size: 10px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    line-height: 1; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis;
+    position: relative; z-index: 1;
+  }
+`;
+
+type DataQualityLevel = "baja" | "media" | "alta";
+
+const DQ_FILLED: Record<DataQualityLevel, number> = { baja: 1, media: 2, alta: 3 };
+const DQ_LABEL:  Record<DataQualityLevel, string>  = { baja: "Calidad baja", media: "Calidad media", alta: "Calidad alta" };
+
+interface DqProps { level: DataQualityLevel; }
+
+type DqColor = "green" | "purple";
+interface DqProps2 { level: DataQualityLevel; color: DqColor; }
+
+function DqUnits({ level, variant, color }: { level: DataQualityLevel; variant: string; color: DqColor }): JSX.Element {
+  const filled = DQ_FILLED[level];
+  return (
+    <div className={`pdq-${variant} pdq-${color}`} role="status" aria-label={DQ_LABEL[level]}>
+      <div className={filled >= 1 ? "pdq-unit on" : "pdq-unit"} />
+      <div className={filled >= 2 ? "pdq-unit on" : "pdq-unit"} />
+      <div className={filled >= 3 ? "pdq-unit on" : "pdq-unit"} />
+    </div>
+  );
+}
+
+/* SVG isotipo con path CSS class — anima stroke directamente */
+function IsotipoWaveSvg({ active }: { active: boolean }): JSX.Element {
+  const pathClass = active ? "pdq-wave-path" : "pdq-wave-path-ghost";
+  return (
+    <svg width="14" height="20" viewBox="0 0 10 14" fill="none">
+      <path className={pathClass} d="M2 2 L8 7 L2 12" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function DqCycle({ level }: DqProps): JSX.Element {
+  const filled = DQ_FILLED[level];
+  return (
+    <div className="pdq-g pdq-cycle" role="status" aria-label={DQ_LABEL[level]}>
+      <span className={filled >= 1 ? "pdq-iso on" : "pdq-iso"}><IsotipoWaveSvg active={filled >= 1} /></span>
+      <span className={filled >= 2 ? "pdq-iso on" : "pdq-iso"}><IsotipoWaveSvg active={filled >= 2} /></span>
+      <span className={filled >= 3 ? "pdq-iso on" : "pdq-iso"}><IsotipoWaveSvg active={filled >= 3} /></span>
+    </div>
+  );
+}
+
+function DqDiamonds({ level, color }: DqProps2): JSX.Element {
+  return <DqUnits level={level} variant="d" color={color} />;
+}
+function DqHalos({ level, color }: DqProps2): JSX.Element {
+  return <DqUnits level={level} variant="e" color={color} />;
+}
+function DqChevrons({ level, color }: DqProps2): JSX.Element {
+  return <DqUnits level={level} variant="f" color={color} />;
+}
+
+/* ══ ARC GAUGE v2 — solo verde · indicador + needle que oscila ══
+   Centro (15,17) radio 12
+   Baja  25%→135°: arcEnd(6.5,8.5)  needleTip(7.3,9.3)
+   Media 55%→81°:  arcEnd(16.9,5.1) needleTip(16.7,6.2)
+   Alta  88%→22°:  arcEnd(26.1,12)  needleTip(25.2,12.5)
+══ */
+type ArcGaugeCfg = { arcD: string; tipX: number; tipY: number; altaMode: boolean; }
+const ARC_GAUGE_CFG: Record<DataQualityLevel, ArcGaugeCfg> = {
+  baja:  { arcD: "M 3 17 A 12 12 0 0 1 6.5 8.5",  tipX: 7.2,  tipY: 9.4,  altaMode: false },
+  media: { arcD: "M 3 17 A 12 12 0 0 1 16.9 5.1",  tipX: 16.7, tipY: 6.2,  altaMode: false },
+  alta:  { arcD: "M 3 17 A 12 12 0 0 1 27 17",     tipX: 27.0, tipY: 17.0, altaMode: true  },
+};
+
+interface DqArcProps { level: DataQualityLevel; size?: "sm" | "md" | "lg"; }
+
+function DqArc({ level, size = "md" }: DqArcProps): JSX.Element {
+  const cfg = ARC_GAUGE_CFG[level];
+  const needleGroupCls = cfg.altaMode ? "dq-needle-alta" : "dq-needle-group";
+  const dims: Record<string, { w: number; h: number }> = {
+    sm: { w: 28, h: 18 },
+    md: { w: 38, h: 26 },
+    lg: { w: 48, h: 32 },
+  };
+  const d = dims[size];
+  return (
+    <svg width={d.w} height={d.h} viewBox="-4 -5 38 28" fill="none" overflow="visible" role="status" aria-label={DQ_LABEL[level]}>
+      <path d="M 3 17 A 12 12 0 0 1 27 17" stroke="var(--vmc-color-vault, oklch(0.22 0.18 285))" strokeOpacity="0.14" strokeWidth="3" strokeLinecap="round" />
+      <path className="dq-gauge-fill-green" d={cfg.arcD} strokeWidth="3" strokeLinecap="round" />
+      <g className={needleGroupCls}>
+        <line className="dq-gauge-needle-green" x1="15" y1="17" x2={cfg.tipX} y2={cfg.tipY} strokeWidth="1.8" strokeLinecap="round" />
+        <circle className="dq-gauge-pivot-green" cx={cfg.tipX} cy={cfg.tipY} r="2" />
+      </g>
+      <circle fill="var(--vmc-color-vault, oklch(0.22 0.18 285))" fillOpacity="0.35" cx="15" cy="17" r="2" />
+    </svg>
+  );
+}
+
+/* ══ SLANTED SLABS — 3 paralelogramos 30° oblicuos
+   ViewBox 0 0 30 16 · cada slab 6px ancho, 16px alto, slant 4px
+   Posiciones: slab1 x=0, slab2 x=9, slab3 x=18
+══ */
+function SlabClass(filled: number, index: number): string {
+  if (filled >= index) {
+    if (filled === 3) { return index === 3 ? "pdq-slab-green last" : "pdq-slab-green"; }
+    return index === filled ? "pdq-slab-orange last" : "pdq-slab-orange";
+  }
+  return "pdq-slab-inactive";
+}
+
+function DqSlabs({ level }: DqProps): JSX.Element {
+  const filled = DQ_FILLED[level];
+  return (
+    <svg width="32" height="18" viewBox="0 0 30 16" fill="none" role="status" aria-label={DQ_LABEL[level]}>
+      {/* Slab 1 */}
+      <polygon className={SlabClass(filled, 1)} points="4,0 10,0 6,16 0,16" />
+      {/* Slab 2 */}
+      <polygon className={SlabClass(filled, 2)} points="13,0 19,0 15,16 9,16" />
+      {/* Slab 3 */}
+      <polygon className={SlabClass(filled, 3)} points="22,0 28,0 24,16 18,16" />
+    </svg>
+  );
+}
+
+/* ── Variante C: Rings — 3 círculos concéntricos ── */
+function DqRings({ level }: DqProps): JSX.Element {
+  const filled = DQ_FILLED[level];
+  return (
+    <svg className="pdq-rings" viewBox="0 0 28 28" fill="none" role="status" aria-label={DQ_LABEL[level]}>
+      {/* Anillo exterior */}
+      <circle className={filled >= 3 ? "pdq-ring pdq-ring-3 on" : "pdq-ring pdq-ring-3"} cx="14" cy="14" r="12" />
+      {/* Anillo medio */}
+      <circle className={filled >= 2 ? "pdq-ring pdq-ring-2 on" : "pdq-ring pdq-ring-2"} cx="14" cy="14" r="8" />
+      {/* Anillo interior */}
+      <circle className={filled >= 1 ? "pdq-ring pdq-ring-1 on" : "pdq-ring pdq-ring-1"} cx="14" cy="14" r="4" />
+    </svg>
+  );
+}
+
+/* ── SVG isotipo VMC — dos chevrons angulares superpuestos ── */
+function IsotipoSvg({ fill }: { fill: string }): JSX.Element {
+  return (
+    <svg viewBox="0 0 10 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Chevron único → derecha, stroke grueso redondeado */}
+      <path d="M2 2 L8 7 L2 12" stroke={fill} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+interface DqIsoProps { level: DataQualityLevel; color: DqColor; }
+
+function DqIsotipo({ level }: DqIsoProps): JSX.Element {
+  const filled = DQ_FILLED[level];
+  const activeColor = "var(--vmc-color-orange-500, oklch(0.72 0.16 55))";
+  const ghostColor = "oklch(0.82 0.01 220)";
+  return (
+    <div className="pdq-g" role="status" aria-label={DQ_LABEL[level]}>
+      <span className={filled >= 1 ? "pdq-iso on" : "pdq-iso"}>
+        <IsotipoSvg fill={filled >= 1 ? activeColor : ghostColor} />
+      </span>
+      <span className={filled >= 2 ? "pdq-iso on" : "pdq-iso"}>
+        <IsotipoSvg fill={filled >= 2 ? activeColor : ghostColor} />
+      </span>
+      <span className={filled >= 3 ? "pdq-iso on" : "pdq-iso"}>
+        <IsotipoSvg fill={filled >= 3 ? activeColor : ghostColor} />
+      </span>
+    </div>
+  );
+}
+
+/* Keep old for backward compat in JSX */
+function DqDots({ level }: DqProps): JSX.Element {
+  return <DqUnits level={level} variant="d" color="green" />;
+}
+function DqSegments({ level }: DqProps): JSX.Element {
+  return <DqUnits level={level} variant="e" color="green" />;
+}
+function DqBars({ level }: DqProps): JSX.Element {
+  return <DqUnits level={level} variant="f" color="green" />;
+}
+
+/* ─── ConditionPill ─── */
+
+/* ─── AuctionStatusBanner CSS ─── */
+const PASTATUS_CSS = `
+  /* ── AuctionStatusBanner — negotiable variant ─────────────────────────
+     Spec DESIGN.md: bg var(--color-negotiable) · text var(--color-vault)
+     Fix legibilidad: gradiente cyan → teal-vault profundo (no plana)
+  ──────────────────────────────────────────────────────────────────────── */
+  .pastatus {
+    display: flex;
+    align-items: center;
+    width: 443px;
+    height: 60px;
+    padding: 0 16px;
+    gap: 12px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    /* Gradiente: cyan base → teal profundo → teal-vault
+       El extremo derecho mezcla vault para anclar en la paleta de marca
+       y bajar la luminancia total → texto vault legible en toda la banda */
+    /* cyan-600 → cyan-800 — misma rama DS, match con botón Negociar */
+    background: linear-gradient(
+      to right,
+      var(--vmc-color-cyan-600) 0%,
+      var(--vmc-color-cyan-800) 100%
+    );
+  }
+  /* Shine top — capa de luz sutil, no blanquea el fondo */
+  .pastatus::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, oklch(1 0 0 / 0.10) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  /* Back button */
+  .pastatus-back {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: oklch(1 0 0 / 0.15);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    color: oklch(1 0 0);
+    cursor: pointer;
+    position: relative; z-index: 1;
+    transition: background 0.15s ease;
+  }
+  .pastatus-back:hover { background: oklch(1 0 0 / 0.25); }
+  /* Text block */
+  .pastatus-text {
+    display: flex; flex-direction: column; gap: 2px;
+    position: relative; z-index: 1;
+    min-width: 0;
+  }
+  .pastatus-title {
+    font-family: var(--vmc-font-display);
+    font-size: 15px; font-weight: 700; line-height: 1.2;
+    color: oklch(1 0 0);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    text-shadow: 0 1px 4px oklch(0 0 0 / 0.35), 0 0 16px oklch(0 0 0 / 0.20);
+  }
+  .pastatus-sub {
+    font-family: var(--vmc-font-display);
+    font-size: 11px; font-weight: 500; line-height: 1.2;
+    color: oklch(1 0 0 / 0.85);
+    text-shadow: 0 1px 3px oklch(0 0 0 / 0.30);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+`;
+
+const PCOND_CSS = `
+  /* ── Variante ACTUAL (vault gradient, border-radius 4px) ── */
+  .pcond {
+    position: relative;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    text-align: center; padding: 8px; min-height: 46px;
+    border-radius: 4px; border: 2px solid transparent;
+    font-family: var(--vmc-font-display); font-size: 12px; font-weight: 600; line-height: 1.35;
+    user-select: none; overflow: hidden;
+    transition: box-shadow 0.25s ease, transform 0.2s ease, opacity 0.2s ease;
+  }
+  .pcond--active {
+    background-image:
+      linear-gradient(135deg, oklch(0.45 0.20 285) 0%, oklch(0.30 0.20 285) 100%),
+      linear-gradient(135deg, oklch(0.78 0.16 55) 0%, rgb(100% 100% 100%) 40%, oklch(0.55 0.20 285) 75%, oklch(0.80 0.12 285) 100%);
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: 0 3px 14px oklch(0.52 0.38 285 / 0.35), inset 0 1px 0 oklch(1 0 0 / 0.22);
+    color: oklch(1 0 0); text-shadow: 0 1px 2px oklch(0 0 0 / 0.25);
+  }
+  .pcond--active::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, oklch(1 0 0 / 0.14) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .pcond--inactive {
+    background: oklch(0.88 0.004 220); color: oklch(0.50 0.02 220); opacity: 0.65; cursor: default;
+  }
+  .pcond-icon { flex-shrink: 0; color: oklch(1 0 0); position: relative; z-index: 1; }
+
+  /* ── FIGMA pixel-perfect — node 614-4342 ──────────────────────────────
+     Outer:  w-135 h-46 p-8 · drop-shadow(0 4px 3px #99A1AF4D)
+     Inner:  border-2 #cfbaff · pt-13.91 pb-15.09 px-10 · overflow-clip
+     Fill:   absolute inset-0 rgba(73,69,80,0.4)
+     Shine:  absolute inset:[0_0.5px_0_0] grad white/14 → transparent 55%
+     Shadow: inset 0 1px 0 0 rgba(255,255,255,0.15)
+     Text:   Plus Jakarta Sans 600 12px lh-16 white text-shadow 0 1 3 #00000040
+     Badge:  pvbtn-icon technique — circle oklch(1 0 0 / 0.20) 26px
+  ─────────────────────────────────────────────────────────────────────── */
+  .pcond-fig {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    /* pill + text-only: exact Figma inner padding */
+    padding: 13.91px 10px 15.09px;
+    width: 135px; min-height: 46px; height: auto;
+    box-sizing: border-box;
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    /* VYStrokes3 gradient border — dual-layer technique:
+       fill = rgba(73,69,80,0.40) · border = CFBAFF→FFFFFF→AE8EFF→CFBAFF */
+    background-image:
+      linear-gradient(oklch(0.33 0.02 290 / 0.40), oklch(0.33 0.02 290 / 0.40)),
+      linear-gradient(135deg,
+        oklch(0.78 0.13 300) 0%,
+        oklch(0.85 0.10 300) 38%,
+        oklch(0.70 0.17 295) 68%,
+        oklch(0.78 0.13 300) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip:   padding-box, border-box;
+    overflow: hidden;
+    filter: drop-shadow(0px 4px 3px oklch(0.65 0.013 237 / 0.30));
+    box-shadow: inset 0px 1px 0px 0px oklch(1 0 0 / 0.15);
+    user-select: none;
+  }
+  /* shine overlay — inset: top:0 right:0.5px bottom:0 left:0 */
+  .pcond-fig::before {
+    content: ''; position: absolute;
+    top: 0; right: 0.5px; bottom: 0; left: 0;
+    background: linear-gradient(180deg, oklch(1 0 0 / 0.14) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  /* text label */
+  .pcond-fig-label {
+    flex: 1 0 0; min-width: 1px;
+    font-family: var(--vmc-font-display); font-size: 12px;
+    font-weight: 600; line-height: 16px;
+    color: oklch(1 0 0); text-align: center;
+    text-shadow: 0px 1px 3px oklch(0 0 0 / 0.25);
+    word-break: break-word;
+    position: relative; z-index: 1;
+  }
+  /* badge variant — flex row, pill expande ancho para no apretar el texto */
+  .pcond-fig--badge {
+    padding: 8px 12px 8px 8px;
+    gap: 6px;
+    justify-content: center;
+    width: auto; min-width: 135px;
+    min-height: 46px; height: auto;
+  }
+  /* check icon dentro del badge — ~16px */
+  .pcond-fig-badge > svg,
+  .pcond-fig-badge--v2 > svg { width: 14px; height: 11px; }
+  /* badge circle v1 — pvbtn-icon: 32×32 r16, bg white/20, color white */
+  .pcond-fig-badge {
+    width: 32px; height: 32px;
+    border-radius: 16px;
+    background: oklch(1 0 0 / 0.20);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    color: oklch(1 0 0);
+    position: relative; z-index: 2;
+  }
+  /* badge circle v2 — gradiente VYStrokes3 (135deg, opaco) · check vault oscuro */
+  .pcond-fig-badge--v2 {
+    width: 32px; height: 32px;
+    border-radius: 16px;
+    background: linear-gradient(135deg,
+      oklch(0.80 0.12 300) 0%,
+      oklch(0.88 0.09 300) 35%,
+      oklch(0.72 0.16 295) 65%,
+      oklch(0.80 0.12 300) 100%
+    );
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    color: oklch(0.30 0.20 285);
+    position: relative; z-index: 2;
+    box-shadow: 0 1px 4px oklch(0.73 0.15 295 / 0.40);
+  }
+  .pcond-fig--inactive { opacity: 0.38; }
+`;
+
+const CONDITION_ITEMS_BP = [
+  { label: "Con Precio Reserva",               initialActive: true  },
+  { label: "Con Opción a Visitas",             initialActive: true  },
+  { label: "Con Comisión",                     initialActive: true  },
+  { label: "Cuota mínima de participantes: 2", initialActive: true  },
+  { label: "Sin Opción a Financiamiento",      initialActive: false },
+] as const;
+
+function CheckIconBP(): JSX.Element {
+  return (
+    <svg width={10} height={10} viewBox="0 0 12 12" fill="none"
+      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="2 6 5 9 10 3" />
+    </svg>
+  );
+}
+
+/* ════════════════════════════════════════════════
+   CHECK ICONS — 5 opciones modernas
+════════════════════════════════════════════════ */
+
+/** A — Thin classic: trazo 1.5px, ángulo 45° */
+function CheckA(): JSX.Element {
+  return (
+    <svg width="10" height="8" viewBox="0 0 12 9" fill="none"
+      stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="1,4.5 4.5,8 11,1" />
+    </svg>
+  );
+}
+
+/** B — Bold rounded: trazo 2.5px, compacto */
+function CheckB(): JSX.Element {
+  return (
+    <svg width="10" height="8" viewBox="0 0 11 9" fill="none"
+      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="1.5,4.5 4,7.5 9.5,1.5" />
+    </svg>
+  );
+}
+
+/** C — Circle outline: check dentro de aro */
+function CheckC(): JSX.Element {
+  return (
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none"
+      stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="8" cy="8" r="6.5" />
+      <polyline points="5,8 7,10.5 11,5.5" />
+    </svg>
+  );
+}
+
+/** D — Circle filled: disco semi-transparente + check */
+function CheckD(): JSX.Element {
+  return (
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="8" cy="8" r="7" fill="currentColor" fillOpacity="0.22" />
+      <polyline points="5,8 7,10.5 11,5.5" stroke="currentColor" strokeWidth="1.8" />
+    </svg>
+  );
+}
+
+/** E — Long minimal: span ancho, trazo fino — estilo luxury */
+function CheckE(): JSX.Element {
+  return (
+    <svg width="12" height="8" viewBox="0 0 14 9" fill="none"
+      stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="1,4.5 5,8 13,1" />
+    </svg>
+  );
+}
+
+type CheckType = "A" | "B" | "C" | "D" | "E" | "none";
+
+const CHECK_ICONS: Record<Exclude<CheckType, "none">, () => JSX.Element> = {
+  A: CheckA,
+  B: CheckB,
+  C: CheckC,
+  D: CheckD,
+  E: CheckE,
+};
+
+const CHECK_LABELS: Record<Exclude<CheckType, "none">, string> = {
+  A: "A — thin 1.8px",
+  B: "B — bold 2.5px",
+  C: "C — circle ring",
+  D: "D — circle fill",
+  E: "E — long minimal",
+};
+
+/* ── Variante ACTUAL (vault gradient) ── */
+interface CPillProps { label: string; isActive: boolean; showCheck: boolean; spanFull?: boolean; }
+
+function CPill({ label, isActive, showCheck, spanFull }: CPillProps): JSX.Element {
+  const style: React.CSSProperties = {};
+  if (spanFull) { style.gridColumn = "1 / -1"; }
+  const cls = isActive ? "pcond pcond--active" : "pcond pcond--inactive";
+  return (
+    <div className={cls} style={style}>
+      {showCheck && isActive && (
+        <span className="pcond-icon"><CheckA /></span>
+      )}
+      {label}
+    </div>
+  );
+}
+
+interface CPillGridProps { showCheck: boolean; }
+
+function CPillGrid({ showCheck }: CPillGridProps): JSX.Element {
+  const isOdd = CONDITION_ITEMS_BP.length % 2 !== 0;
+  return (
+    <div style={{
+      background: "var(--vmc-color-background-card, oklch(1 0 0))",
+      borderRadius: 8, border: "1px solid oklch(0.22 0.18 285 / 0.07)",
+      boxShadow: "0 2px 10px oklch(0.22 0.18 285 / 0.06)",
+      padding: "4px 6px", width: 311,
+    }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4 }}>
+        {CONDITION_ITEMS_BP.map(function renderCPill(item, i) {
+          const isLastOdd = isOdd && (i === CONDITION_ITEMS_BP.length - 1);
+          return (
+            <CPill
+              key={item.label}
+              label={item.label}
+              isActive={item.initialActive}
+              showCheck={showCheck}
+              spanFull={isLastOdd}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ── Variante FIGMA pixel-perfect — acepta tipo de check + variante de badge ── */
+interface FigPillProps {
+  label: string;
+  isActive: boolean;
+  checkType: CheckType;
+  badgeVariant?: "v1" | "v2";
+}
+
+function FigPill({ label, isActive, checkType, badgeVariant = "v1" }: FigPillProps): JSX.Element {
+  const hasBadge = checkType !== "none" && isActive;
+  const IconKey = hasBadge ? checkType as Exclude<CheckType, "none"> : null;
+  const IconComponent = IconKey ? CHECK_ICONS[IconKey] : null;
+
+  let cls = "pcond-fig";
+  if (hasBadge) { cls = "pcond-fig pcond-fig--badge"; }
+  if (!isActive) { cls = `${cls} pcond-fig--inactive`; }
+
+  const badgeCls = badgeVariant === "v2" ? "pcond-fig-badge--v2" : "pcond-fig-badge";
+
+  return (
+    <div className={cls}>
+      {IconComponent && (
+        <span className={badgeCls}><IconComponent /></span>
+      )}
+      <span className="pcond-fig-label">{label}</span>
+    </div>
+  );
+}
+
+interface FigPillGridProps { checkType: CheckType; badgeVariant?: "v1" | "v2"; }
+
+function FigPillGrid({ checkType, badgeVariant = "v1" }: FigPillGridProps): JSX.Element {
+  const activeItems = CONDITION_ITEMS_BP.filter(function isActive(item) {
+    return item.initialActive;
+  });
+  return (
+    <div style={{
+      background: "var(--vmc-color-background-card, oklch(1 0 0))",
+      borderRadius: 8, border: "1px solid oklch(0.22 0.18 285 / 0.07)",
+      boxShadow: "0 2px 10px oklch(0.22 0.18 285 / 0.06)",
+      padding: "12px 10px",
+      display: "flex", flexDirection: "column" as const, gap: 8, alignItems: "center",
+    }}>
+      {activeItems.map(function renderFigPill(item) {
+        return (
+          <FigPill
+            key={item.label}
+            label={item.label}
+            isActive={true}
+            checkType={checkType}
+            badgeVariant={badgeVariant}
+          />
+        );
+      })}
+    </div>
+  );
+}
 
 export default function ButtonPrimaryPreviewPage(): JSX.Element {
   return (
@@ -3704,6 +4801,71 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
               <MdGhostDemo />
             </div>
           </div>
+        </div>
+
+        {/* ─────────────────────────────────────────────
+            1b. MD — Negociar (cyan→vault)
+        ───────────────────────────────────────────── */}
+        <SectionLabel title="MD · Negociar" subtitle="48px · cyan→vault · mismo patrón que Primary" />
+
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px",
+          borderBottom: "1px solid var(--vmc-color-vault-utility-ghost)" }}>
+
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 12, marginBottom: 16 }}>
+            {(["Default", "Hover", "Pressed", "Disabled"] as const).map(function renderNegRow(state) {
+              const isHover    = state === "Hover";
+              const isPressed  = state === "Pressed";
+              const isDisabled = state === "Disabled";
+              return (
+                <StateCol key={state} label={state}>
+                  <button
+                    className={`pvbtn-neg${isHover ? " pvbtn-neg--hover" : ""}${isPressed ? " pvbtn-neg--pressed" : ""}`}
+                    type="button"
+                    disabled={isDisabled}
+                  >
+                    Negociar
+                  </button>
+                </StateCol>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Live demo Negociar */}
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "24px",
+          display: "flex", flexDirection: "column", gap: 10,
+          borderBottom: "1px solid var(--vmc-color-vault-utility-ghost)" }}>
+          <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700,
+            textTransform: "uppercase", letterSpacing: "0.08em",
+            color: "var(--vmc-color-text-tertiary)", margin: 0 }}>
+            Demo interactivo
+          </p>
+          <div style={{ display: "flex", justifyContent: "center", padding: "16px 0" }}>
+            <MdNegociarDemo />
+          </div>
+        </div>
+
+        {/* ─────────────────────────────────────────────
+            1c. Secondary — Agenda tu visita
+        ───────────────────────────────────────────── */}
+        <SectionLabel title="Secondary · Agenda tu visita" subtitle="160×40px · vault · ícono calendario · círculo white/20" />
+
+        <div style={{ background: "var(--vmc-color-background-card)", padding: "20px 24px",
+          display: "flex", gap: 24, flexWrap: "wrap" as const, alignItems: "flex-end",
+          borderBottom: "1px solid var(--vmc-color-vault-utility-ghost)" }}>
+          <StateCol label="Default"><AgendaVisitaBtn /></StateCol>
+          <StateCol label="Hover">
+            <button className="psec-agenda psec-agenda--hover" type="button" style={{ transform: "translateY(-1px) scale(1.02)" }}>
+              <span className="psec-agenda-icon"><CalendarIcon /></span>
+              <span className="psec-agenda-label">Agenda tu visita</span>
+            </button>
+          </StateCol>
+          <StateCol label="Disabled">
+            <button className="psec-agenda" type="button" disabled>
+              <span className="psec-agenda-icon"><CalendarIcon /></span>
+              <span className="psec-agenda-label">Agenda tu visita</span>
+            </button>
+          </StateCol>
         </div>
 
         {/* ─────────────────────────────────────────────
@@ -5835,6 +6997,326 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
               </div>
             </div>
           </div>
+
+        </div>
+
+        {/* ── AuctionStatusBanner · Negotiable ──────────────────────────── */}
+        <style>{PASTATUS_CSS}</style>
+        <SectionLabel
+          title="AuctionStatusBanner · Negotiable"
+          subtitle="60px · cyan→teal-vault · text var(--color-vault) · back button"
+        />
+        <div style={{
+          background: "var(--vmc-color-background-card, oklch(1 0 0))",
+          padding: "24px",
+          borderBottom: "1px solid var(--vmc-color-vault-utility-ghost)",
+        }}>
+          <AuctionStatusNegotiable />
+        </div>
+
+        {/* ── ConditionPill · Checkmark experiments ─────────────────────── */}
+        <SectionLabel
+          title="ConditionPill"
+          subtitle="Mantener actual + ✓ · Figma pixel-perfect · 5 opciones de check"
+        />
+
+        <style>{PCOND_CSS}</style>
+
+        {/* ── Fila 1: Variante ACTUAL ── */}
+        <div style={{
+          background: "var(--vmc-color-background-card, #fff)",
+          padding: "16px 24px 20px",
+          borderRadius: 8,
+          marginBottom: 2,
+        }}>
+          <p style={{
+            fontFamily: F, fontSize: 9, fontWeight: 700,
+            textTransform: "uppercase" as const, letterSpacing: "0.12em",
+            color: "oklch(0.22 0.18 285 / 0.35)", margin: "0 0 14px",
+          }}>
+            Variante actual (vault gradient · border-radius 4px)
+          </p>
+          <div style={{ display: "flex", gap: 32, flexWrap: "wrap" as const, alignItems: "flex-start" }}>
+            <div>
+              <p style={{
+                fontFamily: F, fontSize: 10, fontWeight: 700,
+                textTransform: "uppercase" as const, letterSpacing: "0.09em",
+                color: "oklch(0.22 0.18 285 / 0.45)", margin: "0 0 8px",
+              }}>Sin check</p>
+              <CPillGrid showCheck={false} />
+            </div>
+            <div>
+              <p style={{
+                fontFamily: F, fontSize: 10, fontWeight: 700,
+                textTransform: "uppercase" as const, letterSpacing: "0.09em",
+                color: "oklch(0.22 0.18 285 / 0.55)", margin: "0 0 8px",
+              }}>Con ✓ blanco</p>
+              <CPillGrid showCheck={true} />
+            </div>
+          </div>
+        </div>
+
+        {/* ── Fila 2: Figma pixel-perfect — 5 opciones de check ── */}
+        <div style={{
+          background: "var(--vmc-color-background-card, #fff)",
+          padding: "16px 24px 20px",
+          borderRadius: 8,
+        }}>
+          <p style={{
+            fontFamily: F, fontSize: 9, fontWeight: 700,
+            textTransform: "uppercase" as const, letterSpacing: "0.12em",
+            color: "oklch(0.22 0.18 285 / 0.35)", margin: "0 0 14px",
+          }}>
+            Figma pixel-perfect · 135×46 · border-radius 9999px · VYStrokes3 · neutral-utility-label @40% · solo activas
+          </p>
+          <div style={{ display: "flex", gap: 32, flexWrap: "wrap" as const, alignItems: "flex-start" }}>
+
+            <div>
+              <p style={{
+                fontFamily: F, fontSize: 10, fontWeight: 700,
+                textTransform: "uppercase" as const, letterSpacing: "0.09em",
+                color: "oklch(0.22 0.18 285 / 0.35)", margin: "0 0 8px",
+              }}>Base · sin check</p>
+              <FigPillGrid checkType="none" />
+            </div>
+
+            <div>
+              <p style={{
+                fontFamily: F, fontSize: 10, fontWeight: 700,
+                textTransform: "uppercase" as const, letterSpacing: "0.09em",
+                color: "oklch(0.22 0.18 285 / 0.55)", margin: "0 0 8px",
+              }}>Con check · bold 2.5px</p>
+              <FigPillGrid checkType="B" badgeVariant="v1" />
+            </div>
+
+            <div>
+              <p style={{
+                fontFamily: F, fontSize: 10, fontWeight: 700,
+                textTransform: "uppercase" as const, letterSpacing: "0.09em",
+                color: "oklch(0.73 0.15 295 / 0.80)", margin: "0 0 8px",
+              }}>Con check v2 · VYStrokes3</p>
+              <FigPillGrid checkType="B" badgeVariant="v2" />
+            </div>
+
+          </div>
+        </div>
+
+        {/* ── DataQualityBadge ───────────────────────────────────────── */}
+        <style>{PDQB_CSS}</style>
+        <SectionLabel
+          title="DataQualityBadge"
+          subtitle="3 variantes visuales · elige la que mejor comunica · sin texto"
+        />
+        <div style={{
+          background: "var(--vmc-color-background-card, oklch(1 0 0))",
+          padding: "24px",
+          borderBottom: "1px solid var(--vmc-color-vault-utility-ghost)",
+          display: "flex", flexDirection: "column" as const, gap: 24,
+        }}>
+
+          {/* Grid: 3 formas × 2 colores */}
+          <div style={{ display: "grid", gridTemplateColumns: "120px 1fr 1fr", gap: "12px 24px", alignItems: "center" }}>
+
+            {/* Headers */}
+            <div />
+            <p style={{ fontFamily: F, fontSize: 9, fontWeight: 700, textTransform: "uppercase" as const, letterSpacing: "0.10em", color: "oklch(0.70 0.20 145)", margin: 0 }}>Verde</p>
+            <p style={{ fontFamily: F, fontSize: 9, fontWeight: 700, textTransform: "uppercase" as const, letterSpacing: "0.10em", color: "oklch(0.45 0.22 285)", margin: 0 }}>Morado</p>
+
+            {/* ARC GAUGE — 3 tamaños */}
+            <p style={{ fontFamily: F, fontSize: 9, fontWeight: 700, color: "oklch(0.45 0.22 285)", margin: 0 }}>ARC ◜ Gauge</p>
+            <div style={{ display: "flex", flexDirection: "column" as const, gap: 12 }}>
+              <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
+                <span style={{ fontFamily: F, fontSize: 8, color: "oklch(0.55 0.03 220)", width: 20 }}>SM</span>
+                <DqArc level="baja" size="sm" /><DqArc level="media" size="sm" /><DqArc level="alta" size="sm" />
+              </div>
+              <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
+                <span style={{ fontFamily: F, fontSize: 8, color: "oklch(0.55 0.03 220)", width: 20 }}>MD</span>
+                <DqArc level="baja" size="md" /><DqArc level="media" size="md" /><DqArc level="alta" size="md" />
+              </div>
+              <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
+                <span style={{ fontFamily: F, fontSize: 8, color: "oklch(0.55 0.03 220)", width: 20 }}>LG</span>
+                <DqArc level="baja" size="lg" /><DqArc level="media" size="lg" /><DqArc level="alta" size="lg" />
+              </div>
+            </div>
+            <div />
+
+            {/* SLABS ★★ Recomendado */}
+            <p style={{ fontFamily: F, fontSize: 9, fontWeight: 700, color: "oklch(0.72 0.16 55)", margin: 0 }}>SLABS /// ★ Gem</p>
+            <div style={{ display: "flex", gap: 20, alignItems: "center" }}><DqSlabs level="baja" /><DqSlabs level="media" /><DqSlabs level="alta" /></div>
+            <div />
+
+            {/* C — Rings */}
+            <p style={{ fontFamily: F, fontSize: 9, fontWeight: 700, color: "oklch(0.70 0.20 145)", margin: 0 }}>C — Rings ◎</p>
+            <div style={{ display: "flex", gap: 20 }}><DqRings level="baja" /><DqRings level="media" /><DqRings level="alta" /></div>
+            <div />
+
+            {/* D — Diamonds */}
+            <p style={{ fontFamily: F, fontSize: 9, fontWeight: 600, color: "oklch(0.50 0.03 220)", margin: 0 }}>D — Diamantes</p>
+            <div style={{ display: "flex", gap: 16 }}><DqDiamonds level="baja" color="green" /><DqDiamonds level="media" color="green" /><DqDiamonds level="alta" color="green" /></div>
+            <div style={{ display: "flex", gap: 16 }}><DqDiamonds level="baja" color="purple" /><DqDiamonds level="media" color="purple" /><DqDiamonds level="alta" color="purple" /></div>
+
+            {/* E — Halos */}
+            <p style={{ fontFamily: F, fontSize: 9, fontWeight: 600, color: "oklch(0.50 0.03 220)", margin: 0 }}>E — Halos</p>
+            <div style={{ display: "flex", gap: 16 }}><DqHalos level="baja" color="green" /><DqHalos level="media" color="green" /><DqHalos level="alta" color="green" /></div>
+            <div style={{ display: "flex", gap: 16 }}><DqHalos level="baja" color="purple" /><DqHalos level="media" color="purple" /><DqHalos level="alta" color="purple" /></div>
+
+            {/* F — Chevrons */}
+            <p style={{ fontFamily: F, fontSize: 9, fontWeight: 600, color: "oklch(0.50 0.03 220)", margin: 0 }}>F — Chevrons ›</p>
+            <div style={{ display: "flex", gap: 16 }}><DqChevrons level="baja" color="green" /><DqChevrons level="media" color="green" /><DqChevrons level="alta" color="green" /></div>
+            <div style={{ display: "flex", gap: 16 }}><DqChevrons level="baja" color="purple" /><DqChevrons level="media" color="purple" /><DqChevrons level="alta" color="purple" /></div>
+
+            {/* G — Isotipo VMC ★ */}
+            <p style={{ fontFamily: F, fontSize: 9, fontWeight: 700, color: "oklch(0.72 0.16 55)", margin: 0 }}>G — Isotipo VMC ★</p>
+            <div style={{ display: "flex", gap: 16 }}><DqIsotipo level="baja" color="green" /><DqIsotipo level="media" color="green" /><DqIsotipo level="alta" color="green" /></div>
+            <div />
+
+            {/* H — Color Cycle verde→naranja→verde */}
+            <p style={{ fontFamily: F, fontSize: 9, fontWeight: 700, color: "oklch(0.55 0.18 110)", margin: 0 }}>H — Verde ↔ Naranja</p>
+            <div style={{ display: "flex", gap: 16 }}><DqCycle level="baja" /><DqCycle level="media" /><DqCycle level="alta" /></div>
+            <div />
+
+          </div>
+
+          {/* En contexto */}
+          <div style={{ borderTop: "1px solid oklch(0.22 0.18 285 / 0.06)", paddingTop: 20 }}>
+            <p style={{ fontFamily: F, fontSize: 10, fontWeight: 700, textTransform: "uppercase" as const, letterSpacing: "0.09em", color: "oklch(0.22 0.18 285 / 0.35)", margin: "0 0 12px" }}>
+              En contexto — acordeón
+            </p>
+            <div style={{
+              background: "oklch(1 0 0)", border: "1px solid oklch(0.22 0.18 285 / 0.08)",
+              borderRadius: 8, padding: "12px 16px",
+              display: "flex", gap: 32, flexWrap: "wrap" as const,
+            }}>
+              {(["baja", "media", "alta"] as DataQualityLevel[]).map(function renderCtx(lvl) {
+                return (
+                  <div key={lvl} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", minWidth: 240 }}>
+                    <div>
+                      <p style={{ fontFamily: F, fontSize: 9, fontWeight: 700, textTransform: "uppercase" as const, letterSpacing: "0.10em", color: "oklch(0.50 0.03 220)", margin: "0 0 3px" }}>Calidad de información</p>
+                      <p style={{ fontFamily: F, fontSize: 11, fontWeight: 500, color: "oklch(0.45 0.03 220)", margin: 0 }}>Código: 61483</p>
+                    </div>
+                    <DqSegments level={lvl} />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* ── DataQualityBadge · Figma Handoff ────────────────────────── */}
+        <SectionLabel
+          title="DataQualityBadge · Figma Handoff"
+          subtitle="24×24 · variantes de animación + 3 estados de calidad"
+        />
+        <div style={{
+          background: "oklch(1 0 0)",
+          padding: "40px 48px",
+          borderBottom: "1px solid var(--vmc-color-vault-utility-ghost)",
+          display: "flex", gap: 56, alignItems: "flex-end", flexWrap: "wrap" as const,
+        }}>
+
+          {/* ── Variantes del ícono solo (frames animación) ── */}
+          {[
+            { label: "Ghost", opacity: 0.15, brightness: 1,    color: "oklch(0.55 0.03 220)" },
+            { label: "Activo",  opacity: 1,    brightness: 1,    color: "var(--vmc-color-orange-500, oklch(0.72 0.16 55))" },
+            { label: "Pulse",   opacity: 0.75, brightness: 1.25, color: "var(--vmc-color-orange-500, oklch(0.72 0.16 55))" },
+          ].map(function renderIconVariant(v) {
+            return (
+              <div key={v.label} style={{ display: "flex", flexDirection: "column" as const, alignItems: "center", gap: 10 }}>
+                <svg
+                  width="24" height="34" viewBox="0 0 10 14" fill="none"
+                  style={{ opacity: v.opacity, filter: `brightness(${v.brightness})` }}
+                >
+                  <path d="M2 2 L8 7 L2 12" stroke={v.color} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span style={{ fontFamily: F, fontSize: 9, fontWeight: 600, textTransform: "uppercase" as const, letterSpacing: "0.08em", color: "oklch(0.55 0.03 220)" }}>{v.label}</span>
+              </div>
+            );
+          })}
+
+          <div style={{ width: 1, height: 60, background: "oklch(0.22 0.18 285 / 0.08)", alignSelf: "center" }} />
+
+          {/* ── 3 estados del badge ── */}
+          {(["baja", "media", "alta"] as DataQualityLevel[]).map(function renderBadgeState(lvl) {
+            const filled = DQ_FILLED[lvl];
+            const labels: Record<DataQualityLevel, string> = { baja: "Baja", media: "Media", alta: "Alta" };
+            const orange = "var(--vmc-color-orange-500, oklch(0.72 0.16 55))";
+            const ghost = "oklch(0.85 0.01 220)";
+            return (
+              <div key={lvl} style={{ display: "flex", flexDirection: "column" as const, alignItems: "center", gap: 10 }}>
+                <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                  <svg width="24" height="34" viewBox="0 0 10 14" fill="none" style={{ opacity: filled >= 1 ? 1 : 0.15 }}>
+                    <path d="M2 2 L8 7 L2 12" stroke={filled >= 1 ? orange : ghost} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <svg width="24" height="34" viewBox="0 0 10 14" fill="none" style={{ opacity: filled >= 2 ? 1 : 0.15 }}>
+                    <path d="M2 2 L8 7 L2 12" stroke={filled >= 2 ? orange : ghost} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <svg width="24" height="34" viewBox="0 0 10 14" fill="none" style={{ opacity: filled >= 3 ? 1 : 0.15 }}>
+                    <path d="M2 2 L8 7 L2 12" stroke={filled >= 3 ? orange : ghost} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+                <span style={{ fontFamily: F, fontSize: 9, fontWeight: 600, textTransform: "uppercase" as const, letterSpacing: "0.08em", color: "oklch(0.55 0.03 220)" }}>{labels[lvl]}</span>
+              </div>
+            );
+          })}
+
+        </div>
+
+        {/* ── DataQualityBadge · Sin animación con gradiente ─────────── */}
+        <SectionLabel
+          title="DataQualityBadge · Gradiente (sin animación)"
+          subtitle="24×24 · stroke gradiente naranja · 3 estados"
+        />
+        <div style={{
+          background: "oklch(1 0 0)",
+          padding: "40px 48px",
+          borderBottom: "1px solid var(--vmc-color-vault-utility-ghost)",
+          display: "flex", gap: 56, alignItems: "flex-end", flexWrap: "wrap" as const,
+        }}>
+          {/* Definición SVG del gradiente — reutilizable por todos */}
+          <svg width="0" height="0" style={{ position: "absolute" }}>
+            <defs>
+              <linearGradient id="chevron-orange-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%"   stopColor="oklch(0.80 0.22 145)" />
+                <stop offset="100%" stopColor="oklch(0.55 0.22 145)" />
+              </linearGradient>
+              <linearGradient id="chevron-orange-grad-ghost" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%"   stopColor="oklch(0.88 0.01 220)" />
+                <stop offset="100%" stopColor="oklch(0.82 0.01 220)" />
+              </linearGradient>
+            </defs>
+          </svg>
+
+          {/* Ícono solo con gradiente */}
+          <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "center", gap: 10 }}>
+            <svg width="24" height="34" viewBox="0 0 10 14" fill="none">
+              <path d="M2 2 L8 7 L2 12" stroke="url(#chevron-orange-grad)" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span style={{ fontFamily: F, fontSize: 9, fontWeight: 600, textTransform: "uppercase" as const, letterSpacing: "0.08em", color: "oklch(0.55 0.03 220)" }}>Ícono</span>
+          </div>
+
+          <div style={{ width: 1, height: 60, background: "oklch(0.22 0.18 285 / 0.08)", alignSelf: "center" }} />
+
+          {/* 3 estados con gradiente */}
+          {(["baja", "media", "alta"] as DataQualityLevel[]).map(function renderGradState(lvl) {
+            const filled = DQ_FILLED[lvl];
+            const labels: Record<DataQualityLevel, string> = { baja: "Baja", media: "Media", alta: "Alta" };
+            return (
+              <div key={lvl} style={{ display: "flex", flexDirection: "column" as const, alignItems: "center", gap: 10 }}>
+                <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                  <svg width="24" height="34" viewBox="0 0 10 14" fill="none">
+                    <path d="M2 2 L8 7 L2 12" stroke={filled >= 1 ? "url(#chevron-orange-grad)" : "url(#chevron-orange-grad-ghost)"} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <svg width="24" height="34" viewBox="0 0 10 14" fill="none">
+                    <path d="M2 2 L8 7 L2 12" stroke={filled >= 2 ? "url(#chevron-orange-grad)" : "url(#chevron-orange-grad-ghost)"} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <svg width="24" height="34" viewBox="0 0 10 14" fill="none">
+                    <path d="M2 2 L8 7 L2 12" stroke={filled >= 3 ? "url(#chevron-orange-grad)" : "url(#chevron-orange-grad-ghost)"} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+                <span style={{ fontFamily: F, fontSize: 9, fontWeight: 600, textTransform: "uppercase" as const, letterSpacing: "0.08em", color: "oklch(0.55 0.03 220)" }}>{labels[lvl]}</span>
+              </div>
+            );
+          })}
 
         </div>
 
