@@ -3987,7 +3987,7 @@ interface DqArcProps { level: DataQualityLevel; size?: "sm" | "md" | "lg"; }
 function DqArc({ level, size = "md" }: DqArcProps): JSX.Element {
   const cfg = ARC_GAUGE_CFG[level];
   const needleGroupCls = cfg.altaMode ? "dq-needle-alta" : "dq-needle-group";
-  const dims: Record<string, { w: number; h: number }> = {
+  const dims: Record<"sm" | "md" | "lg", { w: number; h: number }> = {
     sm: { w: 28, h: 18 },
     md: { w: 38, h: 26 },
     lg: { w: 48, h: 32 },

@@ -79,6 +79,7 @@ export const useBgStore = create<BgStore>(function init(set) {
           strokeWeight: state.strokeWeight, scaleX: state.scaleX, scaleY: state.scaleY,
           twistAmount: state.twistAmount, lightZ: state.lightZ,
           ambientLight: state.ambientLight, lightIntensity: state.lightIntensity,
+          glowAmount: state.glowAmount,
         },
       };
       const stored = JSON.parse(localStorage.getItem("vmc-bg-presets") || "[]") as SavedPreset[];
