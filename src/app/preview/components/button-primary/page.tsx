@@ -20,6 +20,60 @@ const BUTTON_CSS = `
     initial-value: oklch(0.55 0.22 285);
   }
 
+  /* ── Racing border — luz viaja el stroke como pista de carreras ──
+     Técnica: wrapper con padding=border + conic-gradient rotante
+     Hot spot visible: blanco brillante + glow drop-shadow animado
+  ─────────────────────────────────────────────────────────────── */
+  @property --race-angle {
+    syntax: '<angle>'; inherits: false; initial-value: 0deg;
+  }
+  @keyframes border-race {
+    to { --race-angle: 360deg; }
+  }
+  @keyframes race-glow {
+    0%,100% { filter: drop-shadow(0 0 3px oklch(0.78 0.15 55 / 0.40)); }
+    50%      { filter: drop-shadow(0 0 6px oklch(1 0 0 / 0.75)) drop-shadow(0 0 10px oklch(0.78 0.15 55 / 0.50)); }
+  }
+  /* Wrapper — provee el borde animado */
+  .pvbtn-race-wrap {
+    display: inline-flex;
+    border-radius: 9999px;
+    padding: 2.5px;
+    /* Mismo stroke que pvbtn hover — white→orange-400→vault-400→white
+       traducido a conic-gradient rotante (mismos % → mismos deg) */
+    background: conic-gradient(
+      from var(--race-angle),
+      var(--vmc-color-base-white,  oklch(1 0 0))           0deg,
+      var(--vmc-color-orange-400,  oklch(0.78 0.15 55))    90deg,
+      var(--vmc-color-vault-400,   oklch(0.52 0.22 285))   270deg,
+      var(--vmc-color-base-white,  oklch(1 0 0))           360deg
+    );
+    animation: border-race 3.8s linear infinite, race-glow 3.8s linear infinite;
+  }
+  /* Botón interior — sin borde propio, fill normal */
+  .pvbtn-race-inner {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 48px; padding: 0 56px;
+    border-radius: 9999px; border: none;
+    cursor: pointer; position: relative; overflow: hidden;
+    font-family: var(--vmc-font-display); font-size: 15px; font-weight: 600;
+    color: var(--vmc-color-base-white);
+    text-shadow: 0 1px 3px oklch(0 0 0 / 0.25);
+    background: linear-gradient(135deg,
+      var(--vmc-color-orange-600, oklch(0.65 0.18 55)) 0%,
+      var(--vmc-color-orange-600, oklch(0.65 0.18 55)) 40%,
+      var(--vmc-color-vault-500, oklch(0.45 0.22 285)) 100%
+    );
+    box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.25);
+  }
+  .pvbtn-race-inner::before {
+    content: ''; position: absolute; inset: 0; border-radius: inherit;
+    background: linear-gradient(180deg, oklch(1 0 0 / 0.17) 0%, transparent 55%);
+    pointer-events: none; z-index: 1;
+  }
+  .pvbtn-race-inner:hover { transform: translateY(-1px) scale(1.01); }
+  .pvbtn-race-inner:active { transform: scale(0.97); }
+
   /* ── MD Primary ── */
   .pvbtn {
     --vbtn-stop-a: var(--vmc-color-orange-600);
@@ -4708,6 +4762,25 @@ export default function ButtonPrimaryPreviewPage(): JSX.Element {
             </div>
           </div>
 
+        </div>
+
+        {/* ─────────────────────────────────────────────
+            0b. Racing Border — luz viaja el stroke
+        ───────────────────────────────────────────── */}
+        <SectionLabel title="Racing Border" subtitle="conic-gradient rotante · luz recorre el pill · loop infinito" />
+        <div style={{
+          background: "var(--vmc-color-background-card)",
+          padding: "32px 24px",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          gap: 32,
+          borderBottom: "1px solid var(--vmc-color-vault-utility-ghost)",
+        }}>
+          <div className="pvbtn-race-wrap">
+            <button className="pvbtn-race-inner" type="button">Participa</button>
+          </div>
+          <div className="pvbtn-race-wrap" style={{ animationDelay: "-1s" }}>
+            <button className="pvbtn-race-inner" type="button">Bidear</button>
+          </div>
         </div>
 
         {/* ─────────────────────────────────────────────
