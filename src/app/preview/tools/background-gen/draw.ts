@@ -126,30 +126,73 @@ function buildHT(): void {
 export function drawHalftone(ctx: CanvasRenderingContext2D, W: number, H: number, t: number, p: BgParams): void {
   buildHT();
   ctx.fillStyle = BG; ctx.fillRect(0,0,W,H);
-  const nx = W/2+Math.cos(t*0.4)*W*0.12, ny = H/2+Math.sin(t*0.3)*H*0.10;
-  const nr = Math.min(W,H)*(0.4+p.displacementAmount*0.001);
+
+  /* Dos focos laterales — visibles en los costados del frame 1024px */
+  const nr = Math.min(W,H)*(0.38+p.displacementAmount*0.001);
+  /* Oscilan suavemente en los extremos del viewport */
+  const lx = W*0.04 + Math.sin(t*0.35)*W*0.04;
+  const rx = W*0.96 + Math.cos(t*0.28)*W*0.03;
+  const ly = H*0.50 + Math.cos(t*0.42)*H*0.15;
+  const ry = H*0.50 + Math.sin(t*0.38)*H*0.14;
+
   ctx.globalCompositeOperation = "screen";
-  const ng = ctx.createRadialGradient(nx,ny,0,nx,ny,nr*1.6);
-  ng.addColorStop(0,`rgba(100,40,200,${0.45+p.patternOpacity})`);
-  ng.addColorStop(0.4,"rgba(80,30,180,0.18)"); ng.addColorStop(1,"rgba(0,0,0,0)");
-  ctx.fillStyle = ng; ctx.fillRect(0,0,W,H);
+
+  /* Glow izquierdo — violeta */
+  const gl = ctx.createRadialGradient(lx,ly,0,lx,ly,nr*1.5);
+  gl.addColorStop(0,`rgba(120,50,220,${0.50+p.patternOpacity})`);
+  gl.addColorStop(0.4,"rgba(80,30,180,0.15)"); gl.addColorStop(1,"rgba(0,0,0,0)");
+  ctx.fillStyle = gl; ctx.fillRect(0,0,W,H);
+
+  /* Glow derecho — violeta con tinte naranja si accentOpacity */
+  const gr2 = ctx.createRadialGradient(rx,ry,0,rx,ry,nr*1.5);
+  const rc = p.accentOpacity > 0.02 ? `rgba(160,60,220,${0.45+p.patternOpacity})` : `rgba(100,40,210,${0.50+p.patternOpacity})`;
+  gr2.addColorStop(0,rc);
+  gr2.addColorStop(0.4,"rgba(80,30,180,0.15)"); gr2.addColorStop(1,"rgba(0,0,0,0)");
+  ctx.fillStyle = gr2; ctx.fillRect(0,0,W,H);
+
+  /* Acento naranja en los focos laterales */
   if (p.accentOpacity > 0.01) {
-    const og = ctx.createRadialGradient(nx+W*0.15,ny-H*0.1,0,nx+W*0.15,ny-H*0.1,nr);
-    og.addColorStop(0,`rgba(237,115,22,${p.accentOpacity+0.1})`);
-    og.addColorStop(0.5,"rgba(237,115,22,0.04)"); og.addColorStop(1,"rgba(0,0,0,0)");
-    ctx.fillStyle = og; ctx.fillRect(0,0,W,H);
+    const ol = ctx.createRadialGradient(lx,ly,0,lx,ly,nr*0.7);
+    ol.addColorStop(0,`rgba(237,115,22,${p.accentOpacity+0.08})`);
+    ol.addColorStop(1,"rgba(0,0,0,0)");
+    ctx.fillStyle = ol; ctx.fillRect(0,0,W,H);
+
+    const or2 = ctx.createRadialGradient(rx,ry,0,rx,ry,nr*0.7);
+    or2.addColorStop(0,`rgba(237,115,22,${p.accentOpacity+0.06})`);
+    or2.addColorStop(1,"rgba(0,0,0,0)");
+    ctx.fillStyle = or2; ctx.fillRect(0,0,W,H);
   }
   ctx.globalCompositeOperation = "source-over";
+
+  /* Halftone dots — INVERTIDO: densos en bordes, void en el centro */
   if (htCache.built) {
-    const grid = Math.max(12,Math.round(22-p.density*0.4));
+    const grid = Math.max(10, Math.round(20-p.density*0.4));
+    const cx = W / 2;
+    /* Zona de fade: qué tan amplio es el void central.
+       ~40% del ancho total queda vacío en el medio */
+    const voidR = cx * 0.42;
+
     for (let x = grid/2; x < W; x += grid) {
       for (let y = grid/2; y < H; y += grid) {
-        const dist = Math.sqrt((x-nx)**2+(y-ny)**2);
-        const idx = Math.round(Math.max(0,1-dist/nr)*16);
+        /* Distancia horizontal al centro — define el void */
+        const distFromCenter = Math.abs(x - cx);
+        /* 0 en el centro, 1 en los bordes */
+        const edgeFrac = Math.max(0, (distFromCenter - voidR) / (cx - voidR));
+        /* Pulso vertical suave para que no sea una banda plana */
+        const vertPulse = 0.7 + 0.3 * Math.sin(y * 0.008 + t * 0.5 + x * 0.003);
+        /* patternOpacity amplifica la densidad — rango más amplio */
+        const intensity = edgeFrac * vertPulse;
+        if (intensity < 0.04) { continue; }
+        const idx = Math.round(Math.min(1, intensity) * 15);
         const sprite = htCache.sprites[idx];
-        if (sprite) { ctx.drawImage(sprite, x-8, y-8); }
+        if (sprite) {
+          /* globalAlpha aplica directamente sobre el sprite — responde al slider */
+          ctx.globalAlpha = intensity * p.patternOpacity * 8;
+          ctx.drawImage(sprite, x-8, y-8);
+        }
       }
     }
+    ctx.globalAlpha = 1; /* restaurar */
     const gf = Math.floor(t*10)%4;
     const gp = ctx.createPattern(htCache.grain[gf],"repeat");
     if (gp) { ctx.fillStyle = gp; ctx.fillRect(0,0,W,H); }
@@ -923,16 +966,38 @@ export function drawArrowBreathe(ctx: CanvasRenderingContext2D, W: number, H: nu
     if (aw.life >= aw.maxLife) { awakePool.splice(ai, 1); }
   }
 
-  /* Grid base — todos breathing */
+  /* Grid base — breathing concentrado en los costados, void central */
+  const cx = W / 2;
+  const voidR = cx * 0.40; /* 40% del ancho = zona vacía en el medio */
+
+  /* Despertar solo en los costados */
+  if (p.speed > 0.05 && Math.random() < p.speed * 0.004 && awakePool.length < 3) {
+    const side = Math.random() > 0.5 ? 1 : 0; /* 0=izq, 1=der */
+    const col = side === 0
+      ? Math.floor(Math.random() * cols * 0.3)
+      : Math.floor(cols * 0.7 + Math.random() * cols * 0.3);
+    const row = Math.floor(Math.random() * rows);
+    awakePool.push({
+      col, row,
+      life: 0, maxLife: 120 + Math.random() * 80,
+      x: (col + 0.5) * cw, y: (row + 0.5) * ch,
+      targetX: (Math.floor(Math.random() * cols * 0.3 + (side === 1 ? cols * 0.7 : 0)) + 0.5) * cw,
+      targetY: (Math.floor(Math.random() * rows) + 0.5) * ch,
+    });
+  }
+
   for (let col = 0; col < cols; col++) {
     for (let row = 0; row < rows; row++) {
       const x = (col + 0.5) * cw, y = (row + 0.5) * ch;
-      /* Ola por fila: offset sinusoidal */
+
+      /* Fade lateral: 0 en el centro, 1 en los bordes */
+      const distFromCenter = Math.abs(x - cx);
+      const edgeFrac = Math.max(0, (distFromCenter - voidR) / (cx - voidR));
+      if (edgeFrac < 0.05) { continue; } /* void central */
+
       const waveOffset = (row / rows) * Math.PI * 2 * waveSpeed;
       const breath = (Math.sin(t * breathFreq + waveOffset) + 1) * 0.5;
-      /* Alpha entre 30%-100% de patternOpacity */
-      const alpha = (0.30 + breath * 0.70) * p.patternOpacity * 1.4;
-      /* Size pulsa levemente */
+      const alpha = (0.30 + breath * 0.70) * p.patternOpacity * 1.4 * edgeFrac;
       const pulsedSize = size * (0.92 + breath * 0.08);
       chevron(ctx, x, y, pulsedSize, 0, LAVENDER(1), lw, alpha);
     }

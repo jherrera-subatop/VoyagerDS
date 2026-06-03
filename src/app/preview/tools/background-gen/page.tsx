@@ -677,7 +677,12 @@ export default function BackgroundGenPage(): JSX.Element {
   const p = useBgStore();
   const [saveName, setSaveName]   = useState("");
   const [showSave, setShowSave]   = useState(false);
-  const [presets, setPresets]     = useState<SavedPreset[]>(() => p.listPresets());
+  const [presets, setPresets]     = useState<SavedPreset[]>([]);
+
+  /* Cargar presets del localStorage en el cliente — evita SSR mismatch */
+  useEffect(function loadPresets() {
+    setPresets(p.listPresets());
+  }, []);
 
   function handleGeo(g: GeometryType): void { p.setParam("geometry", g); }
   function handleSave(): void {
@@ -734,6 +739,68 @@ export default function BackgroundGenPage(): JSX.Element {
           })}
         </div>
 
+        {/* ── Presets — input siempre visible ── */}
+        <Sep label="Presets" />
+        <div style={{ display: "flex", gap: 4, marginBottom: 8 }}>
+          <input
+            type="text" value={saveName} onChange={handleSaveNameChange}
+            placeholder="Nombre → Enter para guardar"
+            onKeyDown={function onKey(e) { if (e.key === "Enter") { handleSave(); } }}
+            style={{ flex: 1, height: 28, borderRadius: 6, padding: "0 8px",
+                     border: "1px solid oklch(0.22 0.18 285 / 0.20)",
+                     background: "oklch(0.95 0.004 285)", fontFamily: F, fontSize: 9,
+                     color: "oklch(0.22 0.18 285)", outline: "none" }}
+          />
+          <button type="button" onClick={handleSave} style={{
+            width: 28, height: 28, borderRadius: 6, border: "none",
+            background: "oklch(0.55 0.18 50)", color: "#fff",
+            fontWeight: 700, fontSize: 12, cursor: "pointer",
+          }}>+</button>
+        </div>
+        {/* Lista de presets guardados */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 3, maxHeight: 180, overflowY: "auto", marginBottom: 6 }}>
+          {presets.length === 0 && (
+            <p style={{ fontFamily: F, fontSize: 8, color: "oklch(0.55 0.05 285)", margin: 0, fontStyle: "italic", textAlign: "center", padding: "4px 0" }}>
+              Aún no hay presets guardados
+            </p>
+          )}
+          {presets.map(function renderPresetTop(preset) {
+            function handleLoadClick(): void { handleLoad(preset); }
+            function handleDeleteClick(): void { handleDelete(preset.name); }
+            function handleCopyLink(): void {
+              const encoded = encodeURIComponent(btoa(JSON.stringify(preset.params)));
+              const url = `${window.location.origin}/preview/tools/background-gen/preview?p=${encoded}`;
+              navigator.clipboard.writeText(url).catch(function noop() { return; });
+            }
+            return (
+              <div key={preset.name} style={{
+                background: "oklch(0.93 0.004 285)", borderRadius: 6,
+                padding: "5px 8px", cursor: "pointer",
+                border: "1px solid oklch(0.22 0.18 285 / 0.08)",
+              }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                  <button type="button" onClick={handleLoadClick} style={{
+                    flex: 1, textAlign: "left", background: "none", border: "none",
+                    fontFamily: F, fontSize: 10, fontWeight: 700, color: "oklch(0.28 0.18 285)",
+                    cursor: "pointer", padding: 0,
+                  }}>{preset.name}</button>
+                  <button type="button" onClick={handleCopyLink} title="Copiar link" style={{
+                    background: "none", border: "none", cursor: "pointer",
+                    fontSize: 11, padding: "0 2px", color: "oklch(0.55 0.18 50)", lineHeight: 1,
+                  }}>⎘</button>
+                  <button type="button" onClick={handleDeleteClick} style={{
+                    background: "none", border: "none", color: "oklch(0.60 0.05 285)",
+                    cursor: "pointer", fontSize: 13, padding: 0, lineHeight: 1,
+                  }}>×</button>
+                </div>
+                <div style={{ fontFamily: F, fontSize: 7, color: "oklch(0.55 0.05 285)", marginTop: 2 }}>
+                  {preset.params.geometry} · op {preset.params.patternOpacity.toFixed(2)}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
         <Sep label="Movimiento" />
         <Slider label="Speed"        value={p.speed}              min={0}    max={2}   step={0.01} paramKey="speed" />
         <Slider label="Density"      value={p.density}            min={2}    max={30}  step={1}    paramKey="density" />
@@ -765,87 +832,6 @@ export default function BackgroundGenPage(): JSX.Element {
             fontFamily: F, fontSize: 8, fontWeight: 700, textTransform: "uppercase",
             letterSpacing: "0.06em", color: "oklch(0.55 0.18 50)", cursor: "pointer",
           }}>⟳ Random</button>
-        </div>
-
-        {/* Presets */}
-        <Sep label="Presets" />
-        {showSave && (
-          <div style={{ display: "flex", gap: 4, marginBottom: 8 }}>
-            <input type="text" value={saveName} onChange={handleSaveNameChange} placeholder="Nombre…"
-              style={{ flex: 1, height: 26, borderRadius: 6, padding: "0 8px",
-                       border: "1px solid oklch(0.22 0.18 285 / 0.20)",
-                       background: "oklch(0.95 0.004 285)", fontFamily: F, fontSize: 9,
-                       color: "oklch(0.22 0.18 285)", outline: "none" }} />
-            <button type="button" onClick={handleSave} style={{
-              width: 26, height: 26, borderRadius: 6, border: "none",
-              background: "oklch(0.55 0.18 50)", color: "#fff",
-              fontWeight: 700, fontSize: 11, cursor: "pointer",
-            }}>✓</button>
-          </div>
-        )}
-        <button type="button" onClick={handleToggleSave} style={{
-          width: "100%", height: 26, borderRadius: 6, marginBottom: 6,
-          border: "1px solid oklch(0.55 0.18 50 / 0.35)", background: "oklch(0.55 0.18 50 / 0.06)",
-          fontFamily: F, fontSize: 8, fontWeight: 700, textTransform: "uppercase",
-          letterSpacing: "0.07em", color: "oklch(0.55 0.18 50)", cursor: "pointer",
-        }}>+ Guardar actual</button>
-        {/* Lista de presets — siempre visible si hay alguno */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 3, maxHeight: 200, overflowY: "auto", marginBottom: 4 }}>
-          {presets.length === 0 && (
-            <p style={{ fontFamily: F, fontSize: 8, color: "oklch(0.60 0.05 285)", margin: 0, fontStyle: "italic" }}>
-              Sin presets guardados aún
-            </p>
-          )}
-          {presets.map(function renderPreset(preset) {
-            function handleLoadClick(): void { handleLoad(preset); }
-            function handleDeleteClick(): void { handleDelete(preset.name); }
-            function handleCopyLink(): void {
-              /* Genera URL shareable con los params del preset */
-              const encoded = encodeURIComponent(btoa(JSON.stringify(preset.params)));
-              const url = `${window.location.origin}/preview/tools/background-gen/preview?p=${encoded}`;
-              navigator.clipboard.writeText(url).catch(function noop() { return; });
-            }
-            return (
-              <div key={preset.name} style={{
-                background: "oklch(0.93 0.004 285)", borderRadius: 6,
-                padding: "5px 8px", display: "flex", flexDirection: "column", gap: 4,
-              }}>
-                {/* Nombre + acciones */}
-                <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
-                  <button type="button" onClick={handleLoadClick} style={{
-                    flex: 1, textAlign: "left", background: "none", border: "none",
-                    fontFamily: F, fontSize: 9, fontWeight: 600, color: "oklch(0.28 0.18 285)",
-                    cursor: "pointer", padding: 0,
-                  }}>{preset.name}</button>
-                  {/* Copiar link shareable */}
-                  <button type="button" onClick={handleCopyLink} title="Copiar link para compartir" style={{
-                    background: "none", border: "none", cursor: "pointer",
-                    fontSize: 11, padding: "0 2px", color: "oklch(0.55 0.18 50)",
-                    lineHeight: 1,
-                  }}>⎘</button>
-                  <button type="button" onClick={handleDeleteClick} style={{
-                    background: "none", border: "none", color: "oklch(0.60 0.05 285)",
-                    cursor: "pointer", fontSize: 12, padding: 0, lineHeight: 1,
-                  }}>×</button>
-                </div>
-                {/* Chips de params clave */}
-                <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
-                  <span style={{ fontFamily: F, fontSize: 7, background: "oklch(0.87 0.006 285)",
-                                 borderRadius: 4, padding: "1px 5px", color: "oklch(0.40 0.10 285)" }}>
-                    {preset.params.geometry}
-                  </span>
-                  <span style={{ fontFamily: F, fontSize: 7, background: "oklch(0.87 0.006 285)",
-                                 borderRadius: 4, padding: "1px 5px", color: "oklch(0.40 0.10 285)" }}>
-                    op {preset.params.patternOpacity.toFixed(2)}
-                  </span>
-                  <span style={{ fontFamily: F, fontSize: 7, background: "oklch(0.87 0.006 285)",
-                                 borderRadius: 4, padding: "1px 5px", color: "oklch(0.40 0.10 285)" }}>
-                    sp {preset.params.speed.toFixed(2)}
-                  </span>
-                </div>
-              </div>
-            );
-          })}
         </div>
 
         {/* Preview */}
