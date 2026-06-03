@@ -801,27 +801,64 @@ export default function BackgroundGenPage(): JSX.Element {
           fontFamily: F, fontSize: 8, fontWeight: 700, textTransform: "uppercase",
           letterSpacing: "0.07em", color: "oklch(0.55 0.18 50)", cursor: "pointer",
         }}>+ Guardar actual</button>
-        {presets.length > 0 && (
-          <div style={{ display: "flex", flexDirection: "column", gap: 3, maxHeight: 120, overflowY: "auto" }}>
-            {presets.map(function renderPreset(preset) {
-              function handleLoadClick(): void { handleLoad(preset); }
-              function handleDeleteClick(): void { handleDelete(preset.name); }
-              return (
-                <div key={preset.name} style={{ display: "flex", alignItems: "center", gap: 4,
-                                                background: "oklch(0.94 0.004 285)", borderRadius: 5, padding: "4px 6px" }}>
+        {/* Lista de presets — siempre visible si hay alguno */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 3, maxHeight: 200, overflowY: "auto", marginBottom: 4 }}>
+          {presets.length === 0 && (
+            <p style={{ fontFamily: F, fontSize: 8, color: "oklch(0.60 0.05 285)", margin: 0, fontStyle: "italic" }}>
+              Sin presets guardados aún
+            </p>
+          )}
+          {presets.map(function renderPreset(preset) {
+            function handleLoadClick(): void { handleLoad(preset); }
+            function handleDeleteClick(): void { handleDelete(preset.name); }
+            function handleCopyLink(): void {
+              /* Genera URL shareable con los params del preset */
+              const encoded = encodeURIComponent(btoa(JSON.stringify(preset.params)));
+              const url = `${window.location.origin}/preview/tools/background-gen/preview?p=${encoded}`;
+              navigator.clipboard.writeText(url).catch(function noop() { return; });
+            }
+            return (
+              <div key={preset.name} style={{
+                background: "oklch(0.93 0.004 285)", borderRadius: 6,
+                padding: "5px 8px", display: "flex", flexDirection: "column", gap: 4,
+              }}>
+                {/* Nombre + acciones */}
+                <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
                   <button type="button" onClick={handleLoadClick} style={{
                     flex: 1, textAlign: "left", background: "none", border: "none",
-                    fontFamily: F, fontSize: 9, color: "oklch(0.28 0.18 285)", cursor: "pointer", padding: 0,
+                    fontFamily: F, fontSize: 9, fontWeight: 600, color: "oklch(0.28 0.18 285)",
+                    cursor: "pointer", padding: 0,
                   }}>{preset.name}</button>
+                  {/* Copiar link shareable */}
+                  <button type="button" onClick={handleCopyLink} title="Copiar link para compartir" style={{
+                    background: "none", border: "none", cursor: "pointer",
+                    fontSize: 11, padding: "0 2px", color: "oklch(0.55 0.18 50)",
+                    lineHeight: 1,
+                  }}>⎘</button>
                   <button type="button" onClick={handleDeleteClick} style={{
                     background: "none", border: "none", color: "oklch(0.60 0.05 285)",
                     cursor: "pointer", fontSize: 12, padding: 0, lineHeight: 1,
                   }}>×</button>
                 </div>
-              );
-            })}
-          </div>
-        )}
+                {/* Chips de params clave */}
+                <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
+                  <span style={{ fontFamily: F, fontSize: 7, background: "oklch(0.87 0.006 285)",
+                                 borderRadius: 4, padding: "1px 5px", color: "oklch(0.40 0.10 285)" }}>
+                    {preset.params.geometry}
+                  </span>
+                  <span style={{ fontFamily: F, fontSize: 7, background: "oklch(0.87 0.006 285)",
+                                 borderRadius: 4, padding: "1px 5px", color: "oklch(0.40 0.10 285)" }}>
+                    op {preset.params.patternOpacity.toFixed(2)}
+                  </span>
+                  <span style={{ fontFamily: F, fontSize: 7, background: "oklch(0.87 0.006 285)",
+                                 borderRadius: 4, padding: "1px 5px", color: "oklch(0.40 0.10 285)" }}>
+                    sp {preset.params.speed.toFixed(2)}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
 
         {/* Preview */}
         <button type="button" onClick={function openPreview() {
