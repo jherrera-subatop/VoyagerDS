@@ -546,16 +546,10 @@ function BgCanvas(): JSX.Element {
   const canvasRef   = useRef<HTMLCanvasElement>(null);
   const rafRef      = useRef<number>(0);
   const timeRef     = useRef<number>(0);
-  const channelRef  = useRef<BroadcastChannel | null>(null);
-
-  useEffect(function setupBroadcast() {
-    channelRef.current = new BroadcastChannel("vmc-bg-preview");
-
-    /* Escuchar requests del preview al abrir */
-    const reqCh = new BroadcastChannel("vmc-bg-request");
-    reqCh.onmessage = function onRequest() {
-      const s = useBgStore.getState();
-      channelRef.current?.postMessage({
+  /* Escribe params en localStorage en cada cambio — preview los lee */
+  useEffect(function setupSync() {
+    function writeToStorage(s: ReturnType<typeof useBgStore.getState>): void {
+      const snap = {
         geometry: s.geometry, speed: s.speed, density: s.density,
         curlFrequency: s.curlFrequency, displacementAmount: s.displacementAmount,
         patternOpacity: s.patternOpacity, accentOpacity: s.accentOpacity,
@@ -563,20 +557,14 @@ function BgCanvas(): JSX.Element {
         twistAmount: s.twistAmount, lightZ: s.lightZ,
         ambientLight: s.ambientLight, lightIntensity: s.lightIntensity,
         glowAmount: s.glowAmount,
-      });
-    };
-
-    const unsub = useBgStore.subscribe(function onParamsChange(s) {
-      channelRef.current?.postMessage({
-        geometry: s.geometry, speed: s.speed, density: s.density,
-        curlFrequency: s.curlFrequency, displacementAmount: s.displacementAmount,
-        patternOpacity: s.patternOpacity, accentOpacity: s.accentOpacity,
-        strokeWeight: s.strokeWeight, scaleX: s.scaleX, scaleY: s.scaleY,
-        twistAmount: s.twistAmount, lightZ: s.lightZ,
-        ambientLight: s.ambientLight, lightIntensity: s.lightIntensity,
-      });
-    });
-    return function cleanup() { unsub(); channelRef.current?.close(); reqCh.close(); };
+      };
+      localStorage.setItem("vmc-bg-live", JSON.stringify(snap));
+    }
+    /* Escribir estado inicial */
+    writeToStorage(useBgStore.getState());
+    /* Suscribir a cambios futuros */
+    const unsub = useBgStore.subscribe(writeToStorage);
+    return unsub;
   }, []);
 
   useEffect(function mount() {
@@ -862,18 +850,8 @@ export default function BackgroundGenPage(): JSX.Element {
 
         {/* Preview */}
         <button type="button" onClick={function openPreview() {
+          /* localStorage ya tiene el estado actual — preview lo lee al montar */
           window.open("/preview/tools/background-gen/preview", "_blank");
-          setTimeout(function broadcast() {
-            const s = useBgStore.getState();
-            const ch = new BroadcastChannel("vmc-bg-preview");
-            ch.postMessage({ geometry: s.geometry, speed: s.speed, density: s.density,
-              curlFrequency: s.curlFrequency, displacementAmount: s.displacementAmount,
-              patternOpacity: s.patternOpacity, accentOpacity: s.accentOpacity,
-              strokeWeight: s.strokeWeight, scaleX: s.scaleX, scaleY: s.scaleY,
-              twistAmount: s.twistAmount, lightZ: s.lightZ,
-              ambientLight: s.ambientLight, lightIntensity: s.lightIntensity });
-            ch.close();
-          }, 700);
         }} style={{
           marginTop: 8, width: "100%", height: 32, borderRadius: 9999, border: "none",
           background: "linear-gradient(135deg, oklch(0.45 0.22 285), oklch(0.65 0.18 55))",

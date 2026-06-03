@@ -36,7 +36,7 @@ interface Params {
   glowAmount: number;
 }
 
-/* ── Canvas fixed full-viewport — recibe params vía BroadcastChannel ── */
+/* ── Canvas fixed full-viewport — sincronizado via localStorage storage event ── */
 function BgCanvas({ initialParams }: { initialParams: Params }): JSX.Element {
   const canvasRef  = useRef<HTMLCanvasElement>(null);
   const rafRef     = useRef<number>(0);
@@ -47,15 +47,20 @@ function BgCanvas({ initialParams }: { initialParams: Params }): JSX.Element {
     const canvas = canvasRef.current;
     if (!canvas) { return; }
 
-    /* Escuchar + pedir estado actual al generator */
-    const ch = new BroadcastChannel("vmc-bg-preview");
-    ch.onmessage = function onMsg(e: MessageEvent<Params>) {
-      paramsRef.current = e.data;
-    };
-    /* Solicitar broadcast inmediato del generator al abrir */
-    const reqCh = new BroadcastChannel("vmc-bg-request");
-    reqCh.postMessage("request");
-    reqCh.close();
+    /* Leer estado actual del localStorage al montar — sin timing issues */
+    try {
+      const stored = localStorage.getItem("vmc-bg-live");
+      if (stored) { paramsRef.current = JSON.parse(stored) as Params; }
+    } catch { /* ignore */ }
+
+    /* Escuchar cambios en tiempo real via storage event (cross-tab) */
+    function onStorage(e: StorageEvent): void {
+      if (e.key === "vmc-bg-live" && e.newValue) {
+        try { paramsRef.current = JSON.parse(e.newValue) as Params; }
+        catch { /* ignore */ }
+      }
+    }
+    window.addEventListener("storage", onStorage);
 
     function scale(): void {
       const dpr = window.devicePixelRatio || 1;
@@ -82,8 +87,8 @@ function BgCanvas({ initialParams }: { initialParams: Params }): JSX.Element {
     render();
     return function cleanup() {
       window.removeEventListener("resize", scale);
+      window.removeEventListener("storage", onStorage);
       cancelAnimationFrame(rafRef.current);
-      ch.close();
     };
   }, []);
 
