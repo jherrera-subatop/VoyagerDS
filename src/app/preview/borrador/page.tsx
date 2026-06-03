@@ -433,6 +433,85 @@ export default function BorradorPage(): JSX.Element {
         </div>
       </section>
 
+      {/* ── ConditionPill · Checkmark experiments ── */}
+      <section>
+        <SectionTitle>ConditionPill · Checkmark experiments</SectionTitle>
+        <style>{`
+          .pcond-v {
+            position: relative;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+            text-align: center;
+            padding: 8px;
+            min-height: 46px;
+            border-radius: 4px;
+            border: 2px solid transparent;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 12px; font-weight: 600; line-height: 1.35;
+            user-select: none;
+            overflow: visible;
+            transition: box-shadow 0.25s ease, transform 0.2s ease, opacity 0.2s ease;
+          }
+          .pcond-v--active {
+            background-image:
+              linear-gradient(135deg,
+                var(--vmc-color-vault-500, oklch(0.45 0.20 285)) 0%,
+                var(--vmc-color-vault-700, oklch(0.30 0.20 285)) 100%
+              ),
+              linear-gradient(135deg,
+                var(--vmc-color-orange-400, oklch(0.78 0.16 55)) 0%,
+                rgb(100% 100% 100%)                              40%,
+                var(--vmc-color-vault-400, oklch(0.55 0.20 285)) 75%,
+                var(--vmc-color-vault-300, oklch(0.80 0.12 285)) 100%
+              );
+            background-origin: padding-box, border-box;
+            background-clip:   padding-box, border-box;
+            box-shadow:
+              0 3px 14px rgb(51.76% 37.65% 89.8% / 0.35),
+              inset 0 1px 0 rgb(100% 100% 100% / 0.22);
+            color: oklch(1 0 0);
+            text-shadow: 0 1px 2px oklch(0 0 0 / 0.25);
+          }
+          .pcond-v--active::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgb(100% 100% 100% / 0.14) 0%, transparent 55%);
+            pointer-events: none;
+          }
+          .pcond-v--inactive {
+            background: oklch(0.88 0.004 220);
+            color: oklch(0.50 0.02 220);
+            opacity: 0.65;
+          }
+          /* ── Opción A: check blanco ── */
+          .pcond-v--a .pcond-v-icon { color: oklch(1 0 0); flex-shrink: 0; position: relative; z-index: 1; }
+          /* ── Opción B: check teal ── */
+          .pcond-v--b .pcond-v-icon { color: oklch(0.78 0.14 195); flex-shrink: 0; position: relative; z-index: 1; }
+          /* ── Opción C: dot badge top-right ── */
+          .pcond-v-dot {
+            position: absolute; top: -5px; right: -5px;
+            width: 12px; height: 12px; border-radius: 50%;
+            background: oklch(0.78 0.14 195);
+            border: 1.5px solid oklch(0.45 0.20 285);
+            z-index: 3;
+          }
+        `}</style>
+
+        <div style={{ display: "flex", gap: 48, flexWrap: "wrap", alignItems: "flex-start" }}>
+          <div>
+            <Label>A — ✓ blanco izquierda</Label>
+            <ConditionsCheckCard variant="a" />
+          </div>
+          <div>
+            <Label>B — ✓ teal izquierda</Label>
+            <ConditionsCheckCard variant="b" />
+          </div>
+          <div>
+            <Label>C — dot teal top-right</Label>
+            <ConditionsCheckCard variant="c" />
+          </div>
+        </div>
+      </section>
+
       {/* ── Download Button ── */}
       <section>
         <SectionTitle>Download Button</SectionTitle>
@@ -513,6 +592,87 @@ function ConditionPill({ label, isActive, onToggle, spanFull, interactive }: Con
     >
       {label}
     </button>
+  );
+}
+
+/* ─── ConditionPill checkmark variants ─── */
+
+function CheckIcon(): JSX.Element {
+  return (
+    <svg width={10} height={10} viewBox="0 0 12 12" fill="none"
+      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="2 6 5 9 10 3" />
+    </svg>
+  );
+}
+
+type CheckVariant = "a" | "b" | "c";
+
+interface ConditionPillVProps {
+  label: string;
+  isActive: boolean;
+  variant: CheckVariant;
+  spanFull?: boolean;
+}
+
+function ConditionPillV({ label, isActive, variant, spanFull }: ConditionPillVProps): JSX.Element {
+  const stateCls = isActive ? "pcond-v pcond-v--active" : "pcond-v pcond-v--inactive";
+  const varCls = isActive ? ` pcond-v--${variant}` : "";
+  const style: React.CSSProperties = {};
+  if (spanFull) { style.gridColumn = "1 / -1"; }
+
+  if (!isActive) {
+    return (
+      <div className={stateCls} style={style}>
+        {label}
+      </div>
+    );
+  }
+
+  if (variant === "c") {
+    return (
+      <div className={`${stateCls}${varCls}`} style={style}>
+        <span className="pcond-v-dot" />
+        {label}
+      </div>
+    );
+  }
+
+  return (
+    <div className={`${stateCls}${varCls}`} style={style}>
+      <span className="pcond-v-icon"><CheckIcon /></span>
+      {label}
+    </div>
+  );
+}
+
+interface ConditionsCheckCardProps { variant: CheckVariant; }
+
+function ConditionsCheckCard({ variant }: ConditionsCheckCardProps): JSX.Element {
+  const isOddCount = CONDITION_ITEMS.length % 2 !== 0;
+  return (
+    <div style={{
+      background: "oklch(1 0 0)",
+      borderRadius: 8,
+      boxShadow: "0 0 16px 0 oklch(0 0 0 / 0.14)",
+      padding: "4px 6px",
+      width: 311,
+    }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4 }}>
+        {CONDITION_ITEMS.map(function renderPillV(item, i) {
+          const isLastOdd = isOddCount && (i === CONDITION_ITEMS.length - 1);
+          return (
+            <ConditionPillV
+              key={item.label}
+              label={item.label}
+              isActive={item.initialActive}
+              variant={variant}
+              spanFull={isLastOdd}
+            />
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
