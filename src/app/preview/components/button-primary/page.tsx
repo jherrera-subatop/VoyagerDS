@@ -3712,343 +3712,319 @@ const CATEGORY_ITEMS = [
 /* ─── Sidebar ─── */
 
 const SIDEBAR_CSS = `
-  /* ════════════════════════════════════════════════════════════════
-     Sidebar — Institutional Float (Gemini DS Research)
-     Luminance stacking · Floating filament · easeOutExpo 140ms
-     Iconos stroke sin fondo en default · naranja en active
-     Soporte section margin-top:auto → empujado al fondo
-  ════════════════════════════════════════════════════════════════ */
-  /* Variables locales del componente */
+  /* Sidebar — Figma pixel-perfect
+     bg: vault-dark #2E0F70
+     items: 64px h · pl-20 pr-16 · icon 22px · text 15px/Regular/85%
+     left border 4px: transparent → orange active
+     soporte: 11px/600/tracking 0.88px/35%
+     hover: white/8 bg · active: white/8 bg + orange left border
+  */
   .psb {
-    --sb-bg-base:    oklch(0.22 0.18 285);
-    --sb-bg-hover:   oklch(0.25 0.16 285 / 0.55);
-    --sb-bg-active:  oklch(0.28 0.14 285);
-    --sb-text-on:    oklch(0.98 0.01 285);
-    --sb-text-off:   oklch(0.72 0.03 285);
-    --sb-text-muted: oklch(0.48 0.03 285);
-    --sb-orange:     oklch(0.65 0.25 45);
-    --sb-border:     oklch(1 0 0 / 0.04);
-    --sb-t: 140ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  /* Shell — luminance base */
-  .psb {
-    width: 226px; height: 640px; flex-shrink: 0;
+    width: 226px; height: 100%;
     display: flex; flex-direction: column;
-    background: var(--sb-bg-base);
-    border-radius: 12px; overflow: hidden; position: relative;
-    border: 1px solid var(--sb-border);
-    box-shadow: 0 24px 64px oklch(0.22 0.18 285 / 0.50), inset 0 1px 0 oklch(1 0 0 / 0.07);
-  }
-  .psb::before {
-    content: ''; position: absolute; top: -60px; right: -60px;
-    width: 240px; height: 240px; border-radius: 50%;
-    background: radial-gradient(circle, oklch(0.40 0.20 285 / 0.40) 0%, transparent 70%);
-    pointer-events: none;
+    background: oklch(0.26 0.19 285); /* #2E0F70 — vault-dark */
+    position: relative; overflow: hidden;
   }
 
   /* Brand */
   .psb-brand {
     height: 64px; flex-shrink: 0;
-    display: flex; align-items: center; gap: 10px; padding: 0 16px;
-    border-bottom: 1px solid var(--sb-border); z-index: 1; position: relative;
+    display: flex; align-items: center;
+    padding: 0 16px;
+    border-bottom: 1px solid oklch(1 0 0 / 0.08);
   }
   .psb-hamburger {
-    width: 32px; height: 32px; border-radius: 8px;
-    background: oklch(1 0 0 / 0.10); border: none; cursor: pointer;
+    width: 44px; height: 44px; border-radius: 8px;
+    background: transparent; border: none; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    color: var(--sb-text-off); flex-shrink: 0;
-    transition: background var(--sb-t), color var(--sb-t);
-  }
-  .psb-hamburger:hover { background: oklch(1 0 0 / 0.16); color: var(--sb-text-on); }
-
-  /* Nav — flex col, soporte empujado al fondo con margin-top:auto */
-  .psb-nav {
-    flex: 1; overflow-y: auto; padding: 6px 0;
-    display: flex; flex-direction: column;
-    z-index: 1; scrollbar-width: none;
-  }
-  .psb-nav::-webkit-scrollbar { display: none; }
-  .psb-support { margin-top: auto; }
-
-  /* Section label — 11px, tracking 0.08em, muted (investigación) */
-  .psb-section-label {
-    padding: 14px 20px 6px;
-    font-family: var(--vmc-font-display);
-    font-size: 11px; font-weight: 500;
-    text-transform: uppercase; letter-spacing: 0.08em;
-    color: var(--sb-text-muted);
-  }
-  .psb-divider { height: 1px; margin: 2px 12px; background: var(--sb-border); }
-
-  /* Nav item — 44px · easeOutExpo 140ms */
-  .psb-item {
-    display: flex; align-items: center; gap: 12px;
-    padding: 0 12px; height: 44px;
-    margin: 1px 12px; border-radius: 8px;
-    cursor: pointer; border: none; background: transparent;
-    text-align: left; width: calc(100% - 24px);
-    position: relative;
-    transition: background var(--sb-t);
-  }
-  .psb-item:hover { background: var(--sb-bg-hover); }
-  .psb-item:active { background: var(--sb-bg-active); }
-
-  /* ACTIVE — Institutional Float: luminance stacking + floating filament */
-  .psb-item--active {
-    background: var(--sb-bg-active) !important;
-    box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.06), 0 4px 12px oklch(0 0 0 / 0.25);
-  }
-  /* Floating filament — left:6px inset, NOT touching edge, 16px tall */
-  .psb-item--active::before {
-    content: ''; position: absolute;
-    left: 6px; top: 50%; transform: translateY(-50%);
-    width: 3px; height: 16px; border-radius: 1.5px;
-    background: var(--sb-orange);
-    box-shadow: 0 0 10px oklch(0.65 0.25 45 / 0.55);
-    animation: psb-filament 140ms cubic-bezier(0.16,1,0.3,1) forwards;
-  }
-  @keyframes psb-filament {
-    from { height: 0; opacity: 0; }
-    to   { height: 16px; opacity: 1; }
-  }
-
-  /* Icon — sin bg en default (investigación), solo stroke coloreado */
-  .psb-icon {
-    width: 32px; height: 32px; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    color: oklch(0.55 0.02 285);
-    border-radius: 6px;
-    transition: color var(--sb-t), background var(--sb-t);
-  }
-  .psb-item:hover .psb-icon { color: oklch(0.85 0.01 285); background: oklch(1 0 0 / 0.06); }
-  .psb-item--active .psb-icon {
-    color: var(--sb-orange);
-    filter: drop-shadow(0 2px 6px oklch(0.65 0.25 45 / 0.35));
-  }
-
-  /* Label — 14px/500 · var tokens de contraste */
-  .psb-label {
-    flex: 1; font-family: var(--vmc-font-display);
-    font-size: 14px; font-weight: 500; line-height: 1;
-    color: var(--sb-text-off);
-    transition: color var(--sb-t);
-  }
-  .psb-item:hover .psb-label { color: var(--sb-text-on); }
-  .psb-item--active .psb-label { color: var(--sb-text-on); font-weight: 600; }
-
-  /* Chevron */
-  .psb-chevron {
-    color: oklch(0.40 0.03 285); flex-shrink: 0;
-    transition: color var(--sb-t), transform var(--sb-t);
-  }
-  .psb-item:hover .psb-chevron { color: oklch(0.60 0.03 285); transform: translateX(2px); }
-
-  /* Badge */
-  .psb-badge {
-    display: inline-flex; align-items: center; justify-content: center;
-    min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9999px;
-    background: var(--sb-orange);
-    font-family: var(--vmc-font-display); font-size: 10px; font-weight: 700;
-    color: oklch(1 0 0); flex-shrink: 0;
-    box-shadow: 0 2px 6px oklch(0.65 0.25 45 / 0.40);
-  }
-
-  /* Promo — pvbtn fill gradient (idéntico al primary button) */
-  .psb-promo {
-    margin: 8px; border-radius: 10px; padding: 14px;
-    position: relative; overflow: hidden; flex-shrink: 0; z-index: 1;
-    border: 2px solid transparent;
-    background-image:
-      linear-gradient(155deg, oklch(0.65 0.18 55) 0%, oklch(0.45 0.22 285) 100%),
-      linear-gradient(135deg,
-        oklch(1 0 0) 0%,
-        var(--vmc-color-orange-400, oklch(0.78 0.15 55)) 25%,
-        var(--vmc-color-vault-400, oklch(0.52 0.22 285)) 75%,
-        oklch(1 0 0) 100%
-      );
-    background-origin: padding-box, border-box;
-    background-clip: padding-box, border-box;
-    box-shadow:
-      inset 0 1px 0 oklch(1 0 0 / 0.25),
-      0 6px 24px oklch(0.65 0.18 55 / 0.35);
-  }
-  /* pvbtn::before shine — idéntico */
-  .psb-promo::before {
-    content: ''; position: absolute; inset: 0; border-radius: inherit;
-    background: linear-gradient(180deg, oklch(1 0 0 / 0.16) 0%, transparent 55%);
-    pointer-events: none;
-  }
-  /* CTA — psec pattern dentro de la promo */
-  .psb-promo-cta {
-    display: flex; align-items: center; justify-content: center;
-    height: 32px; width: 100%; border-radius: 9999px;
-    border: 1.5px solid oklch(1 0 0 / 0.75);
-    background: oklch(1 0 0 / 0.14);
-    font-family: var(--vmc-font-display); font-size: 11px; font-weight: 700;
-    color: oklch(1 0 0); cursor: pointer;
-    position: relative; z-index: 1;
-    text-shadow: 0 1px 2px oklch(0 0 0 / 0.20);
-    transition: background 0.15s ease, transform 0.1s ease;
-    box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.20);
-  }
-  .psb-promo-cta:hover { background: oklch(1 0 0 / 0.24); transform: translateY(-1px); }
-  .psb-promo-cta:active { transform: scale(0.97); }
-
-  /* User strip */
-  .psb-user {
-    height: 56px; flex-shrink: 0;
-    border-top: 1px solid oklch(1 0 0 / 0.08);
-    display: flex; align-items: center; gap: 10px;
-    padding: 0 14px; position: relative; z-index: 1; cursor: pointer;
+    color: oklch(1 0 0 / 0.65); flex-shrink: 0;
     transition: background 0.15s ease;
   }
-  .psb-user:hover { background: oklch(1 0 0 / 0.05); }
-  /* Avatar — pvbtn fill pattern */
-  .psb-avatar {
-    width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
-    background: linear-gradient(135deg,
-      var(--vmc-color-orange-600, oklch(0.65 0.18 55)) 0%,
-      var(--vmc-color-vault-500, oklch(0.45 0.22 285)) 100%
-    );
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--vmc-font-display); font-size: 11px; font-weight: 800;
-    color: oklch(1 0 0);
-    box-shadow: 0 2px 10px oklch(0.65 0.18 55 / 0.40),
-                inset 0 1px 0 oklch(1 0 0 / 0.25);
+  .psb-hamburger:hover { background: oklch(1 0 0 / 0.08); color: oklch(1 0 0); }
+
+  /* Nav */
+  .psb-nav {
+    flex: 1; overflow-y: auto;
+    scrollbar-width: none;
   }
+  .psb-nav::-webkit-scrollbar { display: none; }
+
+  /* ─── VARIANTE A — Gradient sweep (default) ──────────────────────
+     Hover: gradiente naranja desde borde izquierdo hacia la derecha
+     Active: gradiente más intenso + borde naranja con glow
+     Mismo lenguaje que pvbtn fill pero adaptado a nav
+  ──────────────────────────────────────────────────────────────────── */
+  .psb-item {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px; padding: 0 16px 0 20px;
+    border-left: 4px solid transparent;
+    cursor: pointer; border-top: none; border-right: none; border-bottom: none;
+    background: transparent; text-align: left; width: 100%;
+    position: relative;
+    transition: background 0.20s ease, border-color 0.20s ease, box-shadow 0.20s ease;
+  }
+  /* Hover — mismo pvbtn::before: sweep de luz de izquierda */
+  .psb-item:hover {
+    background: linear-gradient(90deg, oklch(1 0 0 / 0.07) 0%, transparent 75%);
+    border-left-color: oklch(0.72 0.16 55 / 0.35);
+  }
+  /* Active — gradiente naranja + borde glow (pvbtn box-shadow pattern) */
+  .psb-item--active {
+    background: linear-gradient(90deg,
+      oklch(0.72 0.16 55 / 0.18) 0%,
+      oklch(0.72 0.16 55 / 0.07) 35%,
+      transparent 70%
+    );
+    border-left-color: var(--vmc-color-orange-500, oklch(0.72 0.16 55));
+    box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.06);
+  }
+  /* Active shine — pvbtn::before idéntico pero en item */
+  .psb-item--active::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, oklch(1 0 0 / 0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  /* Icon — 22×22 · active gets pvbtn-icon bg (white/20%) */
+  .psb-icon {
+    width: 22px; height: 22px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: oklch(1 0 0 / 0.60); border-radius: 6px;
+    transition: color 0.20s ease, background 0.20s ease, filter 0.20s ease;
+    padding: 5px; box-sizing: content-box;
+  }
+  .psb-item:hover .psb-icon { color: oklch(1 0 0 / 0.90); }
+  /* Active: pvbtn-icon pattern — circle bg + orange + glow */
+  .psb-item--active .psb-icon {
+    background: oklch(0.72 0.16 55 / 0.20);
+    color: var(--vmc-color-orange-400, oklch(0.78 0.15 55));
+    filter: drop-shadow(0 0 5px oklch(0.72 0.16 55 / 0.50));
+    border-radius: 8px;
+  }
+
+  /* Label — 15px/400, 85% */
+  .psb-label {
+    flex: 1; margin-left: 14px;
+    font-family: var(--vmc-font-display);
+    font-size: 15px; font-weight: 400; line-height: 22px;
+    color: oklch(1 0 0 / 0.85);
+    transition: color 0.20s ease;
+  }
+  .psb-item:hover .psb-label { color: oklch(1 0 0 / 0.95); }
+  .psb-item--active .psb-label { color: oklch(1 0 0); font-weight: 500; }
+
+  /* Chevron — 15×15 */
+  .psb-chevron {
+    width: 15px; height: 15px; flex-shrink: 0;
+    color: oklch(1 0 0 / 0.35);
+    transition: color 0.15s ease;
+  }
+  .psb-item:hover .psb-chevron { color: oklch(1 0 0 / 0.60); }
+  .psb-item--active .psb-chevron { color: oklch(1 0 0 / 0.50); }
+
+  /* Section label — SOPORTE: 11px/600/tracking 0.88px */
+  .psb-section-label {
+    padding: 20px 20px 8px;
+    font-family: var(--vmc-font-display);
+    font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.88px;
+    color: oklch(1 0 0 / 0.35);
+  }
+
+  /* Promo card — vault-to-orange gradient, Figma */
+  .psb-promo {
+    margin: 0 13px 16px; border-radius: 14px;
+    width: 200px; height: 250px;
+    position: relative; overflow: hidden; flex-shrink: 0;
+    border: 1px solid oklch(1 0 0 / 0.20);
+    background: linear-gradient(160deg,
+      oklch(0.30 0.22 285) 0%,
+      oklch(0.35 0.25 285) 32%,
+      oklch(0.55 0.18 55) 75%,
+      oklch(0.65 0.20 50) 100%
+    );
+    box-shadow: 0 10px 24px oklch(0.22 0.18 285 / 0.35);
+  }
+  .psb-promo-image {
+    height: 96px; width: 100%; position: relative;
+    background: oklch(0 0 0 / 0.04);
+    display: flex; align-items: center; justify-content: center;
+    border: 1px dashed oklch(0 0 0 / 0.25);
+    box-sizing: border-box;
+  }
+  .psb-promo-body {
+    padding: 6px 18px 18px;
+    display: flex; flex-direction: column;
+    flex: 1;
+  }
+  .psb-promo-eyebrow {
+    font-family: var(--vmc-font-display); font-size: 9.5px; font-weight: 700;
+    color: oklch(1 0 0 / 0.90); margin: 0 0 2px;
+  }
+  .psb-promo-title {
+    font-family: var(--vmc-font-display); font-size: 24px; font-weight: 800;
+    color: oklch(1 0 0); line-height: 1; margin: 0 0 auto;
+    letter-spacing: -0.8px;
+  }
+  .psb-promo-title span {
+    color: oklch(0.92 0.10 55);
+  }
+  .psb-promo-cta {
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+    width: 100%; height: 36px; border-radius: 9999px;
+    background: oklch(1 0 0); border: none; cursor: pointer;
+    font-family: var(--vmc-font-display); font-size: 12.5px; font-weight: 800;
+    color: oklch(0.55 0.18 55);
+    box-shadow: 0 5px 7px oklch(0 0 0 / 0.20);
+    transition: transform 0.15s ease;
+  }
+  .psb-promo-cta:hover { transform: translateY(-1px); }
 `;
 
-/* ─── Sidebar Icons ─── */
-function SbIcMenu(): JSX.Element {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-      <line x1="2" y1="4.5" x2="14" y2="4.5" />
-      <line x1="2" y1="8" x2="14" y2="8" />
-      <line x1="2" y1="11.5" x2="14" y2="11.5" />
-    </svg>
-  );
-}
-function SbIcChevron(): JSX.Element {
-  return (
-    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="4.5,2.5 8.5,6.5 4.5,10.5" />
-    </svg>
-  );
-}
+/* ── Sidebar SVG Icons (22×22, stroke 1.5) ── */
 function SbIcToday(): JSX.Element {
   return (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2.5" y="3.5" width="13" height="12" rx="2" />
-      <line x1="5" y1="2" x2="5" y2="5" />
-      <line x1="13" y1="2" x2="13" y2="5" />
-      <line x1="2.5" y1="7.5" x2="15.5" y2="7.5" />
-      <rect x="5.5" y="10" width="2.5" height="2.5" rx="0.5" fill="currentColor" stroke="none" />
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="4" width="16" height="15" rx="2.5" />
+      <line x1="6" y1="2" x2="6" y2="6" />
+      <line x1="16" y1="2" x2="16" y2="6" />
+      <line x1="3" y1="9" x2="19" y2="9" />
+      <rect x="7" y="12" width="2.5" height="2.5" rx="0.5" fill="currentColor" stroke="none" />
     </svg>
   );
 }
 function SbIcOffer(): JSX.Element {
   return (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M9 2 L15.5 5.5 V12.5 L9 16 L2.5 12.5 V5.5 Z" />
-      <circle cx="9" cy="9" r="2.5" />
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="11" cy="11" r="8.5" />
+      <circle cx="11" cy="11" r="3.5" />
+      <line x1="8.5" y1="2.5" x2="8.5" y2="5.5" />
+      <line x1="13.5" y1="2.5" x2="13.5" y2="5.5" />
     </svg>
   );
 }
 function SbIcCategory(): JSX.Element {
   return (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="2" width="6" height="6" rx="1.5" />
-      <rect x="10" y="2" width="6" height="6" rx="1.5" />
-      <rect x="2" y="10" width="6" height="6" rx="1.5" />
-      <rect x="10" y="10" width="6" height="6" rx="1.5" />
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 6.5 L11 3 L19 6.5 L11 10 Z" />
+      <path d="M3 6.5 L3 13 L11 16.5 L11 10" />
+      <path d="M19 6.5 L19 13 L11 16.5" />
     </svg>
   );
 }
 function SbIcCompany(): JSX.Element {
   return (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="5" width="10" height="11" rx="1.5" />
-      <path d="M12 8 L16 8 L16 16 L12 16" />
-      <rect x="4.5" y="8" width="2" height="2" rx="0.3" fill="currentColor" stroke="none" />
-      <rect x="7.5" y="8" width="2" height="2" rx="0.3" fill="currentColor" stroke="none" />
-      <rect x="4.5" y="11" width="2" height="2" rx="0.3" fill="currentColor" stroke="none" />
-      <rect x="7.5" y="11" width="2" height="2" rx="0.3" fill="currentColor" stroke="none" />
-      <rect x="5" y="14" width="4" height="2.5" rx="0.5" />
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2.5" y="6" width="12" height="14" rx="1.5" />
+      <path d="M14.5 9.5 L19.5 9.5 L19.5 20 L14.5 20" />
+      <rect x="5.5" y="9.5" width="2.5" height="2.5" rx="0.4" fill="currentColor" stroke="none" />
+      <rect x="9.5" y="9.5" width="2.5" height="2.5" rx="0.4" fill="currentColor" stroke="none" />
+      <rect x="5.5" y="13.5" width="2.5" height="2.5" rx="0.4" fill="currentColor" stroke="none" />
+      <rect x="9.5" y="13.5" width="2.5" height="2.5" rx="0.4" fill="currentColor" stroke="none" />
+      <rect x="6.5" y="17" width="4" height="3" rx="0.5" />
     </svg>
   );
 }
 function SbIcHelp(): JSX.Element {
   return (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="9" cy="9" r="7" />
-      <path d="M6.5 7C6.5 5.6 7.6 4.5 9 4.5C10.4 4.5 11.5 5.6 11.5 7C11.5 8.4 10 9.2 9 10" />
-      <circle cx="9" cy="13" r="0.7" fill="currentColor" stroke="none" />
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="11" cy="11" r="8.5" />
+      <path d="M8.5 8.5C8.5 7.1 9.6 6 11 6C12.4 6 13.5 7.1 13.5 8.5C13.5 9.9 12 10.7 11 11.7" />
+      <circle cx="11" cy="15.5" r="0.8" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+function SbIcChevron(): JSX.Element {
+  return (
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="5.5,3 9.5,7.5 5.5,12" />
+    </svg>
+  );
+}
+function SbIcMenu(): JSX.Element {
+  return (
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+      <line x1="3" y1="6" x2="19" y2="6" />
+      <line x1="3" y1="11" x2="19" y2="11" />
+      <line x1="3" y1="16" x2="19" y2="16" />
+    </svg>
+  );
+}
+function SbIcImage(): JSX.Element {
+  return (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: "oklch(0 0 0 / 0.35)" }}>
+      <rect x="3" y="3" width="22" height="22" rx="3" />
+      <circle cx="9" cy="9.5" r="2" />
+      <polyline points="3,19 9,13 14,17 18,13 25,19" />
     </svg>
   );
 }
 
-/* ─── SidebarPreview component ─── */
-interface SbNavItem { id: string; label: string; icon: () => JSX.Element; badge?: number; section?: string; }
+/* ── Nav item data ── */
+interface SbItem { id: string; label: string; icon: () => JSX.Element; isSupport?: boolean; }
 
-const SB_ITEMS: SbNavItem[] = [
-  { id: "hoy",        label: "Hoy",             icon: SbIcToday,    badge: 3 },
+const SB_NAV: SbItem[] = [
+  { id: "hoy",        label: "Hoy",             icon: SbIcToday },
   { id: "oferta",     label: "Tipo de oferta",  icon: SbIcOffer },
   { id: "categorias", label: "Categorías",      icon: SbIcCategory },
   { id: "empresas",   label: "Empresas",        icon: SbIcCompany },
-  { id: "ayuda",      label: "Centro de ayuda", icon: SbIcHelp,   section: "Soporte" },
+  { id: "ayuda",      label: "Centro de ayuda", icon: SbIcHelp, isSupport: true },
 ];
 
 interface SidebarDemoProps { activeId?: string; }
 
 function SidebarDemo({ activeId = "hoy" }: SidebarDemoProps): JSX.Element {
+  const firstSupport = SB_NAV.findIndex(function findSupport(i) { return i.isSupport === true; });
   return (
-    <aside className="psb">
+    <aside className="psb" style={{ height: 680 }}>
       {/* Brand */}
       <div className="psb-brand">
-        <button className="psb-hamburger" type="button" aria-label="Toggle sidebar">
+        <button className="psb-hamburger" type="button" aria-label="Toggle menu">
           <SbIcMenu />
         </button>
-        <div>
-          <div style={{ fontFamily: F, fontSize: 13, fontWeight: 800, color: "oklch(1 0 0)", letterSpacing: "0.05em", textTransform: "uppercase", lineHeight: 1.2 }}>VMCSubastas</div>
-          <div style={{ fontFamily: F, fontSize: 8, fontWeight: 500, color: "oklch(1 0 0 / 0.40)", letterSpacing: "0.10em", textTransform: "uppercase" }}>Powered by Subastop</div>
+        <div style={{ marginLeft: 8 }}>
+          <div style={{ fontFamily: F, fontSize: 13, fontWeight: 800, color: "oklch(1 0 0)", letterSpacing: "0.06em", textTransform: "uppercase" as const, lineHeight: 1.2 }}>VMCSubastas</div>
+          <div style={{ fontFamily: F, fontSize: 8, fontWeight: 500, color: "oklch(1 0 0 / 0.45)", letterSpacing: "0.10em", textTransform: "uppercase" as const }}>Powered by Subastop</div>
         </div>
       </div>
 
       {/* Nav */}
       <nav className="psb-nav">
-        {SB_ITEMS.map(function renderSbItem(item) {
+        {SB_NAV.map(function renderItem(item, idx) {
           const isActive = activeId === item.id;
+          const showSection = item.isSupport && idx === firstSupport;
           const Icon = item.icon;
           return (
             <div key={item.id}>
-              {item.section && <div className="psb-support"><p className="psb-section-label">{item.section}</p><div className="psb-divider" /></div>}
-              {!item.section && item.id === "ayuda" && null}
+              {showSection && (
+                <p className="psb-section-label">Soporte</p>
+              )}
               <button className={`psb-item${isActive ? " psb-item--active" : ""}`} type="button">
                 <span className="psb-icon"><Icon /></span>
                 <span className="psb-label">{item.label}</span>
-                {item.badge && <span className="psb-badge">{item.badge}</span>}
-                {!item.badge && <span className="psb-chevron"><SbIcChevron /></span>}
+                <span className="psb-chevron"><SbIcChevron /></span>
               </button>
             </div>
           );
         })}
       </nav>
 
-      {/* Promo */}
-      <div className="psb-promo">
-        <p style={{ fontFamily: F, fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.10em", color: "oklch(1 0 0 / 0.75)", margin: "0 0 3px", position: "relative", zIndex: 1 }}>¡Dile bye al riesgo alto!</p>
-        <p style={{ fontFamily: F, fontSize: 17, fontWeight: 800, color: "oklch(1 0 0)", margin: "0 0 4px", lineHeight: 1.1, position: "relative", zIndex: 1 }}>Compra<br />Subaspass</p>
-        <p style={{ fontFamily: F, fontSize: 10, color: "oklch(1 0 0 / 0.70)", margin: "0 0 10px", lineHeight: 1.5, position: "relative", zIndex: 1 }}>Participa sin consignar y sin restricciones.</p>
-        <button className="psb-promo-cta" type="button">Comprar ahora →</button>
-      </div>
-
-      {/* User */}
-      <div className="psb-user" role="button" tabIndex={0}>
-        <div className="psb-avatar">JH</div>
-        <div>
-          <p style={{ fontFamily: F, fontSize: 14, fontWeight: 700, color: "oklch(1 0 0)", margin: 0, lineHeight: 1.2 }}>JA8NEE</p>
-          <p style={{ fontFamily: F, fontSize: 12, color: "oklch(1 0 0 / 0.55)", margin: 0 }}>Ver perfil</p>
+      {/* Promo card */}
+      <div style={{ flex: 1, display: "flex", alignItems: "flex-end", padding: "0 0 0 13px" }}>
+        <div className="psb-promo">
+          <div className="psb-promo-image">
+            <SbIcImage />
+            <span style={{ fontFamily: F, fontSize: 13, color: "oklch(0 0 0 / 0.40)", marginLeft: 6 }}>Arrastra una foto</span>
+          </div>
+          <div className="psb-promo-body">
+            <p className="psb-promo-eyebrow">¡Dile bye al riesgo alto!</p>
+            <p className="psb-promo-title">Compra<br /><span>Subaspass</span></p>
+            <div style={{ marginTop: "auto", paddingTop: 33 }}>
+              <button className="psb-promo-cta" type="button">
+                Comprar ahora <span style={{ fontSize: 10 }}>→</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </aside>
