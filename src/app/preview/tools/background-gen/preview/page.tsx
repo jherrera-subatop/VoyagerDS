@@ -122,7 +122,7 @@ function PreviewInner({ params }: { params: Params }): JSX.Element {
         {/* Sidebar — semi-transparente para que el patrón del canvas se vea a través */}
         <aside style={{
           width: 226, flexShrink: 0,
-          background: "#2E0F70",
+          background: "transparent",
           
           borderRight: "1px solid rgba(255,255,255,.06)",
           display: "flex", flexDirection: "column",
@@ -168,7 +168,7 @@ function PreviewInner({ params }: { params: Params }): JSX.Element {
 
           {/* Topbar — vault opaco */}
           <header style={{
-            height: 63, background: "#2E0F70",
+            height: 63, background: "transparent",
             display: "flex", alignItems: "center", justifyContent: "flex-end",
             padding: "0 11px", flexShrink: 0,
           }}>
@@ -197,7 +197,7 @@ function PreviewInner({ params }: { params: Params }): JSX.Element {
             {/* Hero — vault opaco */}
             <div style={{
               width: "100%", height: 272, borderRadius: 16, overflow: "hidden",
-              position: "relative", background: "#2E0F70", flexShrink: 0,
+              position: "relative", background: "transparent", flexShrink: 0,
             }}>
               <div style={{
                 position: "absolute", top: 20, left: 28, background: "#22005C",
@@ -271,7 +271,7 @@ function PreviewInner({ params }: { params: Params }): JSX.Element {
           </div>
 
           {/* Footer — vault opaco */}
-          <footer style={{ background: "#2E0F70", padding: "32px 32px 0" }}>
+          <footer style={{ background: "transparent", padding: "32px 32px 0" }}>
             <div style={{ display: "flex", gap: 40, paddingBottom: 24 }}>
               <div style={{ maxWidth: 180 }}>
                 <div style={{ fontSize: 13, fontWeight: 800, color: "#fff", marginBottom: 8 }}>
